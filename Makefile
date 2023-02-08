@@ -1,25 +1,25 @@
-NAME = miniRT
+NAME	= miniRT
 
-CC =		gcc
-CFLAGS =	-g -o3
-EFLAGS =	-Wall -Wextra -Werror
-LIBFLAGS =	
-RM =		rm -rf
+CC		= gcc
+CFLAGS	= -g -o3
+EFLAGS	= -Wall -Wextra -Werror
+LFLAGS	=
+RM		= rm -rf
 
-PINK	:= \033[0;35m
-PURPLE	:= \033[0;34m
+PINK	= \033[0;35m
+PURPLE	= \033[0;34m
 BLUE	= \033[94m
-RESET	:= \033[0m
+RESET	= \033[0m
 
-SRC = 	
-OBJ	=	$(addprefix obj/, $(SRC:src/%.c=%.o))
-LIBFT =	libft/libft.a
+SRC		= 	
+OBJ		= $(addprefix obj/, $(SRC:src/%.c=%.o))
+LIBFT	= libft/libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(LIBFLAGS)
-	@echo "$(BLUE)MiniRT compiled!✨$(RESET)\n"
+	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(LFLAGS)
+	@echo "$(BLUE)MiniRT compiled!$(RESET)\n"
 
 $(LIBFT):
 	@make --no-print-directory -C src/libft
@@ -30,7 +30,7 @@ obj/%.o: src/%.c
 
 clean:
 	@$(RM) $(OBJ) obj
-	@echo "$(PINK)MiniRT cleaned!✨$(RESET)"
+	@echo "$(PINK)MiniRT cleaned!$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
