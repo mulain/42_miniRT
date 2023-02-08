@@ -2,7 +2,9 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file."
+# include "../libft/include/libft.h"
+
+# define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
 
 //errors.c
 void	exit_msg(char *msg);
