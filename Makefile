@@ -22,7 +22,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	@echo "$(BLUE)MiniRT compiled!$(RESET)"
 
 $(LIBFT):
-	@make --no-print-directory -C src/libft
+	@make --no-print-directory -C /libft
 
 obj/%.o: src/%.c
 	@mkdir -p obj
