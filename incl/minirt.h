@@ -16,9 +16,11 @@
 
 typedef struct s_data
 {
-	t_mlx	mlx;
+	t_mlx			mlx;
+	t_ambientlight	amb_light;
+	t_camera		camera;
+	t_light			light;
 	//Linked list for all the objects?
-
 
 	char	*scene_name;
 }	t_data;
@@ -51,24 +53,24 @@ typedef struct s_plane
 {
 	t_point		anchor;
 	 /*has same data as a point but is ackchually a vector: range -1 to 1
-	 maybe name too long. if norm fucks us, change it. i would request using 
+	 maybe name too long. i would request using 
 	 long names because it is so easy to read. and it really distinguishes
 	 that this is a vector not a point. Could also make a separate struct
-	 from t_point (which would however have the exact same content, i.e.
+	 t_normvector or smth (which would however have the exact same content, i.e.
 	 3 doubles).
 	 */ 
-	t_point		orientation_vector;
+	t_point		orientation_vector; // range -1 to 1
 	t_color		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
 	t_point		anchor;
+	t_point		orientation_vector; // range -1 to 1
 	double		d;
 	double		h;
 	t_color		color;
 }	t_cylinder;
-
 
 // General attribute structs for use across different objects
 
@@ -88,6 +90,26 @@ typedef struct s_color
 	int			y;
 	int			z;
 }	t_color;
+
+typedef struct s_light
+{
+	t_point		coordinates;
+	double		brightness; //0.0 to 1.0
+	t_color		color;
+}	t_light;
+
+typedef struct s_camera
+{
+	t_point		viewpoint;
+	t_point		orientation_vector; // range -1 to 1
+	int			fieldofview; // 0 to 180
+}	t_camera;
+
+typedef struct s_ambientlight
+{
+	double		brightness; //0.0 to 1.0
+	t_color		color;
+}	t_ambientlight;
 
 // parsing_01.c
 void	parsing(t_data *d, int argc, char **argv);
