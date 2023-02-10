@@ -8,7 +8,7 @@
 # include <math.h>
 # include <stdbool.h>
 
-# include "../mlx/mlx.h"
+//# include "../mlx/mlx.h"
 # include "../libft/include/libft.h"
 
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
@@ -119,16 +119,20 @@ typedef struct s_data
 
 }	t_data;
 
+// main.c
+
+void	init_structs(t_data *d);
+void	init_mlx(t_data *d);
+
 // parsing_01.c
 void	parsing(t_data *d, int argc, char **argv);
 void	parse_line(t_data *d, char *line);
 
-
 // parsing_objects.c
 void	parse_ambientlight(t_data *d, char *line);
 
-// setup_01.c
-void	init_mlx(t_data *d);
+// utils_is.c
+bool	is_whitespace(char c);
 
 // errors.c
 void	exit_onlymsg(char *msg);

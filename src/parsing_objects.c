@@ -30,5 +30,7 @@ void parse_ambientlight(t_data *d, char *line)
 	j = i;
 	while (line[j] && !is_whitespace(line[j]))
 		j++;
-	amb_light = ft_strlcpy(malloc((j - i) * sizeof(char)), line + i, j - i);
+	amb_light = malloc((j - i + 1) * sizeof(char));
+	ft_strlcpy(amb_light, line + i, j - i + 1);
+	printf("amblight:'%s'\n", amb_light);
 }

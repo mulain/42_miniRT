@@ -14,7 +14,7 @@ RESET	= \033[0m
 OS		= $(shell uname)
 
 ifeq ($(OS), Linux)
-MLXFLAGS = -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
+MLXFLAGS = #-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
 
 DEFINEFLAGS =	-DKEY_ESC=65307 -DKEY_LEFT=65361 -DKEY_RIGHT=65363 -DKEY_UP=65362 -DKEY_DOWN=65364\
 				-DKEY_W=119 -DKEY_A=97 -DKEY_S=115 -DKEY_D=100\
@@ -22,7 +22,7 @@ DEFINEFLAGS =	-DKEY_ESC=65307 -DKEY_LEFT=65361 -DKEY_RIGHT=65363 -DKEY_UP=65362 
 				-DKEY_C=99\
 				-DMOUSE_LEFT=1 -DMOUSE_RIGHT=3 -DMOUSE_MIDDLE=2 -DMOUSE_SCR_UP=4 -DMOUSE_SCR_DOWN=5
 else
-MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS = #-Lmlx -lmlx -framework OpenGL -framework AppKit
 DEFINEFLAGS = 	-DKEY_ESC=53 -DKEY_LEFT=123 -DKEY_RIGHT=124 -DKEY_UP=126 -DKEY_DOWN=125\
 				-DKEY_W=13 -DKEY_A= -DKEY_S=1 -DKEY_D=2\
 				-DKEY_I=34 -DKEY_O=31\
@@ -30,14 +30,14 @@ DEFINEFLAGS = 	-DKEY_ESC=53 -DKEY_LEFT=123 -DKEY_RIGHT=124 -DKEY_UP=126 -DKEY_DO
 				-DMOUSE_LEFT=1 -DMOUSE_RIGHT=2 -DMOUSE_MIDDLE=3 -DMOUSE_SCR_UP=5 -DMOUSE_SCR_DOWN=4
 endif
 
-SRC		= src/main.c src/errors.c src/parsing_01.c
+SRC		= src/main.c src/errors.c src/parsing_01.c src/parsing_objects.c src/utils_is.c
 OBJ		= $(addprefix obj/, $(SRC:src/%.c=%.o))
 LIBFT	= libft/libft.a
 MLX		= 
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(OBJ) $(LIBFT) #$(MLX)
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LIBFT)
 	@echo "$(BLUE)MiniRT compiled!$(RESET)"
 
