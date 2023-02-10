@@ -30,3 +30,18 @@ bool	is_decimalformat(char *input)
 	}
 	return (1);
 }
+
+bool	is_uchartriplet(char **array)
+{
+	int		i;
+	int		val;
+
+	i = 0;
+	while (i < 3)
+	{
+		val = ft_atoi(array[i]);
+		if (!ft_isdigit(array[i]) || val < 0 || val > 255)
+			return (false)
+		i++;
+	}
+}

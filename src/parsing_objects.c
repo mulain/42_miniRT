@@ -3,45 +3,25 @@
 /*
 Starts splitting at line + 1, because line[0] is the identifier.
 */
-void	parse_ambientlight(t_data *d, char *line)
+void	parse_ambientlight(t_data *d)
 {
-	char	**elements;
-	char	**subelements;
 	int		i;
 	int		val;
 
 	if (d->amb_light.declared)
-	{
-		free(line);
 		exit_free(E_AMBLIGHT);
-	}
-	elements = ft_split(line + 1, ' ');
-	free(line);
+	d->elements_a = ft_split(d->line + 1, ' ');
 	i = 0;
-	while (elements[i])
+	while (d->elements_a[i])
 	{
-		printf("string %i:'%s'\n", i, elements[i]);
+		printf("string %i:'%s'\n", i, d->elements_a[i]);
 		i++;
 	}
-	if (!is_decimalformat(elements[0]))
-	{
-		free_2d_char(elements);
+	if (!is_decimalformat(d->elements_a[0]))
 		exit_free(E_AMBLIGHTDATA);
-	}
-	subelements = ft_split(elements[1], ',');
-	free_2d_char(elements);
-	i = 0;
-	while (i < 3)
-	{
-		val = ft_atoi(subelements[i]);
-		if (!ft_isdigit(subelements[i]) || val < 0 || val > 255)
-		{
-			free(subelements);
-			exit_onlymsg(E_AMBLIGHTDATA);
-		}
-		i++;
-	}
-
+	d->elements_b = ft_split(d->elements_a[1], ',');
+	
+	//free_structvars(d);
 }
 
 /*

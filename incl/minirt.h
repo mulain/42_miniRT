@@ -140,12 +140,13 @@ bool	is_whitespace(char c);
 bool	is_decimalformat(char *input);
 
 // utils_calc.c
-
 double	my_strtod(char *input);
 
 // errors.c
 void	exit_onlymsg(char *msg);
-void	exit_free(char *msg);
+void	exit_free(t_data *d, char *msg);
 
+// shutdown.c
+void	shutdown(t_data *d);
 
 #endif

@@ -6,8 +6,8 @@ void	exit_onlymsg(char *msg)
 	exit(1);
 }
 
-void exit_free(char *msg)
+void	exit_free(t_data *d, char *msg)
 {
-	//freefunction
+	shutdown(d);
 	exit_onlymsg(msg);
 }

@@ -1,10 +1,5 @@
 # include "../incl/minirt.h"
 
-/*
-parse_line has to free line, because its subfunctions will abort the program
-if an error is detected. If line were freed in the while loop here, it would
-leak if a parsing error occurs.
-*/
 void	parsing(t_data *d, int argc, char **argv)
 {
 	int		fd;
@@ -25,19 +20,16 @@ void	parsing(t_data *d, int argc, char **argv)
 	while (line)
 	{
 		parse_line(d, line);
+		free(line);
 		line = get_next_line(fd);
 	}
 }
 
 void	parse_line(t_data *d, char *line)
 {
-	char	*temp;
-
-	temp = line;
-	line = ft_strtrim(line, " \t\n\f\r\v");
-	free(temp);
-	if (line[0] == 'A')
-		parse_ambientlight(d, line);
+	d->line = ft_strtrim(line, " \t\n\f\r\v");
+	if (d->line[0] == 'A')
+		parse_ambientlight(d);
 	/* else if (line[0] == 'C')
 
 	else if (line[0] == 'L')
@@ -48,14 +40,12 @@ void	parse_line(t_data *d, char *line)
 
 	else if (line[0] == 'p' && line[1] == 'l')
  */
-	else if (!line[0] || line[0] == '#')
+	else if (!d->line[0] || d->line[0] == '#')
 	{
-		free(line);
+		free(d->line);
+		d->line = NULL;
 		return ;
 	}
 	else
-	{
-		free(line);
-		exit_onlymsg(E_INVALOBJID);
-	}
+		exit_free(E_INVALOBJID);
 }
