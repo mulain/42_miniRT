@@ -48,7 +48,7 @@ void	parse_line(t_data *d, char *line)
 
 	else if (line[0] == 'p' && line[1] == 'l')
  */
-	else if (!line[0])
+	else if (!line[0] || line[0] == '#')
 	{
 		free(line);
 		return ;

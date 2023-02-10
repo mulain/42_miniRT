@@ -1,15 +1,28 @@
 # include "../incl/minirt.h"
 
+/*
+Starts splitting at line + 1, because line[0] is the identifier.
+*/
 void	parse_ambientlight(t_data *d, char *line)
 {
 	char	**elements;
+	int		i;
 
 	if (d->amb_light.declared)
 	{
 		free(line);
 		exit_free(E_AMBLIGHT);
 	}
-	elements = ft_split(line, ' ');
+	elements = ft_split(line + 1, ' ');
+	free(line);
+	i = 0;
+	while (elements[i])
+	{
+		printf("string %i:'%s'\n", i, elements[i]);
+		i++;
+	}
+
+	free_2d_char(elements);
 }
 
 /*
