@@ -6,7 +6,9 @@ Starts splitting at line + 1, because line[0] is the identifier.
 void	parse_ambientlight(t_data *d, char *line)
 {
 	char	**elements;
+	char	**subelements;
 	int		i;
+	int		val;
 
 	if (d->amb_light.declared)
 	{
@@ -21,8 +23,25 @@ void	parse_ambientlight(t_data *d, char *line)
 		printf("string %i:'%s'\n", i, elements[i]);
 		i++;
 	}
-
+	if (!is_decimalformat(elements[0]))
+	{
+		free_2d_char(elements);
+		exit_free(E_AMBLIGHTDATA);
+	}
+	subelements = ft_split(elements[1], ',');
 	free_2d_char(elements);
+	i = 0;
+	while (i < 3)
+	{
+		val = ft_atoi(subelements[i]);
+		if (!ft_isdigit(subelements[i]) || val < 0 || val > 255)
+		{
+			free(subelements);
+			exit_onlymsg(E_AMBLIGHTDATA);
+		}
+		i++;
+	}
+
 }
 
 /*

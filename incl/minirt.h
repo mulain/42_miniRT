@@ -117,6 +117,9 @@ typedef struct s_data
 	t_camera		camera;
 	t_light			light;
 	//Linked list for all the objects?
+	char			*line;
+	char			**elements_a;
+	char			**elements_b;
 
 }	t_data;
 
@@ -134,6 +137,11 @@ void	parse_ambientlight(t_data *d, char *line);
 
 // utils_is.c
 bool	is_whitespace(char c);
+bool	is_decimalformat(char *input);
+
+// utils_calc.c
+
+double	my_strtod(char *input);
 
 // errors.c
 void	exit_onlymsg(char *msg);

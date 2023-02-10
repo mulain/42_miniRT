@@ -14,6 +14,17 @@ void init_structs(t_data *d)
 	d->amb_light.declared = false;
 	d->amb_light.brightness = 0;
 	d->amb_light.color = (t_color){0,0,0};
+	d->camera.declared = false;
+	d->camera.fieldofview = 0;
+	d->camera.orientation_vector = (t_point){0,0,0};
+	d->camera.viewpoint = (t_point){0,0,0};
+	d->light.declared = false;
+	d->light.brightness = 0;
+	d->light.color = (t_color){0,0,0};
+	d->light.coordinates = (t_point){0,0,0};
+	d->elements_a = NULL;
+	d->elements_b = NULL;
+	d->line = NULL;
 }
 
 /* void	init_mlx(t_data *d)
