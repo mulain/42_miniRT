@@ -6,24 +6,19 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
+# include <stdbool.h>
 
 # include "../mlx/mlx.h"
 # include "../libft/include/libft.h"
 
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
 # define E_FILETYPE		"Wrong input file type. Please supply a .rt file.\n"
+# define E_FILENAME		"Invalid input file name.\n"
+//# define E_MULTIDEF		"Ambient light (A), camera (C) and light (L) may only be defined once.\n"
+# define E_AMBLIGHT		"Ambient light (A) may only be defined once.\n"
+# define E_CAMERA		"Camera (C) may only be defined once.\n"
+# define E_LIGHT		"Light (L) may only be defined once.\n"
 # define E_OPENFILE		"Could not open input file.\n"
-
-typedef struct s_data
-{
-	t_mlx			mlx;
-	t_ambientlight	amb_light;
-	t_camera		camera;
-	t_light			light;
-	//Linked list for all the objects?
-
-	char	*scene_name;
-}	t_data;
 
 typedef struct s_mlx
 {
@@ -40,6 +35,48 @@ typedef struct s_mlx
 	int		img_width;
 	int		img_height;
 }	t_mlx;
+
+// General attribute structs for use across different objects
+
+//unsure about range for these. prolly unlimited and
+//we translate to our system later
+typedef struct s_point
+{
+	double		x;
+	double		y;
+	double		z;
+}	t_point;
+
+//i just love ints, what can i say? range ofc 0-255
+typedef struct s_color
+{
+	int			x;
+	int			y;
+	int			z;
+}	t_color;
+
+typedef struct s_light
+{
+	t_point		coordinates;
+	double		brightness; //0.0 to 1.0
+	t_color		color;
+	bool		declared;
+}	t_light;
+
+typedef struct s_camera
+{
+	t_point		viewpoint;
+	t_point		orientation_vector; // range -1 to 1
+	int			fieldofview; // 0 to 180
+	bool		declared;
+}	t_camera;
+
+typedef struct s_ambientlight
+{
+	double		brightness; //0.0 to 1.0
+	t_color		color;
+	bool		declared;
+}	t_ambientlight;
 
 // Object structs - could move these to a separate h file if it gets too crowded
 typedef struct s_sphere
@@ -72,52 +109,30 @@ typedef struct s_cylinder
 	t_color		color;
 }	t_cylinder;
 
-// General attribute structs for use across different objects
-
-//unsure about range for these. prolly unlimited and
-//we translate to our system later
-typedef struct s_point
+typedef struct s_data
 {
-	double		x;
-	double		y;
-	double		z;
-}	t_point;
+	t_mlx			mlx;
+	t_ambientlight	amb_light;
+	t_camera		camera;
+	t_light			light;
+	//Linked list for all the objects?
 
-//i just love ints, what can i say? range ofc 0-255
-typedef struct s_color
-{
-	int			x;
-	int			y;
-	int			z;
-}	t_color;
-
-typedef struct s_light
-{
-	t_point		coordinates;
-	double		brightness; //0.0 to 1.0
-	t_color		color;
-}	t_light;
-
-typedef struct s_camera
-{
-	t_point		viewpoint;
-	t_point		orientation_vector; // range -1 to 1
-	int			fieldofview; // 0 to 180
-}	t_camera;
-
-typedef struct s_ambientlight
-{
-	double		brightness; //0.0 to 1.0
-	t_color		color;
-}	t_ambientlight;
+}	t_data;
 
 // parsing_01.c
 void	parsing(t_data *d, int argc, char **argv);
+void	parse_line(t_data *d, char *line);
+
+
+// parsing_objects.c
+void	parse_ambientlight(t_data *d, char *line);
 
 // setup_01.c
 void	init_mlx(t_data *d);
 
 // errors.c
-void	exit_msg(char *msg);
+void	exit_onlymsg(char *msg);
+void	exit_free(char *msg);
+
 
 #endif

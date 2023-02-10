@@ -33,15 +33,16 @@ endif
 SRC		= src/main.c src/errors.c src/parsing_01.c
 OBJ		= $(addprefix obj/, $(SRC:src/%.c=%.o))
 LIBFT	= libft/libft.a
+MLX		= 
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LIBFT)
 	@echo "$(BLUE)MiniRT compiled!$(RESET)"
 
 $(LIBFT):
-	@make --no-print-directory -C /libft
+	@make --no-print-directory -C libft/
 
 obj/%.o: src/%.c
 	@mkdir -p obj

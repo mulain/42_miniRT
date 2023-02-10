@@ -10,10 +10,10 @@ int	main(int argc, char **argv)
 
 void	init_mlx(t_data *d)
 {
-	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, d->img_width, d->img_height, "miniRT");
-	d->img = mlx_new_image(d->mlx, d->img_width, d->img_height);
-	d->img_addr = mlx_get_data_addr(d->img, &d->img_bpp, &d->img_line_length,
-			&d->img_endian);
-	d->img_bytespp = d->img_bpp / 8;
+	d->mlx.mlx = mlx_init();
+	d->mlx.win = mlx_new_window(d->mlx.mlx, d->mlx.img_width, d->mlx.img_height, "miniRT");
+	d->mlx.img = mlx_new_image(d->mlx.mlx, d->mlx.img_width, d->mlx.img_height);
+	d->mlx.img_addr = mlx_get_data_addr(d->mlx.img, &d->mlx.img_bpp, &d->mlx.img_line_length,
+			&d->mlx.img_endian);
+	d->mlx.img_bytespp = d->mlx.img_bpp / 8;
 }
