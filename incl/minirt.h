@@ -14,9 +14,10 @@
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
 # define E_FILETYPE		"Wrong input file type. Please supply a .rt file.\n"
 # define E_FILENAME		"Invalid input file name.\n"
-//# define E_MULTIDEF		"Ambient light (A), camera (C) and light (L) may only be defined once.\n"
-# define E_AMBLIGHT		"Ambient light (A) may only be defined once.\n"
-# define E_CAMERA		"Camera (C) may only be defined once.\n"
+# define E_INVALOBJID	"Invalid object identifier encountered.\n"
+# define E_AMBLIGHT		"Ambient light (A): may only be defined once.\n"
+# define E_AMBLIGHTDATA "Ambient light (A): parsing error.\n"
+# define E_CAMERA		"Camera (C): may only be defined once.\n"
 # define E_LIGHT		"Light (L) may only be defined once.\n"
 # define E_OPENFILE		"Could not open input file.\n"
 
