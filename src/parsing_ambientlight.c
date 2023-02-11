@@ -16,7 +16,6 @@ while (elements[i])
 */
 void	parse_ambientlight(t_data *d, char **elements)
 {
-	int		i;
 	char	**subelements;
 
 	if (d->amb_light.declared)
@@ -24,7 +23,6 @@ void	parse_ambientlight(t_data *d, char **elements)
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHTDEF);
 	}
-	i = 0;
 	if (!is_decimalformat(elements[1]))
 	{
 		free_2d_char(elements);
