@@ -40,6 +40,9 @@ bool	is_onlydigits(char *str);
 bool	is_decimalformat(char *input);
 bool	is_uchartriplet(char **array);
 
+// utils_str.c
+int		count_occurences(char *str, char c);
+
 // utils_calc.c
 double	my_strtod(char *input);
 

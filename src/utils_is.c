@@ -22,27 +22,21 @@ bool	is_onlydigits(char *str)
 bool	is_decimalformat(char *input)
 {
 	int		i;
-	bool	dot_found;
 
-	dot_found = false;
-	i = 1;
+	if (count_occurences(input, '.') > 1)
+		return (false);
 	if (!ft_isdigit(input[0]))
 	{
 		if (!ft_strchr("-+.", (int)input[0]) || !input[1])
 			return (false);
-		if (input[0] == '.')
-			dot_found = true;
-		if (ft_strchr("-+", (int)input[0]) && input[1] == '.' && !input[2])
+		if (input[1] == '.' && !input[2])
 			return (false);
 	}
+	i = 1;
 	while (input[i])
 	{
 		if (!ft_isdigit(input[i]) && input[i] != '.')
 			return (false);
-		if (input[i] == '.' && dot_found)
-			return (false);
-		else
-			dot_found = true;
 		i++;
 	}
 	return (true);
