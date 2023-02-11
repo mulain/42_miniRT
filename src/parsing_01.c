@@ -20,16 +20,18 @@ void	parsing(t_data *d, int argc, char **argv)
 	while (line)
 	{
 		parse_line(d, line);
-		free(line);
 		line = get_next_line(fd);
 	}
 }
 
 void	parse_line(t_data *d, char *line)
 {
-	d->line = ft_strtrim(line, " \t\n\f\r\v");
-	if (d->line[0] == 'A')
-		parse_ambientlight(d);
+	char	**elements;
+
+	elements = ft_split(line, ' ');
+	free(line);
+	if (!ft_strncmp(elements[0], "A", 2))
+		parse_ambientlight(d, elements);
 	/* else if (line[0] == 'C')
 
 	else if (line[0] == 'L')
@@ -40,12 +42,14 @@ void	parse_line(t_data *d, char *line)
 
 	else if (line[0] == 'p' && line[1] == 'l')
  */
-	else if (!d->line[0] || d->line[0] == '#')
+	else if (!elements[0][0] || elements[0][0] == '#')
 	{
-		free(d->line);
-		d->line = NULL;
+		free_2d_char(elements);
 		return ;
 	}
 	else
-		exit_free(E_INVALOBJID);
+	{
+		free_2d_char(elements);
+		exit_free(d, E_INVALOBJID);
+	}
 }

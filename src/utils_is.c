@@ -5,6 +5,20 @@ bool	is_whitespace(char c)
 	return (ft_strchr(" \t\n\f\r\v", c));
 }
 
+bool	is_onlydigits(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool	is_decimalformat(char *input)
 {
 	int		i;
@@ -12,23 +26,26 @@ bool	is_decimalformat(char *input)
 
 	dot_found = false;
 	i = 1;
-	if (input[0] < '0' || input[0] > '9')
+	if (!ft_isdigit(input[0]))
 	{
-		if (input[0] != '-' && input[0] != '+' && input[0] != '.')
-			return (0);
-		if (!input[1])
-			return (0);
+		if (!ft_strchr("-+.", (int)input[0]) || !input[1])
+			return (false);
 		if (input[0] == '.')
 			dot_found = true;
+		if (ft_strchr("-+", (int)input[0]) && input[1] == '.' && !input[2])
+			return (false);
 	}
 	while (input[i])
 	{
-		if (input[i] < '0' || input[i] > '9')
-			if (input [i] != '.' || dot_found)
-				return (0);
+		if (!ft_isdigit(input[i]) && input[i] != '.')
+			return (false);
+		if (input[i] == '.' && dot_found)
+			return (false);
+		else
+			dot_found = true;
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
 bool	is_uchartriplet(char **array)
@@ -40,8 +57,10 @@ bool	is_uchartriplet(char **array)
 	while (i < 3)
 	{
 		val = ft_atoi(array[i]);
-		if (!ft_isdigit(array[i]) || val < 0 || val > 255)
-			return (false)
+		if (!is_onlydigits(array[i])
+			|| val < 0 || val > 255)
+			return (false);
 		i++;
 	}
+	return (true);
 }
