@@ -18,6 +18,7 @@
 # define E_INVALOBJID	"Invalid object identifier encountered.\n"
 # define E_AMBLIGHTDEF	"Ambient light (A): may only be defined once.\n"
 # define E_AMBLIGHT1	"Ambient light (A): invalid first argument.\n"
+# define E_AMBLIGHT2	"Ambient light (A): invalid second argument.\n"
 # define E_CAMERA		"Camera (C): may only be defined once.\n"
 # define E_LIGHT		"Light (L) may only be defined once.\n"
 # define E_OPENFILE		"Could not open input file.\n"
