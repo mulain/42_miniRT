@@ -12,6 +12,7 @@ void	parse_ambientlight(t_data *d, char **elements)
 {
 	char	**subelements;
 
+//implement argcount oO
 	if (d->amb_light.declared)
 	{
 		free_2d_char(elements);
@@ -41,6 +42,7 @@ Camera:
 C -50.0,0,20 0,0,1 70
 ∗ identifier: C (-> elements[0])
 ∗ x,y,z coordinates of the view point: 0.0,0.0,20.6 (-> elements[1])
+
 ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis:
 0.0,0.0,1.0 (-> elements[2])
 ∗ FOV : Horizontal field of view in degrees in range [0,180] (-> elements[3])
@@ -52,10 +54,26 @@ void	parse_camera(t_data *d, char **elements)
 	if (d->camera.declared)
 	{
 		free_2d_char(elements);
-		exit_free(d, E_AMBLIGHTDEF);
+		exit_free(d, E_CAMERADEF);
 	}
-	d->amb_light.declared = true;
-	if (!set_double(&d->amb_light.brightness, elements[1]))
+	d->camera.declared = true;
+	subelements = ft_split(elements[1], ',');
+	if (!set_tpoint(&d->camera.viewpoint, subelements))
+	{
+		free_2d_char(elements);
+		free_2d_char(subelements);
+		exit_free(d, E_CAMERA1);
+	}
+	printf("viewpoint_x:%f\nviewpoint_y:%f\nviewpoint_z:%f\n", d->camera.viewpoint.x, d->camera.viewpoint.y, d->camera.viewpoint.z);
+	free(subelements);
+	subelements = ft_split(elements[2], ',');
+	if (!set_tnormvector(&d->camera.normvector, subelements))
+	{
+		free_2d_char(elements);
+		free_2d_char(subelements);
+		exit_free(d, E_CAMERA1);
+	}
+	/* if (!set_double(&d->amb_light.brightness, elements[1]))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHT1);
@@ -68,6 +86,7 @@ void	parse_camera(t_data *d, char **elements)
 		free_2d_char(subelements);
 		exit_free(d, E_AMBLIGHT2);
 	}
-	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
+	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b); */
+	free_2d_char(elements);
 	free_2d_char(subelements);
 }

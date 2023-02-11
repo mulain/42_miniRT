@@ -5,8 +5,8 @@ void	parsing(t_data *d, int argc, char **argv)
 	int		fd;
 	int		len;
 	char	*line;
+	char	*temp;
 
-	//(void)d;
 	if (argc < 2)
 		exit_onlymsg(E_ARGCOUNT);
 	len = ft_strlen(argv[1]);
@@ -22,6 +22,9 @@ void	parsing(t_data *d, int argc, char **argv)
 	{
 		parse_line(d, line);
 		line = get_next_line(fd);
+		temp = line;
+		line = ft_strtrim(line, " \t\n\f\r\v");
+		free(temp);
 	}
 }
 

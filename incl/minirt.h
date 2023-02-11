@@ -37,10 +37,9 @@ double	ft_strtod(char *input);
 
 // utils_set.c
 bool	set_double(double *target, char *input);
-bool	set_tcolor(t_color *color, char **input);
-
-// utils_calc.c
-double	my_strtod(char *input);
+bool	set_tcolor(t_color *color, char **arr);
+bool	set_tpoint(t_point *point, char **arr);
+bool	set_tnormvector(t_normvector *vec, char **arr);
 
 // errors.c
 void	exit_onlymsg(char *msg);
