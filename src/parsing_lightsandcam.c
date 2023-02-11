@@ -1,0 +1,73 @@
+# include "../incl/minirt.h"
+
+/*
+Subject example:
+Ambient lighting:
+A 0.2 255,255,255
+∗ identifier: A (-> elements[0])
+∗ ambient lighting ratio in range [0.0,1.0]: 0.2 (-> elements[1])
+∗ R,G,B colors in range [0-255]: 255, 255, 255 (-> elements[2])
+*/
+void	parse_ambientlight(t_data *d, char **elements)
+{
+	char	**subelements;
+
+	if (d->amb_light.declared)
+	{
+		free_2d_char(elements);
+		exit_free(d, E_AMBLIGHTDEF);
+	}
+	d->amb_light.declared = true;
+	if (!set_double(&d->amb_light.brightness, elements[1]))
+	{
+		free_2d_char(elements);
+		exit_free(d, E_AMBLIGHT1);
+	}
+	printf("double:%f\n", d->amb_light.brightness);
+	subelements = ft_split(elements[2], ',');
+	free_2d_char(elements);
+	if (!set_tcolor(&d->amb_light.color, subelements))
+	{
+		free_2d_char(subelements);
+		exit_free(d, E_AMBLIGHT2);
+	}
+	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
+	free_2d_char(subelements);
+}
+
+/*
+Subject example:
+Camera:
+C -50.0,0,20 0,0,1 70
+∗ identifier: C (-> elements[0])
+∗ x,y,z coordinates of the view point: 0.0,0.0,20.6 (-> elements[1])
+∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis:
+0.0,0.0,1.0 (-> elements[2])
+∗ FOV : Horizontal field of view in degrees in range [0,180] (-> elements[3])
+*/
+void	parse_camera(t_data *d, char **elements)
+{
+	char	**subelements;
+
+	if (d->camera.declared)
+	{
+		free_2d_char(elements);
+		exit_free(d, E_AMBLIGHTDEF);
+	}
+	d->amb_light.declared = true;
+	if (!set_double(&d->amb_light.brightness, elements[1]))
+	{
+		free_2d_char(elements);
+		exit_free(d, E_AMBLIGHT1);
+	}
+	printf("double:%f\n", d->amb_light.brightness);
+	subelements = ft_split(elements[2], ',');
+	free_2d_char(elements);
+	if (!set_tcolor(&d->amb_light.color, subelements))
+	{
+		free_2d_char(subelements);
+		exit_free(d, E_AMBLIGHT2);
+	}
+	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
+	free_2d_char(subelements);
+}

@@ -30,15 +30,16 @@ DEFINEFLAGS = 	-DKEY_ESC=53 -DKEY_LEFT=123 -DKEY_RIGHT=124 -DKEY_UP=126 -DKEY_DO
 				-DMOUSE_LEFT=1 -DMOUSE_RIGHT=2 -DMOUSE_MIDDLE=3 -DMOUSE_SCR_UP=5 -DMOUSE_SCR_DOWN=4
 endif
 
-SRC		= 	src/main.c\
-			src/errors.c\
-			src/parsing_01.c\
-			src/parsing_ambientlight.c\
-			src/utils_is.c\
-			src/utils_set.c\
-			src/utils_str.c\
-			src/shutdown.c
-OBJ		= 	$(addprefix obj/, $(SRC:src/%.c=%.o))
+SRCFILE	= 	main.c\
+			errors.c\
+			parsing.c\
+			parsing_lightsandcam.c\
+			utils_is.c\
+			utils_set.c\
+			utils_str.c\
+			shutdown.c
+SRC		=	$(addprefix src/, $(SRCFILE))
+OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 LIBFT	= 	libft/libft.a
 MLX		= 
 

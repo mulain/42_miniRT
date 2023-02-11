@@ -8,7 +8,7 @@ bool	set_double(double *target, char *input)
 	return (true);
 }
 
-bool	set_uchartriplet(t_color *color, char **input)
+bool	set_tcolor(t_color *color, char **input)
 {
 	int		i;
 
