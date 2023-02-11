@@ -23,17 +23,21 @@ void	parse_ambientlight(t_data *d, char **elements)
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHTDEF);
 	}
-	if (!is_decimalformat(elements[1]))
+	d->amb_light.declared = true;
+	if (!set_double(&d->amb_light.brightness, elements[1]))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHT1);
 	}
+	printf("double:%f\n", d->amb_light.brightness);
 	subelements = ft_split(elements[2], ',');
 	free_2d_char(elements);
-	if (!is_uchartriplet(subelements))
+	if (!set_uchartriplet(&d->amb_light.color, subelements))
 	{
 		free_2d_char(subelements);
 		exit_free(d, E_AMBLIGHT2);
 	}
+	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
 	free_2d_char(subelements);
+	printf("ok\n");
 }

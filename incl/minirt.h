@@ -39,10 +39,15 @@ void	parse_ambientlight(t_data *d, char **elements);
 bool	is_whitespace(char c);
 bool	is_onlydigits(char *str);
 bool	is_decimalformat(char *input);
-bool	is_uchartriplet(char **array);
+bool	is_ucharformat(char *input);
 
 // utils_str.c
 int		count_occurences(char *str, char c);
+double	ft_strtod(char *input);
+
+// utils_set.c
+bool	set_double(double *target, char *input);
+bool	set_uchartriplet(t_color *color, char **input);
 
 // utils_calc.c
 double	my_strtod(char *input);

@@ -2,32 +2,57 @@
 
 int	count_occurences(char *str, char c)
 {
-	int		i;
 	int		count;
 
-	i = 0;
 	count = 0;
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] == c)
+		if (*str == c)
 			count++;
-		i++;
+		str++;
 	}
 	return (count);
 }
 
-/* bool	check_and_strtod(char *input, double *value)
+/*
+Caveats:
+- 	Relies on prior syntax checking (is_decimalformat)
+-	Does not handle exponent notation
+*/
+double	ft_strtod(char *input)
 {
-	if (!is_numbercharstr(input))
-		return (true);
-	
+	double		result;
+	double		fraction;
+	int			sign;
+	int			n_fraction;
+
+	result = 0;
+	fraction = 0;
+	n_fraction = 1;
+	sign = 1;
+	if (*input == '-')
+	{
+		sign = -1;
+		input++;
+	}
+	else if (*input == '+')
+		input++;
+	while (ft_isdigit(*input))
+	{
+		result = result * 10 + *input - 48;
+		input++;
+	}
+	if (*input == '.' )
+	{
+		input++;
+		while (ft_isdigit(*input))
+		{
+			fraction = fraction * 10 + *input - 48;
+			n_fraction *= 10;
+			input++;
+		}
+	}
+	result += fraction / n_fraction;
+	result *= sign;
+	return (result);
 }
-
-
-
-
-double	my_strtod(char *input)
-{
-
-}
- */

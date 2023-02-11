@@ -35,6 +35,7 @@ SRC		= 	src/main.c\
 			src/parsing_01.c\
 			src/parsing_ambientlight.c\
 			src/utils_is.c\
+			src/utils_set.c\
 			src/utils_str.c\
 			src/shutdown.c
 OBJ		= 	$(addprefix obj/, $(SRC:src/%.c=%.o))

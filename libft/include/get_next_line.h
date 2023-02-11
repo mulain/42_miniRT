@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmardin <wmardin@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 21:48:03 by wmardin           #+#    #+#             */
-/*   Updated: 2022/09/23 19:50:18 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/02/11 20:05:00 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 1
 
 char	*get_next_line(int fd);
 char	*ft_appendbuffertoline(char *line, char *readbuffer, int readreturn);

@@ -32,9 +32,9 @@ typedef struct s_point
 //i just love ints, what can i say? range ofc 0-255
 typedef struct s_color
 {
-	int			x;
-	int			y;
-	int			z;
+	int			r;
+	int			g;
+	int			b;
 }	t_color;
 
 typedef struct s_light

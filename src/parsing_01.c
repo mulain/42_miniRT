@@ -6,6 +6,7 @@ void	parsing(t_data *d, int argc, char **argv)
 	int		len;
 	char	*line;
 
+	//(void)d;
 	if (argc < 2)
 		exit_onlymsg(E_ARGCOUNT);
 	len = ft_strlen(argv[1]);
@@ -42,7 +43,7 @@ void	parse_line(t_data *d, char *line)
 
 	else if (line[0] == 'p' && line[1] == 'l')
  */
-	else if (!elements[0][0] || elements[0][0] == '#')
+	else if (!elements[0][0] || elements[0][0] == '#' || elements[0][0] == '\n')
 	{
 		free_2d_char(elements);
 		return ;

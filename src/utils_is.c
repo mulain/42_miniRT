@@ -5,14 +5,14 @@ bool	is_whitespace(char c)
 	return (ft_strchr(" \t\n\f\r\v", c));
 }
 
-bool	is_onlydigits(char *str)
+bool	is_onlydigits(char *input)
 {
 	int		i;
 
 	i = 0;
-	while (str[i])
+	while (input[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(input[i]))
 			return (false);
 		i++;
 	}
@@ -42,19 +42,12 @@ bool	is_decimalformat(char *input)
 	return (true);
 }
 
-bool	is_uchartriplet(char **array)
+bool	is_ucharformat(char *input)
 {
-	int		i;
 	int		val;
 
-	i = 0;
-	while (i < 3)
-	{
-		val = ft_atoi(array[i]);
-		if (!is_onlydigits(array[i])
-			|| val < 0 || val > 255)
-			return (false);
-		i++;
-	}
+	val = ft_atoi(input);
+	if (!is_onlydigits(input) || val < 0 || val > 255)
+		return (false);
 	return (true);
 }
