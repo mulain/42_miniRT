@@ -1,2 +1,6 @@
+# Lines starting(!) with a '#' will not be parsed.
+# Lines with only whitespaces will be skipped
+			   
+# After receiving sufficient valid arguments in a line, the rest will not be evaluated.
 A 1.0 0,0,255 asdfasdf
 C 1.0,3,-.5 0,0,-1.0000

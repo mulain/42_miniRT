@@ -34,13 +34,16 @@ void	parse_line(t_data *d, char *line)
 
 	elements = ft_split(line, ' ');
 	free(line);
-	if (!ft_strncmp(elements[0], "A", 2))
+	if (!elements || !elements[0] || ft_strchr("#\n\0", (int)elements[0][0]))
+	//!elements[0][0] || elements[0][0] == '#' || elements[0][0] == '\n')
+	{
+		free_2d_char(elements);
+		return ;
+	}
+	else if (!ft_strncmp(elements[0], "A", 2))
 		parse_ambientlight(d, elements);
 	else if (!ft_strncmp(elements[0], "C", 2))
 		parse_camera(d, elements);
-
-
-
 /*
 	else if (line[0] == 'L')
 
@@ -50,11 +53,6 @@ void	parse_line(t_data *d, char *line)
 
 	else if (line[0] == 'p' && line[1] == 'l')
  */
-	else if (!elements[0][0] || elements[0][0] == '#' || elements[0][0] == '\n')
-	{
-		free_2d_char(elements);
-		return ;
-	}
 	else
 	{
 		free_2d_char(elements);

@@ -30,7 +30,6 @@ bool	set_tpoint(t_point *point, char **arr)
 	i = 0;
 	while (i < 3)
 	{
-		printf("arr[i]:'%s'\n", arr[i]);
 		if (!is_decimalformat(arr[i]))
 			return (false);
 		i++;
