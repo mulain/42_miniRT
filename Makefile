@@ -34,6 +34,7 @@ SRCFILE	= 	main.c\
 			errors.c\
 			parsing.c\
 			parsing_ambientlight.c\
+			parsing_camera.c\
 			utils_is.c\
 			utils_set.c\
 			utils_str.c\

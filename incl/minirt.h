@@ -27,11 +27,13 @@ void	check_declared_amblight(t_data *d, char **elements);
 void	set_amblight_lightingratio(t_data *d, char **elements);
 void	set_amblight_color(t_data *d, char **elements);
 
-
-void	check_argcountamblight(t_data *d, char **elements);
-
-
+// parsing_camera.c
 void	parse_camera(t_data *d, char **elements);
+void	check_declared_camera(t_data *d, char **elements);
+void	set_camera_viewpoint(t_data *d, char **elements);
+void	set_camera_normvector(t_data *d, char **elements);
+
+
 
 // utils_is.c
 bool	is_whitespace(char c);

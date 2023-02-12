@@ -49,6 +49,7 @@ bool	set_tnormvector(t_normvector *vec, char **arr)
 		if (!is_decimalformat(arr[i])
 			|| ft_strtod(arr[i]) < -1 || ft_strtod(arr[i]) > 1.0)
 			return (false);
+		i++;
 	}
 	*vec = (t_normvector){ft_strtod(arr[0]), ft_strtod(arr[1]),
 		ft_strtod(arr[2])};
