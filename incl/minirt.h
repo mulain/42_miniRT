@@ -35,6 +35,13 @@ void	set_camera_viewpoint(t_data *d, char **elements);
 void	set_camera_normvector(t_data *d, char **elements);
 void	set_camera_fieldofview(t_data *d, char **elements);
 
+// parsing_light.c
+void	parse_light(t_data *d, char **elements);
+void	check_light_declared(t_data *d, char **elements);
+void	set_light_coordinates(t_data *d, char **elements);
+void	set_light_brightness(t_data *d, char **elements);
+void	set_light_color(t_data *d, char **elements);
+
 // utils_is.c
 bool	is_whitespace(char c);
 bool	is_onlydigits(char *str);

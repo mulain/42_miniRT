@@ -50,9 +50,9 @@ void	parse_line(t_data *d, char *line)
 		parse_ambientlight(d, elements);
 	else if (!ft_strncmp(elements[0], "C", 2))
 		parse_camera(d, elements);
+	else if (!ft_strncmp(elements[0], "L", 2))
+		parse_light(d, elements);
 /*
-	else if (line[0] == 'L')
-
 	else if (line[0] == 's' && line[1] == 'p')
 
 	else if (line[0] == 'c' && line[1] == 'y')
