@@ -12,9 +12,8 @@ void	parse_ambientlight(t_data *d, char **elements)
 {
 	check_declared_amblight(d, elements);
 	set_amblight_lightingratio(d, elements);
-	printf("double:%f\n", d->amb_light.brightness);
 	set_amblight_color(d, elements);
-	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
+	print_ambientlight(d);
 }
 
 void	check_declared_amblight(t_data *d, char **elements)
@@ -29,7 +28,7 @@ void	check_declared_amblight(t_data *d, char **elements)
 
 void	set_amblight_lightingratio(t_data *d, char **elements)
 {
-	if (!elements[1] || !set_double(&d->amb_light.brightness, elements[1]))
+	if (!elements[1] || !set_double(&d->amb_light.brightness, elements[1], 0, 1))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHT1);

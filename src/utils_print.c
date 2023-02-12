@@ -1,5 +1,16 @@
 # include "../incl/minirt.h"
 
+void	print_ambientlight(t_data *d)
+{
+	ft_printf("----- Ambient Light -----\n");
+	ft_printf("Brightness:\n");
+	printf("  %f\n", d->amb_light.brightness);
+	ft_printf("Color:\n");
+	ft_printf("  r: %i\n", d->amb_light.color.r);
+	ft_printf("  g: %i\n", d->amb_light.color.g);
+	ft_printf("  b: %i\n", d->amb_light.color.b);
+}
+
 void	print_camera(t_data *d)
 {
 	ft_printf("----- Camera -----\n");

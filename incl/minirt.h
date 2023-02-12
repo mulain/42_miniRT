@@ -41,10 +41,11 @@ bool	is_decimalformat(char *input);
 bool	is_ucharformat(char *input);
 
 // utils_print.c
+void	print_ambientlight(t_data *d);
 void	print_camera(t_data *d);
 
 // utils_set.c
-bool	set_double(double *target, char *input);
+bool	set_double(double *target, char *input, double min, double max);
 bool	set_tcolor(t_color *color, char **arr);
 bool	set_tpoint(t_point *point, char **arr);
 bool	set_tnormvector(t_normvector *vec, char **arr);

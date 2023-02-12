@@ -1,8 +1,11 @@
 # include "../incl/minirt.h"
 
-bool	set_double(double *target, char *input)
+bool	set_double(double *target, char *input, double min, double max)
 {
-	if (!is_decimalformat(input))
+	double	val;
+
+	val = ft_strtod(input);
+	if (!is_decimalformat(input) || val < min || val > max)
 		return (false);
 	*target = ft_strtod(input);
 	return (true);
