@@ -35,7 +35,6 @@ void	parse_line(t_data *d, char *line)
 	elements = ft_split(line, ' ');
 	free(line);
 	if (!elements || !elements[0] || ft_strchr("#\n\0", (int)elements[0][0]))
-	//!elements[0][0] || elements[0][0] == '#' || elements[0][0] == '\n')
 	{
 		free_2d_char(elements);
 		return ;

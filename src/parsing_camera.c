@@ -51,7 +51,7 @@ void	set_camera_viewpoint(t_data *d, char **elements)
 		free_2d_char(subelements);
 		exit_free(d, E_CAMERA1);
 	}
-	free(subelements);
+	free_2d_char(subelements);
 }
 
 void	set_camera_normvector(t_data *d, char **elements)
@@ -74,5 +74,5 @@ void	set_camera_normvector(t_data *d, char **elements)
 		free_2d_char(subelements);
 		exit_free(d, E_CAMERA2);
 	}
-	free(subelements);
+	free_2d_char(subelements);
 }
