@@ -14,6 +14,7 @@ void	parse_light(t_data *d, char **elements)
 	set_light_coordinates(d, elements);
 	set_light_brightness(d, elements);
 	set_light_color(d, elements);
+	free_2d_char(elements);
 	print_light(d);
 }
 
@@ -70,12 +71,12 @@ void	set_light_color(t_data *d, char **elements)
 		exit_free(d, E_LIGHT3);
 	}
 	subelements = ft_split(elements[3], ',');
-	free_2d_char(elements);
 	i = 0;
 	while (subelements[i])
 		i++;
 	if (i < 2 || !set_tcolor(&d->light.color, subelements))
 	{
+		free_2d_char(elements);
 		free_2d_char(subelements);
 		exit_free(d, E_LIGHT3);
 	}

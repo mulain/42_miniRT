@@ -13,6 +13,7 @@ void	parse_ambientlight(t_data *d, char **elements)
 	check_amblight_declared(d, elements);
 	set_amblight_brightness(d, elements);
 	set_amblight_color(d, elements);
+	free_2d_char(elements);
 	print_ambientlight(d);
 }
 
@@ -46,12 +47,12 @@ void	set_amblight_color(t_data *d, char **elements)
 		exit_free(d, E_AMBLIGHT2);
 	}
 	subelements = ft_split(elements[2], ',');
-	free_2d_char(elements);
 	i = 0;
 	while (subelements[i])
 		i++;
 	if (i < 2 || !set_tcolor(&d->amb_light.color, subelements))
 	{
+		free_2d_char(elements);
 		free_2d_char(subelements);
 		exit_free(d, E_AMBLIGHT2);
 	}
