@@ -21,8 +21,16 @@ void	init_mlx(t_data *d);
 void	parsing(t_data *d, int argc, char **argv);
 void	parse_line(t_data *d, char *line);
 
-// parsing_lightsandcam.c
+// parsing_ambientlight.c
 void	parse_ambientlight(t_data *d, char **elements);
+void	check_declared_amblight(t_data *d, char **elements);
+void	set_amblight_lightingratio(t_data *d, char **elements);
+void	set_amblight_color(t_data *d, char **elements);
+
+
+void	check_argcountamblight(t_data *d, char **elements);
+
+
 void	parse_camera(t_data *d, char **elements);
 
 // utils_is.c

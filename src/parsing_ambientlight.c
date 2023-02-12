@@ -10,31 +10,56 @@ A 0.2 255,255,255
 */
 void	parse_ambientlight(t_data *d, char **elements)
 {
-	char	**subelements;
+	check_declared_amblight(d, elements);
+	set_amblight_lightingratio(d, elements);
+	printf("double:%f\n", d->amb_light.brightness);
+	set_amblight_color(d, elements);
+	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
+}
 
-//implement argcount oO
+void	check_declared_amblight(t_data *d, char **elements)
+{
 	if (d->amb_light.declared)
 	{
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHTDEF);
 	}
 	d->amb_light.declared = true;
-	if (!set_double(&d->amb_light.brightness, elements[1]))
+}
+
+void	set_amblight_lightingratio(t_data *d, char **elements)
+{
+	if (!elements[1] || !set_double(&d->amb_light.brightness, elements[1]))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHT1);
 	}
-	printf("double:%f\n", d->amb_light.brightness);
+}
+
+void	set_amblight_color(t_data *d, char **elements)
+{
+	int		i;
+	char	**subelements;
+
+	if (!elements[2])
+	{
+		free_2d_char(elements);
+		exit_free(d, E_AMBLIGHT2);
+	}
 	subelements = ft_split(elements[2], ',');
 	free_2d_char(elements);
-	if (!set_tcolor(&d->amb_light.color, subelements))
+	i = 0;
+	while (subelements[i])
+		i++;
+	if (i < 2 || !set_tcolor(&d->amb_light.color, subelements))
 	{
 		free_2d_char(subelements);
 		exit_free(d, E_AMBLIGHT2);
 	}
-	printf("color r:%i\ncolor g:%i\ncolor b:%i\n", d->amb_light.color.r, d->amb_light.color.g, d->amb_light.color.b);
 	free_2d_char(subelements);
 }
+
+
 
 /*
 Subject example:

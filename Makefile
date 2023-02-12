@@ -33,7 +33,7 @@ endif
 SRCFILE	= 	main.c\
 			errors.c\
 			parsing.c\
-			parsing_lightsandcam.c\
+			parsing_ambientlight.c\
 			utils_is.c\
 			utils_set.c\
 			utils_str.c\
