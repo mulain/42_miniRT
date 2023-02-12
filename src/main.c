@@ -22,9 +22,7 @@ void init_structs(t_data *d)
 	d->light.brightness = 0;
 	d->light.color = (t_color){0, 0, 0};
 	d->light.coordinates = (t_point){0, 0, 0};
-	d->elements_a = NULL;
-	d->elements_b = NULL;
-	d->line = NULL;
+	d->objectlist = NULL;
 }
 
 /* void	init_mlx(t_data *d)

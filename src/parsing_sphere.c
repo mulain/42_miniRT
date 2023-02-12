@@ -18,6 +18,7 @@ void	parse_sphere(t_data *d, char **elements)
 	set_sphere_center(d, sphere, elements);
 	set_sphere_diameter(d, sphere, elements);
 	set_sphere_color(d, sphere, elements);
+	objlst_add_back(&d->objectlist, objlst_new(sphere, sp));
 	free_2d_char(elements);
 }
 

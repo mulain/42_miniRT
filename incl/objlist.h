@@ -5,8 +5,8 @@
 
 typedef enum e_objtype
 {
-	sphere = 1,
-	cylinder = 2,
+	sp = 1,
+	cy = 2,
 
 }	t_objtype;
 
@@ -20,6 +20,7 @@ typedef struct s_objlist
 
 }	t_objlist;
 
+// objlist.c
 t_objlist	*objlst_new(void *content, t_objtype objtype);
 void		objlst_add_back(t_objlist **lst, t_objlist *new);
 t_objlist	*objlst_last(t_objlist *lst);

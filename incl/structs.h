@@ -19,9 +19,6 @@ typedef struct s_mlx
 }	t_mlx;
 
 // General attribute structs for use across different objects
-
-//unsure about range for these. prolly unlimited and
-//we translate to our system later
 typedef struct s_point
 {
 	double		x;
@@ -102,6 +99,8 @@ typedef struct s_cylinder
 	t_color			color;
 }	t_cylinder;
 
+typedef struct s_objlist t_objlist;
+
 /*
 The main struct.
 */
@@ -111,11 +110,7 @@ typedef struct s_data
 	t_ambientlight	amb_light;
 	t_camera		camera;
 	t_light			light;
-	//Linked list for all the objects?
-	char			*line;
-	char			**elements_a;
-	char			**elements_b;
-
+	t_objlist		*objectlist;
 }	t_data;
 
 #endif
