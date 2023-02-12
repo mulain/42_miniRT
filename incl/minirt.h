@@ -41,15 +41,18 @@ bool	is_onlydigits(char *str);
 bool	is_decimalformat(char *input);
 bool	is_ucharformat(char *input);
 
-// utils_str.c
-int		count_occurences(char *str, char c);
-double	ft_strtod(char *input);
+// utils_print.c
+void	print_camera(t_data *d);
 
 // utils_set.c
 bool	set_double(double *target, char *input);
 bool	set_tcolor(t_color *color, char **arr);
 bool	set_tpoint(t_point *point, char **arr);
 bool	set_tnormvector(t_normvector *vec, char **arr);
+
+// utils_str.c
+int		count_occurences(char *str, char c);
+double	ft_strtod(char *input);
 
 // errors.c
 void	exit_onlymsg(char *msg);

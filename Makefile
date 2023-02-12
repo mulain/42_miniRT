@@ -36,6 +36,7 @@ SRCFILE	= 	main.c\
 			parsing_ambientlight.c\
 			parsing_camera.c\
 			utils_is.c\
+			utils_print.c\
 			utils_set.c\
 			utils_str.c\
 			shutdown.c
