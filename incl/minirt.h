@@ -55,10 +55,12 @@ bool	is_onlydigits(char *str);
 bool	is_decimalformat(char *input);
 bool	is_ucharformat(char *input);
 
-// utils_print.c
+// utils_print1.c
+void	print_objlist(t_objlist *lst);
 void	print_ambientlight(t_data *d);
 void	print_camera(t_data *d);
 void	print_light(t_data *d);
+void	print_sphere(t_sphere *sp);
 
 // utils_set.c
 bool	set_double(double *target, char *input, double min, double max);

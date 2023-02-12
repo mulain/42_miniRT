@@ -22,6 +22,7 @@ void	parsing(t_data *d, int argc, char **argv)
 		parse_line(d, line);
 		line = gnl_trimmed(fd);
 	}
+	print_objlist(d->objectlist);
 }
 
 char	*gnl_trimmed(int fd)

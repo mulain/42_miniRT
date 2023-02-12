@@ -7,3 +7,4 @@ A 1.0 0,0,255 asdfasdf
 # Zeros may be omitted before or after decimal pointsm but not both at once. That would be just a dot.
 C .5,3,-.5 1,0,0 180
 L .1,-5,2 1.0 0,0,100
+sp 1,1,1 5 0,0,255
