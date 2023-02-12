@@ -1,6 +1,6 @@
 # Lines with only whitespaces will not be parsed.
 			   
-# Lines starting with '#' will not be parsed. Leading whitespaces are skipped
+# Lines starting with '#' will not be parsed. Leading whitespaces are skipped.
    #
 # After receiving sufficient valid arguments in a line, the rest will not be evaluated.
 A 1.0 0,0,255 asdfasdf

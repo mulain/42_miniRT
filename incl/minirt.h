@@ -19,6 +19,7 @@ void	init_mlx(t_data *d);
 
 // parsing.c
 void	parsing(t_data *d, int argc, char **argv);
+char	*gnl_trimmed(int fd);
 void	parse_line(t_data *d, char *line);
 
 // parsing_ambientlight.c

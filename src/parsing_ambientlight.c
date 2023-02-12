@@ -28,7 +28,7 @@ void	check_amblight_declared(t_data *d, char **elements)
 
 void	set_amblight_brightness(t_data *d, char **elements)
 {
-	if (!elements[1] || !set_double(&d->amb_light.brightness, elements[1], 0, 1))
+	if (!elements[1] || !set_double(&d->amb_light.brightness, elements[1], 0.0, 1.0))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_AMBLIGHT1);
