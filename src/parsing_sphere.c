@@ -47,7 +47,7 @@ void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements)
 
 void	set_sphere_diameter(t_data *d, t_sphere *sphere, char **elements)
 {
-	if (!elements[2] || !set_double(&sphere->diameter, elements[2], 0.0, 5000.0))
+	if (!elements[2] || !set_double(&sphere->diameter, elements[2], 0.0, 0.0))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_SPHERE2);

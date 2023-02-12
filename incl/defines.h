@@ -29,4 +29,8 @@
 # define E_SPHERE2		"Sphere (sp): invalid second argument.\n"
 # define E_SPHERE3		"Sphere (sp): invalid third argument.\n"
 
+# define E_PLANE1		"Plane (pl): invalid first argument.\n"
+# define E_PLANE2		"Plane (pl): invalid second argument.\n"
+# define E_PLANE3		"Plane (pl): invalid third argument.\n"
+
 #endif

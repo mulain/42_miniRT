@@ -1,11 +1,22 @@
 # include "../incl/minirt.h"
 
+/*
+Define range constraints with min and max.
+If no constraints should be respected: pass min == max.
+*/
 bool	set_double(double *target, char *input, double min, double max)
 {
 	double	val;
 
+	if (!is_decimalformat(input))
+		return (false);
 	val = ft_strtod(input);
-	if (!is_decimalformat(input) || val < min || val > max)
+	if (min == max)
+	{
+		*target = ft_strtod(input);
+		return (true);
+	}
+	if (val < min || val > max)
 		return (false);
 	*target = ft_strtod(input);
 	return (true);

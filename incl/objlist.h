@@ -6,7 +6,8 @@
 typedef enum e_objtype
 {
 	sp = 1,
-	cy = 2,
+	pl = 2,
+	cy = 3,
 
 }	t_objtype;
 

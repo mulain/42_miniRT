@@ -40,6 +40,7 @@ SRCFILE	= 	errors.c\
 			parsing_sphere.c\
 			utils_is.c\
 			utils_print1.c\
+			utils_print2.c\
 			utils_set.c\
 			utils_str.c\
 			shutdown.c
