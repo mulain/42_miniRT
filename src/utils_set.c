@@ -44,17 +44,24 @@ bool	set_tpoint(t_point *point, char **arr)
 bool	set_tnormvector(t_normvector *vec, char **arr)
 {
 	int		i;
+	double	x;
+	double	y;
+	double	z;
 
 	i = 0;
 	while (i < 3)
 	{
-		if (!is_decimalformat(arr[i])
-			|| ft_strtod(arr[i]) < -1 || ft_strtod(arr[i]) > 1.0)
+		if (!is_decimalformat(arr[i]))
 			return (false);
 		i++;
 	}
-	*vec = (t_normvector){ft_strtod(arr[0]), ft_strtod(arr[1]),
-		ft_strtod(arr[2])};
+	x = ft_strtod(arr[0]);
+	y = ft_strtod(arr[1]);
+	z = ft_strtod(arr[2]);
+	if (x < -1.0 || x > 1.0 || y < -1.0 || y > 1.0 || z < -1.0 || z > 1.0
+		|| sqrt(x * x + y * y + z * z) != 1.0)
+		return (false);
+	*vec = (t_normvector){x, y, z};
 	return (true);
 }
 

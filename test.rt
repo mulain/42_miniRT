@@ -5,4 +5,4 @@
 # After receiving sufficient valid arguments in a line, the rest will not be evaluated.
 A 1.0 0,0,255 asdfasdf
 # Zeros may be omitted before or after decimal pointsm but not both at once. That would be just a dot.
-C .5,3,-.5 1,1,-1. 180
+C .5,3,-.5 1,0,0 180

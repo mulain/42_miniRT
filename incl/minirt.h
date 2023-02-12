@@ -23,13 +23,13 @@ void	parse_line(t_data *d, char *line);
 
 // parsing_ambientlight.c
 void	parse_ambientlight(t_data *d, char **elements);
-void	check_declared_amblight(t_data *d, char **elements);
-void	set_amblight_lightingratio(t_data *d, char **elements);
+void	check_amblight_declared(t_data *d, char **elements);
+void	set_amblight_brightness(t_data *d, char **elements);
 void	set_amblight_color(t_data *d, char **elements);
 
 // parsing_camera.c
 void	parse_camera(t_data *d, char **elements);
-void	check_declared_camera(t_data *d, char **elements);
+void	check_camera_declared(t_data *d, char **elements);
 void	set_camera_viewpoint(t_data *d, char **elements);
 void	set_camera_normvector(t_data *d, char **elements);
 void	set_camera_fieldofview(t_data *d, char **elements);

@@ -10,13 +10,13 @@ A 0.2 255,255,255
 */
 void	parse_ambientlight(t_data *d, char **elements)
 {
-	check_declared_amblight(d, elements);
-	set_amblight_lightingratio(d, elements);
+	check_amblight_declared(d, elements);
+	set_amblight_brightness(d, elements);
 	set_amblight_color(d, elements);
 	print_ambientlight(d);
 }
 
-void	check_declared_amblight(t_data *d, char **elements)
+void	check_amblight_declared(t_data *d, char **elements)
 {
 	if (d->amb_light.declared)
 	{
@@ -26,7 +26,7 @@ void	check_declared_amblight(t_data *d, char **elements)
 	d->amb_light.declared = true;
 }
 
-void	set_amblight_lightingratio(t_data *d, char **elements)
+void	set_amblight_brightness(t_data *d, char **elements)
 {
 	if (!elements[1] || !set_double(&d->amb_light.brightness, elements[1], 0, 1))
 	{

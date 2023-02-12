@@ -12,7 +12,7 @@ C -50.0,0,20 0,0,1 70
 */
 void	parse_camera(t_data *d, char **elements)
 {
-	check_declared_camera(d, elements);
+	check_camera_declared(d, elements);
 	set_camera_viewpoint(d, elements);
 	set_camera_normvector(d, elements);
 	set_camera_fieldofview(d, elements);
@@ -20,7 +20,7 @@ void	parse_camera(t_data *d, char **elements)
 	print_camera(d);
 }
 
-void	check_declared_camera(t_data *d, char **elements)
+void	check_camera_declared(t_data *d, char **elements)
 {
 	if (d->camera.declared)
 	{
