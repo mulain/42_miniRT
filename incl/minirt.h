@@ -32,8 +32,7 @@ void	parse_camera(t_data *d, char **elements);
 void	check_declared_camera(t_data *d, char **elements);
 void	set_camera_viewpoint(t_data *d, char **elements);
 void	set_camera_normvector(t_data *d, char **elements);
-
-
+void	set_camera_fieldofview(t_data *d, char **elements);
 
 // utils_is.c
 bool	is_whitespace(char c);
@@ -49,6 +48,7 @@ bool	set_double(double *target, char *input);
 bool	set_tcolor(t_color *color, char **arr);
 bool	set_tpoint(t_point *point, char **arr);
 bool	set_tnormvector(t_normvector *vec, char **arr);
+bool	set_int(int *target, char *input, int min, int max);
 
 // utils_str.c
 int		count_occurences(char *str, char c);

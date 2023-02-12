@@ -54,3 +54,14 @@ bool	set_tnormvector(t_normvector *vec, char **arr)
 		ft_strtod(arr[2])};
 	return (true);
 }
+
+bool	set_int(int *target, char *input, int min, int max)
+{
+	int		val;
+
+	val = ft_atoi(input);
+	if (!is_onlydigits(input) || val < min || val > max)
+		return (false);
+	*target = val;
+	return (true);
+}
