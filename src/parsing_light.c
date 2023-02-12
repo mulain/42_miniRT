@@ -14,6 +14,7 @@ void	parse_light(t_data *d, char **elements)
 	set_light_coordinates(d, elements);
 	set_light_brightness(d, elements);
 	set_light_color(d, elements);
+	print_light(d);
 }
 
 void	check_light_declared(t_data *d, char **elements)

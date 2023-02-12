@@ -51,6 +51,7 @@ bool	is_ucharformat(char *input);
 // utils_print.c
 void	print_ambientlight(t_data *d);
 void	print_camera(t_data *d);
+void	print_light(t_data *d);
 
 // utils_set.c
 bool	set_double(double *target, char *input, double min, double max);

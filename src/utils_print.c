@@ -25,3 +25,18 @@ void	print_camera(t_data *d)
 	ft_printf("Field of view:\n");
 	ft_printf("  %i degrees\n", d->camera.fieldofview);
 }
+
+void	print_light(t_data *d)
+{
+	ft_printf("----- Light -----\n");
+	ft_printf("Coordinates:\n");
+	printf("  x: %f\n", d->light.coordinates.x);
+	printf("  y: %f\n", d->light.coordinates.y);
+	printf("  z: %f\n", d->light.coordinates.z);
+	ft_printf("Brightness:\n");
+	printf("  %f\n", d->light.brightness);
+	ft_printf("Color:\n");
+	ft_printf("  r: %i\n", d->light.color.r);
+	ft_printf("  g: %i\n", d->light.color.g);
+	ft_printf("  b: %i\n", d->light.color.b);
+}
