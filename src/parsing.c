@@ -31,7 +31,7 @@ char	*gnl_trimmed(int fd)
 
 	temp = get_next_line(fd);
 	line = ft_strtrim(temp, " \t\n\f\r\v");
-	free (temp);
+	free(temp);
 	return (line);
 }
 
@@ -52,9 +52,9 @@ void	parse_line(t_data *d, char *line)
 		parse_camera(d, elements);
 	else if (!ft_strncmp(elements[0], "L", 2))
 		parse_light(d, elements);
+	else if (!ft_strncmp(elements[0], "sp", 3))
+		parse_sphere(d, elements);
 /*
-	else if (line[0] == 's' && line[1] == 'p')
-
 	else if (line[0] == 'c' && line[1] == 'y')
 
 	else if (line[0] == 'p' && line[1] == 'l')

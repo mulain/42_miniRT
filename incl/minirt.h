@@ -11,6 +11,7 @@
 //# include "../mlx/mlx.h"
 # include "../libft/include/libft.h"
 # include "structs.h"
+# include "objlist.h"
 # include "defines.h"
 
 // main.c
@@ -41,6 +42,12 @@ void	check_light_declared(t_data *d, char **elements);
 void	set_light_coordinates(t_data *d, char **elements);
 void	set_light_brightness(t_data *d, char **elements);
 void	set_light_color(t_data *d, char **elements);
+
+// parsing_sphere.c
+void	parse_sphere(t_data *d, char **elements);
+void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements);
+void	set_sphere_diameter(t_data *d, t_sphere *sphere, char **elements);
+void	set_sphere_color(t_data *d, t_sphere *sphere, char **elements);
 
 // utils_is.c
 bool	is_whitespace(char c);

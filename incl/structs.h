@@ -76,7 +76,7 @@ typedef struct s_sphere
 {
 	t_point		center;
 	t_color		color;
-	double		d;
+	double		diameter;
 }	t_sphere;
 
 typedef struct s_plane

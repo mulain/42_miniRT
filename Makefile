@@ -30,12 +30,14 @@ DEFINEFLAGS = 	-DKEY_ESC=53 -DKEY_LEFT=123 -DKEY_RIGHT=124 -DKEY_UP=126 -DKEY_DO
 				-DMOUSE_LEFT=1 -DMOUSE_RIGHT=2 -DMOUSE_MIDDLE=3 -DMOUSE_SCR_UP=5 -DMOUSE_SCR_DOWN=4
 endif
 
-SRCFILE	= 	main.c\
-			errors.c\
+SRCFILE	= 	errors.c\
+			main.c\
+			objlist.c\
 			parsing.c\
 			parsing_ambientlight.c\
 			parsing_camera.c\
 			parsing_light.c\
+			parsing_sphere.c\
 			utils_is.c\
 			utils_print.c\
 			utils_set.c\
