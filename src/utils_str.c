@@ -21,7 +21,7 @@ int	count_subelements(char **arr)
 	i = 0;
 	while (arr[i])
 		i++;
-	return (i + 1);
+	return (i);
 }
 
 /*

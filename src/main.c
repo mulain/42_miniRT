@@ -7,6 +7,7 @@ int	main(int argc, char **argv)
 	init_structs(&data);
 	parsing(&data, argc, argv);
 	//init_mlx(&data);
+	free_all(&data);
 }
 
 void	init_structs(t_data *d)

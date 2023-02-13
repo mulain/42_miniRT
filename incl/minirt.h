@@ -14,6 +14,14 @@
 # include "objlist.h"
 # include "defines.h"
 
+// calc_vector.c
+double	normvector_length(t_normvector vec);
+
+// errors.c
+void	exit_onlymsg(char *msg);
+void	exit_free(t_data *d, char *msg);
+void	free_all(t_data *d);
+
 // main.c
 void	init_structs(t_data *d);
 void	init_mlx(t_data *d);
@@ -22,20 +30,13 @@ void	init_mlx(t_data *d);
 void	parsing(t_data *d, int argc, char **argv);
 char	*gnl_trimmed(int fd);
 void	parse_line(t_data *d, char *line);
-bool	skip_line(char **elements);
+bool	skip_line(t_data *d);
 
 // parsing_ambientlight.c
 void	parse_ambientlight(t_data *d);
-void	check_amblight_declared(t_data *d, char **elements);
-void	set_amblight_brightness(t_data *d, char **elements);
-void	set_amblight_color(t_data *d, char **elements);
 
 // parsing_camera.c
-void	parse_camera(t_data *d, char **elements);
-void	check_camera_declared(t_data *d, char **elements);
-void	set_camera_viewpoint(t_data *d, char **elements);
-void	set_camera_normvector(t_data *d, char **elements);
-void	set_camera_fieldofview(t_data *d, char **elements);
+void	parse_camera(t_data *d);
 
 // parsing_light.c
 void	parse_light(t_data *d, char **elements);
@@ -52,7 +53,10 @@ void	set_sphere_color(t_data *d, t_sphere *sphere, char **elements);
 
 // parsing_utils.c
 void	parse_double(t_data *d, double *target, int index, char *msg);
-
+void	parse_tcolor(t_data *d, t_color *color, int index, char *msg);
+void	parse_tpoint(t_data *d, t_point *point, int index, char *msg);
+void	parse_tnormvector(t_data *d, t_normvector *vec, int index, char *msg);
+void	parse_int(t_data *d, int *target, int index, char *msg);
 
 // utils_is.c
 bool	is_whitespace(char c);
@@ -78,10 +82,5 @@ bool	set_int(int *target, char *input, int min, int max);
 int		count_occurences(char *str, char c);
 double	ft_strtod(char *input);
 int		count_subelements(char **arr);
-
-// errors.c
-void	exit_onlymsg(char *msg);
-void	exit_free(t_data *d, char *msg);
-void	free_all(t_data *d);
 
 #endif

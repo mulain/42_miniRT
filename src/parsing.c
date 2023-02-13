@@ -40,7 +40,7 @@ void	parse_line(t_data *d, char *line)
 {
 	d->parse.elmnts = ft_split(line, ' ');
 	free(line);
-	if (skip_line(d->parse.elmnts))
+	if (skip_line(d))
 		return ;
 	else if (!ft_strncmp(d->parse.elmnts[0], "A", 2))
 		parse_ambientlight(d);
@@ -59,11 +59,14 @@ void	parse_line(t_data *d, char *line)
 		exit_free(d, E_INVALOBJID);
 }
 
-bool	skip_line(char **elements)
+bool	skip_line(t_data *d)
 {
+	char	**elements;
+
+	elements = d->parse.elmnts;
 	if (!elements || !elements[0] || ft_strchr("#\n\0", (int)elements[0][0]))
 	{
-		free_2d_char(elements);
+		free_2d_char(d->parse.elmnts);
 		return (true);
 	}
 	return (false);

@@ -19,7 +19,7 @@ void	parse_sphere(t_data *d, char **elements)
 	set_sphere_diameter(d, sphere, elements);
 	set_sphere_color(d, sphere, elements);
 	objlst_add_back(&d->objectlist, objlst_new(sphere, sp));
-	free_2d_char(elements);
+	free_2d_char(&elements);
 }
 
 void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements)
@@ -29,7 +29,7 @@ void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements)
 
 	if (!elements[1])
 	{
-		free_2d_char(elements);
+		free_2d_char(&elements);
 		exit_free(d, E_SPHERE1);
 	}
 	subelements = ft_split(elements[1], ',');
@@ -38,18 +38,18 @@ void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements)
 		i++;
 	if (i < 2 || !set_tpoint(&sphere->center, subelements))
 	{
-		free_2d_char(elements);
-		free_2d_char(subelements);
+		free_2d_char(&elements);
+		free_2d_char(&subelements);
 		exit_free(d, E_SPHERE1);
 	}
-	free_2d_char(subelements);
+	free_2d_char(&subelements);
 }
 
 void	set_sphere_diameter(t_data *d, t_sphere *sphere, char **elements)
 {
 	if (!elements[2] || !set_double(&sphere->diameter, elements[2], 0.0, 0.0))
 	{
-		free_2d_char(elements);
+		free_2d_char(&elements);
 		exit_free(d, E_SPHERE2);
 	}
 }
@@ -61,7 +61,7 @@ void	set_sphere_color(t_data *d, t_sphere *sphere, char **elements)
 
 	if (!elements[3])
 	{
-		free_2d_char(elements);
+		free_2d_char(&elements);
 		exit_free(d, E_SPHERE3);
 	}
 	subelements = ft_split(elements[3], ',');
@@ -70,9 +70,9 @@ void	set_sphere_color(t_data *d, t_sphere *sphere, char **elements)
 		i++;
 	if (i < 2 || !set_tcolor(&sphere->color, subelements))
 	{
-		free_2d_char(elements);
-		free_2d_char(subelements);
+		free_2d_char(&elements);
+		free_2d_char(&subelements);
 		exit_free(d, E_SPHERE3);
 	}
-	free_2d_char(subelements);
+	free_2d_char(&subelements);
 }
