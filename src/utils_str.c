@@ -14,6 +14,16 @@ int	count_occurences(char *str, char c)
 	return (count);
 }
 
+int	count_subelements(char **arr)
+{
+	int		i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i + 1);
+}
+
 /*
 Caveats:
 - 	Relies on prior syntax checking (is_decimalformat)

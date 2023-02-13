@@ -22,9 +22,10 @@ void	init_mlx(t_data *d);
 void	parsing(t_data *d, int argc, char **argv);
 char	*gnl_trimmed(int fd);
 void	parse_line(t_data *d, char *line);
+bool	skip_line(char **elements);
 
 // parsing_ambientlight.c
-void	parse_ambientlight(t_data *d, char **elements);
+void	parse_ambientlight(t_data *d);
 void	check_amblight_declared(t_data *d, char **elements);
 void	set_amblight_brightness(t_data *d, char **elements);
 void	set_amblight_color(t_data *d, char **elements);
@@ -49,6 +50,10 @@ void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements);
 void	set_sphere_diameter(t_data *d, t_sphere *sphere, char **elements);
 void	set_sphere_color(t_data *d, t_sphere *sphere, char **elements);
 
+// parsing_utils.c
+void	parse_double(t_data *d, double *target, int index, char *msg);
+
+
 // utils_is.c
 bool	is_whitespace(char c);
 bool	is_onlydigits(char *str);
@@ -72,12 +77,11 @@ bool	set_int(int *target, char *input, int min, int max);
 // utils_str.c
 int		count_occurences(char *str, char c);
 double	ft_strtod(char *input);
+int		count_subelements(char **arr);
 
 // errors.c
 void	exit_onlymsg(char *msg);
 void	exit_free(t_data *d, char *msg);
-
-// shutdown.c
-void	shutdown(t_data *d);
+void	free_all(t_data *d);
 
 #endif

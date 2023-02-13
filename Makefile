@@ -3,7 +3,7 @@ NAME	= miniRT
 CC		= gcc
 CFLAGS	= -g -o3
 EFLAGS	= -Wall -Wextra -Werror
-LFLAGS	=
+LFLAGS	= -lm
 RM		= rm -rf
 
 PINK	= \033[0;35m
@@ -38,6 +38,7 @@ SRCFILE	= 	errors.c\
 			parsing_camera.c\
 			parsing_light.c\
 			parsing_sphere.c\
+			parsing_utils.c\
 			utils_is.c\
 			utils_print1.c\
 			utils_print2.c\
@@ -52,7 +53,7 @@ MLX		=
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) #$(MLX)
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LIBFT)
+	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LFLAGS) $(LIBFT)
 	@echo "$(BLUE)miniRT compiled!$(RESET)"
 
 $(LIBFT):

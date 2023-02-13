@@ -38,31 +38,33 @@ char	*gnl_trimmed(int fd)
 
 void	parse_line(t_data *d, char *line)
 {
-	char	**elements;
-
-	elements = ft_split(line, ' ');
+	d->parse.elmnts = ft_split(line, ' ');
 	free(line);
-	if (!elements || !elements[0] || ft_strchr("#\n\0", (int)elements[0][0]))
-	{
-		free_2d_char(elements);
+	if (skip_line(d->parse.elmnts))
 		return ;
-	}
-	else if (!ft_strncmp(elements[0], "A", 2))
-		parse_ambientlight(d, elements);
-	else if (!ft_strncmp(elements[0], "C", 2))
-		parse_camera(d, elements);
-	else if (!ft_strncmp(elements[0], "L", 2))
-		parse_light(d, elements);
-	else if (!ft_strncmp(elements[0], "sp", 3))
-		parse_sphere(d, elements);
+	else if (!ft_strncmp(d->parse.elmnts[0], "A", 2))
+		parse_ambientlight(d);
+	else if (!ft_strncmp(d->parse.elmnts[0], "C", 2))
+		parse_camera(d, d->parse.elmnts);
+	else if (!ft_strncmp(d->parse.elmnts[0], "L", 2))
+		parse_light(d, d->parse.elmnts);
+	else if (!ft_strncmp(d->parse.elmnts[0], "sp", 3))
+		parse_sphere(d, d->parse.elmnts);
 /*
 	else if (line[0] == 'c' && line[1] == 'y')
 
 	else if (line[0] == 'p' && line[1] == 'l')
  */
 	else
+		exit_free(d, E_INVALOBJID);
+}
+
+bool	skip_line(char **elements)
+{
+	if (!elements || !elements[0] || ft_strchr("#\n\0", (int)elements[0][0]))
 	{
 		free_2d_char(elements);
-		exit_free(d, E_INVALOBJID);
+		return (true);
 	}
+	return (false);
 }
