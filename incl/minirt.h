@@ -26,7 +26,6 @@ void	init_mlx(t_data *d);
 void	parsing(t_data *d, int fd);
 char	*gnl_trimmed(int fd);
 void	parse_line(t_data *d, char *line);
-bool	skip_line(t_data *d);
 
 // parsing_lightsandcam.c
 void	parse_ambientlight(t_data *d);

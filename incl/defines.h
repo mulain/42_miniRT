@@ -10,6 +10,7 @@
 # define E_MALLOC		"Malloc error.\n"
 
 # define E_INVALOBJID	"Invalid object identifier.\n"
+# define E_MANDATORY	"Camera (C) and Light (L) must both be declared.\n"
 
 # define E_AMBLIGHTDEF	"Ambient light (A): may only be defined once.\n"
 # define E_AMBLIGHT1	"Ambient light (A): invalid first argument.\n"
