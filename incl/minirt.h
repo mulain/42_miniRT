@@ -32,11 +32,11 @@ char	*gnl_trimmed(int fd);
 void	parse_line(t_data *d, char *line);
 bool	skip_line(t_data *d);
 
-// parsing_ambientlight.c
+// parsing_lightsandcam.c
 void	parse_ambientlight(t_data *d);
-
-// parsing_camera.c
 void	parse_camera(t_data *d);
+
+
 
 // parsing_light.c
 void	parse_light(t_data *d, char **elements);
