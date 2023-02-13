@@ -1,5 +1,8 @@
 # include "../incl/minirt.h"
 
+/*
+Will not test range if min == max.
+*/
 void	parse_double(t_data *d, double *target, int index, char *msg)
 {
 	char	*input;

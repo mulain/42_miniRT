@@ -35,21 +35,10 @@ bool	skip_line(t_data *d);
 // parsing_lightsandcam.c
 void	parse_ambientlight(t_data *d);
 void	parse_camera(t_data *d);
+void	parse_light(t_data *d);
 
-
-
-// parsing_light.c
-void	parse_light(t_data *d, char **elements);
-void	check_light_declared(t_data *d, char **elements);
-void	set_light_coordinates(t_data *d, char **elements);
-void	set_light_brightness(t_data *d, char **elements);
-void	set_light_color(t_data *d, char **elements);
-
-// parsing_sphere.c
-void	parse_sphere(t_data *d, char **elements);
-void	set_sphere_center(t_data *d, t_sphere *sphere, char **elements);
-void	set_sphere_diameter(t_data *d, t_sphere *sphere, char **elements);
-void	set_sphere_color(t_data *d, t_sphere *sphere, char **elements);
+// parsing_objects.c
+void	parse_sphere(t_data *d);
 
 // parsing_utils.c
 void	parse_double(t_data *d, double *target, int index, char *msg);

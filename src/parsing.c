@@ -45,11 +45,11 @@ void	parse_line(t_data *d, char *line)
 	else if (!ft_strncmp(d->parse.elmnts[0], "A", 2))
 		parse_ambientlight(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "C", 2))
-		parse_camera(d, d->parse.elmnts);
+		parse_camera(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "L", 2))
-		parse_light(d, d->parse.elmnts);
+		parse_light(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "sp", 3))
-		parse_sphere(d, d->parse.elmnts);
+		parse_sphere(d);
 /*
 	else if (line[0] == 'c' && line[1] == 'y')
 
@@ -57,6 +57,8 @@ void	parse_line(t_data *d, char *line)
  */
 	else
 		exit_free(d, E_INVALOBJID);
+	free_2d_char(d->parse.elmnts);
+	d->parse.elmnts = NULL;
 }
 
 bool	skip_line(t_data *d)
@@ -67,6 +69,7 @@ bool	skip_line(t_data *d)
 	if (!elements || !elements[0] || ft_strchr("#\n\0", (int)elements[0][0]))
 	{
 		free_2d_char(d->parse.elmnts);
+		d->parse.elmnts = NULL;
 		return (true);
 	}
 	return (false);

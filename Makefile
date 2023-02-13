@@ -35,10 +35,8 @@ SRCFILE	= 	calc_vector.c\
 			main.c\
 			objlist.c\
 			parsing.c\
-			parsing_ambientlight.c\
-			parsing_camera.c\
-			parsing_light.c\
-			parsing_sphere.c\
+			parsing_lightsandcam.c\
+			parsing_objects.c\
 			parsing_utils.c\
 			utils_is.c\
 			utils_print1.c\
