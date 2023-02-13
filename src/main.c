@@ -44,7 +44,6 @@ void	init_structs(t_data *d)
 	d->light.color = (t_color){0, 0, 0};
 	d->light.coordinates = (t_point){0, 0, 0};
 	d->objectlist = NULL;
-	d->parse.input = NULL;
 	d->parse.elmnts = NULL;
 	d->parse.subelmnts = NULL;
 	d->parse.min = 0.0;

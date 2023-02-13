@@ -10,6 +10,9 @@ void	parsing(t_data *d, int fd)
 		parse_line(d, line);
 		line = gnl_trimmed(fd);
 	}
+	print_ambientlight(d);
+	print_light(d);
+	print_camera(d);
 	print_objlist(d->objectlist);
 }
 

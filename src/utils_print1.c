@@ -41,6 +41,11 @@ void	print_camera(t_data *d)
 
 void	print_light(t_data *d)
 {
+	if (!d->light.declared)
+	{
+		ft_printf("Light not declared.\n");
+		return ;
+	}
 	ft_printf("----- Light -----\n");
 	ft_printf("Coordinates:\n");
 	printf("  x: %f\n", d->light.coordinates.x);

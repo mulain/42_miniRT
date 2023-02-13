@@ -17,7 +17,6 @@ void	parse_ambientlight(t_data *d)
 	d->parse.max = 1.0;
 	parse_double(d, &d->amb_light.brightness, 1, E_AMBLIGHT1);
 	parse_tcolor(d, &d->amb_light.color, 2, E_AMBLIGHT2);
-	print_ambientlight(d);
 }
 
 /*
@@ -38,7 +37,6 @@ void	parse_light(t_data *d)
 	d->parse.max = 1.0;
 	parse_double(d, &d->light.brightness, 2, E_LIGHT2);
 	parse_tcolor(d, &d->light.color, 3, E_LIGHT3);
-	print_light(d);
 }
 
 /*
@@ -61,5 +59,4 @@ void	parse_camera(t_data *d)
 	d->parse.min = 0;
 	d->parse.max = 180;
 	parse_int(d, &d->camera.fieldofview, 3, E_CAMERA3);
-	print_camera(d);
 }
