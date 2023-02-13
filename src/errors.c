@@ -1,15 +1,10 @@
 # include "../incl/minirt.h"
 
-void	exit_onlymsg(char *msg)
-{
-	write (2, msg, ft_strlen(msg));
-	exit(1);
-}
-
-void	exit_free(t_data *d, char *msg)
+void	error_exit(t_data *d, char *msg)
 {
 	free_all(d);
-	exit_onlymsg(msg);
+	write (2, msg, ft_strlen(msg));
+	exit(1);
 }
 
 void	free_all(t_data *d)

@@ -11,7 +11,7 @@ A 0.2 255,255,255
 void	parse_ambientlight(t_data *d)
 {
 	if (d->amb_light.declared)
-		exit_free(d, E_AMBLIGHTDEF);
+		error_exit(d, E_AMBLIGHTDEF);
 	d->amb_light.declared = true;
 	d->parse.min = 0.0;
 	d->parse.max = 1.0;
@@ -26,12 +26,12 @@ L -40.0,50.0,0.0 0.6 10,0,255
 ∗ identifier: L (-> elements[0])
 ∗ x,y,z coordinates of the light point: 0.0,0.0,20.6 (-> elements[1])
 ∗ the light brightness ratio in range [0.0,1.0]: 0.6 (-> elements[2])
-∗ (unused in mandatory part)R,G,B colors in range [0-255]: 10, 0, 255 (-> elements[3])
+∗ (unused in mandatory)R,G,B colors in range [0-255]: 10, 0, 255 (-> elements[3])
 */
 void	parse_light(t_data *d)
 {
 	if (d->light.declared)
-		exit_free(d, E_LIGHTDEF);
+		error_exit(d, E_LIGHTDEF);
 	d->light.declared = true;
 	parse_tpoint(d, &d->light.coordinates, 1, E_LIGHT1);
 	d->parse.min = 0.0;
@@ -54,7 +54,7 @@ C -50.0,0,20 0,0,1 70
 void	parse_camera(t_data *d)
 {
 	if (d->camera.declared)
-		exit_free(d, E_CAMERADEF);
+		error_exit(d, E_CAMERADEF);
 	d->camera.declared = true;
 	parse_tpoint(d, &d->camera.viewpoint, 1, E_CAMERA1);
 	parse_tnormvector(d, &d->camera.normvector, 2, E_CAMERA2);

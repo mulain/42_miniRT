@@ -3,11 +3,31 @@
 int	main(int argc, char **argv)
 {
 	t_data		data;
+	int			fd;
 
+	fd = get_infile(&data, argc, argv);
 	init_structs(&data);
-	parsing(&data, argc, argv);
+	parsing(&data, fd);
 	//init_mlx(&data);
 	free_all(&data);
+}
+
+int	get_infile(t_data *d, int argc, char **argv)
+{
+	int		fd;
+	int		len;
+
+	if (argc < 2)
+		error_exit(d, E_ARGCOUNT);
+	len = ft_strlen(argv[1]);
+	if (len < 4)
+		error_exit(d, E_FILENAME);
+	if (ft_strncmp(argv[1] + len - 3, ".rt", 4))
+		error_exit(d, E_FILETYPE);
+	fd = open(argv[1], 0);
+	if (fd == -1)
+		error_exit(d, E_OPENFILE);
+	return (fd);
 }
 
 void	init_structs(t_data *d)

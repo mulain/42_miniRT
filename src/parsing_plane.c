@@ -15,7 +15,7 @@ void	parse_plane(t_data *d, char **elements)
 
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
-		exit_free(d, E_MALLOC);
+		error_exit(d, E_MALLOC);
 	set_plane_anchor(d, plane, elements);
 	
 	
@@ -31,7 +31,7 @@ void	set_plane_anchor(t_data *d, t_plane *plane, char **elements)
 	if (!elements[1])
 	{
 		free_2d_char(elements);
-		exit_free(d, E_PLANE1);
+		error_exit(d, E_PLANE1);
 	}
 	subelements = ft_split(elements[1], ',');
 	i = 0;
@@ -41,7 +41,7 @@ void	set_plane_anchor(t_data *d, t_plane *plane, char **elements)
 	{
 		free_2d_char(elements);
 		free_2d_char(subelements);
-		exit_free(d, E_PLANE1);
+		error_exit(d, E_PLANE1);
 	}
 	free_2d_char(subelements);
 }

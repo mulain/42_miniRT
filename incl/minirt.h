@@ -18,16 +18,16 @@
 double	normvector_length(t_normvector vec);
 
 // errors.c
-void	exit_onlymsg(char *msg);
-void	exit_free(t_data *d, char *msg);
+void	error_exit(t_data *d, char *msg);
 void	free_all(t_data *d);
 
 // main.c
+int		get_infile(t_data *d, int argc, char **argv);
 void	init_structs(t_data *d);
 void	init_mlx(t_data *d);
 
 // parsing.c
-void	parsing(t_data *d, int argc, char **argv);
+void	parsing(t_data *d, int fd);
 char	*gnl_trimmed(int fd);
 void	parse_line(t_data *d, char *line);
 bool	skip_line(t_data *d);

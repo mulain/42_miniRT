@@ -14,7 +14,7 @@ void	parse_sphere(t_data *d)
 
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
-		exit_free(d, E_MALLOC);
+		error_exit(d, E_MALLOC);
 	parse_tpoint(d, &sphere->center, 1, E_SPHERE1);
 	d->parse.min = 0;
 	d->parse.max = 0;

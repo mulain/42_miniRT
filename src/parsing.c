@@ -1,21 +1,9 @@
 # include "../incl/minirt.h"
 
-void	parsing(t_data *d, int argc, char **argv)
+void	parsing(t_data *d, int fd)
 {
-	int		fd;
-	int		len;
 	char	*line;
 
-	if (argc < 2)
-		exit_onlymsg(E_ARGCOUNT);
-	len = ft_strlen(argv[1]);
-	if (len < 4)
-		exit_onlymsg(E_FILENAME);
-	if (ft_strncmp(argv[1] + len - 3, ".rt", 4))
-		exit_onlymsg(E_FILETYPE);
-	fd = open(argv[1], 0);
-	if (fd == -1)
-		exit_onlymsg(E_OPENFILE);
 	line = gnl_trimmed(fd);
 	while (line)
 	{
@@ -42,7 +30,7 @@ void	parse_line(t_data *d, char *line)
 	free(line);
 	if (skip_line(d))
 		return ;
-	else if (!ft_strncmp(d->parse.elmnts[0], "A", 2))
+	if (!ft_strncmp(d->parse.elmnts[0], "A", 2))
 		parse_ambientlight(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "C", 2))
 		parse_camera(d);
@@ -56,7 +44,7 @@ void	parse_line(t_data *d, char *line)
 	else if (line[0] == 'p' && line[1] == 'l')
  */
 	else
-		exit_free(d, E_INVALOBJID);
+		error_exit(d, E_INVALOBJID);
 	free_2d_char(d->parse.elmnts);
 	d->parse.elmnts = NULL;
 }
