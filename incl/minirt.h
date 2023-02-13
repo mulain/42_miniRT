@@ -17,10 +17,6 @@
 // calc_vector.c
 double	normvector_length(t_normvector vec);
 
-// errors.c
-void	error_exit(t_data *d, char *msg);
-void	free_all(t_data *d);
-
 // main.c
 int		get_infile(t_data *d, int argc, char **argv);
 void	init_structs(t_data *d);
@@ -77,5 +73,9 @@ bool	set_int(int *target, char *input, int min, int max);
 int		count_occurences(char *str, char c);
 double	ft_strtod(char *input);
 int		count_subelements(char **arr);
+
+// shutdown.c
+void	error_exit(t_data *d, char *msg);
+void	free_all(t_data *d);
 
 #endif
