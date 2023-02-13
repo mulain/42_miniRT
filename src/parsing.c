@@ -41,11 +41,10 @@ void	parse_line(t_data *d, char *line)
 		parse_light(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "sp", 3))
 		parse_sphere(d);
-/*
-	else if (line[0] == 'c' && line[1] == 'y')
-
-	else if (line[0] == 'p' && line[1] == 'l')
- */
+	else if (!ft_strncmp(d->parse.elmnts[0], "pl", 3))
+		parse_plane(d);
+	else if (!ft_strncmp(d->parse.elmnts[0], "cy", 3))
+		parse_cylinder(d);
 	else
 		error_exit(d, E_INVALOBJID);
 	free_2d_char(d->parse.elmnts);

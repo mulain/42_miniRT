@@ -7,8 +7,7 @@ typedef enum e_objtype
 {
 	sp = 1,
 	pl = 2,
-	cy = 3,
-
+	cy = 3
 }	t_objtype;
 
 typedef struct s_objlist t_objlist;

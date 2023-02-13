@@ -9,6 +9,10 @@ void	print_objlist(t_objlist *lst)
 	{
 		if (temp->objtype == sp)
 			print_sphere(temp->content);
+		else if (temp->objtype == pl)
+			print_plane(temp->content);
+		else if (temp->objtype == cy)
+			print_cylinder(temp->content);
 		temp = temp->next;
 	}
 }
@@ -57,19 +61,4 @@ void	print_light(t_data *d)
 	ft_printf("  r: %i\n", d->light.color.r);
 	ft_printf("  g: %i\n", d->light.color.g);
 	ft_printf("  b: %i\n", d->light.color.b);
-}
-
-void	print_sphere(t_sphere *sp)
-{
-	ft_printf("----- Sphere -----\n");
-	ft_printf("Coordinates:\n");
-	printf("  x: %f\n", sp->center.x);
-	printf("  y: %f\n", sp->center.x);
-	printf("  z: %f\n", sp->center.x);
-	ft_printf("Diameter:\n");
-	printf("  %f\n", sp->diameter);
-	ft_printf("Color:\n");
-	ft_printf("  r: %i\n", sp->color.r);
-	ft_printf("  g: %i\n", sp->color.g);
-	ft_printf("  b: %i\n", sp->color.b);
 }

@@ -33,4 +33,10 @@
 # define E_PLANE2		"Plane (pl): invalid second argument.\n"
 # define E_PLANE3		"Plane (pl): invalid third argument.\n"
 
+# define E_CYLINDER1	"Cylinder (cy): invalid first argument.\n"
+# define E_CYLINDER2	"Cylinder (cy): invalid second argument.\n"
+# define E_CYLINDER3	"Cylinder (cy): invalid third argument.\n"
+# define E_CYLINDER4	"Cylinder (cy): invalid fourth argument.\n"
+# define E_CYLINDER5	"Cylinder (cy): invalid fifth argument.\n"
+
 #endif

@@ -79,16 +79,16 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_point			anchor;
-	t_normvector	orientation_vector; // range -1 to 1
+	t_normvector	normvector; // range -1 to 1
 	t_color			color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
 	t_point			anchor;
-	t_normvector	orientation_vector; // range -1 to 1
-	double			d;
-	double			h;
+	t_normvector	normvector; // range -1 to 1
+	double			diameter;
+	double			height;
 	t_color			color;
 }	t_cylinder;
 

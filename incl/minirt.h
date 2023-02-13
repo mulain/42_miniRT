@@ -39,6 +39,8 @@ void	parse_light(t_data *d);
 
 // parsing_objects.c
 void	parse_sphere(t_data *d);
+void	parse_plane(t_data *d);
+void	parse_cylinder(t_data *d);
 
 // parsing_utils.c
 void	parse_double(t_data *d, double *target, int index, char *msg);
@@ -58,7 +60,11 @@ void	print_objlist(t_objlist *lst);
 void	print_ambientlight(t_data *d);
 void	print_camera(t_data *d);
 void	print_light(t_data *d);
+
+// utils_print2.c
 void	print_sphere(t_sphere *sp);
+void	print_plane(t_plane *pl);
+void	print_cylinder(t_cylinder *cy);
 
 // utils_set.c
 bool	set_double(double *target, char *input, double min, double max);
