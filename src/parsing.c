@@ -7,7 +7,7 @@ void	parsing(t_data *d, int fd)
 	line = gnl_trimmed(fd);
 	while (line)
 	{
-		if (ft_strchr("#\n\0", (int)line[0]))
+		if (!line[0] || line[0] == '#')
 			free(line);
 		else
 			parse_line(d, line);

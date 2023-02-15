@@ -7,6 +7,9 @@ A 1.0 0,0,255 asdfasdf
 # Zeros may be omitted before or after decimal points, but not both at once. That would be just a dot.
 # For now, it is only possible to separate the values with spaces, not other whitespaces.
 
+
+
+
 C   .5,3,-.5        1,0,0       120
 L   .1,-5,2         1.0         0,0,100
 sp  1,1,1           5           0,0,255
