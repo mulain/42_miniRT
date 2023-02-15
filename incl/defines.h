@@ -3,7 +3,7 @@
 # define DEFINES_H
 
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
-# define E_FILETYPE		"Wrong input file type. Please supply a .rt file.\n"
+# define E_FILETYPE		"Invalid input file type. Please supply a .rt file.\n"
 # define E_FILENAME		"Invalid input file name.\n"
 # define E_OPENFILE		"Could not open input file.\n"
 

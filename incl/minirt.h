@@ -58,13 +58,6 @@ void	print_sphere(t_sphere *sp);
 void	print_plane(t_plane *pl);
 void	print_cylinder(t_cylinder *cy);
 
-// utils_set.c
-bool	set_double(double *target, char *input, double min, double max);
-bool	set_tcolor(t_color *color, char **arr);
-bool	set_tpoint(t_point *point, char **arr);
-bool	set_tnormvector(t_normvector *vec, char **arr);
-bool	set_int(int *target, char *input, int min, int max);
-
 // shutdown.c
 void	error_exit(t_data *d, char *msg);
 void	free_all(t_data *d);
