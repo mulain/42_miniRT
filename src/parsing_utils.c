@@ -10,7 +10,7 @@ void	parse_double(t_data *d, double *target, int index, char *msg)
 	input = d->parse.elmnts[index];
 	if (!input || !is_decimalformat(input))
 		error_exit(d, msg);
-	*target = ft_strtod(input);
+	*target = conv_strtod(input);
 	if (d->parse.min == d->parse.max)
 		return ;
 	if (*target < d->parse.min || *target > d->parse.max)
@@ -58,8 +58,8 @@ void	parse_tpoint(t_data *d, t_point *point, int index, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	*point = (t_point){ft_strtod(split[0]), ft_strtod(split[1]),
-		ft_strtod(split[2])};
+	*point = (t_point){conv_strtod(split[0]), conv_strtod(split[1]),
+		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
 }
@@ -82,8 +82,8 @@ void	parse_tnormvector(t_data *d, t_normvector *vec, int index, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	*vec = (t_normvector){ft_strtod(split[0]), ft_strtod(split[1]),
-		ft_strtod(split[2])};
+	*vec = (t_normvector){conv_strtod(split[0]), conv_strtod(split[1]),
+		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
 	if (vec->x < -1.0 || vec->x > 1.0 || vec->y < -1.0 || vec->y > 1.0

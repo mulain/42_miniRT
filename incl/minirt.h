@@ -45,9 +45,6 @@ void	parse_tnormvector(t_data *d, t_normvector *vec, int index, char *msg);
 void	parse_int(t_data *d, int *target, int index, char *msg);
 
 // utils_is.c
-bool	is_whitespace(char c);
-bool	is_onlydigits(char *str);
-bool	is_decimalformat(char *input);
 bool	is_ucharformat(char *input);
 
 // utils_print1.c
@@ -67,11 +64,6 @@ bool	set_tcolor(t_color *color, char **arr);
 bool	set_tpoint(t_point *point, char **arr);
 bool	set_tnormvector(t_normvector *vec, char **arr);
 bool	set_int(int *target, char *input, int min, int max);
-
-// utils_str.c
-int		count_occurences(char *str, char c);
-double	ft_strtod(char *input);
-int		count_subelements(char **arr);
 
 // shutdown.c
 void	error_exit(t_data *d, char *msg);

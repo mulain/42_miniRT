@@ -30,7 +30,6 @@ SRCFILE	= 	calc_vector.c\
 			utils_print1.c\
 			utils_print2.c\
 			utils_set.c\
-			utils_str.c\
 			shutdown.c
 
 SRC		=	$(addprefix src/, $(SRCFILE))
