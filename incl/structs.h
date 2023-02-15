@@ -38,7 +38,6 @@ typedef struct s_normvector
 	double		z;
 }	t_normvector;
 
-//i just love ints, what can i say? range ofc 0-255
 typedef struct s_color
 {
 	int			r;
@@ -49,7 +48,7 @@ typedef struct s_color
 typedef struct s_light
 {
 	t_point		coordinates;
-	double		brightness; //0.0 to 1.0
+	double		brightness;
 	t_color		color;
 	bool		declared;
 }	t_light;
@@ -57,14 +56,14 @@ typedef struct s_light
 typedef struct s_camera
 {
 	t_point			viewpoint;
-	t_normvector	normvector; // range -1 to 1
-	int				fieldofview; // 0 to 180
+	t_normvector	normvector;
+	int				fieldofview;
 	bool			declared;
 }	t_camera;
 
 typedef struct s_ambientlight
 {
-	double		brightness; //0.0 to 1.0
+	double		brightness;
 	t_color		color;
 	bool		declared;
 }	t_ambientlight;
@@ -79,14 +78,14 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_point			anchor;
-	t_normvector	normvector; // range -1 to 1
+	t_normvector	normvector;
 	t_color			color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
 	t_point			anchor;
-	t_normvector	normvector; // range -1 to 1
+	t_normvector	normvector;
 	double			diameter;
 	double			height;
 	t_color			color;
