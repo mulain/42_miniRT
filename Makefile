@@ -38,10 +38,6 @@ OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 LIBFT	= 	libft/libft.a
 MLX		= 
 
-
-
-
-
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) #$(MLX)
