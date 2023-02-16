@@ -41,7 +41,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) #$(MLX)
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LFLAGS) $(LIBFT)
-	@echo "$(BLUE)miniRT compiled!$(RESET)"
+	@echo "$(BLUE)miniRT compiled.$(RESET)"
 
 $(LIBFT):
 	@make --no-print-directory -C libft/
@@ -52,7 +52,7 @@ obj/%.o: src/%.c
 
 clean:
 	@$(RM) $(OBJ) obj
-	@echo "$(BLUE)miniRT cleaned!$(RESET)"
+	@echo "$(BLUE)miniRT cleaned.$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
