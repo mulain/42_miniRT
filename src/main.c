@@ -4,18 +4,16 @@
 int	main(int argc, char **argv)
 {
 	t_data		data;
-	int			fd;
 
-	fd = get_infile(&data, argc, argv);
 	init_structs(&data);
-	parsing(&data, fd);
+	get_infile(&data, argc, argv);
+	parsing(&data);
 	//init_mlx(&data);
 	free_all(&data);
 }
 
-int	get_infile(t_data *d, int argc, char **argv)
+void	get_infile(t_data *d, int argc, char **argv)
 {
-	int		fd;
 	int		len;
 
 	if (argc < 2)
@@ -25,10 +23,9 @@ int	get_infile(t_data *d, int argc, char **argv)
 		error_exit(d, E_FILENAME);
 	if (ft_strncmp(argv[1] + len - 3, ".rt", 4))
 		error_exit(d, E_FILETYPE);
-	fd = open(argv[1], 0);
-	if (fd == -1)
+	d->parse.fd = open(argv[1], 0);
+	if (d->parse.fd == -1)
 		error_exit(d, E_OPENFILE);
-	return (fd);
 }
 
 void	init_structs(t_data *d)
@@ -45,6 +42,7 @@ void	init_structs(t_data *d)
 	d->light.color = (t_color){0, 0, 0};
 	d->light.coordinates = (t_point){0, 0, 0};
 	d->objectlist = NULL;
+	d->parse.fd = -1;
 	d->parse.elmnts = NULL;
 	d->parse.subelmnts = NULL;
 	d->parse.min = 0.0;

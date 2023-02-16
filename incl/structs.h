@@ -94,6 +94,7 @@ typedef struct s_cylinder
 // Struct for parsing
 typedef struct s_parsing
 {
+	int			fd;
 	char		**elmnts;
 	char		**subelmnts;
 	double		min;

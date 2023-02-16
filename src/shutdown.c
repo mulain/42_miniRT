@@ -4,6 +4,8 @@
 void	error_exit(t_data *d, char *msg)
 {
 	free_all(d);
+	if (d->parse.fd != -1)
+		close(d->parse.fd);
 	write (2, msg, ft_strlen(msg));
 	exit(1);
 }

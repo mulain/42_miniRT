@@ -1,10 +1,12 @@
 
 #include "../incl/minirt.h"
 
-void	parsing(t_data *d, int fd)
+void	parsing(t_data *d)
 {
 	char	*line;
+	int		fd;
 
+	fd = d->parse.fd;
 	line = gnl_trimmed(fd);
 	while (line)
 	{
