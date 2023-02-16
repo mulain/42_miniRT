@@ -56,7 +56,7 @@ void	parse_camera(t_data *d)
 		error_exit(d, E_CAMERADEF);
 	d->camera.declared = true;
 	parse_tpoint(d, &d->camera.viewpoint, 1, E_CAMERA1);
-	parse_tnormvector(d, &d->camera.normvector, 2, E_CAMERA2);
+	parse_tvector(d, &d->camera.normvector, 2, E_CAMERA2);
 	d->parse.min = 0;
 	d->parse.max = 180;
 	parse_int(d, &d->camera.fieldofview, 3, E_CAMERA3);

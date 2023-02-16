@@ -31,12 +31,12 @@ is the same datastructure as a point, but has less range
 and is something factually different, so chose to give it 
 its own name.
 */
-typedef struct s_normvector
+typedef struct s_vector
 {
 	double		x;
 	double		y;
 	double		z;
-}	t_normvector;
+}	t_vector;
 
 typedef struct s_color
 {
@@ -55,10 +55,10 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-	t_point			viewpoint;
-	t_normvector	normvector;
-	int				fieldofview;
-	bool			declared;
+	t_point		viewpoint;
+	t_vector	normvector;
+	int			fieldofview;
+	bool		declared;
 }	t_camera;
 
 typedef struct s_ambientlight
@@ -77,18 +77,18 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	t_point			anchor;
-	t_normvector	normvector;
-	t_color			color;
+	t_point		anchor;
+	t_vector	normvector;
+	t_color		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_point			anchor;
-	t_normvector	normvector;
-	double			diameter;
-	double			height;
-	t_color			color;
+	t_point		anchor;
+	t_vector	normvector;
+	double		diameter;
+	double		height;
+	t_color		color;
 }	t_cylinder;
 
 // Struct for parsing

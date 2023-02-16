@@ -42,7 +42,7 @@ void	parse_plane(t_data *d)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(plane, pl));
 	parse_tpoint(d, &plane->anchor, 1, E_PLANE1);
-	parse_tnormvector(d, &plane->normvector, 2, E_PLANE2);
+	parse_tvector(d, &plane->normvector, 2, E_PLANE2);
 	parse_tcolor(d, &plane->color, 3, E_PLANE3);
 }
 
@@ -66,7 +66,7 @@ void	parse_cylinder(t_data *d)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(cylinder, cy));
 	parse_tpoint(d, &cylinder->anchor, 1, E_CYLINDER1);
-	parse_tnormvector(d, &cylinder->normvector, 2, E_CYLINDER2);
+	parse_tvector(d, &cylinder->normvector, 2, E_CYLINDER2);
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
 	parse_double(d, &cylinder->diameter, 3, E_CYLINDER3);

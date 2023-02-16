@@ -35,7 +35,7 @@ void	init_structs(t_data *d)
 	d->amb_light.color = (t_color){0, 0, 0};
 	d->camera.declared = false;
 	d->camera.fieldofview = 0;
-	d->camera.normvector = (t_normvector){0, 0, 0};
+	d->camera.normvector = (t_vector){0, 0, 0};
 	d->camera.viewpoint = (t_point){0, 0, 0};
 	d->light.declared = false;
 	d->light.brightness = 0;

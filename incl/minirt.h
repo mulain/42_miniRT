@@ -15,7 +15,7 @@
 # include "defines.h"
 
 // calc_vector.c
-double	normvector_length(t_normvector vec);
+double	vector_length(t_vector vec);
 
 // main.c
 void	get_infile(t_data *d, int argc, char **argv);
@@ -41,7 +41,7 @@ void	parse_cylinder(t_data *d);
 void	parse_double(t_data *d, double *target, int index, char *msg);
 void	parse_tcolor(t_data *d, t_color *color, int index, char *msg);
 void	parse_tpoint(t_data *d, t_point *point, int index, char *msg);
-void	parse_tnormvector(t_data *d, t_normvector *vec, int index, char *msg);
+void	parse_tvector(t_data *d, t_vector *vec, int index, char *msg);
 void	parse_int(t_data *d, int *target, int index, char *msg);
 
 // utils_is.c
