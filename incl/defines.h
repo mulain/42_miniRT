@@ -2,6 +2,10 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+// Math
+# define EPSILON		0.00001
+
+// Error messages
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
 # define E_FILETYPE		"Invalid input file type. Please supply a .rt file.\n"
 # define E_FILENAME		"Invalid input file name.\n"

@@ -1,4 +1,5 @@
-# include "../incl/minirt.h"
+
+#include "../incl/minirt.h"
 
 void	parsing(t_data *d, int fd)
 {

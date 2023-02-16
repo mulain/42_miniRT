@@ -1,4 +1,5 @@
-# include "../incl/minirt.h"
+
+#include "../incl/minirt.h"
 
 void	print_objlist(t_objlist *lst)
 {

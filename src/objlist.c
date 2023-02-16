@@ -1,4 +1,5 @@
-# include "../incl/objlist.h"
+
+#include "../incl/objlist.h"
 
 t_objlist	*objlst_new(void *content, t_objtype objtype)
 {

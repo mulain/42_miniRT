@@ -6,15 +6,11 @@ EFLAGS	= -Wall -Wextra -Werror
 LFLAGS	= -lm
 RM		= rm -rf
 
-PINK	= \033[0;35m
-PURPLE	= \033[0;34m
-BLUE	= \033[94m
-RESET	= \033[0m
-
 OS		= $(shell uname)
 
 ifeq ($(OS), Linux)
-	MLXFLAGS = #-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
+	MLXFLAGS	= #-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
+	MLX			= mlx/minilibx-linux
 else
 	MLXFLAGS = #-Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
@@ -34,7 +30,11 @@ SRCFILE	= 	calc_vector.c\
 SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 LIBFT	= 	libft/libft.a
-MLX		= 
+
+PINK	= \033[0;35m
+PURPLE	= \033[0;34m
+BLUE	= \033[94m
+RESET	= \033[0m
 
 all: $(NAME)
 
