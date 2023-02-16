@@ -56,9 +56,6 @@ void		parse_tpoint(t_data *d, t_point *point, int index, char *msg);
 void		parse_tvector(t_data *d, t_vector *vec, int index, char *msg);
 void		parse_int(t_data *d, int *target, int index, char *msg);
 
-// utils_is.c
-bool		is_ucharformat(char *input);
-
 // utils_print1.c
 void		print_objlist(t_objlist *lst);
 void		print_ambientlight(t_data *d);

@@ -25,7 +25,6 @@ SRCFILE	= 	calc_intersection.c\
 			parsing_utils.c\
 			parsing.c\
 			shutdown.c\
-			utils_is.c\
 			utils_print1.c\
 			utils_print2.c
 SRC		=	$(addprefix src/, $(SRCFILE))
