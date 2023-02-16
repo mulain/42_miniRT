@@ -10,23 +10,24 @@ OS		= $(shell uname)
 
 ifeq ($(OS), Linux)
 	MLXFLAGS	= #-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
-	MLX			= mlx/minilibx-linux
+	MLX			= #mlx/minilibx-linux
 else
-	MLXFLAGS = #-Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
 
-SRCFILE	= 	calc_vector.c\
+SRCFILE	= 	calc_intersection.c\
+			calc_vector1.c\
+			calc_vector2.c\
 			main.c\
 			objlist.c\
-			parsing.c\
 			parsing_lightsandcam.c\
 			parsing_objects.c\
 			parsing_utils.c\
+			parsing.c\
+			shutdown.c\
 			utils_is.c\
 			utils_print1.c\
-			utils_print2.c\
-			shutdown.c
-
+			utils_print2.c
 SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 LIBFT	= 	libft/libft.a

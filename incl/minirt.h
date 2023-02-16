@@ -14,9 +14,13 @@
 # include "objlist.h"
 # include "defines.h"
 
+// calc_intersection.c
+double		intersect_plane(t_ray ray, t_plane plane);
+
+
 // calc_vector1.c
-t_vector	vector_add(t_vector v1, t_vector v2);
-t_vector	vector_subtract(t_vector v1, t_vector v2);
+t_vector	point_add(t_point p1, t_point p2);
+t_vector	point_subtract(t_point v1, t_point v2);
 t_vector	vector_multiply(t_vector v, double mult);
 t_vector	vector_divide(t_vector v, double div);
 
@@ -65,6 +69,8 @@ void		print_light(t_data *d);
 void		print_sphere(t_sphere *sp);
 void		print_plane(t_plane *pl);
 void		print_cylinder(t_cylinder *cy);
+void		print_point(t_point p, char *name);
+void		print_vector(t_vector v, char *name);
 
 // shutdown.c
 void		error_exit(t_data *d, char *msg);

@@ -1,14 +1,14 @@
 
 #include "../incl/minirt.h"
 
-t_vector	vector_add(t_vector v1, t_vector v2)
+t_vector	point_add(t_point p1, t_point p2)
 {
-	return ((t_vector){v1.x + v2.x, v1.y + v2.y, v1.z + v2.z});
+	return ((t_vector){p1.x + p2.x, p1.y + p2.y, p1.z + p2.z});
 }
 
-t_vector	vector_subtract(t_vector v1, t_vector v2)
+t_vector	point_subtract(t_point p1, t_point p2)
 {
-	return ((t_vector){v1.x - v2.x, v1.y - v2.y, v1.z - v2.z});
+	return ((t_vector){p1.x - p2.x, p1.y - p2.y, p1.z - p2.z});
 }
 
 t_vector	vector_multiply(t_vector v, double mult)

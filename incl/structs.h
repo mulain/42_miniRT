@@ -40,8 +40,8 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
-	t_point		origin;
-	t_vector	direction;
+	t_point		point;
+	t_vector	vector;
 }	t_ray;
 
 typedef struct s_color
@@ -53,7 +53,7 @@ typedef struct s_color
 
 typedef struct s_light
 {
-	t_point		coordinates;
+	t_point		point;
 	double		brightness;
 	t_color		color;
 	bool		declared;
@@ -61,8 +61,8 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-	t_point		viewpoint;
-	t_vector	normvector;
+	t_point		point;
+	t_vector	vector;
 	int			fieldofview;
 	bool		declared;
 }	t_camera;
@@ -76,22 +76,22 @@ typedef struct s_ambientlight
 
 typedef struct s_sphere
 {
-	t_point		center;
+	t_point		point;
 	t_color		color;
-	double		diameter;
+	double		radius;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_point		anchor;
-	t_vector	normvector;
+	t_point		point;
+	t_vector	vector;
 	t_color		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_point		anchor;
-	t_vector	normvector;
+	t_point		point;
+	t_vector	vector;
 	double		diameter;
 	double		height;
 	t_color		color;

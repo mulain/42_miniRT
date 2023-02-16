@@ -4,28 +4,18 @@
 void	parsing(t_data *d)
 {
 	char	*line;
-	int		fd;
 
-	fd = d->parse.fd;
-	line = gnl_trimmed(fd);
+	line = gnl_trimmed(d->parse.fd);
 	while (line)
 	{
 		if (!line[0] || line[0] == '#')
 			free(line);
 		else
 			parse_line(d, line);
-		line = gnl_trimmed(fd);
+		line = gnl_trimmed(d->parse.fd);
 	}
 	if (!d->amb_light.declared || !d->camera.declared)
 		error_exit(d, E_MANDATORY);
-
-
-
-
-	print_ambientlight(d);
-	print_light(d);
-	print_camera(d);
-	print_objlist(d->objectlist);
 }
 
 char	*gnl_trimmed(int fd)

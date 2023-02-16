@@ -1,6 +1,26 @@
 
 #include "../incl/minirt.h"
 
+void	testshit(t_data *d)
+{
+	double		test;
+	t_ray		ray;
+	t_plane		plane;
+
+	ray.point = (t_point){1.1, 1.1, 1.1};
+	ray.vector = (t_vector){0, 2, 0};
+	plane.point = (t_point){0, 1.0, 0};
+	plane.vector = (t_vector){0, 1, 0};
+	test = intersect_plane(ray, plane);
+	printf("test intersect ray plane:%f\n", test);
+	(void)d;
+	
+	/* print_ambientlight(d);
+	print_light(d);
+	print_camera(d);
+	print_objlist(d->objectlist); */
+}
+
 int	main(int argc, char **argv)
 {
 	t_data		data;
@@ -9,6 +29,7 @@ int	main(int argc, char **argv)
 	get_infile(&data, argc, argv);
 	parsing(&data);
 	//init_mlx(&data);
+	testshit(&data);
 	free_all(&data);
 }
 
@@ -35,12 +56,12 @@ void	init_structs(t_data *d)
 	d->amb_light.color = (t_color){0, 0, 0};
 	d->camera.declared = false;
 	d->camera.fieldofview = 0;
-	d->camera.normvector = (t_vector){0, 0, 0};
-	d->camera.viewpoint = (t_point){0, 0, 0};
+	d->camera.vector = (t_vector){0, 0, 0};
+	d->camera.point = (t_point){0, 0, 0};
 	d->light.declared = false;
 	d->light.brightness = 0;
 	d->light.color = (t_color){0, 0, 0};
-	d->light.coordinates = (t_point){0, 0, 0};
+	d->light.point = (t_point){0, 0, 0};
 	d->objectlist = NULL;
 	d->parse.fd = -1;
 	d->parse.elmnts = NULL;

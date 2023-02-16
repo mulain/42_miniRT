@@ -32,14 +32,14 @@ void	print_ambientlight(t_data *d)
 void	print_camera(t_data *d)
 {
 	printf("----- Camera -----\n");
-	printf("Viewpoint:\n");
-	printf("  x: %f\n", d->camera.viewpoint.x);
-	printf("  y: %f\n", d->camera.viewpoint.y);
-	printf("  z: %f\n", d->camera.viewpoint.z);
+	printf("point:\n");
+	printf("  x: %f\n", d->camera.point.x);
+	printf("  y: %f\n", d->camera.point.y);
+	printf("  z: %f\n", d->camera.point.z);
 	printf("Normvector:\n");
-	printf("  x: %f\n", d->camera.normvector.x);
-	printf("  y: %f\n", d->camera.normvector.y);
-	printf("  z: %f\n", d->camera.normvector.z);
+	printf("  x: %f\n", d->camera.vector.x);
+	printf("  y: %f\n", d->camera.vector.y);
+	printf("  z: %f\n", d->camera.vector.z);
 	printf("Field of view:\n");
 	printf("  %i degrees\n", d->camera.fieldofview);
 }
@@ -52,10 +52,10 @@ void	print_light(t_data *d)
 		return ;
 	}
 	printf("----- Light -----\n");
-	printf("Coordinates:\n");
-	printf("  x: %f\n", d->light.coordinates.x);
-	printf("  y: %f\n", d->light.coordinates.y);
-	printf("  z: %f\n", d->light.coordinates.z);
+	printf("point:\n");
+	printf("  x: %f\n", d->light.point.x);
+	printf("  y: %f\n", d->light.point.y);
+	printf("  z: %f\n", d->light.point.z);
 	printf("Brightness:\n");
 	printf("  %f\n", d->light.brightness);
 	printf("Color:\n");

@@ -21,7 +21,7 @@ A·B = ||A|| ||B|| cos(θ)
 where ||A|| and ||B|| are the magnitudes of the vectors,
 and θ is the angle between the vectors.
 
-These definitions are equivalent when using Cartesian coordinates.
+These definitions are equivalent when using Cartesian point.
 
 Cosine in rel. to angle between vectors:
 	-	0 deg: cosine is 1
@@ -38,6 +38,11 @@ double	vector_dotprod(t_vector v1, t_vector v2)
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
 
+/*
+The cross product of two vectors is a vector that is perpendicular to
+both of the pointal vectors.
+Cross product of parallel vectors is 0.
+*/
 t_vector	vector_crossprod(t_vector v1, t_vector v2)
 {
 	t_vector	result;
@@ -55,14 +60,4 @@ divided by its current length to have a new length of 1.
 t_vector	vector_normalize(t_vector v)
 {
 	return (vector_divide(v, vector_length(v)));
-}
-
-t_vector	vector_divide(t_vector v, double divisor)
-{
-	return ((t_vector){v.x / divisor, v.y / divisor, v.z / divisor});
-}
-
-t_vector	vector_multiply(t_vector v, double mult)
-{
-	return ((t_vector){v.x * mult, v.y * mult, v.z * mult});
 }
