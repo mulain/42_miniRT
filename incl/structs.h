@@ -38,6 +38,12 @@ typedef struct s_vector
 	double		z;
 }	t_vector;
 
+typedef struct s_ray
+{
+	t_point		origin;
+	t_vector	direction;
+}	t_ray;
+
 typedef struct s_color
 {
 	int			r;
