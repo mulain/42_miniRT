@@ -1,9 +1,10 @@
 NAME	=	miniRT
 CC		=	gcc
+RM		=	rm -rf
 CFLAGS	=	-g -o3
 EFLAGS	=	-Wall -Wextra -Werror
 LFLAGS	=	-lm $(LIBFT) $(MLXFLAGS)
-RM		=	rm -rf
+LIBFT	= 	libft/libft.a
 
 ifeq ($(shell uname), Linux)
 	OS			=	Linux
@@ -33,11 +34,8 @@ SRCFILE	= 	calc_intersection.c\
 			utils_print2.c
 SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
-LIBFT	= 	libft/libft.a
 
-PINK	=	\033[0;35m
-PURPLE	=	\033[0;34m
-BLUE	=	\033[94m
+BLUE	=	\033[0;34m
 RESET	=	\033[0m
 
 all: $(NAME)
