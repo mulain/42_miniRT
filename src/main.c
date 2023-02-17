@@ -8,7 +8,7 @@ void	testshit(t_data *d)
 	t_plane		plane;
 
 	ray.point = (t_point){1.1, 1.1, 1.1};
-	ray.vector = (t_vector){0, 2, 0};
+	ray.vector = (t_vector){0, 0, 1};
 	plane.point = (t_point){0, 1.0, 0};
 	plane.vector = (t_vector){0, 1, 0};
 	test = intersect_plane(ray, plane);
