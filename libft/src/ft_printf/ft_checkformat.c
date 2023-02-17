@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:37:30 by wmardin           #+#    #+#             */
-/*   Updated: 2023/02/13 20:07:34 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/02/17 16:51:09 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_checkformat(const char c, va_list args)
 {
 	int		prints;
 
+	prints = 0;
 	if (c == 'c')
 		prints = ft_printchar(va_arg(args, int));
 	else if (c == 's')

@@ -35,21 +35,27 @@ int sphere_intersection(Vector3 center, double radius, Vector3 ray_origin, Vecto
     double b = 2 * dot(ray_direction, Vector3Subtract(ray_origin, center));
     double c = dot(Vector3Subtract(ray_origin, center), Vector3Subtract(ray_origin, center)) - pow(radius, 2);
     double discriminant = pow(b, 2) - 4 * a * c;
-    if (discriminant < 0) {
+    if (discriminant < 0)
         return 0; // no intersection
-    } else if (discriminant == 0) {
+    else if (discriminant == 0)
+	{
         *t1 = -b / (2 * a);
         return 1;
-    } else {
+    }
+	else
+	{
         double t_min = (-b - sqrt(discriminant)) / (2 * a);
         double t_max = (-b + sqrt(discriminant)) / (2 * a);
-        if (t_max < 0) {
-            return 0; // sphere behind the ray
-        } else if (t_min >= 0) {
+        if (t_max < 0)
+			return 0; // sphere behind the ray
+        else if (t_min >= 0)
+		{
             *t1 = t_min;
             *t2 = t_max;
             return 2;
-        } else {
+        }
+		else
+		{
             *t1 = 0;
             *t2 = t_max;
             return 1;
@@ -57,7 +63,8 @@ int sphere_intersection(Vector3 center, double radius, Vector3 ray_origin, Vecto
     }
 }
 
-int main() {
+int main()
+{
     Vector3 center = {1.0, 2.0, 3.0};
     double radius = 4.0;
     Vector3 ray_origin = {0.0, 0.0, 0.0};

@@ -12,7 +12,7 @@ ifeq ($(OS), Linux)
 	MLXFLAGS	= #-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
 	MLX			= #mlx/minilibx-linux
 else
-	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLXFLAGS = #-Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
 
 SRCFILE	= 	calc_intersection.c\

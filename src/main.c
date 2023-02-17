@@ -6,19 +6,34 @@ void	testshit(t_data *d)
 	double		test;
 	t_ray		ray;
 	t_plane		plane;
+	t_sphere	sphere;
 
-	ray.point = (t_point){0, 1, 0};
+	(void)d;
+	
+	// ray
+	ray.point = (t_point){0, 0, 0};
 	ray.vector = (t_vector){0, 0, 1};
+	
+	// sphere
+	sphere.point = (t_point){0, 0, 0};
+	sphere.radius = 1;
+	test = intersect_sphere(ray, sphere);
+	printf("intersect sphere: %f\n", test);
+
+	
+	// plane
 	plane.point = (t_point){0, 1.0, 0};
 	plane.vector = (t_vector){0, 1, 0};
 	test = intersect_plane(ray, plane);
-	printf("test intersect ray plane:%f\n", test);
-	(void)d;
+	printf("intersect plane:%f\n", test);
 	
-	/* print_ambientlight(d);
+	/*
+	// print the input file objects
+	print_ambientlight(d);
 	print_light(d);
 	print_camera(d);
-	print_objlist(d->objectlist); */
+	print_objlist(d->objectlist);
+	*/
 }
 
 int	main(int argc, char **argv)

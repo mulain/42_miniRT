@@ -44,7 +44,7 @@ double	intersect_plane(t_ray ray, t_plane plane)
 }
 
 /*
-Sphere formula: ||(p - c)|| = r
+Sphere formula: square(||(p - c)||) = r * r
 	c = center of sphere
 	r = radius of sphere
 	p = point on sphere
@@ -53,5 +53,30 @@ Sphere formula: ||(p - c)|| = r
 */
 double	intersect_sphere(t_ray ray, t_sphere sphere)
 {
+	t_vector	t;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		intrsct1;
+	double		intrsct2;
 
+	t = point_subtract(ray.point, sphere.point);
+	a = vector_dotprod(ray.vector, ray.vector);
+	b = 2 * vector_dotprod(ray.vector, t);
+	c = vector_dotprod(t, t) - sphere.radius * sphere.radius;
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
+		return (INFINITY); // no intersection
+	if (discriminant == 0)
+		return (-b / (2 * a)); //only one intersection point
+	intrsct1 = (-b - sqrt(discriminant)) / (2 * a);
+	intrsct2 = (-b + sqrt(discriminant)) / (2 * a);
+	if (intrsct2 < 0)
+		return (INFINITY); //sphere behind ray
+	if (intrsct1 >= 0)
+		return (intrsct1);
+		// 2 intersections but we only want intrsct1
+		// intrsct2 however is also valid (if ray passes thru sphere)
+	return (intrsct2); // ray originates inside sphere
 }
