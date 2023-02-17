@@ -31,6 +31,7 @@ double		vector_dotprod(t_vector v1, t_vector v2);
 t_vector	vector_crossprod(t_vector v1, t_vector v2);
 
 // main.c
+int			main(int argc, char **argv);
 void		get_infile(t_data *d, int argc, char **argv);
 void		init_structs(t_data *d);
 void		init_mlx(t_data *d);
