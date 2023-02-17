@@ -5,9 +5,9 @@
 The length (or magnitude) of a vector is the square root of the dot product
 of the vector with itself.
 */
-double	vector_length(t_vector vec)
+double	vector_length(t_vector v)
 {
-	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
 /*
