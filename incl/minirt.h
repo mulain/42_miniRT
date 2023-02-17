@@ -21,6 +21,7 @@ double		intersect_plane(t_ray ray, t_plane plane);
 // calc_vector1.c
 t_vector	point_add(t_point p1, t_point p2);
 t_vector	point_subtract(t_point p1, t_point p2);
+double	point_distance(t_point p1, t_point p2);
 t_vector	vector_multiply(t_vector v, double mult);
 t_vector	vector_divide(t_vector v, double div);
 
