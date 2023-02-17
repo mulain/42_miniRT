@@ -10,6 +10,7 @@ typedef enum e_objtype
 	cy = 3
 }	t_objtype;
 
+// forward declaration
 typedef struct s_objlist t_objlist;
 
 typedef struct s_objlist
