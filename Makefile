@@ -73,7 +73,7 @@ git:
 
 mgit:
 	git add .
-	@read -p "Enter the commit message: " msg; \
+	@read -p "Enter the commit message: " msg;\
 	git commit -m "$$msg"
 	git push
 	@echo "$(BLUE)git auto add & push with message performed.$(RESET)"
