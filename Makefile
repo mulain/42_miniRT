@@ -1,23 +1,22 @@
-NAME	= miniRT
+NAME	=	miniRT
+CC		=	gcc
+CFLAGS	=	-g -o3
+EFLAGS	=	-Wall -Wextra -Werror
+LFLAGS	=	-lm $(LIBFT) $(MLXFLAGS)
+RM		=	rm -rf
 
-CC		= gcc
-CFLAGS	= -g -o3
-EFLAGS	= -Wall -Wextra -Werror
-LFLAGS	= -lm
-RM		= rm -rf
-
-OS		= $(shell uname)
-
-ifeq ($(OS), Linux)
-	OS			= Linux
-	MLX			= mlx/mlx_linux/libmlx.a
-	MLXFLAGS	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
-	MLXCOMPILE	= @make -C mlx/mlx_linux/
+ifeq ($(shell uname), Linux)
+	OS			=	Linux
+	MLX			=	mlx/mlx_linux/libmlx.a
+	MLXFLAGS	=	$(MLX) -L/usr/lib -lXext -lX11
+	MLXCOMPILE	=	@make -C mlx/mlx_linux/
+	DEFINEFLAGS	=
 else
-	OS			= Mac
-	MLX			= mlx/mlx_mac/libmlx.a
-	MLXFLAGS	= mlx/mlx_mac/libmlx.a -framework OpenGL -framework AppKit
-	MLXCOMPILE	= @make -C mlx/mlx_mac/
+	OS			=	Mac
+	MLX			=	mlx/mlx_mac/libmlx.a
+	MLXFLAGS	=	$(MLX) -framework OpenGL -framework AppKit
+	MLXCOMPILE	=	@make -C mlx/mlx_mac/
+	DEFINEFLAGS	=
 endif
 
 SRCFILE	= 	calc_intersection.c\
@@ -36,22 +35,23 @@ SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 LIBFT	= 	libft/libft.a
 
-PINK	= \033[0;35m
-PURPLE	= \033[0;34m
-BLUE	= \033[94m
-RESET	= \033[0m
+PINK	=	\033[0;35m
+PURPLE	=	\033[0;34m
+BLUE	=	\033[94m
+RESET	=	\033[0m
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@echo "$(BLUE)Compiling with $(OS)-flags.$(RESET)"
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LFLAGS) $(LIBFT)
+	@echo "$(BLUE)Compiling miniRT with $(OS)-flags.$(RESET)"
+	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(DEFINEFLAGS) -o $(NAME) $(LFLAGS) 
 	@echo "$(BLUE)miniRT compiled.$(RESET)"
 
 $(LIBFT):
 	@make --no-print-directory -C libft/
 
 $(MLX):
+	@echo "$(BLUE)Compiling mlx with $(OS)-flags.$(RESET)"
 	$(MLXCOMPILE)
 
 obj/%.o: src/%.c
