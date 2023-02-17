@@ -9,10 +9,15 @@ RM		= rm -rf
 OS		= $(shell uname)
 
 ifeq ($(OS), Linux)
-	MLXFLAGS	= #-Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
-	MLX			= #mlx/minilibx-linux
+	OS			= Linux
+	MLX			= mlx/mlx_linux/libmlx.a
+	MLXFLAGS	= -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11
+	MLXCOMPILE	= @make -C mlx/mlx_linux/
 else
-	MLXFLAGS = #-Lmlx -lmlx -framework OpenGL -framework AppKit
+	OS			= Mac
+	MLX			= mlx/mlx_mac/libmlx.a
+	MLXFLAGS	= mlx/mlx_mac/libmlx.a -framework OpenGL -framework AppKit
+	MLXCOMPILE	= @make -C mlx/mlx_mac/
 endif
 
 SRCFILE	= 	calc_intersection.c\
@@ -38,12 +43,16 @@ RESET	= \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) #$(MLX)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	@echo "$(BLUE)Compiling with $(OS)-flags.$(RESET)"
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LFLAGS) $(LIBFT)
 	@echo "$(BLUE)miniRT compiled.$(RESET)"
 
 $(LIBFT):
 	@make --no-print-directory -C libft/
+
+$(MLX):
+	$(MLXCOMPILE)
 
 obj/%.o: src/%.c
 	@mkdir -p obj

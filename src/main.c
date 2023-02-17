@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	init_structs(&data);
 	get_infile(&data, argc, argv);
 	parsing(&data);
-	//init_mlx(&data);
+	init_mlx(&data);
 	testshit(&data);
 	free_all(&data);
 }
@@ -85,7 +85,7 @@ void	init_structs(t_data *d)
 	d->parse.max = 0.0;
 }
 
-/* void	init_mlx(t_data *d)
+void	init_mlx(t_data *d)
 {
 	d->mlx.mlx = mlx_init();
 	d->mlx.win = mlx_new_window(d->mlx.mlx, d->mlx.img_width, d->mlx.img_height, "miniRT");
@@ -94,4 +94,3 @@ void	init_structs(t_data *d)
 			&d->mlx.img_endian);
 	d->mlx.img_bytespp = d->mlx.img_bpp / 8;
 }
- */
