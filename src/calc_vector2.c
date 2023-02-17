@@ -40,7 +40,7 @@ double	vector_dotprod(t_vector v1, t_vector v2)
 
 /*
 The cross product of two vectors is a vector that is perpendicular to
-both of the pointal vectors.
+both of the given vectors.
 Cross product of parallel vectors is 0.
 */
 t_vector	vector_crossprod(t_vector v1, t_vector v2)
@@ -54,8 +54,8 @@ t_vector	vector_crossprod(t_vector v1, t_vector v2)
 }
 
 /*
-A normalized vector is of length 1. Therefore it should be
-divided by its current length to have a new length of 1.
+A normalized vector is of length 1. So divide by its current length
+to have a new length of 1.
 */
 t_vector	vector_normalize(t_vector v)
 {

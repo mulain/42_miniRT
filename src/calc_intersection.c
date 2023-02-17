@@ -33,23 +33,25 @@ double	intersect_plane(t_ray ray, t_plane plane)
 	double		dividend;
 	double		divisor;
 
-	print_point(ray.point, "ray point");
-	print_point(plane.point, "plane point");
-	print_vector(point_subtract(plane.point, ray.point), "plane - point");
-
 	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
 			plane.vector);
-	printf("dividend:%f\n", dividend);
-	
-	divisor = vector_dotprod(plane.vector, ray.vector);
-	printf("divisor:%f\n", divisor);
-	
-	
-	
 	if (fabs(dividend) < EPSILON)
 		return (0);
-	
+	divisor = vector_dotprod(plane.vector, ray.vector);
 	if (fabs(divisor) < EPSILON)
 		return (INFINITY);
 	return (dividend / divisor);
+}
+
+/*
+Sphere formula: ||(p - c)|| = r
+	c = center of sphere
+	r = radius of sphere
+	p = point on sphere
+	||x|| means length/magnitude of the vector x
+
+*/
+double	intersect_sphere(t_ray ray, t_sphere sphere)
+{
+
 }
