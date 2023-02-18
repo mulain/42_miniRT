@@ -16,6 +16,7 @@ typedef struct s_mlx
 	int		img_endian;
 	int		img_width;
 	int		img_height;
+	bool	initialized;
 }	t_mlx;
 
 typedef struct s_helper
