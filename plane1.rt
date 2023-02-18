@@ -1,0 +1,10 @@
+# Lines with only whitespaces will not be parsed.
+			   
+# Lines starting with '#' will not be parsed. Leading whitespaces are skipped.
+   #
+# After receiving sufficient valid arguments in a line, the rest will not be evaluated.
+A 1.0 0,0,255 asdfasdf
+# Zeros may be omitted before or after decimal pointsm but not both at once. That would be just a dot.
+C 0,0,0 0,0,-1 90
+L .1,-5,2 1.0 0,0,100
+pl 0,50,0 0,0,-1 255,0,0

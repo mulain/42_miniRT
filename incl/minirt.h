@@ -8,11 +8,14 @@
 # include <math.h>
 # include <stdbool.h>
 
-//# include "../mlx/mlx.h"
+# include "../miniLibX/mlx.h"
 # include "../libft/include/libft.h"
 # include "structs.h"
 # include "objlist.h"
 # include "defines.h"
+# include "../incl/k_vectormath.h"
+
+
 
 // main.c
 void	init_structs(t_data *d);
@@ -61,12 +64,16 @@ void	print_ambientlight(t_data *d);
 void	print_camera(t_data *d);
 void	print_light(t_data *d);
 void	print_sphere(t_sphere *sp);
+void	print_plane(t_plane *pl);
+
 
 // utils_set.c
 bool	set_double(double *target, char *input, double min, double max);
 bool	set_tcolor(t_color *color, char **arr);
-bool	set_tpoint(t_point *point, char **arr);
-bool	set_tnormvector(t_normvector *vec, char **arr);
+// bool	set_tpoint(t_vector *point, char **arr);
+bool	set_tpoint(t_vector *point, char **arr);
+
+bool	set_tnormvector(t_vector *vec, char **arr);
 bool	set_int(int *target, char *input, int min, int max);
 
 // utils_str.c
@@ -79,5 +86,15 @@ void	exit_free(t_data *d, char *msg);
 
 // shutdown.c
 void	shutdown(t_data *d);
+
+//plane
+void	parse_plane(t_data *d, char **elements);
+void	set_plane_anchor(t_data *d, t_plane *plane, char **elements);
+void	set_plane_vector(t_data *d, t_plane *plane, char **elements);
+void	set_plane_color(t_data *d, t_plane *plane, char **elements);
+
+// // kris
+// void	ite_ray(t_data *data);
+
 
 #endif

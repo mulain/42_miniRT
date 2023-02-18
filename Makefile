@@ -1,8 +1,8 @@
-NAME	= miniRT
+NAME	=  miniRT
 
 CC		= gcc
 CFLAGS	= -g -o3
-EFLAGS	= -Wall -Wextra -Werror
+EFLAGS	= -Wall -Wextra -Werror  -fsanitize=address
 LFLAGS	=
 RM		= rm -rf
 
@@ -38,21 +38,36 @@ SRCFILE	= 	errors.c\
 			parsing_camera.c\
 			parsing_light.c\
 			parsing_sphere.c\
+			parsing_plane.c\
 			utils_is.c\
 			utils_print1.c\
 			utils_print2.c\
 			utils_set.c\
 			utils_str.c\
-			shutdown.c
-SRC		=	$(addprefix src/, $(SRCFILE))
-OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
-LIBFT	= 	libft/libft.a
-MLX		= 
+			shutdown.c\
+			k_ite_ray.c\
+			k_vectormath.c
 
-all: $(NAME)
+# KRIS	=	ite_ray.c\
+# 			vectormath.c
+SRC		=	$(addprefix src/, $(SRCFILE))# $(addprefix src/kris_plane/, $(KRIS))
+
+# OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o)) $(addprefix obj/, $(KRIS:%.c=%.o))
+OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
+
+LIBFT	= 	libft/libft.a
+
+MLX		= ./miniLibX/
+MLX_LNK	= -L $(MLX) -l mlx -framework OpenGL -framework AppKit
+MLX_LIB	= mlx.a
+
+all: $(MLX_LIB) $(NAME)
+
+$(MLX_LIB) :
+	@make -C $(MLX)
 
 $(NAME): $(OBJ) $(LIBFT) #$(MLX)
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LIBFT)
+	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(MLX_LNK) $(MLXFLAGS) $(DEFINEFLAGS) -o $(NAME) $(LIBFT)
 	@echo "$(BLUE)miniRT compiled!$(RESET)"
 
 $(LIBFT):
@@ -60,7 +75,7 @@ $(LIBFT):
 
 obj/%.o: src/%.c
 	@mkdir -p obj
-	$(CC) $(EFLAGS) -c $< -o $@
+	$(CC) -I $(MLX) $(EFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ) obj

@@ -37,7 +37,9 @@ bool	set_tcolor(t_color *color, char **arr)
 	return (true);
 }
 
-bool	set_tpoint(t_point *point, char **arr)
+// bool	set_tpoint(t_vector *point, char **arr)
+bool	set_tpoint(t_vector *point, char **arr)
+
 {
 	int		i;
 
@@ -48,11 +50,13 @@ bool	set_tpoint(t_point *point, char **arr)
 			return (false);
 		i++;
 	}
-	*point = (t_point){ft_strtod(arr[0]), ft_strtod(arr[1]), ft_strtod(arr[2])};
+	// *point = (t_vector){ft_strtod(arr[0]), ft_strtod(arr[1]), ft_strtod(arr[2])};
+	*point = (t_vector){ft_strtod(arr[0]), ft_strtod(arr[1]), ft_strtod(arr[2])};
+
 	return (true);
 }
 
-bool	set_tnormvector(t_normvector *vec, char **arr)
+bool	set_tnormvector(t_vector *vec, char **arr)
 {
 	int		i;
 	double	x;
@@ -72,7 +76,8 @@ bool	set_tnormvector(t_normvector *vec, char **arr)
 	if (x < -1.0 || x > 1.0 || y < -1.0 || y > 1.0 || z < -1.0 || z > 1.0
 		|| sqrt(x * x + y * y + z * z) != 1.0)
 		return (false);
-	*vec = (t_normvector){x, y, z};
+	*vec = (t_vector){x, y, z};
+	
 	return (true);
 }
 

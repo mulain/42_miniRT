@@ -19,24 +19,31 @@ typedef struct s_mlx
 }	t_mlx;
 
 // General attribute structs for use across different objects
-typedef struct s_point
-{
-	double		x;
-	double		y;
-	double		z;
-}	t_point;
+// typedef struct s_point
+// {
+// 	double		x;
+// 	double		y;
+// 	double		z;
+// }	t_vector;
 
 /*
 is the same datastructure as a point, but has less range
 and is something factually different, so chose to give it 
 its own name.
 */
-typedef struct s_normvector
+// typedef struct s_normvector
+// {
+// 	double		x;
+// 	double		y;
+// 	double		z;
+// }	t_vector;
+
+typedef struct s_vector
 {
 	double		x;
 	double		y;
 	double		z;
-}	t_normvector;
+}	t_vector;
 
 //i just love ints, what can i say? range ofc 0-255
 typedef struct s_color
@@ -48,7 +55,7 @@ typedef struct s_color
 
 typedef struct s_light
 {
-	t_point		coordinates;
+	t_vector		coordinates;
 	double		brightness; //0.0 to 1.0
 	t_color		color;
 	bool		declared;
@@ -56,8 +63,8 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-	t_point			viewpoint;
-	t_normvector	normvector; // range -1 to 1
+	t_vector			viewpoint;
+	t_vector	normvector; // range -1 to 1
 	int				fieldofview; // 0 to 180
 	bool			declared;
 }	t_camera;
@@ -71,29 +78,32 @@ typedef struct s_ambientlight
 
 typedef struct s_sphere
 {
-	t_point		center;
+	t_vector		center;
 	t_color		color;
 	double		diameter;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_point			anchor;
+	// t_vector			anchor;
+	t_vector		anchr;
 	 /*has same data as a point but is ackchually a vector: range -1 to 1
 	 maybe name too long. i would request using 
 	 long names because it is so easy to read. and it really distinguishes
 	 that this is a vector not a point. Could also make a separate struct
-	 t_normvector or smth (which would however have the exact same content, i.e.
+	 t_vector or smth (which would however have the exact same content, i.e.
 	 3 doubles).
 	 */ 
-	t_normvector	orientation_vector; // range -1 to 1
+	// t_vector	orientation_vector; // range -1 to 1
+	t_vector	orientation_vector; // range -1 to 1
+
 	t_color			color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_point			anchor;
-	t_normvector	orientation_vector; // range -1 to 1
+	t_vector			anchor;
+	t_vector	orientation_vector; // range -1 to 1
 	double			d;
 	double			h;
 	t_color			color;
