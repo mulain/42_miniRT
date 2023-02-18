@@ -18,7 +18,19 @@ typedef struct s_mlx
 	int		img_height;
 }	t_mlx;
 
-// General attribute structs for use across different objects
+typedef struct s_helper
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		intersect_1;
+	double		intersect_2;
+}	t_helper;
+
+/*
+Cartesian representation of a point in 3D Euclidean space.
+*/
 typedef struct s_point
 {
 	double		x;
@@ -27,9 +39,9 @@ typedef struct s_point
 }	t_point;
 
 /*
-is the same datastructure as a point, but has less range
-and is something factually different, so chose to give it 
-its own name.
+Cartesian representation of a vector in 3D Euclidean space.
+Not necessary to differentiate point from vector from a pure coding
+point of view, but it's cleaner for math purposes.
 */
 typedef struct s_vector
 {

@@ -44,6 +44,22 @@ double	intersect_plane(t_ray ray, t_plane plane)
 }
 
 /*
+if (discriminant < 0)
+	return (INFINITY);
+	-> no intersection
+if (discriminant == 0)
+	return (-b / (2 * a));
+	-> only one intersection point (tangent)
+if (intrsct2 < 0)
+	return (INFINITY);
+	-> sphere behind ray, no intersection
+if (intrsct1 >= 0)
+	return (intrsct1);
+	-> 2 intersections but we only want intrsct1
+	intrsct2 however is also valid (if ray passes thru sphere)
+return (intrsct2);
+	-> ray originates inside sphere if intrsct1 < 0, one intersection
+
 Sphere formula: square(||(p - c)||) = r * r
 	c = center of sphere
 	r = radius of sphere
@@ -54,29 +70,22 @@ Sphere formula: square(||(p - c)||) = r * r
 double	intersect_sphere(t_ray ray, t_sphere sphere)
 {
 	t_vector	t;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-	double		intrsct1;
-	double		intrsct2;
+	t_helper	h;
 
 	t = point_subtract(ray.point, sphere.point);
-	a = vector_dotprod(ray.vector, ray.vector);
-	b = 2 * vector_dotprod(ray.vector, t);
-	c = vector_dotprod(t, t) - sphere.radius * sphere.radius;
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
-		return (INFINITY); // no intersection
-	if (discriminant == 0)
-		return (-b / (2 * a)); //only one intersection point
-	intrsct1 = (-b - sqrt(discriminant)) / (2 * a);
-	intrsct2 = (-b + sqrt(discriminant)) / (2 * a);
-	if (intrsct2 < 0)
-		return (INFINITY); //sphere behind ray
-	if (intrsct1 >= 0)
-		return (intrsct1);
-		// 2 intersections but we only want intrsct1
-		// intrsct2 however is also valid (if ray passes thru sphere)
-	return (intrsct2); // ray originates inside sphere
+	h.a = vector_dotprod(ray.vector, ray.vector);
+	h.b = 2 * vector_dotprod(ray.vector, t);
+	h.c = vector_dotprod(t, t) - sphere.radius * sphere.radius;
+	h.discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (h.discriminant < 0)
+		return (INFINITY);
+	if (h.discriminant == 0)
+		return (-h.b / (2 * h.a));
+	h.intersect_1 = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
+	h.intersect_2 = (-h.b + sqrt(h.discriminant)) / (2 * h.a);
+	if (h.intersect_2 < 0)
+		return (INFINITY);
+	if (h.intersect_1 >= 0)
+		return (h.intersect_1);
+	return (h.intersect_2);
 }
