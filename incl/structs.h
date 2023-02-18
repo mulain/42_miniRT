@@ -40,7 +40,7 @@ typedef struct s_point
 
 /*
 Cartesian representation of a vector in 3D Euclidean space.
-Not necessary to differentiate point from vector from a pure coding
+Not necessary to differentiate point from vector from a coding
 point of view, but it's cleaner for math purposes.
 */
 typedef struct s_vector

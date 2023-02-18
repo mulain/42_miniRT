@@ -31,6 +31,10 @@ double		vector_length(t_vector v);
 double		vector_dotprod(t_vector v1, t_vector v2);
 t_vector	vector_crossprod(t_vector v1, t_vector v2);
 
+// hooks.c
+int			key_release(int key, t_data *d);
+int			event_windowdestroy(t_data *d);
+
 // main.c
 int			main(int argc, char **argv);
 void		get_infile(t_data *d, int argc, char **argv);

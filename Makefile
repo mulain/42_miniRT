@@ -11,18 +11,19 @@ ifeq ($(shell uname), Linux)
 	MLX			=	mlx/mlx_linux/libmlx.a
 	MLXFLAGS	=	$(MLX) -L/usr/lib -lXext -lX11
 	MLXCOMPILE	=	@make -C mlx/mlx_linux/
-	DEFINEFLAGS	=
+	DEFINEFLAGS	=	-DKEY_ESC=65307 
 else
 	OS			=	Mac
 	MLX			=	mlx/mlx_mac/libmlx.a
 	MLXFLAGS	=	$(MLX) -framework OpenGL -framework AppKit
 	MLXCOMPILE	=	@make -C mlx/mlx_mac/
-	DEFINEFLAGS	=
+	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
 SRCFILE	= 	calc_intersection.c\
 			calc_vector1.c\
 			calc_vector2.c\
+			hooks.c\
 			main.c\
 			objlist.c\
 			parsing_lightsandcam.c\
@@ -42,7 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@echo "$(BLUE)Compiling miniRT with $(OS)-flags.$(RESET)"
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) $(DEFINEFLAGS) -o $(NAME) $(LFLAGS) 
+	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) -o $(NAME) $(LFLAGS) 
 	@echo "$(BLUE)miniRT compiled.$(RESET)"
 
 $(LIBFT):
@@ -54,7 +55,7 @@ $(MLX):
 
 obj/%.o: src/%.c
 	@mkdir -p obj
-	$(CC) $(EFLAGS) -c $< -o $@
+	$(CC) $(EFLAGS) $(DEFINEFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ) obj

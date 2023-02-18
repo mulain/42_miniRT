@@ -9,24 +9,19 @@ void	testshit(t_data *d)
 	t_sphere	sphere;
 
 	(void)d;
-	
 	// ray
 	ray.point = (t_point){0, 0, 0};
 	ray.vector = (t_vector){0, 0, 1};
-	
 	// sphere
 	sphere.point = (t_point){0, 0, 0};
 	sphere.radius = 1;
 	test = intersect_sphere(ray, sphere);
 	printf("intersect sphere: %f\n", test);
-
-	
 	// plane
 	plane.point = (t_point){0, 1.0, 0};
 	plane.vector = (t_vector){0, 1, 0};
 	test = intersect_plane(ray, plane);
 	printf("intersect plane:%f\n", test);
-	
 	/*
 	// print the input file objects
 	print_ambientlight(d);
@@ -45,7 +40,11 @@ int	main(int argc, char **argv)
 	parsing(&data);
 	init_mlx(&data);
 	testshit(&data);
+	mlx_key_hook(data.mlx.win, key_release, &data);
+	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
+	mlx_loop(data.mlx.mlx);
 	free_all(&data);
+	return (0);
 }
 
 void	get_infile(t_data *d, int argc, char **argv)
@@ -87,10 +86,13 @@ void	init_structs(t_data *d)
 
 void	init_mlx(t_data *d)
 {
-	d->mlx.mlx = mlx_init();
-	d->mlx.win = mlx_new_window(d->mlx.mlx, d->mlx.img_width, d->mlx.img_height, "miniRT");
-	d->mlx.img = mlx_new_image(d->mlx.mlx, d->mlx.img_width, d->mlx.img_height);
-	d->mlx.img_addr = mlx_get_data_addr(d->mlx.img, &d->mlx.img_bpp, &d->mlx.img_line_length,
-			&d->mlx.img_endian);
-	d->mlx.img_bytespp = d->mlx.img_bpp / 8;
+	t_mlx		*m;
+
+	m = &d->mlx;
+	m->mlx = mlx_init();
+	m->win = mlx_new_window(m->mlx, m->img_width, m->img_height, "miniRT");
+	m->img = mlx_new_image(m->mlx, m->img_width, m->img_height);
+	m->img_addr = mlx_get_data_addr(m->img, &m->img_bpp, &m->img_line_length,
+			&m->img_endian);
+	m->img_bytespp = m->img_bpp / 8;
 }

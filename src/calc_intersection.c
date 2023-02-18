@@ -65,7 +65,8 @@ Sphere formula: square(||(p - c)||) = r * r
 	r = radius of sphere
 	p = point on sphere
 	||x|| means length/magnitude of the vector x
-
+insert ray formula for point p and solve for t to get a
+quadratic equation. Solve that to get the discriminants above.
 */
 double	intersect_sphere(t_ray ray, t_sphere sphere)
 {
