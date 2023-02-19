@@ -42,7 +42,7 @@ RESET	=	\033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@echo "$(BLUE)Compiling miniRT with $(OS)-flags.$(RESET)"
+	@echo "$(BLUE)Compiling $(NAME) with $(OS)-flags.$(RESET)"
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) -o $(NAME) $(LFLAGS) 
 	@echo "$(BLUE)miniRT compiled.$(RESET)"
 
@@ -63,6 +63,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
+	@echo "$(BLUE)fclean performed."
 
 re: fclean all
 

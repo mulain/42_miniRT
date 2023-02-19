@@ -8,7 +8,7 @@
 # include <math.h>
 # include <stdbool.h>
 
-# include "mlx.h"
+# include MLX_H_PATH
 # include "../libft/include/libft.h"
 # include "structs.h"
 # include "objlist.h"
