@@ -50,7 +50,7 @@ $(LIBFT):
 	@make --no-print-directory -C libft/
 
 $(MLX):
-	@echo "$(BLUE)Compiling mlx with $(OS)-flags.$(RESET)"
+	@echo "$(BLUE)Compiling mlx for $(OS).$(RESET)"
 	$(MLXCOMPILE)
 
 obj/%.o: src/%.c
