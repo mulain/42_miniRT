@@ -19,7 +19,7 @@ Max range is from -1 to 1 = 2.
 Points should therefore map to a range of 2 with values from -1 to 1.
 To map the pixels to range of 2: take the normal percentage (value / maxvalue)
 and multiply by 2.
-To adjust that range (0 to 2) to range (-1 to 1) -> subtract 1. 
+To adjust that range from (0 to 2) to a range from (-1 to 1) -> subtract 1. 
 */
 t_point	pixel_to_point(t_data *d, int x, int y)
 {
