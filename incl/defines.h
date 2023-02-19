@@ -2,7 +2,9 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-// Math
+// Settings
+# define IMG_WIDTH		1920
+# define IMG_HEIGHT		1080
 # define EPSILON		0.00001
 
 // Error messages
@@ -14,7 +16,7 @@
 # define E_MALLOC		"Malloc error.\n"
 
 # define E_INVALOBJID	"Invalid object identifier.\n"
-# define E_MANDATORY	"Camera (C) and Light (L) must both be declared.\n"
+# define E_MANDATORY	"Camera (C) and Light (L) must both be defined.\n"
 
 # define E_AMBLIGHTDEF	"Ambient light (A): may only be defined once.\n"
 # define E_AMBLIGHT1	"Ambient light (A): invalid first argument.\n"

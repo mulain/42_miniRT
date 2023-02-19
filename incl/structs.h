@@ -134,6 +134,9 @@ typedef struct s_data
 	t_light			light;
 	t_objlist		*objectlist;
 	t_parsing		parse;
+	int				width;
+	int				height;
+	float			aspect_ratio;
 }	t_data;
 
 #endif
