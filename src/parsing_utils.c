@@ -1,5 +1,5 @@
 
-#include "../incl/minirt.h"
+#include "minirt.h"
 
 /*
 Will not test range if min == max.

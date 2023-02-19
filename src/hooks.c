@@ -1,5 +1,5 @@
 
-#include "../incl/minirt.h"
+#include "minirt.h"
 
 int	key_release(int key, t_data *d)
 {

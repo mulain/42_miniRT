@@ -1,5 +1,5 @@
 
-#include "../incl/minirt.h"
+#include "minirt.h"
 
 void	parsing(t_data *d)
 {

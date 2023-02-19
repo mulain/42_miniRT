@@ -1,10 +1,13 @@
 
-#include "../incl/minirt.h"
+#include "minirt.h"
 
 void	error_exit(t_data *d, char *msg)
 {
+	int		discard;
+
 	free_all(d);
-	write(2, msg, ft_strlen(msg));
+	discard = write(2, msg, ft_strlen(msg));
+	(void)discard;
 	exit(1);
 }
 

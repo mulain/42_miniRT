@@ -1,5 +1,5 @@
 
-#include "../incl/minirt.h"
+#include "minirt.h"
 
 t_vector	point_add(t_point p1, t_point p2)
 {

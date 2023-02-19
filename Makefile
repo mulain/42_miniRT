@@ -1,7 +1,7 @@
 NAME	=	miniRT
 CC		=	gcc
 RM		=	rm -rf
-CFLAGS	=	-g -o3
+CFLAGS	=	-g -O3 -Iincl
 EFLAGS	=	-Wall -Wextra -Werror
 LFLAGS	=	-lm $(LIBFT) $(MLXFLAGS)
 LIBFT	= 	libft/libft.a
@@ -42,9 +42,8 @@ RESET	=	\033[0m
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@echo "$(BLUE)Compiling $(NAME) with $(OS)-flags.$(RESET)"
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) -o $(NAME) $(LFLAGS) 
-	@echo "$(BLUE)$(NAME) compiled.$(RESET)"
+	@echo "$(BLUE)$(NAME) compiled with $(OS)-flags.$(RESET)"
 
 $(LIBFT):
 	@make --no-print-directory -C libft/
@@ -55,7 +54,7 @@ $(MLX):
 
 obj/%.o: src/%.c
 	@mkdir -p obj
-	$(CC) $(EFLAGS) $(DEFINEFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(EFLAGS) $(DEFINEFLAGS) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ) obj

@@ -1,5 +1,5 @@
 
-#include "../incl/minirt.h"
+#include "minirt.h"
 
 /*
 The length (or magnitude) of a vector is the square root of the dot product
