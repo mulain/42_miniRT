@@ -55,6 +55,8 @@ void	parse_line(t_data *d, char *line)
 		parse_light(d, elements);
 	else if (!ft_strncmp(elements[0], "sp", 3))
 		parse_sphere(d, elements);
+	else if (!ft_strncmp(elements[0], "pl", 3))
+		parse_plane(d, elements);
 /*
 	else if (line[0] == 'c' && line[1] == 'y')
 

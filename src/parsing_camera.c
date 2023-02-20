@@ -44,7 +44,7 @@ void	set_camera_viewpoint(t_data *d, char **elements)
 	i = 0;
 	while (subelements[i])
 		i++;
-	if (i < 2 || !set_tpoint(&d->camera.viewpoint, subelements))
+	if (i < 2 || !set_tpoint(&d->camera.org, subelements))
 	{
 		free_2d_char(elements);
 		free_2d_char(subelements);
@@ -88,7 +88,7 @@ void	set_camera_fieldofview(t_data *d, char **elements)
 		free_2d_char(elements);
 		exit_free(d, E_CAMERA3);
 	}
-	if (!set_int(&d->camera.fieldofview, elements[3], 0, 180))
+	if (!set_int(&d->camera.fov, elements[3], 0, 180))
 	{
 		free_2d_char(elements);
 		exit_free(d, E_CAMERA3);

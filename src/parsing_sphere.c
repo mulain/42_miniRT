@@ -8,6 +8,7 @@ sp 0.0,0.0,20.6 12.6 10,0,255
 ∗ the sphere diameter: 12.6 (-> elements[2])
 ∗ R,G,B colors in range [0-255]: 10, 0, 255 (-> elements[3])
 */
+
 void	parse_sphere(t_data *d, char **elements)
 {
 	t_sphere	*sphere;
