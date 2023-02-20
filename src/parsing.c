@@ -31,7 +31,8 @@ char	*gnl_trimmed(int fd)
 
 void	parse_line(t_data *d, char *line)
 {
-	d->parse.elmnts = ft_split(line, ' ');
+	d->parse.elmnts = split_multichar(line, " \t");
+	//d->parse.elmnts = ft_split(line, ' ');
 	free(line);
 	if (!ft_strncmp(d->parse.elmnts[0], "A", 2))
 		parse_ambientlight(d);
