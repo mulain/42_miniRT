@@ -12,10 +12,10 @@ Plane formula:
 	(p' - p) * n = 0
 	Where
 		p' is the evaluated point
-		p is the point point of the plane
+		p is the point of the plane
 		n is the defining vector of the plane
 	Means that the vector connecting p and the evaluated point p'
-	is orthogonal to the plane's normvector.
+	is orthogonal to the plane's normvector and therefore in the plane.
 Integrate ray into plane formula instead of p':
 	(r(t) - p) * n = 0
 	((o + t * d) - p) * n = 0
@@ -27,10 +27,14 @@ Solve for t:
 	t = (pn - on) / (dn)
 	or
 	t = [(p - o) * n] / [d * n] -> used in the function
-cases
-1 - if dividend is smaller than EPSILON: Ray starts in plane -> immediate intersection
-2 - if divisor is smaller than EPSILON: ray is parallel to plane and has no intersection (return INFINITY),
-3 - if result is negative: intersection point is behind ray -> no intersection -> return INFINITY
+Cases
+1)	If dividend is smaller than EPSILON:
+	Ray starts in plane -> immediate intersection (return 0)
+2)	If divisor is smaller than EPSILON:
+	Ray is parallel to plane -> no intersection (return INFINITY)
+3)	If result is negative:
+	Intersection point is behind ray -> no intersection (return INFINITY)
+4)	Intersection found -> one intersection (return dividend / divisor)
 */
 double	intersect_plane(t_ray ray, t_plane plane)
 {
@@ -52,7 +56,7 @@ double	intersect_plane(t_ray ray, t_plane plane)
 }
 
 /*
-Sphere formula: square(||(p - c)||) = r * r
+Sphere formula: ||(p - c)||² = r²
 	c = center of sphere
 	r = radius of sphere
 	p = point on sphere
