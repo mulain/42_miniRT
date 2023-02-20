@@ -6,12 +6,11 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:25:14 by wmardin           #+#    #+#             */
-/*   Updated: 2023/02/20 13:35:35 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/02/20 13:41:24 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 /*
 Works like ft_split, but takes a string as an argument and splits
