@@ -1,6 +1,9 @@
+#ackchual files
 *.o
 *.a
-test.c
-a.out
 /obj
 minirt
+
+#retardation files
+shmest.c
+a.out
