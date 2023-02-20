@@ -1,14 +1,6 @@
 
 #include "minirt.h"
 
-/*
-Sphere:
-sp 0.0,0.0,20.6 12.6 10,0,255
-∗ identifier: sp (-> elements[0])
-∗ x,y,z point of the sphere point: 0.0,0.0,20.6 (-> elements[1])
-∗ the sphere diameter: 12.6 (-> elements[2])
-∗ R,G,B colors in range [0-255]: 10, 0, 255 (-> elements[3])
-*/
 void	parse_sphere(t_data *d)
 {
 	t_sphere	*sphere;
@@ -24,15 +16,6 @@ void	parse_sphere(t_data *d)
 	sphere->color = parse_tcolor(d, d->parse.elmnts[3], E_SPHERE3);
 }
 
-/*
-Plane:
-pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
-∗ identifier: pl (-> elements[0])
-∗ x,y,z point: 0.0,0.0,-10.0 (-> elements[1])
-∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis:
-0.0,0.0,1.0 (-> elements[2])
-∗ R,G,B colors in range [0-255]: 0, 0, 255 (-> elements[3])
-*/
 void	parse_plane(t_data *d)
 {
 	t_plane		*plane;
@@ -46,17 +29,6 @@ void	parse_plane(t_data *d)
 	plane->color = parse_tcolor(d, d->parse.elmnts[3], E_PLANE3);
 }
 
-/*
-Cylinder:
-cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
-∗ identifier: cy (-> elements[0])
-∗ x,y,z point: 50.0,0.0,20.6 (-> elements[1])
-∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis:
-0.0,0.0,1.0 (-> elements[2])
-∗ the cylinder diameter: 14.2 (-> elements[3])
-∗ the cylinder height: 21.42 (-> elements[4])
-∗ R,G,B colors in range [0,255]: 10, 0, 255 (-> elements[5])
-*/
 void	parse_cylinder(t_data *d)
 {
 	t_cylinder	*cylinder;

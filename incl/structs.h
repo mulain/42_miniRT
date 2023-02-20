@@ -19,6 +19,7 @@ typedef struct s_mlx
 	bool	initialized;
 }	t_mlx;
 
+// Helper for parsing objects that need more variables than norm allows
 typedef struct s_helper
 {
 	double		a;
@@ -29,9 +30,7 @@ typedef struct s_helper
 	double		intersect_2;
 }	t_helper;
 
-/*
-Cartesian representation of a vector or point in 3D Euclidean space.
-*/
+// Cartesian representation of a vector or point in 3D Euclidean space.
 typedef struct s_vector
 {
 	double		x;
@@ -41,7 +40,7 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
-	t_vector		point;
+	t_vector	point;
 	t_vector	vector;
 }	t_ray;
 
@@ -111,9 +110,7 @@ typedef struct s_parsing
 // Forward declaration
 typedef struct s_objlist	t_objlist;
 
-/*
-The main struct.
-*/
+// The main struct
 typedef struct s_data
 {
 	t_mlx			mlx;
