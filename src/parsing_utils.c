@@ -4,30 +4,31 @@
 /*
 Will not test range if min == max.
 */
-void	parse_double(t_data *d, double *target, int index, char *msg)
+double	parse_double(t_data *d, char *input, char *msg)
 {
-	char	*input;
+	double		value;
 
-	input = d->parse.elmnts[index];
 	if (!input || !is_decimalformat(input))
 		error_exit(d, msg);
-	*target = conv_strtod(input);
+	value = conv_strtod(input);
 	if (d->parse.min == d->parse.max)
-		return ;
-	if (*target < d->parse.min || *target > d->parse.max)
+		return (value);
+	if (value < d->parse.min || value > d->parse.max)
 		error_exit(d, msg);
+	return (value);
 }
 
-void	parse_tcolor(t_data *d, t_color *color, int index, char *msg)
+t_color	parse_tcolor(t_data *d, char *input, char *msg)
 {
-	int		i;
-	char	**split;
+	int			i;
+	char		**split;
+	t_color		color;
 
-	if (!d->parse.elmnts[index])
+	if (!input)
 		error_exit(d, msg);
-	d->parse.subelmnts = ft_split(d->parse.elmnts[index], ',');
+	d->parse.subelmnts = split_multichar(input, ",");
 	split = d->parse.subelmnts;
-	if (count_subelements(split) < 3)
+	if (count_subelements(split) != 3)
 		error_exit(d, msg);
 	i = 0;
 	while (i < 3)
@@ -36,21 +37,23 @@ void	parse_tcolor(t_data *d, t_color *color, int index, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	*color = (t_color){ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2])};
+	color = (t_color){ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
+	return (color);
 }
 
-void	parse_tpoint(t_data *d, t_vector *point, int index, char *msg)
+t_vector	parse_tpoint(t_data *d, char *input, char *msg)
 {
-	int		i;
-	char	**split;
+	int			i;
+	char		**split;
+	t_vector	point;
 
-	if (!d->parse.elmnts[index])
+	if (!input)
 		error_exit(d, msg);
-	d->parse.subelmnts = ft_split(d->parse.elmnts[index], ',');
+	d->parse.subelmnts = split_multichar(input, ",");
 	split = d->parse.subelmnts;
-	if (count_subelements(split) < 3)
+	if (count_subelements(split) != 3)
 		error_exit(d, msg);
 	i = 0;
 	while (i < 3)
@@ -59,22 +62,24 @@ void	parse_tpoint(t_data *d, t_vector *point, int index, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	*point = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
+	point = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
 		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
+	return (point);
 }
 
-void	parse_tvector(t_data *d, t_vector *vec, int index, char *msg)
+t_vector	parse_tvector(t_data *d, char *input, char *msg)
 {
-	int		i;
-	char	**split;
+	int			i;
+	char		**split;
+	t_vector	vector;
 
-	if (!d->parse.elmnts[index])
+	if (!input)
 		error_exit(d, msg);
-	d->parse.subelmnts = ft_split(d->parse.elmnts[index], ',');
+	d->parse.subelmnts = ft_split(input, ',');
 	split = d->parse.subelmnts;
-	if (count_subelements(split) < 3)
+	if (count_subelements(split) != 3)
 		error_exit(d, msg);
 	i = 0;
 	while (i < 3)
@@ -83,25 +88,26 @@ void	parse_tvector(t_data *d, t_vector *vec, int index, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	*vec = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
+	vector = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
 		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
-	if (vec->x < -1.0 || vec->x > 1.0 || vec->y < -1.0 || vec->y > 1.0
-		|| vec->z < -1.0 || vec->z > 1.0)
+	if (vector.x < -1.0 || vector.x > 1.0 || vector.y < -1.0 || vector.y > 1.0
+		|| vector.z < -1.0 || vector.z > 1.0)
 		error_exit(d, msg);
+	return (vector_normalize(vector));
 }
 
-void	parse_int(t_data *d, int *target, int index, char *msg)
+int	parse_int(t_data *d, char *input, char *msg)
 {
-	char	*input;
+	char	value;
 
-	input = d->parse.elmnts[index];
 	if (!input || !is_onlydigits(input))
 		error_exit(d, msg);
-	*target = ft_atoi(input);
+	value = ft_atoi(input);
 	if (d->parse.min == d->parse.max)
-		return ;
-	if (*target < (int)d->parse.min || *target > (int)d->parse.max)
+		return (value);
+	if (value < (int)d->parse.min || value > (int)d->parse.max)
 		error_exit(d, msg);
+	return (value);
 }

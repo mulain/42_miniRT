@@ -27,11 +27,16 @@ Solve for t:
 	t = (pn - on) / (dn)
 	or
 	t = [(p - o) * n] / [d * n] -> used in the function
+cases
+1 - if dividend is smaller than EPSILON: Ray starts in plane -> immediate intersection
+2 - if divisor is smaller than EPSILON: ray is parallel to plane and has no intersection (return INFINITY),
+3 - if result is negative: intersection point is behind ray -> no intersection -> return INFINITY
 */
 double	intersect_plane(t_ray ray, t_plane plane)
 {
 	double		dividend;
 	double		divisor;
+	double		result;
 
 	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
 			plane.vector);
@@ -40,10 +45,21 @@ double	intersect_plane(t_ray ray, t_plane plane)
 	divisor = vector_dotprod(plane.vector, ray.vector);
 	if (fabs(divisor) < EPSILON)
 		return (INFINITY);
-	return (dividend / divisor);
+	result = dividend / divisor;
+	if (result < 0)
+		return (INFINITY);
+	return (result);
 }
 
 /*
+Sphere formula: square(||(p - c)||) = r * r
+	c = center of sphere
+	r = radius of sphere
+	p = point on sphere
+	||x|| means length/magnitude of the vector x
+insert ray formula for point p and solve for t to get a
+quadratic equation. Solve that to get the discriminants:
+
 if (discriminant < 0)
 	return (INFINITY);
 	-> no intersection
@@ -59,14 +75,6 @@ if (intrsct1 >= 0)
 	intrsct2 however is also valid (if ray passes thru sphere)
 return (intrsct2);
 	-> ray originates inside sphere if intrsct1 < 0, one intersection
-
-Sphere formula: square(||(p - c)||) = r * r
-	c = center of sphere
-	r = radius of sphere
-	p = point on sphere
-	||x|| means length/magnitude of the vector x
-insert ray formula for point p and solve for t to get a
-quadratic equation. Solve that to get the discriminants above.
 */
 double	intersect_sphere(t_ray ray, t_sphere sphere)
 {
@@ -89,4 +97,11 @@ double	intersect_sphere(t_ray ray, t_sphere sphere)
 	if (h.intersect_1 >= 0)
 		return (h.intersect_1);
 	return (h.intersect_2);
+}
+
+double	intersect_cylinder(t_ray ray, t_cylinder cylinder)
+{
+	(void)ray;
+	(void)cylinder;
+	return (INFINITY);
 }

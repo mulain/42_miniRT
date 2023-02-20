@@ -43,14 +43,14 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJ) -o $(NAME) $(LFLAGS) 
-	@echo "$(BLUE)$(NAME) compiled with $(OS)-flags.$(RESET)"
+	@echo "$(BLUE)$(NAME) compiled for $(OS).$(RESET)"
 
 $(LIBFT):
 	@make --no-print-directory -C libft/
 
 $(MLX):
-	@echo "$(BLUE)Compiling mlx for $(OS).$(RESET)"
 	$(MLXCOMPILE)
+	@echo "$(BLUE)MLX compiled for $(OS).$(RESET)"
 
 obj/%.o: src/%.c
 	@mkdir -p obj

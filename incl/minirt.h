@@ -30,6 +30,7 @@ t_vector	vector_divide(t_vector v, double div);
 double		vector_length(t_vector v);
 double		vector_dotprod(t_vector v1, t_vector v2);
 t_vector	vector_crossprod(t_vector v1, t_vector v2);
+t_vector	vector_normalize(t_vector v);
 
 // hooks.c
 int			key_release(int key, t_data *d);
@@ -57,11 +58,11 @@ void		parse_plane(t_data *d);
 void		parse_cylinder(t_data *d);
 
 // parsing_utils.c
-void		parse_double(t_data *d, double *target, int index, char *msg);
-void		parse_tcolor(t_data *d, t_color *color, int index, char *msg);
-void		parse_tpoint(t_data *d, t_vector *point, int index, char *msg);
-void		parse_tvector(t_data *d, t_vector *vec, int index, char *msg);
-void		parse_int(t_data *d, int *target, int index, char *msg);
+double		parse_double(t_data *d, char *input, char *msg);
+t_color		parse_tcolor(t_data *d, char *input, char *msg);
+t_vector	parse_tpoint(t_data *d, char *input, char *msg);
+t_vector	parse_tvector(t_data *d, char *input, char *msg);
+int			parse_int(t_data *d, char *input, char *msg);
 
 // utils_print1.c
 void		print_objlist(t_objlist *lst);

@@ -17,12 +17,11 @@ void	parse_sphere(t_data *d)
 	if (!sphere)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(sphere, sp));
-	parse_tpoint(d, &sphere->point, 1, E_SPHERE1);
+	sphere->point = parse_tpoint(d, d->parse.elmnts[1], E_SPHERE1);
 	d->parse.min = 0;
 	d->parse.max = 0;
-	parse_double(d, &sphere->radius, 2, E_SPHERE2);
-	sphere->radius *= 0.5;
-	parse_tcolor(d, &sphere->color, 3, E_SPHERE3);
+	sphere->radius = 0.5 * parse_double(d, d->parse.elmnts[2], E_SPHERE2);
+	sphere->color = parse_tcolor(d, d->parse.elmnts[3], E_SPHERE3);
 }
 
 /*
@@ -42,9 +41,9 @@ void	parse_plane(t_data *d)
 	if (!plane)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(plane, pl));
-	parse_tpoint(d, &plane->point, 1, E_PLANE1);
-	parse_tvector(d, &plane->vector, 2, E_PLANE2);
-	parse_tcolor(d, &plane->color, 3, E_PLANE3);
+	plane->point = parse_tpoint(d, d->parse.elmnts[1], E_PLANE1);
+	plane->vector = parse_tvector(d, d->parse.elmnts[2], E_PLANE2);
+	plane->color = parse_tcolor(d, d->parse.elmnts[3], E_PLANE3);
 }
 
 /*
@@ -66,11 +65,11 @@ void	parse_cylinder(t_data *d)
 	if (!cylinder)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(cylinder, cy));
-	parse_tpoint(d, &cylinder->point, 1, E_CYLINDER1);
-	parse_tvector(d, &cylinder->vector, 2, E_CYLINDER2);
+	cylinder->point = parse_tpoint(d, d->parse.elmnts[1], E_CYLINDER1);
+	cylinder->vector = parse_tvector(d, d->parse.elmnts[2], E_CYLINDER2);
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
-	parse_double(d, &cylinder->diameter, 3, E_CYLINDER3);
-	parse_double(d, &cylinder->height, 4, E_CYLINDER4);
-	parse_tcolor(d, &cylinder->color, 5, E_CYLINDER5);
+	cylinder->diameter = parse_double(d, d->parse.elmnts[3], E_CYLINDER3);
+	cylinder->height = parse_double(d, d->parse.elmnts[4], E_CYLINDER4);
+	cylinder->color = parse_tcolor(d, d->parse.elmnts[5], E_CYLINDER5);
 }

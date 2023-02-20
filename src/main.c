@@ -67,8 +67,8 @@ void	init_structs(t_data *d)
 {
 	d->width = IMG_WIDTH;
 	d->height = IMG_HEIGHT;
+	d->aspect_ratio = d->width / d->height;
 	d->mlx.initialized = false;
-	d->aspect_ratio = d->mlx.img_width / d->mlx.img_height;
 	d->amb_light.declared = false;
 	d->amb_light.brightness = 0.0;
 	d->amb_light.color = (t_color){0, 0, 0};
