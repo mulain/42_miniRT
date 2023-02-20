@@ -26,7 +26,7 @@ t_point	pixel_to_point(t_data *d, int x, int y)
 	t_point		point;
 
 	point.x = 2 * x / d->width - 1;
-	point.y = 2 * y / d->height - 1;
+	point.y = 2 * y / d->height - 1; //1 - not xyz - 1
 
 	forward vector = target - origin (normalized)
 	right vector = forward x upguide (might mirror if wrong way around)

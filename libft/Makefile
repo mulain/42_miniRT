@@ -6,7 +6,7 @@
 #    By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/26 13:39:51 by wmardin           #+#    #+#              #
-#    Updated: 2023/02/16 21:37:05 by wmardin          ###   ########.fr        #
+#    Updated: 2023/02/20 12:41:17 by wmardin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC =	$(addprefix $(PATH_ft_is)/, ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdi
 		$(addprefix $(PATH_ft_string)/, ft_atoi.c ft_itoa.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c	ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c)\
 		$(addprefix $(PATH_ft_gnl)/, get_next_line.c get_next_line_utils.c)\
 		$(addprefix $(PATH_ft_printf)/, ft_checkformat.c ft_printchar.c ft_printdecimal.c ft_printf.c ft_printfloat.c ft_printhex_lower.c ft_printhex_upper.c ft_printint.c ft_printpointer.c ft_printstring.c ft_printunsignedint.c)\
-		$(addprefix $(PATH_mulain)/, append_char.c append_string.c conv_strtod.c count_occurences.c count_subelements.c del_singlechar.c free_2d_char.c get_precedingnode.c is_decimalformat.c is_intsize.c is_numberformat.c is_onlydigits.c is_ucharformat.c is_whitespace.c print_list_str.c)
+		$(addprefix $(PATH_mulain)/, append_char.c append_string.c conv_strtod.c count_occurences.c count_subelements.c del_singlechar.c free_2d_char.c get_precedingnode.c is_decimalformat.c is_intsize.c is_numberformat.c is_onlydigits.c is_ucharformat.c is_whitespace.c print_list_str.c split_multichar.c)
 
 OBJ_DIR = obj
 OBJ	= $(addprefix $(OBJ_DIR)/,$(SRC:src/%.c=%.o))

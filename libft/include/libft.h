@@ -95,5 +95,6 @@ bool	is_onlydigits(char *input);
 bool	is_ucharformat(char *input);
 bool	is_whitespace(char c);
 void	print_list_str(t_list *list, char *title);
+char	**split_multichar(char const *s, char *splitters);
 
 #endif
