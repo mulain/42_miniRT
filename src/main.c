@@ -10,15 +10,15 @@ void	testshit(t_data *d)
 
 	(void)d;
 	// ray
-	ray.point = (t_point){0, 0, 0};
+	ray.point = (t_vector){0, 0, 0};
 	ray.vector = (t_vector){0, 0, 1};
 	// sphere
-	sphere.point = (t_point){0, 0, 0};
+	sphere.point = (t_vector){0, 0, 0};
 	sphere.radius = 1;
 	test = intersect_sphere(ray, sphere);
 	printf("intersect sphere: %f\n", test);
 	// plane
-	plane.point = (t_point){0, 1.0, 0};
+	plane.point = (t_vector){0, 1.0, 0};
 	plane.vector = (t_vector){0, 1, 0};
 	test = intersect_plane(ray, plane);
 	printf("intersect plane:%f\n", test);
@@ -75,11 +75,11 @@ void	init_structs(t_data *d)
 	d->camera.declared = false;
 	d->camera.fieldofview = 0;
 	d->camera.vector = (t_vector){0, 0, 0};
-	d->camera.point = (t_point){0, 0, 0};
+	d->camera.point = (t_vector){0, 0, 0};
 	d->light.declared = false;
 	d->light.brightness = 0.0;
 	d->light.color = (t_color){0, 0, 0};
-	d->light.point = (t_point){0, 0, 0};
+	d->light.point = (t_vector){0, 0, 0};
 	d->objectlist = NULL;
 	d->parse.fd = -1;
 	d->parse.elmnts = NULL;

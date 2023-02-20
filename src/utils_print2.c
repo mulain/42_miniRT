@@ -54,17 +54,6 @@ void	print_cylinder(t_cylinder *cy)
 	printf("  b: %i\n", cy->color.b);
 }
 
-void	print_point(t_point p, char *name)
-{
-	if (name)
-		printf("Name: %s\n", name);
-	else
-		printf("Point:\n");
-	printf("  x: %f\n", p.x);
-	printf("  y: %f\n", p.y);
-	printf("  z: %f\n", p.z);
-}
-
 void	print_vector(t_vector v, char *name)
 {
 	if (name)

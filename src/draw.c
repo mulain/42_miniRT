@@ -21,9 +21,9 @@ To map the pixels to range of 2: take the normal percentage (value / maxvalue)
 and multiply by 2.
 To adjust that range from (0 to 2) to a range from (-1 to 1) -> subtract 1. 
 */
-t_point	pixel_to_point(t_data *d, int x, int y)
+t_vector	pixel_to_point(t_data *d, int x, int y)
 {
-	t_point		point;
+	t_vector		point;
 
 	point.x = 2 * x / d->width - 1;
 	point.y = 2 * y / d->height - 1; //1 - not xyz - 1

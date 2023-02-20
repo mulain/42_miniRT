@@ -20,9 +20,9 @@ double		intersect_sphere(t_ray ray, t_sphere sphere);
 double		intersect_cylinder(t_ray ray, t_cylinder cylinder);
 
 // calc_vector1.c
-t_vector	point_add(t_point p1, t_point p2);
-t_vector	point_subtract(t_point p1, t_point p2);
-double		point_distance(t_point p1, t_point p2);
+t_vector	point_add(t_vector p1, t_vector p2);
+t_vector	point_subtract(t_vector p1, t_vector p2);
+double		point_distance(t_vector p1, t_vector p2);
 t_vector	vector_multiply(t_vector v, double mult);
 t_vector	vector_divide(t_vector v, double div);
 
@@ -59,7 +59,7 @@ void		parse_cylinder(t_data *d);
 // parsing_utils.c
 void		parse_double(t_data *d, double *target, int index, char *msg);
 void		parse_tcolor(t_data *d, t_color *color, int index, char *msg);
-void		parse_tpoint(t_data *d, t_point *point, int index, char *msg);
+void		parse_tpoint(t_data *d, t_vector *point, int index, char *msg);
 void		parse_tvector(t_data *d, t_vector *vec, int index, char *msg);
 void		parse_int(t_data *d, int *target, int index, char *msg);
 
@@ -73,7 +73,7 @@ void		print_light(t_data *d);
 void		print_sphere(t_sphere *sp);
 void		print_plane(t_plane *pl);
 void		print_cylinder(t_cylinder *cy);
-void		print_point(t_point p, char *name);
+void		print_vector(t_vector p, char *name);
 void		print_vector(t_vector v, char *name);
 
 // shutdown.c

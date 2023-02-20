@@ -41,7 +41,7 @@ void	parse_tcolor(t_data *d, t_color *color, int index, char *msg)
 	d->parse.subelmnts = NULL;
 }
 
-void	parse_tpoint(t_data *d, t_point *point, int index, char *msg)
+void	parse_tpoint(t_data *d, t_vector *point, int index, char *msg)
 {
 	int		i;
 	char	**split;
@@ -59,7 +59,7 @@ void	parse_tpoint(t_data *d, t_point *point, int index, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	*point = (t_point){conv_strtod(split[0]), conv_strtod(split[1]),
+	*point = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
 		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
@@ -88,8 +88,7 @@ void	parse_tvector(t_data *d, t_vector *vec, int index, char *msg)
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
 	if (vec->x < -1.0 || vec->x > 1.0 || vec->y < -1.0 || vec->y > 1.0
-		|| vec->z < -1.0 || vec->z > 1.0
-		|| vector_length(*vec) != 1.0)
+		|| vec->z < -1.0 || vec->z > 1.0)
 		error_exit(d, msg);
 }
 

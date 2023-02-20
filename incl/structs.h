@@ -30,19 +30,7 @@ typedef struct s_helper
 }	t_helper;
 
 /*
-Cartesian representation of a point in 3D Euclidean space.
-*/
-typedef struct s_point
-{
-	double		x;
-	double		y;
-	double		z;
-}	t_point;
-
-/*
-Cartesian representation of a vector in 3D Euclidean space.
-Not necessary to differentiate point from vector from a coding
-point of view, but it's cleaner for math purposes.
+Cartesian representation of a vector or point in 3D Euclidean space.
 */
 typedef struct s_vector
 {
@@ -53,7 +41,7 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
-	t_point		point;
+	t_vector		point;
 	t_vector	vector;
 }	t_ray;
 
@@ -66,7 +54,7 @@ typedef struct s_color
 
 typedef struct s_light
 {
-	t_point		point;
+	t_vector	point;
 	double		brightness;
 	t_color		color;
 	bool		declared;
@@ -74,7 +62,7 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-	t_point		point;
+	t_vector	point;
 	t_vector	vector;
 	int			fieldofview;
 	bool		declared;
@@ -89,21 +77,21 @@ typedef struct s_ambientlight
 
 typedef struct s_sphere
 {
-	t_point		point;
+	t_vector	point;
 	t_color		color;
 	double		radius;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_point		point;
+	t_vector	point;
 	t_vector	vector;
 	t_color		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_point		point;
+	t_vector	point;
 	t_vector	vector;
 	double		diameter;
 	double		height;

@@ -1,17 +1,17 @@
 
 #include "minirt.h"
 
-t_vector	point_add(t_point p1, t_point p2)
+t_vector	point_add(t_vector p1, t_vector p2)
 {
 	return ((t_vector){p1.x + p2.x, p1.y + p2.y, p1.z + p2.z});
 }
 
-t_vector	point_subtract(t_point p1, t_point p2)
+t_vector	point_subtract(t_vector p1, t_vector p2)
 {
 	return ((t_vector){p1.x - p2.x, p1.y - p2.y, p1.z - p2.z});
 }
 
-double	point_distance(t_point p1, t_point p2)
+double	point_distance(t_vector p1, t_vector p2)
 {
 	double	delta_x;
 	double	delta_y;
