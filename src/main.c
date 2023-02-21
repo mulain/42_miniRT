@@ -7,11 +7,12 @@ void	testshit(t_data *d)
 	t_ray		ray;
 	t_plane		plane;
 	t_sphere	sphere;
+	t_cylinder	cylinder;
 
 	(void)d;
 	// ray
 	ray.point = (t_vector){0, 0, 0};
-	ray.vector = (t_vector){0, 0, 1};
+	ray.vector = (t_vector){0, 1, 100};
 	// sphere
 	sphere.point = (t_vector){0, 0, 0};
 	sphere.radius = 1;
@@ -22,6 +23,12 @@ void	testshit(t_data *d)
 	plane.vector = (t_vector){0, 1, 0};
 	test = intersect_plane(ray, plane);
 	printf("intersect plane:%f\n", test);
+	cylinder.point = (t_vector){0, 1, 0};
+	cylinder.vector = (t_vector){0, 1, 0};
+	cylinder.radius = 1;
+	cylinder.height = 1;
+	test = intersect_cylinder(ray, cylinder);
+	printf("intersect cylinder:%f\n", test);
 	/*
 	// print the input file objects
 	print_ambientlight(d);
@@ -42,7 +49,7 @@ int	main(int argc, char **argv)
 	testshit(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
-	mlx_loop(data.mlx.mlx);
+	//mlx_loop(data.mlx.mlx);
 	free_all(&data);
 	return (0);
 }

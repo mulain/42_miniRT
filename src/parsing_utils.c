@@ -26,7 +26,7 @@ t_color	parse_tcolor(t_data *d, char *input, char *msg)
 
 	if (!input)
 		error_exit(d, msg);
-	d->parse.subelmnts = split_multichar(input, ",");
+	d->parse.subelmnts = ft_split(input, ',');
 	split = d->parse.subelmnts;
 	if (count_subelements(split) != 3)
 		error_exit(d, msg);
@@ -51,7 +51,7 @@ t_vector	parse_tpoint(t_data *d, char *input, char *msg)
 
 	if (!input)
 		error_exit(d, msg);
-	d->parse.subelmnts = split_multichar(input, ",");
+	d->parse.subelmnts = ft_split(input, ',');
 	split = d->parse.subelmnts;
 	if (count_subelements(split) != 3)
 		error_exit(d, msg);

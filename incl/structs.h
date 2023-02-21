@@ -92,7 +92,7 @@ typedef struct s_cylinder
 {
 	t_vector	point;
 	t_vector	vector;
-	double		diameter;
+	double		radius;
 	double		height;
 	t_color		color;
 }	t_cylinder;

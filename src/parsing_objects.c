@@ -41,7 +41,7 @@ void	parse_cylinder(t_data *d)
 	cylinder->vector = parse_tvector(d, d->parse.elmnts[2], E_CYLINDER2);
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
-	cylinder->diameter = parse_double(d, d->parse.elmnts[3], E_CYLINDER3);
+	cylinder->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CYLINDER3);
 	cylinder->height = parse_double(d, d->parse.elmnts[4], E_CYLINDER4);
 	cylinder->color = parse_tcolor(d, d->parse.elmnts[5], E_CYLINDER5);
 }
