@@ -68,3 +68,66 @@ int main() {
     }
     return 0;
 }
+
+
+Best version?
+#include <stdio.h>
+#include <math.h>
+
+typedef struct {
+    double x, y, z;
+} Vec3;
+
+typedef struct {
+    Vec3 origin;
+    Vec3 direction;
+} Ray;
+
+typedef struct {
+    Vec3 center;
+    Vec3 axis;
+    double radius;
+    double height;
+} Cylinder;
+
+double intersectCylinder(Ray ray, Cylinder cylinder) {
+    // Transform the ray and cylinder to a common coordinate system
+    Vec3 toCylinder = {cylinder.center.x - ray.origin.x, cylinder.center.y - ray.origin.y, cylinder.center.z - ray.origin.z};
+    double dotProduct = ray.direction.x * cylinder.axis.x + ray.direction.y * cylinder.axis.y + ray.direction.z * cylinder.axis.z;
+    Vec3 projection = {dotProduct * cylinder.axis.x, dotProduct * cylinder.axis.y, dotProduct * cylinder.axis.z};
+    Vec3 toClosestPoint = {toCylinder.x - projection.x, toCylinder.y - projection.y, toCylinder.z - projection.z};
+    double distanceToAxis = sqrt(toClosestPoint.x * toClosestPoint.x + toClosestPoint.y * toClosestPoint.y + toClosestPoint.z * toClosestPoint.z);
+    double distanceToSurface = sqrt(cylinder.radius * cylinder.radius - distanceToAxis * distanceToAxis);
+    double distanceToIntersection = dotProduct - distanceToSurface;
+    Vec3 intersectionPoint = {ray.origin.x + distanceToIntersection * ray.direction.x, ray.origin.y + distanceToIntersection * ray.direction.y, ray.origin.z + distanceToIntersection * ray.direction.z};
+    Vec3 axisDir = {cylinder.axis.x, cylinder.axis.y, cylinder.axis.z};
+    Vec3 toTop = {cylinder.center.x + axisDir.x * cylinder.height / 2.0 - intersectionPoint.x,
+                  cylinder.center.y + axisDir.y * cylinder.height / 2.0 - intersectionPoint.y,
+                  cylinder.center.z + axisDir.z * cylinder.height / 2.0 - intersectionPoint.z};
+    Vec3 toBottom = {cylinder.center.x - axisDir.x * cylinder.height / 2.0 - intersectionPoint.x,
+                     cylinder.center.y - axisDir.y * cylinder.height / 2.0 - intersectionPoint.y,
+                     cylinder.center.z - axisDir.z * cylinder.height / 2.0 - intersectionPoint.z};
+    double distanceToTop = sqrt(toTop.x * toTop.x + toTop.y * toTop.y + toTop.z * toTop.z);
+    double distanceToBottom = sqrt(toBottom.x * toBottom.x + toBottom.y * toBottom.y + toBottom.z * toBottom.z);
+    double t = -1;
+    if (distanceToIntersection < 0) {
+        // The intersection point is behind the ray
+        t = -1;
+    } else if (distanceToTop < 0 || distanceToBottom < 0 || distanceToTop > cylinder.height || distanceToBottom > cylinder.height) {
+        // The ray misses the cylinder
+        t = -1;
+    } else if (distanceToTop < distanceToBottom) {
+        // The ray intersects the top surface of the cylinder
+        t = (distanceToTop - toCylinder.y) / ray.direction.y;
+    } else {
+        // The ray intersects the bottom surface of the cylinder
+        t = (distanceToBottom + toCylinder.y) / -ray.direction.y;
+    }
+    return t;
+}
+
+int main() {
+    // Example usage
+    Ray ray = { {0, 
+
+
