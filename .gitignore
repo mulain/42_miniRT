@@ -5,5 +5,6 @@
 minirt
 
 #retardation files
-shmest.c
+#shmest.c
+#shmest2.c
 a.out
