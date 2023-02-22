@@ -6,16 +6,12 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
-	int		win_width;
-	int		win_height;
 	void	*img;
 	char	*img_addr;
 	int		img_bpp;
 	int		img_bytespp;
 	int		img_line_length;
 	int		img_endian;
-	int		img_width;
-	int		img_height;
 	bool	initialized;
 }	t_mlx;
 

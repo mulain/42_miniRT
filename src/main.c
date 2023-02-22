@@ -100,11 +100,10 @@ void	init_mlx(t_data *d)
 	t_mlx		*m;
 
 	m = &d->mlx;
-	m->img_width = d->width;
-	m->img_height = d->height;
+	
 	m->mlx = mlx_init();
-	m->win = mlx_new_window(m->mlx, m->img_width, m->img_height, "miniRT");
-	m->img = mlx_new_image(m->mlx, m->img_width, m->img_height);
+	m->win = mlx_new_window(m->mlx, d->width, d->height, "miniRT");
+	m->img = mlx_new_image(m->mlx, d->width, d->height);
 	m->img_addr = mlx_get_data_addr(m->img, &m->img_bpp, &m->img_line_length,
 			&m->img_endian);
 	m->img_bytespp = m->img_bpp / 8;
