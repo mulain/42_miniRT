@@ -31,21 +31,66 @@ on the ratio of image width and image height.
 */
 t_vector	pixel_to_point(t_data *d, int x, int y)
 {
-	t_vector		point;
+	t_vector	point;
 
-	point.x = 2 * (x + 0.5) / d->width - 1;
-	point.x *= d->aspect_ratio;
-	point.x *= d->fov_ratio;
-	point.y = 1 - 2 * (y + 0.5) / d->height;
-	point.y *= d->fov_ratio;
+	point.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio * d->fov_ratio;
+	point.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
 	point.z = -1;
-
-
-/* 	forward vector = target - origin (normalized)
-	right vector = forward x upguide (might mirror if wrong way around)
-	up vector = right x forward */
-
+	return (point);
 }
+
+t_vector	get_vector(t_data *d, int x, int y)
+{
+	t_vector	looking;
+
+	looking = point_subtract(d->camera.point, pixel_to_point(d, x, y));
+	//upguide = t_vector{0, 1, 0};
+	return (vector_normalize(looking));
+	
+
+	
+	
+	
+}
+
+/* transform ray
+ Vector3 cameraRight = cross(cameraDirection, cameraUp);
+        Vector3 worldDirection = {
+            cameraRight.x * rayDirection.x + cameraUp.x * rayDirection.y + cameraDirection.x * rayDirection.z,
+            cameraRight.y * rayDirection.x + cameraUp.y * rayDirection.y + cameraDirection.y * rayDirection.z,
+            cameraRight.z * rayDirection.x + cameraUp.z * rayDirection.y + cameraDirection.z * rayDirection.z
+        };
+        worldDirection = normalize(worldDirection); */
+
+int	trace(t_data *d, t_vector vec, int depth)
+{
+	(void)depth;
+	t_objlist		*temp;
+	t_ray			ray;
+
+	ray.point = d->camera.point;
+	ray.vector = vec;
+	temp = d->objectlist;
+	while (temp)
+	{
+		if (temp->objtype == sp)
+		{
+			if (intersect_sphere(ray, (t_sphere *)temp->content) != INFINITY);
+				return (0x00FFFFFF);
+			else
+				return (0x00000000);
+		}
+		if (temp->objtype == pl)
+		{
+			if (intersect_plane(ray, (t_plane *)temp->content) != INFINITY);
+				return (0x00FF00FF);
+			else
+				return (0x00000000);
+		}
+	}
+	return (0);
+}
+
 
 void	render(t_data *d)
 {

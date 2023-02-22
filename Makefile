@@ -23,6 +23,7 @@ endif
 SRCFILE	= 	calc_intersection.c\
 			calc_vector1.c\
 			calc_vector2.c\
+			draw.c\
 			hooks.c\
 			main.c\
 			objlist.c\

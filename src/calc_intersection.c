@@ -36,12 +36,14 @@ Cases
 	Intersection point is behind ray -> no intersection (return INFINITY)
 4)	Intersection found -> one intersection (return dividend / divisor)
 */
-double	intersect_plane(t_ray ray, t_plane plane)
+double	intersect_plane(t_ray ray, void *content)
 {
+	t_plane		*plane;
 	double		dividend;
 	double		divisor;
 	double		result;
 
+	plane = (t_plane *)content;
 	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
 			plane.vector);
 	if (fabs(dividend) < EPSILON)
@@ -80,11 +82,13 @@ if (intrsct1 >= 0)
 return (intrsct2);
 	-> ray originates inside sphere if intrsct1 < 0, one intersection
 */
-double	intersect_sphere(t_ray ray, t_sphere sphere)
+double	intersect_sphere(t_ray ray, void *content)
 {
 	t_vector	t;
 	t_helper	h;
+	t_sphere	*sphere;
 
+	sphere = (t_plane *)content;
 	t = point_subtract(ray.point, sphere.point);
 	h.a = vector_dotprod(ray.vector, ray.vector);
 	h.b = 2 * vector_dotprod(ray.vector, t);
