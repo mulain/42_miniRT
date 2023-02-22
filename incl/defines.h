@@ -6,6 +6,7 @@
 # define IMG_WIDTH		1920
 # define IMG_HEIGHT		1080
 # define EPSILON		0.00001
+# define RAYDEPTH		2
 
 // Error messages
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"

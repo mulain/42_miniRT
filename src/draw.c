@@ -35,11 +35,32 @@ t_vector	pixel_to_point(t_data *d, int x, int y)
 
 	point.x = 2 * (x + 0.5) / d->width - 1;
 	point.x *= d->aspect_ratio;
-	point.y = 1 - 2 * (y + 0.5) / d->height;
+	point.y = 1 - 2 * (y + 0.5) / d->height; //camera fov missing
 	point.z = -1;
 
-	forward vector = target - origin (normalized)
+/* 	forward vector = target - origin (normalized)
 	right vector = forward x upguide (might mirror if wrong way around)
-	up vector = right x forward
+	up vector = right x forward */
 
+}
+
+void	render(t_data *d)
+{
+	int		x;
+	int		y;
+	int		color;
+
+	y = 0;
+	while (y < d->height)
+	{
+		x = 0;
+		while (x < d->width)
+		{
+			color = trace(d, get_vector(d, x, y), RAYDEPTH);
+			set_pixel(d->mlx, x, y, color);
+			printf("\rProgress: %i%%", y / d->height * 100);
+			x++;
+		}
+		y++;
+	}
 }

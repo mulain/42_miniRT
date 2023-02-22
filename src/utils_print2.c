@@ -45,7 +45,7 @@ void	print_cylinder(t_cylinder *cy)
 	printf("  y: %f\n", cy->vector.y);
 	printf("  z: %f\n", cy->vector.z);
 	printf("Diameter:\n");
-	printf("  %f\n", cy->diameter);
+	printf("  %f\n", cy->radius);
 	printf("Height:\n");
 	printf("  %f\n", cy->height);
 	printf("Color:\n");
