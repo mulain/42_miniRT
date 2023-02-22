@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	testshit(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
-	//mlx_loop(data.mlx.mlx);
+	mlx_loop(data.mlx.mlx);
 	free_all(&data);
 	return (0);
 }

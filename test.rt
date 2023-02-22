@@ -3,7 +3,7 @@
 # Lines with only whitespaces will not be parsed.
 
 # Arguments may be separated with spaces and/or tabs. Leading whitespaces are skipped.
-	A	1.0 0,0,255	
+	A	1.0 0,0,255		
 # After receiving sufficient valid arguments in a line, the rest of the line will not be evaluated.
 C	0.5,3.0,-0.5	1,0,0		120 asdfasdf
 # Zeros may be omitted before or after decimal points, but not both at once. That would be just a dot.
