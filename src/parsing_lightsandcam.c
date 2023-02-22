@@ -24,6 +24,9 @@ void	parse_light(t_data *d)
 	d->light.color = parse_tcolor(d, d->parse.elmnts[3], E_LIGHT3);
 }
 
+/*
+angle in radians = (angle in degrees) x (π/180)
+*/
 void	parse_camera(t_data *d)
 {
 	if (d->camera.declared)
@@ -34,4 +37,5 @@ void	parse_camera(t_data *d)
 	d->parse.min = 0;
 	d->parse.max = 180;
 	d->camera.fieldofview = parse_int(d, d->parse.elmnts[3], E_CAMERA3);
+	d->fov_ratio = tan((d->camera->fov * M_PI / 180) / 2);
 }

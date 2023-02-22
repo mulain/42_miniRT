@@ -35,8 +35,11 @@ t_vector	pixel_to_point(t_data *d, int x, int y)
 
 	point.x = 2 * (x + 0.5) / d->width - 1;
 	point.x *= d->aspect_ratio;
-	point.y = 1 - 2 * (y + 0.5) / d->height; //camera fov missing
+	point.x *= d->fov_ratio;
+	point.y = 1 - 2 * (y + 0.5) / d->height;
+	point.y *= d->fov_ratio;
 	point.z = -1;
+
 
 /* 	forward vector = target - origin (normalized)
 	right vector = forward x upguide (might mirror if wrong way around)

@@ -64,6 +64,7 @@ typedef struct s_camera
 	t_vector	point;
 	t_vector	vector;
 	int			fieldofview;
+	double		fov_factor;
 	bool		declared;
 }	t_camera;
 
@@ -122,6 +123,7 @@ typedef struct s_data
 	int				width;
 	int				height;
 	float			aspect_ratio;
+	float			fov_ratio;
 }	t_data;
 
 #endif
