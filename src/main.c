@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 	parsing(&data);
 	init_mlx(&data);
 	testshit(&data);
+	render(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
 	mlx_loop(data.mlx.mlx);

@@ -75,18 +75,25 @@ int	trace(t_data *d, t_vector vec, int depth)
 	{
 		if (temp->objtype == sp)
 		{
-			if (intersect_sphere(ray, (t_sphere *)temp->content) != INFINITY);
+			printf("sphere detected\n");
+			if (intersect_sphere(ray, *(t_sphere *)temp->content) != INFINITY)
+			{
+				printf("returned frmo interesct sphere\n");
 				return (0x00FFFFFF);
+			}
 			else
 				return (0x00000000);
 		}
 		if (temp->objtype == pl)
 		{
-			if (intersect_plane(ray, (t_plane *)temp->content) != INFINITY);
+						printf("plane detected\n");
+
+			if (intersect_plane(ray, *(t_plane *)temp->content) != INFINITY)
 				return (0x00FF00FF);
 			else
 				return (0x00000000);
 		}
+		temp = temp->next;
 	}
 	return (0);
 }
@@ -101,11 +108,14 @@ void	render(t_data *d)
 	y = 0;
 	while (y < d->height)
 	{
+		printf("y:%i\n", y);
 		x = 0;
 		while (x < d->width)
 		{
+			printf("x:%i\n", x);
+
 			color = trace(d, get_vector(d, x, y), RAYDEPTH);
-			set_pixel(d->mlx, x, y, color);
+			set_pixel(d->mlx.mlx, x, y, color);
 			printf("\rProgress: %i%%", y / d->height * 100);
 			x++;
 		}
