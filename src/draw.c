@@ -75,7 +75,7 @@ int	trace_ray(t_data *d, int x, int y)
 		{
 			if (intersect_sphere(ray, *(t_sphere *)temp->content) != INFINITY)
 			{
-				return (0x00FFFFFF);
+				return (0x0000FFFF);
 			}
 			else
 				return (0x00000000);
