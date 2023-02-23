@@ -100,7 +100,7 @@ t_vector	parse_tvector(t_data *d, char *input, char *msg)
 
 int	parse_int(t_data *d, char *input, char *msg)
 {
-	char	value;
+	int		value;
 
 	if (!input || !is_onlydigits(input))
 		error_exit(d, msg);

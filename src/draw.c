@@ -32,8 +32,8 @@ t_vector	pixel_to_point(t_data *d, int x, int y)
 {
 	t_vector	point;
 
-	point.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio /* * d->fov_ratio */;
-	point.y = (1 - 2 * (y + 0.5) / d->height) /* * d->fov_ratio */;
+	point.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio * d->fov_ratio;
+	point.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
 	point.z = -1;
 	return (point);
 }
@@ -82,8 +82,6 @@ int	trace_ray(t_data *d, int x, int y)
 		}
 		if (temp->objtype == pl)
 		{
-						printf("plane detected\n");
-
 			if (intersect_plane(ray, *(t_plane *)temp->content) != INFINITY)
 				return (0x00FF00FF);
 			else

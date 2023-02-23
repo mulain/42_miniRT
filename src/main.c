@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 	parsing(&data);
 	init_mlx(&data);
 	testshit(&data);
+	printf("aspectratio:%f\nfovratio:%f\n", data.aspect_ratio, data.fov_ratio);
 	render(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
@@ -75,7 +76,7 @@ void	init_structs(t_data *d)
 {
 	d->width = IMG_WIDTH;
 	d->height = IMG_HEIGHT;
-	d->aspect_ratio = d->width / d->height;
+	d->aspect_ratio = (double)d->width / (double)d->height;
 	d->mlx.initialized = false;
 	d->amb_light.declared = false;
 	d->amb_light.brightness = 0.0;
