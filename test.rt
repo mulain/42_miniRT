@@ -1,14 +1,19 @@
-# Lines starting with '#' or with only whitespaces followed by a '#' will not be parsed.
-   		#
-# Lines with only whitespaces will not be parsed.
+# GENERAL
+#	Brightness		Color
+A	1.0 			0,0,255
+#	Position		Vector			Field of View
+C	0,0,0			1,0,0			120
+#	Position		Brightness		Color
+L	0.1,-5.0,2.0	1.0				0,0,100
 
-# Arguments may be separated with spaces and/or tabs. Leading whitespaces are skipped.
-	A	1.0 0,0,255		
-# After receiving sufficient valid arguments in a line, the rest of the line will not be evaluated.
-C	0.5,3.0,-0.5	1,0,0		120 asdfasdf
-# Zeros may be omitted before or after decimal points, but not both at once. That would be just a dot.
-L	.1,-5.0,2.		1.0			0,0,100
-sp	1,1,1			5			0,0,255
-pl	1,1,1			1,0,0		0,100,200
-cy	50.0,0,0		0,1,0		10				20		0,100,200
+# SPHERES
+#	Position		Radius			Color
+sp	0,0,0			5				0,0,255
 
+# PLANES
+#	Position		Vector			Color
+pl	1,1,1			1,0,0			0,100,200
+
+# CYLINDERS
+#	Position		Vector			Radius		Height		Color
+cy	50.0,0,0		0,1,0			10			20			0,100,200

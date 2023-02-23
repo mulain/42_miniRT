@@ -85,7 +85,6 @@ double	intersect_sphere(t_ray ray, t_sphere sphere)
 	t_vector	t;
 	t_helper	h;
 
-	print_sphere(&sphere);
 	t = point_subtract(ray.point, sphere.point);
 	h.a = vector_dotprod(ray.vector, ray.vector);
 	h.b = 2 * vector_dotprod(ray.vector, t);

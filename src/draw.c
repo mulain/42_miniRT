@@ -1,20 +1,19 @@
 
-#include "minirt.h"
+#include "../incl/minirt.h"
 
-void	set_pixel(t_mlx *mlx, int x, int y, int color)
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
-	/*
 	char	*pxl;
 
-	pxl = d->img_addr + y * d->img_line_length + x * d->img_bytespp;
+	pxl = mlx->img_addr + (y * mlx->img_line_length + x * mlx->img_bytespp);
 	*(unsigned int *)pxl = color;
-	*/
-	*(unsigned int *) \
-	(mlx->img_addr + y * mlx->img_line_length + x * mlx->img_bytespp) = color;
+	
+	/* *(unsigned int *) \
+	(mlx->img_addr + y * mlx->img_line_length + x * mlx->img_bytespp) = color */;
 }
 
 /*
-Coordinate system from -1 to 1 with camera at 0,0,0
+Coordinate system from -1 to 1
 Max range is from -1 to 1 = 2.
 Points should therefore map to a range of 2 with values from -1 to 1.
 To map the pixels to range of 2: take the normal percentage (value / maxvalue)
@@ -33,8 +32,8 @@ t_vector	pixel_to_point(t_data *d, int x, int y)
 {
 	t_vector	point;
 
-	point.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio * d->fov_ratio;
-	point.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
+	point.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio /* * d->fov_ratio */;
+	point.y = (1 - 2 * (y + 0.5) / d->height) /* * d->fov_ratio */;
 	point.z = -1;
 	return (point);
 }
@@ -62,23 +61,20 @@ t_vector	get_vector(t_data *d, int x, int y)
         };
         worldDirection = normalize(worldDirection); */
 
-int	trace(t_data *d, t_vector vec, int depth)
+int	trace_ray(t_data *d, int x, int y)
 {
-	(void)depth;
 	t_objlist		*temp;
 	t_ray			ray;
 
 	ray.point = d->camera.point;
-	ray.vector = vec;
+	ray.vector = get_vector(d, x, y);
 	temp = d->objectlist;
 	while (temp)
 	{
 		if (temp->objtype == sp)
 		{
-			printf("sphere detected\n");
 			if (intersect_sphere(ray, *(t_sphere *)temp->content) != INFINITY)
 			{
-				printf("returned frmo interesct sphere\n");
 				return (0x00FFFFFF);
 			}
 			else
@@ -103,22 +99,19 @@ void	render(t_data *d)
 {
 	int		x;
 	int		y;
-	int		color;
 
 	y = 0;
 	while (y < d->height)
 	{
-		printf("y:%i\n", y);
 		x = 0;
 		while (x < d->width)
 		{
-			printf("x:%i\n", x);
-
-			color = trace(d, get_vector(d, x, y), RAYDEPTH);
-			set_pixel(d->mlx.mlx, x, y, color);
-			printf("\rProgress: %i%%", y / d->height * 100);
+			put_pixel(&d->mlx, x, y, trace_ray(d, x, y));
 			x++;
 		}
+		printf("\rRendering: %.0f%%", (double)y / (d->height - 1) * 100);
 		y++;
 	}
+	printf("\n");
+	mlx_put_image_to_window(d->mlx.mlx, d->mlx.win, d->mlx.img, 0, 0);
 }

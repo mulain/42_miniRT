@@ -1,5 +1,5 @@
 
-#include "minirt.h"
+#include "../incl/minirt.h"
 
 void	testshit(t_data *d)
 {
