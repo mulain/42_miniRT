@@ -6,9 +6,9 @@ void	print_sphere(t_sphere *sp)
 	printf("----- Sphere -----\n");
 	printf("point:\n");
 	printf("  x: %f\n", sp->point.x);
-	printf("  y: %f\n", sp->point.x);
-	printf("  z: %f\n", sp->point.x);
-	printf("Diameter:\n");
+	printf("  y: %f\n", sp->point.y);
+	printf("  z: %f\n", sp->point.z);
+	printf("Radius:\n");
 	printf("  %f\n", sp->radius);
 	printf("Color:\n");
 	printf("  r: %i\n", sp->color.r);
@@ -44,7 +44,7 @@ void	print_cylinder(t_cylinder *cy)
 	printf("  x: %f\n", cy->vector.x);
 	printf("  y: %f\n", cy->vector.y);
 	printf("  z: %f\n", cy->vector.z);
-	printf("Diameter:\n");
+	printf("Radius:\n");
 	printf("  %f\n", cy->radius);
 	printf("Height:\n");
 	printf("  %f\n", cy->height);

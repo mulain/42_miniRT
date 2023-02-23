@@ -40,11 +40,18 @@ typedef struct s_ray
 	t_vector	vector;
 }	t_ray;
 
+typedef struct s_intersection
+{
+	double		distance;
+	int			color;
+}	t_intersection;
+
 typedef struct s_color
 {
 	int			r;
 	int			g;
 	int			b;
+	int			combined;
 }	t_color;
 
 typedef struct s_light

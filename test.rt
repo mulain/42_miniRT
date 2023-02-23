@@ -1,19 +1,19 @@
-# GENERAL
-#	Brightness		Color
-A	1.0 			0,0,255
-#	Position		Vector			Field of View
-C	0,0,0			0,0,1			90
-#	Position		Brightness		Color
-L	0,-5,0			1.0				0,0,100
+# CAMERA		Position		Vector			Field of View
+C				0,0,0			0,0,1			90
 
-# SPHERES
-#	Position		Radius			Color
-sp	0,-5,5			5				0,0,255
+# AMBIENT LIGHT					Brightness		Color
+A								1.0 			0,0,255
 
-# PLANES
-#	Position		Vector			Color
-pl	0,-1,0			0,0,1			0,100,200
+# LIGHT			Position		Brightness		Color
+L				0,-5,0			1.0				0,0,100
 
-# CYLINDERS
-#	Position		Vector			Radius		Height		Color
-cy	50,0,0			0,1,0			10			20			0,100,200
+# SPHERES		Position		Diameter		Color
+sp				3,0,10			5				255,255,0
+sp				-1,4,5			6				255,0,0
+
+# PLANES		Position		Vector			Color
+pl				0,-3,1			.3,1,0			0,100,200
+#pl				0,0,0			1,1,0			0,100,200
+
+# CYLINDERS		Position		Vector			Diameter		Height			Color
+#cy				50,0,0			0,1,0			10				20				0,100,200

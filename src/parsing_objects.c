@@ -1,5 +1,5 @@
 
-#include "minirt.h"
+#include "../incl/minirt.h"
 
 void	parse_sphere(t_data *d)
 {

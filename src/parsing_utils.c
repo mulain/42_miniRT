@@ -1,5 +1,5 @@
 
-#include "minirt.h"
+#include "../incl/minirt.h"
 
 /*
 Will not test range if min == max.
@@ -37,7 +37,10 @@ t_color	parse_tcolor(t_data *d, char *input, char *msg)
 			error_exit(d, msg);
 		i++;
 	}
-	color = (t_color){ft_atoi(split[0]), ft_atoi(split[1]), ft_atoi(split[2])};
+	color.r = ft_atoi(split[0]);
+	color.g = ft_atoi(split[1]);
+	color.b = ft_atoi(split[2]);
+	color.combined = 0xFFFFFFFF & (color.r << 16 | color.g << 8 | color.b);
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
 	return (color);

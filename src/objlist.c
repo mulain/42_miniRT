@@ -39,7 +39,7 @@ t_objlist	*objlst_last(t_objlist *lst)
 void	objlist_free(t_objlist *lst)
 {
 	t_objlist	*temp;
-	
+
 	while (lst)
 	{
 		free(lst->content);

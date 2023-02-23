@@ -65,34 +65,37 @@ int	trace_ray(t_data *d, int x, int y)
 {
 	t_objlist		*temp;
 	t_ray			ray;
+	t_sphere		*sphere;
+	t_plane			*plane;
+	t_intersection	intrsct;
+	t_intersection	intrsct_tmp;
 
 	ray.point = d->camera.point;
 	ray.vector = get_vector(d, x, y);
 	temp = d->objectlist;
+	intrsct.color = 0xFF000000;
+	intrsct.distance = INFINITY;
 	while (temp)
 	{
 		if (temp->objtype == sp)
 		{
-			if (intersect_sphere(ray, *(t_sphere *)temp->content) != INFINITY)
-			{
-				return (0x0000FFFF);
-			}
-			else
-				return (0x00000000);
+			sphere = (t_sphere *)temp->content;
+			intrsct_tmp.distance = intersect_sphere(ray, *sphere);
+			intrsct_tmp.color = sphere->color.combined;
+			if (intrsct_tmp.distance < intrsct.distance)
+				intrsct = intrsct_tmp;
 		}
 		if (temp->objtype == pl)
 		{
-			if (intersect_plane(ray, *(t_plane *)temp->content) != INFINITY)
-			{
-				printf("plane hit\n");
-				return (0x00FF00FF);
-			}
-			else
-				return (0x00000000);
+			plane = (t_plane *)temp->content;
+			intrsct_tmp.distance = intersect_plane(ray, *plane);
+			intrsct_tmp.color = plane->color.combined;
+			if (intrsct_tmp.distance < intrsct.distance)
+				intrsct = intrsct_tmp;
 		}
 		temp = temp->next;
 	}
-	return (0);
+	return (intrsct.color);
 }
 
 

@@ -44,10 +44,10 @@ double	intersect_plane(t_ray ray, t_plane plane)
 
 	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
 			plane.vector);
-	if (fabs(dividend) < EPSILON)
+	if (fabs(dividend) < 0)
 		return (0);
 	divisor = vector_dotprod(plane.vector, ray.vector);
-	if (fabs(divisor) < EPSILON)
+	if (fabs(divisor) < 0)
 		return (INFINITY);
 	result = dividend / divisor;
 	if (result < 0)

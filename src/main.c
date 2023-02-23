@@ -12,15 +12,15 @@ void	testshit(t_data *d)
 	(void)d;
 	// ray
 	ray.point = (t_vector){0, 0, 0};
-	ray.vector = (t_vector){0, 1, 100};
+	ray.vector = vector_normalize((t_vector){0, 0, 1});
 	// sphere
 	sphere.point = (t_vector){0, 0, 0};
 	sphere.radius = 1;
 	test = intersect_sphere(ray, sphere);
 	printf("intersect sphere: %f\n", test);
 	// plane
-	plane.point = (t_vector){0, 1.0, 0};
-	plane.vector = (t_vector){0, 1, 0};
+	plane.point = (t_vector){0, -.1, 0};
+	plane.vector = vector_normalize((t_vector){0, 1, 1});
 	test = intersect_plane(ray, plane);
 	printf("intersect plane:%f\n", test);
 	cylinder.point = (t_vector){0, 1, 0};
@@ -45,6 +45,7 @@ int	main(int argc, char **argv)
 	init_structs(&data);
 	get_infile(&data, argc, argv);
 	parsing(&data);
+	print_objlist(data.objectlist);
 	init_mlx(&data);
 	//testshit(&data);
 	//printf("aspectratio:%f\nfovratio:%f\n", data.aspect_ratio, data.fov_ratio);
@@ -80,14 +81,14 @@ void	init_structs(t_data *d)
 	d->mlx.initialized = false;
 	d->amb_light.declared = false;
 	d->amb_light.brightness = 0.0;
-	d->amb_light.color = (t_color){0, 0, 0};
+	d->amb_light.color = (t_color){0, 0, 0, 0};
 	d->camera.declared = false;
 	d->camera.fieldofview = 0;
 	d->camera.vector = (t_vector){0, 0, 0};
 	d->camera.point = (t_vector){0, 0, 0};
 	d->light.declared = false;
 	d->light.brightness = 0.0;
-	d->light.color = (t_color){0, 0, 0};
+	d->light.color = (t_color){0, 0, 0, 0};
 	d->light.point = (t_vector){0, 0, 0};
 	d->objectlist = NULL;
 	d->parse.fd = -1;
