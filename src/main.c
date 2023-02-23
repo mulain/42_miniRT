@@ -46,8 +46,8 @@ int	main(int argc, char **argv)
 	get_infile(&data, argc, argv);
 	parsing(&data);
 	init_mlx(&data);
-	testshit(&data);
-	printf("aspectratio:%f\nfovratio:%f\n", data.aspect_ratio, data.fov_ratio);
+	//testshit(&data);
+	//printf("aspectratio:%f\nfovratio:%f\n", data.aspect_ratio, data.fov_ratio);
 	render(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);

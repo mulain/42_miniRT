@@ -83,7 +83,10 @@ int	trace_ray(t_data *d, int x, int y)
 		if (temp->objtype == pl)
 		{
 			if (intersect_plane(ray, *(t_plane *)temp->content) != INFINITY)
+			{
+				printf("plane hit\n");
 				return (0x00FF00FF);
+			}
 			else
 				return (0x00000000);
 		}
