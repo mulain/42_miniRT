@@ -28,7 +28,17 @@ t_vector	vector_multiply(t_vector v, double mult)
 	return ((t_vector){v.x * mult, v.y * mult, v.z * mult});
 }
 
+/*
+Multiply to be faster (divison more costly than multiplication)
+Care: doesn't guard vs dividing by 0.
+*/
 t_vector	vector_divide(t_vector v, double div)
 {
-	return ((t_vector){v.x / div, v.y / div, v.z / div});
+	double	inv_div;
+
+	inv_div = 1 / div;
+	v.x *= inv_div;
+	v.y *= inv_div;
+	v.z *= inv_div;
+	return (v);
 }

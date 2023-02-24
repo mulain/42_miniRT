@@ -56,8 +56,18 @@ t_vector	vector_crossprod(t_vector v1, t_vector v2)
 /*
 A normalized vector is of length 1. So divide by its current length
 to have a new length of 1.
+Multiply to be faster (divison more costly than multiplication)
+Care: doesn't guard vs dividing by 0.
 */
 t_vector	vector_normalize(t_vector v)
 {
-	return (vector_divide(v, vector_length(v)));
+	double	len;
+	double	inv_len;
+
+	len = vector_length(v);
+	inv_len = 1 / len;
+	v.x *= inv_len;
+	v.y *= inv_len;
+	v.z *= inv_len;
+	return (v);
 }

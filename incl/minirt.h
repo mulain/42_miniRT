@@ -33,10 +33,9 @@ t_vector	vector_crossprod(t_vector v1, t_vector v2);
 t_vector	vector_normalize(t_vector v);
 
 // draw.c
-void		set_pixel(t_mlx *mlx, int x, int y, int color);
+void		put_pixel(t_mlx *mlx, int x, int y, int color);
 t_vector	pixel_to_point(t_data *d, int x, int y);
 t_vector	get_vector(t_data *d, int x, int y);
-int			trace(t_data *d, t_vector vec, int depth);
 void		render(t_data *d);
 
 // hooks.c
