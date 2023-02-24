@@ -36,7 +36,31 @@ Cases
 	Intersection point is behind ray -> no intersection (return INFINITY)
 4)	Intersection found -> one intersection (return dividend / divisor)
 */
-double	intersect_plane(t_ray ray, t_plane plane)
+t_intrsct	intersect_plane(t_ray ray, t_plane plane)
+{
+	double		dividend;
+	double		divisor;
+	double		result;
+	t_intrsct	intersection;
+
+	intersection.color = plane.color.trgb;
+	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
+			plane.vector);
+	divisor = vector_dotprod(plane.vector, ray.vector);
+	if (divisor == 0)
+		intersection.distance = INFINITY;
+	else
+	{
+		result = dividend / divisor;
+		if (result < 0)
+			intersection.distance = INFINITY;
+		else
+			intersection.distance = result;
+	}
+	return (intersection);
+}
+
+double	intersect_plane_old(t_ray ray, t_plane plane)
 {
 	double		dividend;
 	double		divisor;
@@ -80,19 +104,23 @@ if (intrsct1 >= 0)
 return (intrsct2);
 	-> ray originates inside sphere if intrsct1 < 0, one intersection
 */
-double	intersect_sphere(t_ray ray, t_sphere sphere)
+t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere)
 {
 	t_vector	oc;
 	t_helper	h;
+	t_intrsct	intersection;
 
+	intersection.color = sphere.color.trgb;
 	oc = point_subtract(ray.point, sphere.point);
 	h.a = vector_dotprod(ray.vector, ray.vector);
 	h.b = 2 * vector_dotprod(ray.vector, oc);
 	h.c = vector_dotprod(oc, oc) - sphere.radius * sphere.radius;
 	h.discriminant = h.b * h.b - 4 * h.a * h.c;
 	if (h.discriminant < 0)
-		return (INFINITY);
-	return ((-h.b - sqrt(h.discriminant) / (2 * h.a)));
+		intersection.distance = INFINITY;
+	else
+		intersection.distance = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
+	return (intersection);
 }
 
 double	intersect_sphere_old(t_ray ray, t_sphere sphere)

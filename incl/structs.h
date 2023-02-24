@@ -44,14 +44,14 @@ typedef struct s_intersection
 {
 	double		distance;
 	int			color;
-}	t_intersection;
+}	t_intrsct;
 
 typedef struct s_color
 {
 	int			r;
 	int			g;
 	int			b;
-	int			combined;
+	int			trgb;
 }	t_color;
 
 typedef struct s_light

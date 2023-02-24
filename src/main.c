@@ -1,43 +1,6 @@
 
 #include "../incl/minirt.h"
 
-void	testshit(t_data *d)
-{
-	double		test;
-	t_ray		ray;
-	t_plane		plane;
-	t_sphere	sphere;
-	t_cylinder	cylinder;
-
-	(void)d;
-	// ray
-	ray.point = (t_vector){0, 0, 0};
-	ray.vector = vector_normalize((t_vector){0, 0, 1});
-	// sphere
-	sphere.point = (t_vector){0, 0, 0};
-	sphere.radius = 1;
-	test = intersect_sphere(ray, sphere);
-	printf("intersect sphere: %f\n", test);
-	// plane
-	plane.point = (t_vector){0, -.1, 0};
-	plane.vector = vector_normalize((t_vector){0, 1, 1});
-	test = intersect_plane(ray, plane);
-	printf("intersect plane:%f\n", test);
-	cylinder.point = (t_vector){0, 1, 0};
-	cylinder.vector = (t_vector){0, 1, 0};
-	cylinder.radius = 1;
-	cylinder.height = 1;
-	test = intersect_cylinder(ray, cylinder);
-	printf("intersect cylinder:%f\n", test);
-	/*
-	// print the input file objects
-	print_ambientlight(d);
-	print_light(d);
-	print_camera(d);
-	print_objlist(d->objectlist);
-	*/
-}
-
 int	main(int argc, char **argv)
 {
 	t_data		data;
@@ -47,8 +10,6 @@ int	main(int argc, char **argv)
 	parsing(&data);
 	print_objlist(data.objectlist);
 	init_mlx(&data);
-	//testshit(&data);
-	//printf("aspectratio:%f\nfovratio:%f\n", data.aspect_ratio, data.fov_ratio);
 	render(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);

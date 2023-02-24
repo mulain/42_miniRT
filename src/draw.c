@@ -49,10 +49,10 @@ t_vector	get_vector(t_data *d, int x, int y)
 	looking = point_subtract(d->camera.point, pixel_to_point(d, x, y));
 	upguide = (t_vector){0, 1, 0};
 	x_axis = vector_normalize(vector_crossprod(upguide, d->camera.vector));
-	y_axis = vector_normalize( vector_crossprod(x_axis, d->camera.vector));
+	y_axis = vector_normalize(vector_crossprod(x_axis, d->camera.vector));
 	transformed = point_add(vector_multiply(x_axis, looking.x), d->camera.vector);
 	transformed = point_add(vector_multiply(y_axis, looking.y), transformed);
-	return (vector_normalize(transformed));	
+	return (vector_normalize(transformed));
 }
 
 /* transform ray
@@ -64,35 +64,28 @@ t_vector	get_vector(t_data *d, int x, int y)
         };
         worldDirection = normalize(worldDirection); */
 
-int	trace_ray(t_data *d, t_ray ray)
+int	trace_ray(t_data *d, t_objlist *objs, t_ray ray)
 {
-	t_objlist		*temp;
-	t_intersection	intrsct;
-	t_intersection	intrsct_tmp;
+	t_intrsct	intrsct;
+	t_intrsct	temp;
 
-	temp = d->objectlist;
+	(void)d;
 	intrsct.color = 0xFF000000;
 	intrsct.distance = INFINITY;
-	while (temp)
+	while (objs)
 	{
-		if (temp->objtype == sp)
+		if (objs->objtype == sp)
+			temp = intersect_sphere(ray, *(t_sphere *)objs->content);
+		else if (objs->objtype == pl)
+			temp = intersect_plane(ray, *(t_plane *)objs->content);
+		else if (objs->objtype == cy)
 		{
-			intrsct_tmp.distance = intersect_sphere(ray, *(t_sphere *)temp->content);
-			intrsct_tmp.color = ((t_sphere *)temp->content)->color.combined;
+			temp.distance = intersect_cylinder(ray, *(t_cylinder *)objs->content);
+			temp.color = ((t_cylinder *)objs->content)->color.trgb;
 		}
-		else if (temp->objtype == pl)
-		{
-			intrsct_tmp.distance = intersect_plane(ray, *(t_plane *)temp->content);
-			intrsct_tmp.color = ((t_plane *)temp->content)->color.combined;
-		}
-		else if (temp->objtype == cy)
-		{
-			intrsct_tmp.distance = intersect_cylinder(ray, *(t_cylinder *)temp->content);
-			intrsct_tmp.color = ((t_cylinder *)temp->content)->color.combined;
-		}
-		if (intrsct_tmp.distance < intrsct.distance)
-			intrsct = intrsct_tmp;
-		temp = temp->next;
+		if (temp.distance < intrsct.distance)
+			intrsct = temp;
+		objs = objs->next;
 	}
 	return (intrsct.color);
 }
@@ -111,7 +104,7 @@ void	render(t_data *d)
 		while (x < d->width)
 		{
 			ray.vector = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, ray));
+			put_pixel(&d->mlx, x, y, trace_ray(d, d->objectlist, ray));
 			x++;
 		}
 		printf("\rRendering: %.0f%%", (double)y / (d->height - 1) * 100);

@@ -15,8 +15,8 @@
 # include "defines.h"
 
 // calc_intersection.c
-double		intersect_plane(t_ray ray, t_plane plane);
-double		intersect_sphere(t_ray ray, t_sphere sphere);
+t_intrsct	intersect_plane(t_ray ray, t_plane plane);
+t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere);
 double		intersect_cylinder(t_ray ray, t_cylinder cylinder);
 
 // calc_vector1.c
