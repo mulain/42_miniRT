@@ -103,7 +103,7 @@ void	init_mlx(t_data *d)
 	t_mlx		*m;
 
 	m = &d->mlx;
-	
+
 	m->mlx = mlx_init();
 	m->win = mlx_new_window(m->mlx, d->width, d->height, "miniRT");
 	m->img = mlx_new_image(m->mlx, d->width, d->height);

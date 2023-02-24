@@ -3,8 +3,8 @@
 # define DEFINES_H
 
 // Settings
-# define IMG_WIDTH		1920
-# define IMG_HEIGHT		1080
+# define IMG_WIDTH		1500
+# define IMG_HEIGHT		1000
 # define EPSILON		0.00001
 # define RAYDEPTH		2
 

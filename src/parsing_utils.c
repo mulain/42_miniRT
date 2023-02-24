@@ -30,13 +30,10 @@ t_color	parse_tcolor(t_data *d, char *input, char *msg)
 	split = d->parse.subelmnts;
 	if (count_subelements(split) != 3)
 		error_exit(d, msg);
-	i = 0;
-	while (i < 3)
-	{
+	i = -1;
+	while (++i < 3)
 		if (!is_ucharformat(split[i]))
 			error_exit(d, msg);
-		i++;
-	}
 	color.r = ft_atoi(split[0]);
 	color.g = ft_atoi(split[1]);
 	color.b = ft_atoi(split[2]);
@@ -58,13 +55,10 @@ t_vector	parse_tpoint(t_data *d, char *input, char *msg)
 	split = d->parse.subelmnts;
 	if (count_subelements(split) != 3)
 		error_exit(d, msg);
-	i = 0;
-	while (i < 3)
-	{
+	i = -1;
+	while (++i < 3)
 		if (!is_decimalformat(split[i]))
 			error_exit(d, msg);
-		i++;
-	}
 	point = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
 		conv_strtod(split[2])};
 	free_2d_char(split);

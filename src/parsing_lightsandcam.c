@@ -37,5 +37,5 @@ void	parse_camera(t_data *d)
 	d->parse.min = 0;
 	d->parse.max = (double)180;
 	d->camera.fieldofview = parse_int(d, d->parse.elmnts[3], E_CAMERA3);
-	d->fov_ratio = tan(d->camera.fieldofview / 2 * M_PI / 180);
+	d->fov_ratio = tan((d->camera.fieldofview / 2) * M_PI / 180);
 }

@@ -1,5 +1,5 @@
 
-#include "minirt.h"
+#include "../incl/minirt.h"
 
 /*
 Ray formula:
@@ -82,6 +82,21 @@ return (intrsct2);
 */
 double	intersect_sphere(t_ray ray, t_sphere sphere)
 {
+	t_vector	oc;
+	t_helper	h;
+
+	oc = point_subtract(ray.point, sphere.point);
+	h.a = vector_dotprod(ray.vector, ray.vector);
+	h.b = 2 * vector_dotprod(ray.vector, oc);
+	h.c = vector_dotprod(oc, oc) - sphere.radius * sphere.radius;
+	h.discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (h.discriminant < 0)
+		return (INFINITY);
+	return ((-h.b - sqrt(h.discriminant) / (2 * h.a)));
+}
+
+double	intersect_sphere_old(t_ray ray, t_sphere sphere)
+{
 	t_vector	t;
 	t_helper	h;
 
@@ -102,6 +117,8 @@ double	intersect_sphere(t_ray ray, t_sphere sphere)
 		return (h.intersect_1);
 	return (h.intersect_2);
 }
+
+
 
 /*
 Infinite cylinder along y axis of radius r has equation
