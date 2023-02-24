@@ -157,7 +157,56 @@ oriented along a line p_a + v_a * t:
 where q = (x,y,z) is a point on the
 cylinder.
 */
-double	intersect_cylinder(t_ray ray, t_cylinder cylinder)
+t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
+{
+	t_vector	t;
+	t_helper	h;
+	double		y_intersect_1;
+	double		y_intersect_2;
+	double		y_min;
+	double		y_max;
+	t_intrsct	intersection;
+
+	intersection.color = cylinder.color.trgb;
+	t = point_subtract(ray.point, cylinder.point);
+	h.a = ray.vector.x * ray.vector.x + ray.vector.z * ray.vector.z;
+	h.b = 2 * (t.x * ray.vector.x + t.z * ray.vector.z);
+	h.c = t.x * t.x + t.z * t.z - cylinder.radius * cylinder.radius;
+	h.discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (h.discriminant < 0)
+		return (intersection.distance = INFINITY, intersection);
+	h.intersect_1 = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
+	h.intersect_2 = (-h.b + sqrt(h.discriminant)) / (2 * h.a);
+	if (h.intersect_2 < 0)
+		return (intersection.distance = INFINITY, intersection);
+	y_intersect_1 = ray.point.y + h.intersect_1 * ray.vector.y;
+	y_intersect_2 = ray.point.y + h.intersect_2 * ray.vector.y;
+	y_min = cylinder.point.y;
+	y_max = cylinder.point.y + cylinder.height;
+	if ((y_intersect_1 < y_min && y_intersect_2 < y_min)
+		|| (y_intersect_1 > y_max && y_intersect_2 > y_max))
+		return (intersection.distance = INFINITY, intersection);
+	if (y_intersect_1 < y_min)
+		h.intersect_1 = (y_min - ray.point.y) / ray.vector.y;
+	else if (y_intersect_1 > y_max)
+		h.intersect_1 = (y_max - ray.point.y) / ray.vector.y;
+	if (y_intersect_2 < y_min)
+		h.intersect_2 = (y_min - ray.point.y) / ray.vector.y;
+	else if (y_intersect_2 > y_max)
+		h.intersect_2 = (y_max - ray.point.y) / ray.vector.y;
+	if (h.intersect_1 > h.intersect_2)
+		return (intersection.distance = INFINITY, intersection);
+	if (h.intersect_1 < 0)
+	{
+		if (h.intersect_2 < 0)
+			return (intersection.distance = INFINITY, intersection);
+		return (intersection.distance = h.intersect_2, intersection);
+	}
+	return (intersection.distance = h.intersect_1, intersection);
+}
+
+
+double	intersect_cylinder_old(t_ray ray, t_cylinder cylinder)
 {
 	t_vector	t;
 	t_helper	h;

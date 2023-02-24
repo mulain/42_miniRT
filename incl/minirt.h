@@ -17,7 +17,7 @@
 // calc_intersection.c
 t_intrsct	intersect_plane(t_ray ray, t_plane plane);
 t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere);
-double		intersect_cylinder(t_ray ray, t_cylinder cylinder);
+t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder);
 
 // calc_vector1.c
 t_vector	point_add(t_vector p1, t_vector p2);

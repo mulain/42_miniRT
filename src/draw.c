@@ -66,12 +66,12 @@ t_vector	get_vector(t_data *d, int x, int y)
 
 int	trace_ray(t_data *d, t_objlist *objs, t_ray ray)
 {
-	t_intrsct	intrsct;
+	t_intrsct	intersection;
 	t_intrsct	temp;
 
 	(void)d;
-	intrsct.color = 0xFF000000;
-	intrsct.distance = INFINITY;
+	intersection.color = 0xFF000000;
+	intersection.distance = INFINITY;
 	while (objs)
 	{
 		if (objs->objtype == sp)
@@ -79,15 +79,12 @@ int	trace_ray(t_data *d, t_objlist *objs, t_ray ray)
 		else if (objs->objtype == pl)
 			temp = intersect_plane(ray, *(t_plane *)objs->content);
 		else if (objs->objtype == cy)
-		{
-			temp.distance = intersect_cylinder(ray, *(t_cylinder *)objs->content);
-			temp.color = ((t_cylinder *)objs->content)->color.trgb;
-		}
-		if (temp.distance < intrsct.distance)
-			intrsct = temp;
+			temp = intersect_cylinder(ray, *(t_cylinder *)objs->content);
+		if (temp.distance < intersection.distance)
+			intersection = temp;
 		objs = objs->next;
 	}
-	return (intrsct.color);
+	return (intersection.color);
 }
 
 void	render(t_data *d)
