@@ -43,11 +43,11 @@ t_color	parse_tcolor(t_data *d, char *input, char *msg)
 	return (color);
 }
 
-t_vector	parse_tpoint(t_data *d, char *input, char *msg)
+t_3d	parse_tpoint(t_data *d, char *input, char *msg)
 {
 	int			i;
 	char		**split;
-	t_vector	point;
+	t_3d	point;
 
 	if (!input)
 		error_exit(d, msg);
@@ -59,18 +59,18 @@ t_vector	parse_tpoint(t_data *d, char *input, char *msg)
 	while (++i < 3)
 		if (!is_decimalformat(split[i]))
 			error_exit(d, msg);
-	point = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
+	point = (t_3d){conv_strtod(split[0]), conv_strtod(split[1]),
 		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
 	return (point);
 }
 
-t_vector	parse_tvector(t_data *d, char *input, char *msg)
+t_3d	parse_tvector(t_data *d, char *input, char *msg)
 {
 	int			i;
 	char		**split;
-	t_vector	vector;
+	t_3d	vector;
 
 	if (!input)
 		error_exit(d, msg);
@@ -82,7 +82,7 @@ t_vector	parse_tvector(t_data *d, char *input, char *msg)
 	while (++i < 3)
 		if (!is_decimalformat(split[i]))
 			error_exit(d, msg);
-	vector = (t_vector){conv_strtod(split[0]), conv_strtod(split[1]),
+	vector = (t_3d){conv_strtod(split[0]), conv_strtod(split[1]),
 		conv_strtod(split[2])};
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
@@ -91,7 +91,7 @@ t_vector	parse_tvector(t_data *d, char *input, char *msg)
 		error_exit(d, msg);
 	if (vector.x == 0 && vector.y == 0 && vector.z == 0)
 		error_exit(d, msg);
-	return (vector_normalize(vector));
+	return (norm(vector));
 }
 
 int	parse_int(t_data *d, char *input, char *msg)

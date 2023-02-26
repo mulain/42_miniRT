@@ -4,7 +4,7 @@
 void	print_sphere(t_sphere *sp)
 {
 	printf("----- Sphere -----\n");
-	printf("point:\n");
+	printf("Center:\n");
 	printf("  x: %f\n", sp->point.x);
 	printf("  y: %f\n", sp->point.y);
 	printf("  z: %f\n", sp->point.z);
@@ -19,11 +19,11 @@ void	print_sphere(t_sphere *sp)
 void	print_plane(t_plane *pl)
 {
 	printf("----- Plane -----\n");
-	printf("point:\n");
+	printf("Point:\n");
 	printf("  x: %f\n", pl->point.x);
 	printf("  y: %f\n", pl->point.y);
 	printf("  z: %f\n", pl->point.z);
-	printf("Normvector:\n");
+	printf("Vector:\n");
 	printf("  x: %f\n", pl->vector.x);
 	printf("  y: %f\n", pl->vector.y);
 	printf("  z: %f\n", pl->vector.z);
@@ -36,14 +36,14 @@ void	print_plane(t_plane *pl)
 void	print_cylinder(t_cylinder *cy)
 {
 	printf("----- Cylinder -----\n");
-	printf("point:\n");
+	printf("Base:\n");
 	printf("  x: %f\n", cy->point.x);
 	printf("  y: %f\n", cy->point.y);
 	printf("  z: %f\n", cy->point.z);
-	printf("Normvector:\n");
-	printf("  x: %f\n", cy->vector.x);
-	printf("  y: %f\n", cy->vector.y);
-	printf("  z: %f\n", cy->vector.z);
+	printf("Axis:\n");
+	printf("  x: %f\n", cy->axis.x);
+	printf("  y: %f\n", cy->axis.y);
+	printf("  z: %f\n", cy->axis.z);
 	printf("Radius:\n");
 	printf("  %f\n", cy->radius);
 	printf("Height:\n");
@@ -54,7 +54,7 @@ void	print_cylinder(t_cylinder *cy)
 	printf("  b: %i\n", cy->color.b);
 }
 
-void	print_vector(t_vector v, char *name)
+void	print_t3d(t_3d v, char *name)
 {
 	if (name)
 		printf("Name: %s\n", name);

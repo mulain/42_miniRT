@@ -28,9 +28,9 @@ Multiply x by the aspect ratio to account for non square screens. This means tha
 the range of the x coordinates will shrink from or expand beyond -1 to 1 depending
 on the ratio of image width and image height.
 */
-t_vector	pixel_to_point(t_data *d, int x, int y)
+t_3d	pixel_to_point(t_data *d, int x, int y)
 {
-	t_vector	point;
+	t_3d	point;
 
 	point.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio * d->fov_ratio;
 	point.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
@@ -38,21 +38,21 @@ t_vector	pixel_to_point(t_data *d, int x, int y)
 	return (point);
 }
 
-t_vector	get_vector(t_data *d, int x, int y)
+t_3d	get_3d(t_data *d, int x, int y)
 {
-	t_vector	looking;
-	t_vector	upguide;
-	t_vector	x_axis;
-	t_vector	y_axis;
-	t_vector	transformed;
+	t_3d	looking;
+	t_3d	upguide;
+	t_3d	x_axis;
+	t_3d	y_axis;
+	t_3d	transformed;
 
-	looking = point_subtract(d->camera.point, pixel_to_point(d, x, y));
-	upguide = (t_vector){0, 1, 0};
-	x_axis = vector_normalize(vector_crossprod(upguide, d->camera.vector));
-	y_axis = vector_normalize(vector_crossprod(x_axis, d->camera.vector));
-	transformed = point_add(vector_multiply(x_axis, looking.x), d->camera.vector);
-	transformed = point_add(vector_multiply(y_axis, looking.y), transformed);
-	return (vector_normalize(transformed));
+	looking = subtract(d->camera.point, pixel_to_point(d, x, y));
+	upguide = (t_3d){0, 1, 0};
+	x_axis = norm(cross(upguide, d->camera.vector));
+	y_axis = norm(cross(x_axis, d->camera.vector));
+	transformed = add(mult(x_axis, looking.x), d->camera.vector);
+	transformed = add(mult(y_axis, looking.y), transformed);
+	return (norm(transformed));
 }
 
 /* transform ray
@@ -100,7 +100,7 @@ void	render(t_data *d)
 		x = 0;
 		while (x < d->width)
 		{
-			ray.vector = get_vector(d, x, y);
+			ray.vector = get_3d(d, x, y);
 			put_pixel(&d->mlx, x, y, trace_ray(d, d->objectlist, ray));
 			x++;
 		}

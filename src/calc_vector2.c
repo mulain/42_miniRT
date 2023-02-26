@@ -5,7 +5,7 @@
 The length (or magnitude) of a vector is the square root of the dot product
 of the vector with itself.
 */
-double	vector_length(t_vector v)
+double	vector_length(t_3d v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
@@ -33,7 +33,7 @@ Dotprod depends on angle (deg) between vectors:
 	== 90			0
 	> 90 && < 180	negative
 */
-double	vector_dotprod(t_vector v1, t_vector v2)
+double	dot(t_3d v1, t_3d v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
@@ -43,9 +43,9 @@ The cross product of two vectors is a vector that is perpendicular to
 both of the given vectors.
 Cross product of parallel vectors is 0.
 */
-t_vector	vector_crossprod(t_vector v1, t_vector v2)
+t_3d	cross(t_3d v1, t_3d v2)
 {
-	t_vector	result;
+	t_3d	result;
 
 	result.x = v1.y * v2.z - v1.z * v2.y;
 	result.y = v1.z * v2.x - v1.x * v2.z;
@@ -59,7 +59,7 @@ to have a new length of 1.
 Multiply to be faster (divison more costly than multiplication)
 Care: doesn't guard vs dividing by 0.
 */
-t_vector	vector_normalize(t_vector v)
+t_3d	norm(t_3d v)
 {
 	double	len;
 	double	inv_len;

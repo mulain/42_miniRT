@@ -38,7 +38,7 @@ void	parse_cylinder(t_data *d)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(cylinder, cy));
 	cylinder->point = parse_tpoint(d, d->parse.elmnts[1], E_CYLINDER1);
-	cylinder->vector = parse_tvector(d, d->parse.elmnts[2], E_CYLINDER2);
+	cylinder->axis = parse_tvector(d, d->parse.elmnts[2], E_CYLINDER2);
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
 	cylinder->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CYLINDER3);

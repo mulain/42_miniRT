@@ -45,12 +45,12 @@ void	init_structs(t_data *d)
 	d->amb_light.color = (t_color){0, 0, 0, 0};
 	d->camera.declared = false;
 	d->camera.fieldofview = 0;
-	d->camera.vector = (t_vector){0, 0, 0};
-	d->camera.point = (t_vector){0, 0, 0};
+	d->camera.vector = (t_3d){0, 0, 0};
+	d->camera.point = (t_3d){0, 0, 0};
 	d->light.declared = false;
 	d->light.brightness = 0.0;
 	d->light.color = (t_color){0, 0, 0, 0};
-	d->light.point = (t_vector){0, 0, 0};
+	d->light.point = (t_3d){0, 0, 0};
 	d->objectlist = NULL;
 	d->parse.fd = -1;
 	d->parse.elmnts = NULL;

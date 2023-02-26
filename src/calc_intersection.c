@@ -44,9 +44,9 @@ t_intrsct	intersect_plane(t_ray ray, t_plane plane)
 	t_intrsct	intersection;
 
 	intersection.color = plane.color.trgb;
-	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
+	dividend = dot(subtract(plane.point, ray.point),
 			plane.vector);
-	divisor = vector_dotprod(plane.vector, ray.vector);
+	divisor = dot(plane.vector, ray.vector);
 	if (divisor == 0)
 		intersection.distance = INFINITY;
 	else
@@ -66,11 +66,11 @@ double	intersect_plane_old(t_ray ray, t_plane plane)
 	double		divisor;
 	double		result;
 
-	dividend = vector_dotprod(point_subtract(plane.point, ray.point),
+	dividend = dot(subtract(plane.point, ray.point),
 			plane.vector);
 	if (fabs(dividend) < 0)
 		return (0);
-	divisor = vector_dotprod(plane.vector, ray.vector);
+	divisor = dot(plane.vector, ray.vector);
 	if (fabs(divisor) < 0)
 		return (INFINITY);
 	result = dividend / divisor;
@@ -106,15 +106,15 @@ return (intrsct2);
 */
 t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere)
 {
-	t_vector	oc;
+	t_3d		oc;
 	t_helper	h;
 	t_intrsct	intersection;
 
 	intersection.color = sphere.color.trgb;
-	oc = point_subtract(ray.point, sphere.point);
-	h.a = vector_dotprod(ray.vector, ray.vector);
-	h.b = 2 * vector_dotprod(ray.vector, oc);
-	h.c = vector_dotprod(oc, oc) - sphere.radius * sphere.radius;
+	oc = subtract(ray.point, sphere.point);
+	h.a = dot(ray.vector, ray.vector);
+	h.b = 2 * dot(ray.vector, oc);
+	h.c = dot(oc, oc) - sphere.radius * sphere.radius;
 	h.discriminant = h.b * h.b - 4 * h.a * h.c;
 	if (h.discriminant < 0)
 		intersection.distance = INFINITY;
@@ -125,13 +125,13 @@ t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere)
 
 double	intersect_sphere_old(t_ray ray, t_sphere sphere)
 {
-	t_vector	t;
+	t_3d		t;
 	t_helper	h;
 
-	t = point_subtract(ray.point, sphere.point);
-	h.a = vector_dotprod(ray.vector, ray.vector);
-	h.b = 2 * vector_dotprod(ray.vector, t);
-	h.c = vector_dotprod(t, t) - sphere.radius * sphere.radius;
+	t = subtract(ray.point, sphere.point);
+	h.a = dot(ray.vector, ray.vector);
+	h.b = 2 * dot(ray.vector, t);
+	h.c = dot(t, t) - sphere.radius * sphere.radius;
 	h.discriminant = h.b * h.b - 4 * h.a * h.c;
 	if (h.discriminant < 0)
 		return (INFINITY);
@@ -159,7 +159,7 @@ cylinder.
 */
 t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 {
-	t_vector	t;
+	t_3d		t;
 	t_helper	h;
 	double		y_intersect_1;
 	double		y_intersect_2;
@@ -168,7 +168,7 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 	t_intrsct	intersection;
 
 	intersection.color = cylinder.color.trgb;
-	t = point_subtract(ray.point, cylinder.point);
+	t = subtract(ray.point, cylinder.point);
 	h.a = ray.vector.x * ray.vector.x + ray.vector.z * ray.vector.z;
 	h.b = 2 * (t.x * ray.vector.x + t.z * ray.vector.z);
 	h.c = t.x * t.x + t.z * t.z - cylinder.radius * cylinder.radius;
@@ -203,108 +203,4 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 		return (intersection.distance = h.intersect_2, intersection);
 	}
 	return (intersection.distance = h.intersect_1, intersection);
-}
-
-
-
-typedef struct {
-    double x, y, z;
-} Vec3;
-
-typedef struct {
-    Vec3 origin;
-    Vec3 direction;
-} Ray;
-
-typedef struct {
-    Vec3 center;
-    Vec3 axis;
-    double radius;
-    double height;
-} Cylinder;
-
-double intersectCylinder(Ray ray, Cylinder cylinder) {
-    // Transform the ray and cylinder to a common coordinate system
-	t_vector	to_cyl;
-	t_vector	projction;
-	t_vector	to_closestpoint;
-	t_vector	to_top;
-	t_vector	to_bottom;
-	t_vector	intersection;
-
-	double		dotprod;
-	double		dist_axis;
-	double		dist_surface;
-	double		dist_intersct;
-	double		dist_top;
-	double		dist_bottom;
-
-	t_cylinder	cyl;
-	t_ray		ry;
-
-
-    Vec3 toCylinder = {cylinder.center.x - ray.origin.x, cylinder.center.y - ray.origin.y, cylinder.center.z - ray.origin.z};
-	to_cyl = point_subtract(cyl.point, ry.point);
-    
-	double dotProduct = ray.direction.x * cylinder.axis.x + ray.direction.y * cylinder.axis.y + ray.direction.z * cylinder.axis.z;
-    dotprod = vector_dotprod(ry.vector, cyl.vector);
-
-	Vec3 projection = {dotProduct * cylinder.axis.x, dotProduct * cylinder.axis.y, dotProduct * cylinder.axis.z};
-    projction = vector_multiply(cyl.vector, dotprod);
-
-	Vec3 toClosestPoint = {toCylinder.x - projection.x, toCylinder.y - projection.y, toCylinder.z - projection.z};
-    to_closestpoint = point_subtract(to_cyl, projction);
-	
-	double distanceToAxis = sqrt(toClosestPoint.x * toClosestPoint.x + toClosestPoint.y * toClosestPoint.y + toClosestPoint.z * toClosestPoint.z);
-    dist_axis = vector_length(to_closestpoint);
-	
-	double distanceToSurface = sqrt(cylinder.radius * cylinder.radius - distanceToAxis * distanceToAxis);
-	dist_surface = sqrt(cyl.radius * cyl.radius - dist_axis * dist_axis);
-
-    double distanceToIntersection = dotProduct - distanceToSurface;
-	dist_intersct = dotprod - dist_surface;
-
-    Vec3 intersectionPoint = {ray.origin.x + distanceToIntersection * ray.direction.x, ray.origin.y + distanceToIntersection * ray.direction.y, ray.origin.z + distanceToIntersection * ray.direction.z};
-    intersection.x = ry.point.x + dist_intersct * ry.vector.x;
-	intersection.y = ry.point.y + dist_intersct * ry.vector.y;
-	intersection.z = ry.point.z + dist_intersct * ry.vector.z;
-	
-	Vec3 axisDir = {cylinder.axis.x, cylinder.axis.y, cylinder.axis.z};
-	//why?
-
-    Vec3 toTop = {cylinder.center.x + axisDir.x * cylinder.height / 2.0 - intersectionPoint.x,
-                  cylinder.center.y + axisDir.y * cylinder.height / 2.0 - intersectionPoint.y,
-                  cylinder.center.z + axisDir.z * cylinder.height / 2.0 - intersectionPoint.z};
-	to_top.x = cyl.point.x + cyl.vector.x * cyl.height / 2 - intersection.x;
-	to_top.y = cyl.point.y + cyl.vector.y * cyl.height / 2 - intersection.y;
-	to_top.z = cyl.point.z + cyl.vector.z * cyl.height / 2 - intersection.z;
-
-    Vec3 toBottom = {cylinder.center.x - axisDir.x * cylinder.height / 2.0 - intersectionPoint.x,
-                     cylinder.center.y - axisDir.y * cylinder.height / 2.0 - intersectionPoint.y,
-                     cylinder.center.z - axisDir.z * cylinder.height / 2.0 - intersectionPoint.z};
-	to_bottom.x = cyl.point.x - cyl.vector.x * cyl.height / 2 - intersection.x;
-	to_bottom.y = cyl.point.y - cyl.vector.y * cyl.height / 2 - intersection.y;
-	to_bottom.z = cyl.point.z - cyl.vector.z * cyl.height / 2 - intersection.z;
-
-    double distanceToTop = sqrt(toTop.x * toTop.x + toTop.y * toTop.y + toTop.z * toTop.z);
-	dist_top = vector_length(to_top);
-    
-	double distanceToBottom = sqrt(toBottom.x * toBottom.x + toBottom.y * toBottom.y + toBottom.z * toBottom.z);
-	dist_bottom = vector_length(to_bottom);
-
-    double t = -1;
-    if (distanceToIntersection < 0) {
-        // The intersection point is behind the ray
-        t = -1;
-    } else if (distanceToTop < 0 || distanceToBottom < 0 || distanceToTop > cylinder.height || distanceToBottom > cylinder.height) {
-        // The ray misses the cylinder
-        t = -1;
-    } else if (distanceToTop < distanceToBottom) {
-        // The ray intersects the top surface of the cylinder
-        t = (distanceToTop - toCylinder.y) / ray.direction.y;
-    } else {
-        // The ray intersects the bottom surface of the cylinder
-        t = (distanceToBottom + toCylinder.y) / -ray.direction.y;
-    }
-    return t;
 }
