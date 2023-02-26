@@ -1,3 +1,14 @@
+// Calculate the coefficients of the quadratic equation for the ray-cylinder intersection
+    double a = ray->vector.x * ray->vector.x + ray->vector.y * ray->vector.y - cylinder->radius * cylinder->radius * (ray->vector.x * ray->vector.x + ray->vector.y * ray->vector.y) / (cylinder->radius * cylinder->radius);
+    
+	double b = 2 * (ray->vector.x * (ray->point.x - cylinder->center.x) + ray->vector.y * (ray->point.y - cylinder->center.y) - cylinder->radius * cylinder->radius * ray->vector.x * (ray->point.x - cylinder->center.x) / (cylinder->radius * cylinder->radius) - cylinder->radius * cylinder->radius * ray->vector.y * (ray->point.y - cylinder->center.y) / (cylinder->radius * cylinder->radius));
+    
+	double c = (ray->point.x - cylinder->center.x) * (ray->point.x - cylinder->center.x) + (ray->point.y - cylinder->center.y) * (ray->point.y - cylinder->center.y) - cylinder->radius * cylinder->radius + cylinder->radius * cylinder->radius * (ray->point.x - cylinder->center.x) * (ray->point.x - cylinder->center.x) / (cylinder->radius * cylinder->radius) + cylinder->radius * cylinder->radius * (ray->point.y - cylinder->center.y) * (ray->point.y - cylinder->center.y) / (cylinder->radius * cylinder->radius);
+
+
+
+
+
 #include "libft/include/libft.h"
 #include <unistd.h>
 #include <stdio.h>

@@ -1,0 +1,76 @@
+Ray Plane Intersection
+
+Ray formula:
+	r(t) = o + t * d
+	Where
+		o is the point of the ray
+		t is the distance traveled (our target value later)
+		d is the defining vector of the ray
+Plane formula:
+	(p' - p) * n = 0
+	Where
+		p' is the evaluated point
+		p is the point of the plane
+		n is the defining vector of the plane
+	Means that the vector connecting p and the evaluated point p'
+	is orthogonal to the plane's normvector and therefore in the plane.
+Integrate ray into plane formula instead of p':
+	(r(t) - p) * n = 0
+	((o + t * d) - p) * n = 0
+Solve for t:
+	((o + td) - p) * n = 0
+	(o + td)n - pn = 0
+	on + tdn - pn = 0
+	tdn = pn - on
+	t = (pn - on) / (dn)
+	or
+	t = [(p - o) * n] / [d * n] -> used in the function
+Cases
+1)	If dividend is smaller than EPSILON:
+	Ray starts in plane -> immediate intersection (return 0)
+2)	If divisor is smaller than EPSILON:
+	Ray is parallel to plane -> no intersection (return INFINITY)
+3)	If result is negative:
+	Intersection point is behind ray -> no intersection (return INFINITY)
+4)	Intersection found -> one intersection (return dividend / divisor)
+
+Ray Sphere Intersection
+
+Sphere formula: ||(p - c)||² = r²
+	c = center of sphere
+	r = radius of sphere
+	p = point on sphere
+	||x|| means length/magnitude of the vector x
+insert ray formula for point p and solve for t to get a
+quadratic equation. Solve that to get the discriminants:
+
+if (discriminant < 0)
+	return (INFINITY);
+	-> no intersection
+if (discriminant == 0)
+	return (-b / (2 * a));
+	-> only one intersection point (tangent)
+if (intrsct2 < 0)
+	return (INFINITY);
+	-> sphere behind ray, no intersection
+if (intrsct1 >= 0)
+	return (intrsct1);
+	-> 2 intersections but we only want intrsct1
+	intrsct2 however is also valid (if ray passes thru sphere)
+return (intrsct2);
+	-> ray originates inside sphere if intrsct1 < 0, one intersection
+
+Ray Cylinder Intersection
+
+Split problem into 3 parts:
+-	Solve for endless tube
+-	Delimit tube
+-	Solve for the caps
+
+Infinite cylinder along y axis of radius r has equation
+x² + z² - r² = 0.
+The equation for a more general cylinder of radius r
+oriented along a line p_a + v_a * t:
+(q - pa - (va,q - pa)va)2 - r2 = 0
+where q = (x,y,z) is a point on the
+cylinder.

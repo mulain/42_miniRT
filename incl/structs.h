@@ -22,8 +22,8 @@ typedef struct s_helper
 	double		b;
 	double		c;
 	double		discriminant;
-	double		intersect_1;
-	double		intersect_2;
+	double		t1;
+	double		t2;
 }	t_helper;
 
 // Cartesian representation of a vector or point in 3D Euclidean space.
@@ -36,8 +36,8 @@ typedef struct s_3d
 
 typedef struct s_ray
 {
-	t_3d	point;
-	t_3d	vector;
+	t_3d	origin;
+	t_3d	direction;
 }	t_ray;
 
 typedef struct s_intersection
@@ -80,21 +80,21 @@ typedef struct s_ambientlight
 
 typedef struct s_sphere
 {
-	t_3d		point;
+	t_3d		center;
 	t_color		color;
 	double		radius;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_3d	point;
-	t_3d	vector;
+	t_3d		point;
+	t_3d		vector;
 	t_color		color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_3d		point;
+	t_3d		center;
 	t_3d		axis;
 	double		radius;
 	double		height;

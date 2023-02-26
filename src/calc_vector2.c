@@ -5,7 +5,7 @@
 The length (or magnitude) of a vector is the square root of the dot product
 of the vector with itself.
 */
-double	vector_length(t_3d v)
+double	length(t_3d v)
 {
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
@@ -64,7 +64,7 @@ t_3d	norm(t_3d v)
 	double	len;
 	double	inv_len;
 
-	len = vector_length(v);
+	len = length(v);
 	inv_len = 1 / len;
 	v.x *= inv_len;
 	v.y *= inv_len;

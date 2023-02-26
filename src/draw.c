@@ -93,14 +93,14 @@ void	render(t_data *d)
 	int		y;
 	t_ray	ray;
 
-	ray.point = d->camera.point;
+	ray.origin = d->camera.point;
 	y = 0;
 	while (y < d->height)
 	{
 		x = 0;
 		while (x < d->width)
 		{
-			ray.vector = get_3d(d, x, y);
+			ray.direction = get_3d(d, x, y);
 			put_pixel(&d->mlx, x, y, trace_ray(d, d->objectlist, ray));
 			x++;
 		}
