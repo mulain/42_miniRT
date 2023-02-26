@@ -78,57 +78,6 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 	return (i.distance = INFINITY, i);
 }
 
-t_intrsct	intersect_cylinder_asdf(t_ray ray, t_cylinder cylinder)
-{
-	t_3d		oc;
-	t_helper	h;
-	double		y_t1;
-	double		y_t2;
-	double		y_min;
-	double		y_max;
-	t_intrsct	intersection;
-
-	intersection.color = cylinder.color.trgb;
-	oc = subtract(ray.origin, cylinder.center);
-	h.a = dot(ray.direction, ray.direction);
-	h.b = 2 * dot(oc, ray.direction);
-	h.c = dot(oc, oc) - cylinder.radius * cylinder.radius;
-	h.discriminant = h.b * h.b - 4 * h.a * h.c;
-	if (h.discriminant < 0)
-		return (intersection.distance = INFINITY, intersection);
-	h.t1 = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
-	h.t2 = (-h.b + sqrt(h.discriminant)) / (2 * h.a);
-	if (h.t2 < 0)
-		return (intersection.distance = INFINITY, intersection);
-	y_t1 = ray.origin.y + h.t1 * ray.direction.y;
-	y_t2 = ray.origin.y + h.t2 * ray.direction.y;
-	y_min = cylinder.center.y;
-	y_max = cylinder.center.y + cylinder.height;
-	if ((y_t1 < y_min && y_t2 < y_min)
-		|| (y_t1 > y_max && y_t2 > y_max))
-		return (intersection.distance = INFINITY, intersection);
-	if (y_t1 < y_min)
-		h.t1 = (y_min - ray.origin.y) / ray.direction.y;
-	else if (y_t1 > y_max)
-		h.t1 = (y_max - ray.origin.y) / ray.direction.y;
-	if (y_t2 < y_min)
-		h.t2 = (y_min - ray.origin.y) / ray.direction.y;
-	else if (y_t2 > y_max)
-		h.t2 = (y_max - ray.origin.y) / ray.direction.y;
-	if (h.t1 > h.t2)
-		return (intersection.distance = INFINITY, intersection);
-	if (h.t1 < 0)
-	{
-		if (h.t2 < 0)
-			return (intersection.distance = INFINITY, intersection);
-		return (intersection.distance = h.t2, intersection);
-	}
-	return (intersection.distance = h.t1, intersection);
-}
-
-
-
-
 t_intrsct	intersect_cylinder_saveoldwork(t_ray ray, t_cylinder cylinder)
 {
 	t_3d		oc;
