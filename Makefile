@@ -20,11 +20,11 @@ else
 	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
-SRCFILE	= 	calc_intersection.c\
-			calc_vector1.c\
+SRCFILE	= 	calc_vector1.c\
 			calc_vector2.c\
 			draw.c\
 			hooks.c\
+			intersections1.c\
 			main.c\
 			objlist.c\
 			parsing_lightsandcam.c\

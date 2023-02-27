@@ -15,6 +15,14 @@ typedef struct s_mlx
 	bool	initialized;
 }	t_mlx;
 
+// Cartesian representation of a vector or point in 3D Euclidean space.
+typedef struct s_3d
+{
+	double		x;
+	double		y;
+	double		z;
+}	t_3d;
+
 // Helper for parsing objects that need more variables than norm allows
 typedef struct s_helper
 {
@@ -23,22 +31,15 @@ typedef struct s_helper
 	double		c;
 	double		discriminant;
 	double		t1;
-	double		t2;
+	
+	double		dot_prod;
+	t_3d		intrsct;
+
 	double		t_base;
 	double		t_top;
-	double		y_min;
-	double		y_max;
-	double		y_t1;
-	double		y_t2;
 }	t_helper;
 
-// Cartesian representation of a vector or point in 3D Euclidean space.
-typedef struct s_3d
-{
-	double		x;
-	double		y;
-	double		z;
-}	t_3d;
+
 
 typedef struct s_ray
 {

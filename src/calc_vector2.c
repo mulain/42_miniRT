@@ -10,29 +10,6 @@ double	length(t_3d v)
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-/*
-Algebraically, the dot product is the sum of the products of the
-corresponding entries of the two vectors.
-(used this in the function)
-
-Geometrically, it is the product of the Euclidean magnitudes of
-the two vectors and the cosine of the angle between them.
-A·B = ||A|| ||B|| cos(θ)
-where ||A|| and ||B|| are the magnitudes of the vectors,
-and θ is the angle between the vectors.
-
-These definitions are equivalent when using Cartesian point.
-
-Cosine in rel. to angle between vectors:
-	-	0 deg: cosine is 1
-	-	180 deg: cosine is -1
-	-	90 deg: cosine is 0
-
-Dotprod depends on angle (deg) between vectors:
-	> 0 && < 90		positive
-	== 90			0
-	> 90 && < 180	negative
-*/
 double	dot(t_3d v1, t_3d v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);

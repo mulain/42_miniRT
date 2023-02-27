@@ -1,3 +1,35 @@
+Dot Product
+Algebraically, the dot product is the sum of the products of the
+corresponding entries of the two vectors.
+(used this in the function)
+
+It is a measure of direction and magnitude, i.e.:
+	- how much the vectors are going in the same direction
+	- how long the vectors are compared to each other
+
+Range: any real number.
+
+Geometrically, it is the product of the Euclidean magnitudes of
+the two vectors and the cosine of the angle between them.
+A·B = ||A|| ||B|| cos(θ)
+where ||A|| and ||B|| are the magnitudes of the vectors,
+and θ is the angle between the vectors.
+
+These definitions are equivalent when using Cartesian point.
+
+Cosine in rel. to angle between vectors:
+	-	0 deg: cosine is 1
+	-	180 deg: cosine is -1
+	-	90 deg: cosine is 0
+
+Dotprod depends on angle (deg) between vectors:
+	> 0 && < 90		positive
+	== 90			0
+	> 90 && < 180	negative
+*/
+
+
+
 Ray Plane Intersection
 
 Ray formula:
@@ -77,6 +109,7 @@ cylinder.
 
 the quadratic equation usually has two solutions (t1 and t2) of which we choose the closer -
 because that is where our ray will first hit.
+Since we ALWAYS want the closer one (t1), we dont calculate t2.
 This means that we are actually only calculating the portion of the object that is facing us,
 resulting in half tubes for cylinders. See PNG for visualization of the half cylinder.
 The reason this happens is: the infinite cylinder is calculated first and gives us t1. But later
@@ -84,3 +117,44 @@ we apply the boundary of length and that t1 gets thrown out. T2 would have been 
 discarded that. If we wanted to make a hollow cylinder, we would have to keep t2 and calculate it!
 But: this problem is only visible as long as the caps aren't rendered. As soon as the caps are included,
 the misssing portion of the cylinder is behind them anyway and it doesn't matter.
+
+Cylinder Function with comments
+double	cylinder_tube(t_ray ray, t_cylinder cylinder)
+{
+	t_helper	h;
+	t_3d		v;
+	t_3d		u;
+	t_3d		oc;
+	
+	// Compute the direction vector of the ray projected onto the cylinder's axis
+	v = mult(cylinder.axis, dot(ray.direction, cylinder.axis));
+	// Compute the direction vector of the ray perpendicular to the cylinder's axis
+	v = subtract(ray.direction, v);
+	// Compute the origin vector of the ray projected onto the cylinder's axis
+	oc = subtract(ray.origin, cylinder.base);
+	u = mult(cylinder.axis, dot(oc, cylinder.axis));
+	// Compute the origin vector of the ray perpendicular to the cylinder's axis
+	u = subtract(oc, u);
+	// Compute coefficients of quadratic equation
+	h.a = dot(v, v);
+	h.b = 2 * dot(v, u);
+	h.c = dot(u, u) - cylinder.radius * cylinder.radius;
+	// Solve quadratic equation only for closer point t1
+	h.discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (h.discriminant < 0)
+		return (INFINITY);
+	h.t1 = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
+	if (h.t1 < 0)
+		return (INFINITY);
+	//Intersection of ray with cylinder is origin of ray + 
+	//distance t1 traveled along direction of ray
+	h.intrsct = add(ray.origin, mult(ray.direction, h.t1));
+	h.intrsct = subtract(h.intrsct, cylinder.base);
+	h.dot_prod = dot(h.intrsct, cylinder.axis);
+
+	if (!(h.dot_prod >= -cylinder.height * 0.5 && h.dot_prod <= cylinder.height * 0.5))
+		return INFINITY;
+	if (h.t1 < 0)
+		return (INFINITY);
+	return h.t1;
+}
