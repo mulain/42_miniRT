@@ -18,7 +18,7 @@ double	parse_double(t_data *d, char *input, char *msg)
 	return (value);
 }
 
-t_color	parse_tcolor(t_data *d, char *input, char *msg)
+t_color	parse_color(t_data *d, char *input, char *msg)
 {
 	int			i;
 	char		**split;
@@ -43,7 +43,7 @@ t_color	parse_tcolor(t_data *d, char *input, char *msg)
 	return (color);
 }
 
-t_3d	parse_tpoint(t_data *d, char *input, char *msg)
+t_3d	parse_point(t_data *d, char *input, char *msg)
 {
 	int			i;
 	char		**split;
@@ -66,7 +66,7 @@ t_3d	parse_tpoint(t_data *d, char *input, char *msg)
 	return (point);
 }
 
-t_3d	parse_tvector(t_data *d, char *input, char *msg)
+t_3d	parse_vector(t_data *d, char *input, char *msg)
 {
 	int			i;
 	char		**split;

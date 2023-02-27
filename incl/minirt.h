@@ -65,9 +65,9 @@ void		parse_cylinder(t_data *d);
 
 // parsing_utils.c
 double		parse_double(t_data *d, char *input, char *msg);
-t_color		parse_tcolor(t_data *d, char *input, char *msg);
-t_3d		parse_tpoint(t_data *d, char *input, char *msg);
-t_3d		parse_tvector(t_data *d, char *input, char *msg);
+t_color		parse_color(t_data *d, char *input, char *msg);
+t_3d		parse_point(t_data *d, char *input, char *msg);
+t_3d		parse_vector(t_data *d, char *input, char *msg);
 int			parse_int(t_data *d, char *input, char *msg);
 
 // utils_print1.c
