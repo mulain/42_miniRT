@@ -23,7 +23,6 @@ pl				-15,0,0			1,0,0			255,100,240 left
 pl				-15,0,0			1,1,0			0,100,240 left angled
 
 # CYLINDERS		Position		Vector			Diameter		Height			Color
-cy				-10,0,-5		1,0,0			1				3				0,100,200 light blue
+cy				-10,0,-5.5		1,.1,0			1				3				255,100,200 pink
 cy				0,-1,-5			0,1,0			2				3				0,100,200 light blue
-cy				2.5,2,-3.55		-.5,1,0			1				3				50,50,100 navy
-cy				-5,4,-5			0,0,.1			2				3				50,50,100 navy
+cy				2.5,2,-3.55		0,1,0			1				3				50,50,100 navy

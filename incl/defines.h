@@ -5,7 +5,7 @@
 // Settings
 # define IMG_WIDTH		1500
 # define IMG_HEIGHT		1000
-# define EPSILON		0.00001
+# define EPSILON		0.0
 # define RAYDEPTH		2
 
 // Error messages

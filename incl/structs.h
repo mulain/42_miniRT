@@ -24,6 +24,10 @@ typedef struct s_helper
 	double		discriminant;
 	double		t1;
 	double		t2;
+	double		y_min;
+	double		y_max;
+	double		y_t1;
+	double		y_t2;
 }	t_helper;
 
 // Cartesian representation of a vector or point in 3D Euclidean space.

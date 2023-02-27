@@ -74,3 +74,13 @@ oriented along a line p_a + v_a * t:
 (q - pa - (va,q - pa)va)2 - r2 = 0
 where q = (x,y,z) is a point on the
 cylinder.
+
+the quadratic equation usually has two solutions (t1 and t2) of which we choose the closer -
+because that is where our ray will first hit.
+This means that we are actually only calculating the portion of the object that is facing us,
+resulting in half tubes for cylinders. See PNG for visualization of the half cylinder.
+The reason this happens is: the infinite cylinder is calculated first and gives us t1. But later
+we apply the boundary of length and that t1 gets thrown out. T2 would have been visible, but we already
+discarded that. If we wanted to make a hollow cylinder, we would have to keep t2 and calculate it!
+But: this problem is only visible as long as the caps aren't rendered. As soon as the caps are included,
+the misssing portion of the cylinder is behind them anyway and it doesn't matter.
