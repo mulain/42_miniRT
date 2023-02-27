@@ -24,6 +24,8 @@ typedef struct s_helper
 	double		discriminant;
 	double		t1;
 	double		t2;
+	double		t_base;
+	double		t_top;
 	double		y_min;
 	double		y_max;
 	double		y_t1;
@@ -98,7 +100,8 @@ typedef struct s_plane
 
 typedef struct s_cylinder
 {
-	t_3d		center;
+	t_3d		base;
+	t_3d		top;
 	t_3d		axis;
 	double		radius;
 	double		height;

@@ -1,57 +1,57 @@
 
 #include "minirt.h"
 
-void	print_sphere(t_sphere *sp)
+void	print_sphere(t_sphere *sphere)
 {
 	printf("----- Sphere -----\n");
 	printf("Center:\n");
-	printf("  x: %f\n", sp->center.x);
-	printf("  y: %f\n", sp->center.y);
-	printf("  z: %f\n", sp->center.z);
+	printf("  x: %f\n", sphere->center.x);
+	printf("  y: %f\n", sphere->center.y);
+	printf("  z: %f\n", sphere->center.z);
 	printf("Radius:\n");
-	printf("  %f\n", sp->radius);
+	printf("  %f\n", sphere->radius);
 	printf("Color:\n");
-	printf("  r: %i\n", sp->color.r);
-	printf("  g: %i\n", sp->color.g);
-	printf("  b: %i\n", sp->color.b);
+	printf("  r: %i\n", sphere->color.r);
+	printf("  g: %i\n", sphere->color.g);
+	printf("  b: %i\n", sphere->color.b);
 }
 
-void	print_plane(t_plane *pl)
+void	print_plane(t_plane *plane)
 {
 	printf("----- Plane -----\n");
 	printf("Point:\n");
-	printf("  x: %f\n", pl->point.x);
-	printf("  y: %f\n", pl->point.y);
-	printf("  z: %f\n", pl->point.z);
+	printf("  x: %f\n", plane->point.x);
+	printf("  y: %f\n", plane->point.y);
+	printf("  z: %f\n", plane->point.z);
 	printf("Vector:\n");
-	printf("  x: %f\n", pl->vector.x);
-	printf("  y: %f\n", pl->vector.y);
-	printf("  z: %f\n", pl->vector.z);
+	printf("  x: %f\n", plane->vector.x);
+	printf("  y: %f\n", plane->vector.y);
+	printf("  z: %f\n", plane->vector.z);
 	printf("Color:\n");
-	printf("  r: %i\n", pl->color.r);
-	printf("  g: %i\n", pl->color.g);
-	printf("  b: %i\n", pl->color.b);
+	printf("  r: %i\n", plane->color.r);
+	printf("  g: %i\n", plane->color.g);
+	printf("  b: %i\n", plane->color.b);
 }
 
-void	print_cylinder(t_cylinder *cy)
+void	print_cylinder(t_cylinder *cylinder)
 {
 	printf("----- Cylinder -----\n");
 	printf("Base:\n");
-	printf("  x: %f\n", cy->center.x);
-	printf("  y: %f\n", cy->center.y);
-	printf("  z: %f\n", cy->center.z);
+	printf("  x: %f\n", cylinder->base.x);
+	printf("  y: %f\n", cylinder->base.y);
+	printf("  z: %f\n", cylinder->base.z);
 	printf("Axis:\n");
-	printf("  x: %f\n", cy->axis.x);
-	printf("  y: %f\n", cy->axis.y);
-	printf("  z: %f\n", cy->axis.z);
+	printf("  x: %f\n", cylinder->axis.x);
+	printf("  y: %f\n", cylinder->axis.y);
+	printf("  z: %f\n", cylinder->axis.z);
 	printf("Radius:\n");
-	printf("  %f\n", cy->radius);
+	printf("  %f\n", cylinder->radius);
 	printf("Height:\n");
-	printf("  %f\n", cy->height);
+	printf("  %f\n", cylinder->height);
 	printf("Color:\n");
-	printf("  r: %i\n", cy->color.r);
-	printf("  g: %i\n", cy->color.g);
-	printf("  b: %i\n", cy->color.b);
+	printf("  r: %i\n", cylinder->color.r);
+	printf("  g: %i\n", cylinder->color.g);
+	printf("  b: %i\n", cylinder->color.b);
 }
 
 void	print_t3d(t_3d v, char *name)
