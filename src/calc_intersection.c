@@ -53,8 +53,25 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 
 	i.color = cylinder.color.trgb;
 	
-	// Compute the direction vector of the ray projected onto the cylinder's axis
+	// Check for intersection with the closer cylinder cap
 	projection = dot(ray.direction, cylinder.axis);
+	/* oc = subtract(cylinder.center, ray.origin);
+
+	t = dot(oc, cylinder.axis) / projection;
+	//double t = ((circle.center.x - ray.start.x) * circle.normal.x + (circle.center.y - ray.start.y) * circle.normal.y + (circle.center.z - ray.start.z) * circle.normal.z) / dot_product;
+	// if (t < 0) no cap intersetion (is behind starting point)
+	t_3d intersection_point = add(ray.origin, mult(ray.direction, t));
+	double dist = distance(intersection_point, cylinder.center);
+	if (dist < cylinder.radius)
+		return (i.distance = dist, i); */
+
+
+	
+
+
+
+
+	// Compute the direction vector of the ray projected onto the cylinder's axis
 	v = mult(cylinder.axis, projection);
 
 	// Compute the direction vector of the ray perpendicular to the cylinder's axis
@@ -72,23 +89,23 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 	h.b = 2 * dot(v, u);
 	h.c = dot(u, u) - cylinder.radius * cylinder.radius;
 
-	// Solve quadratic equation
+	// Solve quadratic equation only for closer point
 	h.discriminant = h.b * h.b - 4 * h.a * h.c;
 	if (h.discriminant < 0)
 		return (i.distance = INFINITY, i);
 	h.t1 = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
-	h.t2 = (-h.b + sqrt(h.discriminant)) / (2 * h.a);
-	if (h.t2 < EPSILON)
+	//h.t2 = (-h.b + sqrt(h.discriminant)) / (2 * h.a);
+	if (h.t1 < 0)
 		return (i.distance = INFINITY, i);
 	
-	// check if the intersection point is within the valid height range
+/* 	// check if the intersection point is within the valid height range
 	float distance;
 	// only tests for one point. this is not "correct". see info notes. 
 	if (h.t1 > EPSILON)
 		distance = h.t1;
 	else
-		distance = h.t2;
-	t_3d ray_scaled = mult(ray.direction, distance);
+		distance = h.t2; // remove t2 altogether? */
+	t_3d ray_scaled = mult(ray.direction, h.t1);
 	t_3d intersection = add(ray.origin, ray_scaled);
 	
 	t_3d intersection_relative = subtract(intersection, cylinder.center);
@@ -97,7 +114,7 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
     
 	if (intersection_dot_axis >= -cylinder.height/2 && intersection_dot_axis <= cylinder.height/2)
 	{
-        t = distance;
+        t = h.t1;
     }
 	else
 	{

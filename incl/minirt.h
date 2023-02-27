@@ -22,7 +22,7 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder);
 // calc_vector1.c
 t_3d		add(t_3d p1, t_3d p2);
 t_3d		subtract(t_3d p1, t_3d p2);
-double		point_distance(t_3d p1, t_3d p2);
+double		distance(t_3d p1, t_3d p2);
 t_3d		mult(t_3d v, double mult);
 t_3d		divide(t_3d v, double div);
 

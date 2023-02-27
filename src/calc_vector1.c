@@ -11,7 +11,7 @@ t_3d	subtract(t_3d p1, t_3d p2)
 	return ((t_3d){p1.x - p2.x, p1.y - p2.y, p1.z - p2.z});
 }
 
-double	point_distance(t_3d p1, t_3d p2)
+double	distance(t_3d p1, t_3d p2)
 {
 	double	delta_x;
 	double	delta_y;
