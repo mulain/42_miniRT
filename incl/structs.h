@@ -40,18 +40,11 @@ typedef struct s_helper
 }	t_helper;
 
 
-
 typedef struct s_ray
 {
 	t_3d	origin;
 	t_3d	direction;
 }	t_ray;
-
-typedef struct s_intersection
-{
-	double		distance;
-	int			color;
-}	t_intrsct;
 
 typedef struct s_color
 {
@@ -60,6 +53,12 @@ typedef struct s_color
 	int			b;
 	int			trgb;
 }	t_color;
+
+typedef struct s_intersection
+{
+	double		distance;
+	t_color		color;
+}	t_intrsct;
 
 typedef struct s_light
 {

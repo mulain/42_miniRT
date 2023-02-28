@@ -7,7 +7,7 @@ t_intrsct	intersect_plane(t_ray ray, t_plane plane)
 	double		result;
 	t_intrsct	i;
 
-	i.color = plane.color.trgb;
+	i.color = plane.color;
 	divisor = dot(plane.vector, ray.direction);
 	if (fabs(divisor) < EPSILON)
 		return (i.distance = INFINITY, i);
@@ -25,7 +25,7 @@ t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere)
 	t_helper	h;
 	t_intrsct	i;
 
-	i.color = sphere.color.trgb;
+	i.color = sphere.color;
 	oc = subtract(ray.origin, sphere.center);
 	h.a = dot(ray.direction, ray.direction);
 	h.b = 2 * dot(ray.direction, oc);
@@ -44,7 +44,7 @@ t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder)
 	double		t_tube;
 	double		t_caps;
 
-	i.color = cylinder.color.trgb;
+	i.color = cylinder.color;
 	t_tube = cylinder_tube(ray, cylinder);
 	t_caps = cylinder_caps(ray, cylinder);
 	i.distance = fmin(t_tube, t_caps);

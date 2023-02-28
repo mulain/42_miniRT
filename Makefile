@@ -20,7 +20,8 @@ else
 	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
-SRCFILE	= 	calc_vector1.c\
+SRCFILE	= 	calc_color.c\
+			calc_vector1.c\
 			calc_vector2.c\
 			draw.c\
 			hooks.c\

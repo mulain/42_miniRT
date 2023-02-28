@@ -55,23 +55,13 @@ t_3d	get_3d(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-/* transform ray
- Vector3 cameraRight = cross(cameraDirection, cameraUp);
-        Vector3 worldDirection = {
-            cameraRight.x * rayDirection.x + cameraUp.x * rayDirection.y + cameraDirection.x * rayDirection.z,
-            cameraRight.y * rayDirection.x + cameraUp.y * rayDirection.y + cameraDirection.y * rayDirection.z,
-            cameraRight.z * rayDirection.x + cameraUp.z * rayDirection.y + cameraDirection.z * rayDirection.z
-        };
-        worldDirection = normalize(worldDirection); */
-
 int	trace_ray(t_data *d, t_objlist *objs, t_ray ray)
 {
-	t_intrsct	intersection;
+	t_intrsct	i;
 	t_intrsct	temp;
 
-	(void)d;
-	intersection.color = 0xFF000000;
-	intersection.distance = INFINITY;
+	i.color.trgb = 0xFF000000;
+	i.distance = INFINITY;
 	while (objs)
 	{
 		if (objs->objtype == sp)
@@ -80,11 +70,13 @@ int	trace_ray(t_data *d, t_objlist *objs, t_ray ray)
 			temp = intersect_plane(ray, *(t_plane *)objs->content);
 		else if (objs->objtype == cy)
 			temp = intersect_cylinder(ray, *(t_cylinder *)objs->content);
-		if (temp.distance < intersection.distance)
-			intersection = temp;
+		if (temp.distance < i.distance)
+			i = temp;
 		objs = objs->next;
 	}
-	return (intersection.color);
+	i.color = add_light(i.color, d->amb_light.color);
+	i.color = adjust_brightness(i.color, d->amb_light.brightness);
+	return (i.color.trgb);
 }
 
 void	render(t_data *d)
