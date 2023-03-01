@@ -25,6 +25,7 @@ SRCFILE	= 	calc_color.c\
 			calc_vector2.c\
 			draw.c\
 			hooks.c\
+			intersections_util.c\
 			intersections1.c\
 			main.c\
 			objlist.c\

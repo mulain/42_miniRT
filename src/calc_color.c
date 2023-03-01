@@ -52,21 +52,3 @@ t_color	add_light(t_color base, t_color light)
 	base.trgb = 0x00FFFFFF & (base.r << 16 | base.g << 8 | base.b);
 	return (base);
 }
-
-
-
-/* t_color	adjust_brightness_oldmessedup(t_color color, double factor)
-{
-
-	color.r = ((0x00FF0000 & trgb) >> 16) * factor;
-	if (color.r > 255)
-		color.r = 255;
-	color.g = ((0x0000FF00 & trgb) >> 8) * factor;
-	if (color.g > 255)
-		color.g = 255;
-	color.b = (0x000000FF & trgb) * factor;
-	if (color.b > 255)
-		color.b = 255;
-	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
-	return (color);
-} */

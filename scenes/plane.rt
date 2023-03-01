@@ -1,0 +1,16 @@
+# CAMERA		Position		Vector			Field of View
+C				0,0,0			0,.5,-1			100
+
+# AMBIENT LIGHT					Brightness		Color
+A								1.0 			0,0,255
+
+# LIGHT			Position		Brightness		Color
+L				0,-5,0			1.0				0,0,100
+
+# SPHERES		Position		Diameter		Color
+
+# PLANES		Position		Vector			Color
+pl				0,0,-50			0,0,1			200,200,255 background
+pl				0,-5,1			0,1,0			100,180,100	floor
+
+# CYLINDERS		Position		Vector			Diameter		Height			Color

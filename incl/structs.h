@@ -29,12 +29,8 @@ typedef struct s_helper
 	double		a;
 	double		b;
 	double		c;
-	double		discriminant;
-	double		t1;
+	t_3d		oc;
 	
-	double		dot_prod;
-	t_3d		intrsct;
-
 	double		t_base;
 	double		t_top;
 }	t_helper;
@@ -57,6 +53,7 @@ typedef struct s_color
 typedef struct s_intersection
 {
 	double		distance;
+	t_3d		point;
 	t_color		color;
 }	t_intrsct;
 

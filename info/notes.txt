@@ -117,7 +117,10 @@ we apply the boundary of length and that t1 gets thrown out. T2 would have been 
 discarded that. If we wanted to make a hollow cylinder or we wanted to start a ray inside of a cylinder,
 we would have to keep t2 and calculate it!
 But: this problem is only visible as long as the caps aren't rendered. As soon as the caps are included,
-the misssing portion of the cylinder is behind them anyway and it doesn't matter.
+the missing portion of the cylinder is behind them anyway and it doesn't matter.
+NOTE: Changed it back to also calculate t2 because the subject asks for dealing with rays
+inside of objects.
+Kept the text and img because it is interesting to visualize the effects of the math.
 
 Cylinder Function with comments
 double	cylinder_tube(t_ray ray, t_cylinder cylinder)
