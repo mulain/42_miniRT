@@ -1,40 +1,6 @@
 
 #include "../incl/minirt.h"
 
-t_intrsct	intersect_plane(t_ray ray, void *obj)
-{
-	t_plane		*plane;
-	t_intrsct	i;
-	double		div;
-
-	plane = (t_plane *)obj;
-	i.color = plane->color;
-	div = dot(plane->vector, ray.direction);
-	if (fabs(div) < EPSILON)
-		return (i.distance = INFINITY, i);
-	i.distance = dot(subtract(plane->point, ray.origin), plane->vector) / div;
-	if (i.distance < EPSILON)
-		return (i.distance = INFINITY, i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
-	return (i);
-}
-
-t_intrsct	intersect_disc(t_ray ray, void *obj)
-{
-	t_disc		*disc;
-	t_intrsct	i;
-	t_plane		disc_plane;
-
-	disc = (t_disc *)obj;
-	disc_plane.point = disc->center;
-	disc_plane.vector = disc->vector;
-	disc_plane.color = disc->color;
-	i = intersect_plane(ray, &disc_plane);
-	if (distance(i.point, disc->center) > disc->radius)
-		i.distance = INFINITY;
-	return (i);
-}
-
 t_intrsct	intersect_sphere(t_ray ray, void *obj)
 {
 	t_sphere	*sphere;
@@ -78,11 +44,11 @@ t_intrsct	intersect_cylinder(t_ray ray, void *obj)
 
 t_intrsct	intersect_tube(t_ray ray, void *obj)
 {
+	t_cylinder	*cylinder;
 	t_intrsct	i;
 	t_helper	h;
 	t_3d		translate[2];
 	double		length;
-	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)obj;
 	i.color = cylinder->color;
@@ -103,3 +69,24 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 		i.distance = INFINITY;
 	return (i);
 }
+
+/* t_intrsct	intersect_cone(t_ray ray, void *obj)
+{
+	t_cone		*cone;
+	t_intrsct	i;
+	t_helper	h;
+	t_3d		oc;
+
+	cone = (t_cone *)obj;
+	i.color = sphere.color.trgb;
+	oc = subtract(ray.origin, cone->base);
+	h.a = dot(ray.direction, ray.direction);
+	h.b = 2 * dot(ray.direction, oc);
+	h.c = dot(oc, oc) - sphere.radius * sphere.radius;
+	h.discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (h.discriminant < EPSILON)
+		i.distance = INFINITY;
+	else
+		i.distance = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
+	return (i);
+} */

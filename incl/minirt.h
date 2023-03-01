@@ -42,14 +42,16 @@ void		render(t_data *d);
 int			key_release(int key, t_data *d);
 int			event_windowdestroy(t_data *d);
 
-// intersections_util.c
+// intersect_util.c
 double		solve_quad(double a, double b, double c);
 
-// intersections1.c
+// intersect_2d.c
 t_intrsct	intersect_plane(t_ray ray, void *obj);
+t_intrsct	intersect_disc(t_ray ray, void *obj);
+
+// intersect_3d.c
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
 t_intrsct	intersect_cylinder(t_ray ray, void *obj);
-t_intrsct	intersect_disc(t_ray ray, void *obj);
 t_intrsct	intersect_tube(t_ray ray, void *obj);
 
 // main.c

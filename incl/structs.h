@@ -120,6 +120,16 @@ typedef struct s_cylinder
 	t_color		color;
 }	t_cylinder;
 
+typedef struct s_cone
+{
+	t_3d		base;
+	t_3d		top;
+	t_3d		axis;
+	double		radius;
+	double		height;
+	t_color		color;
+}	t_cone;
+
 // Struct for parsing
 typedef struct s_parsing
 {
