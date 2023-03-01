@@ -74,30 +74,6 @@ int	trace_ray(t_data *d, t_objlist *objlist, t_ray ray)
 	return (i.color.trgb);
 }
 
-int	trace_ray_old(t_data *d, t_objlist *objlist, t_ray ray)
-{
-	t_intrsct	i;
-	t_intrsct	temp;
-
-	i.color.trgb = 0xFF000000;
-	i.distance = INFINITY;
-	while (objlist)
-	{
-		if (objlist->objtype == sp)
-			temp = intersect_sphere(ray, *(t_sphere *)objlist->object);
-		else if (objlist->objtype == pl)
-			temp = intersect_plane(ray, *(t_plane *)objlist->object);
-		else if (objlist->objtype == cy)
-			temp = intersect_cylinder(ray, *(t_cylinder *)objlist->object);
-		if (temp.distance < i.distance)
-			i = temp;
-		objlist = objlist->next;
-	}
-	i.color = add_light(i.color, d->amb_light.color);
-	i.color = adjust_brightness(i.color, d->amb_light.brightness);
-	return (i.color.trgb);
-}
-
 void	render(t_data *d)
 {
 	int		x;

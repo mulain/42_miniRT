@@ -1,12 +1,15 @@
 
 #include "../incl/minirt.h"
 
-t_intrsct	intersect_plane(t_ray ray, t_plane plane)
+//t_intrsct	intersect_plane(t_ray ray, t_plane plane)
+t_intrsct	intersect_plane(t_ray ray, void *obj)
 {
 	double		divisor;
 	double		result;
+	t_plane		plane;
 	t_intrsct	i;
 
+	plane = *(t_plane *)obj;
 	i.color = plane.color;
 	divisor = dot(plane.vector, ray.direction);
 	if (fabs(divisor) < EPSILON)
@@ -90,12 +93,12 @@ double	cylinder_caps(t_ray ray, t_cylinder cylinder)
 	cap.color.trgb = 0x0;
 	cap.point = cylinder.top;
 	cap.vector = cylinder.axis;
-	t_top = intersect_plane(ray, cap).distance;
+	t_top = intersect_plane(ray, &cap).distance;
 	intrsct = add(ray.origin, mult(ray.direction, t_top));
 	if (distance(intrsct, cylinder.top) > cylinder.radius)
 		t_top = INFINITY;
 	cap.point = cylinder.base;
-	t_base = intersect_plane(ray, cap).distance;
+	t_base = intersect_plane(ray, &cap).distance;
 	intrsct = add(ray.origin, mult(ray.direction, t_base));
 	if (distance(intrsct, cylinder.base) > cylinder.radius)
 		t_base = INFINITY;

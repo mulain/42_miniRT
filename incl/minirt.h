@@ -43,7 +43,8 @@ int			key_release(int key, t_data *d);
 int			event_windowdestroy(t_data *d);
 
 // intersections1.c
-t_intrsct	intersect_plane(t_ray ray, t_plane plane);
+//t_intrsct	intersect_plane(t_ray ray, t_plane plane);
+t_intrsct	intersect_plane(t_ray ray, void *obj);
 t_intrsct	intersect_sphere(t_ray ray, t_sphere sphere);
 t_intrsct	intersect_cylinder(t_ray ray, t_cylinder cylinder);
 double		cylinder_caps(t_ray ray, t_cylinder cylinder);

@@ -9,7 +9,7 @@ integrate function into listobj
 
 integrate intersection point into intersection object
 
-integrate t2 again?
+integrate t2 again? yes!
 
 cylinder manipulation shmisms
 - ws			move pos.y
