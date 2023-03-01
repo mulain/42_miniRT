@@ -71,8 +71,6 @@ typedef struct s_ambientlight
 	bool		declared;
 }	t_ambientlight;
 
-// Objects
-
 typedef struct s_ray
 {
 	t_3d	origin;
@@ -108,7 +106,6 @@ typedef struct s_sphere
 	t_color		color;
 	double		radius;
 }	t_sphere;
-
 
 typedef struct s_cylinder
 {
