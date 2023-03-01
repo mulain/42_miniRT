@@ -1,15 +1,6 @@
 restructure intersection files
-- circle
-- tube
 - triangle
 - cone
-- solve quad?
-
-integrate function into listobj
-
-integrate intersection point into intersection object
-
-integrate t2 again? yes!
 
 cylinder manipulation shmisms
 - ws			move pos.y
@@ -18,3 +9,5 @@ cylinder manipulation shmisms
 - up down		height
 - left right	radius
 - 				vector: xyz and ctrl+xyz?
+
+Threads

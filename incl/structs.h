@@ -30,17 +30,7 @@ typedef struct s_helper
 	double		b;
 	double		c;
 	t_3d		oc;
-	
-	double		t_base;
-	double		t_top;
 }	t_helper;
-
-
-typedef struct s_ray
-{
-	t_3d	origin;
-	t_3d	direction;
-}	t_ray;
 
 typedef struct s_color
 {
@@ -81,12 +71,13 @@ typedef struct s_ambientlight
 	bool		declared;
 }	t_ambientlight;
 
-typedef struct s_sphere
+// Objects
+
+typedef struct s_ray
 {
-	t_3d		center;
-	t_color		color;
-	double		radius;
-}	t_sphere;
+	t_3d	origin;
+	t_3d	direction;
+}	t_ray;
 
 typedef struct s_plane
 {
@@ -94,6 +85,30 @@ typedef struct s_plane
 	t_3d		vector;
 	t_color		color;
 }	t_plane;
+
+typedef struct s_disc
+{
+	t_3d		center;
+	t_3d		vector;
+	double		radius;
+	t_color		color;
+}	t_disc;
+
+typedef struct s_triangle
+{
+	t_3d		p1;
+	t_3d		p2;
+	t_3d		p3;
+	t_color		color;
+}	t_triangle;
+
+typedef struct s_sphere
+{
+	t_3d		center;
+	t_color		color;
+	double		radius;
+}	t_sphere;
+
 
 typedef struct s_cylinder
 {

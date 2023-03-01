@@ -49,8 +49,8 @@ double		solve_quad(double a, double b, double c);
 t_intrsct	intersect_plane(t_ray ray, void *obj);
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
 t_intrsct	intersect_cylinder(t_ray ray, void *obj);
-t_intrsct	intersect_disc(t_ray ray, t_plane *plane, double radius);
-t_intrsct	intersect_tube(t_ray ray, t_cylinder *cylinder);
+t_intrsct	intersect_disc(t_ray ray, void *obj);
+t_intrsct	intersect_tube(t_ray ray, void *obj);
 
 // main.c
 int			main(int argc, char **argv);
