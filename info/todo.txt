@@ -1,0 +1,20 @@
+restructure intersection files
+- circle
+- tube
+- triangle
+- cone
+- solve quad?
+
+integrate function into listobj
+
+integrate intersection point into intersection object
+
+integrate t2 again?
+
+cylinder manipulation shmisms
+- ws			move pos.y
+- ad			move pos.x
+- qe			move pos.y
+- up down		height
+- left right	radius
+- 				vector: xyz and ctrl+xyz?

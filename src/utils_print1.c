@@ -9,11 +9,11 @@ void	print_objlist(t_objlist *lst)
 	while (temp)
 	{
 		if (temp->objtype == sp)
-			print_sphere(temp->content);
+			print_sphere(temp->object);
 		else if (temp->objtype == pl)
-			print_plane(temp->content);
+			print_plane(temp->object);
 		else if (temp->objtype == cy)
-			print_cylinder(temp->content);
+			print_cylinder(temp->object);
 		temp = temp->next;
 	}
 }

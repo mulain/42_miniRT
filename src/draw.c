@@ -55,24 +55,43 @@ t_3d	get_3d(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-int	trace_ray(t_data *d, t_objlist *objs, t_ray ray)
+int	trace_ray(t_data *d, t_objlist *objlist, t_ray ray)
+{
+	t_intrsct	i;
+	t_intrsct	i_new;
+
+	i.color.trgb = 0xFF000000;
+	i.distance = INFINITY;
+	while (objlist)
+	{
+		i_new = objlist->get_intersection(ray, objlist->object);
+		if (i_new.distance < i.distance)
+			i = i_new;
+		objlist = objlist->next;
+	}
+	i.color = add_light(i.color, d->amb_light.color);
+	i.color = adjust_brightness(i.color, d->amb_light.brightness);
+	return (i.color.trgb);
+}
+
+int	trace_ray_old(t_data *d, t_objlist *objlist, t_ray ray)
 {
 	t_intrsct	i;
 	t_intrsct	temp;
 
 	i.color.trgb = 0xFF000000;
 	i.distance = INFINITY;
-	while (objs)
+	while (objlist)
 	{
-		if (objs->objtype == sp)
-			temp = intersect_sphere(ray, *(t_sphere *)objs->content);
-		else if (objs->objtype == pl)
-			temp = intersect_plane(ray, *(t_plane *)objs->content);
-		else if (objs->objtype == cy)
-			temp = intersect_cylinder(ray, *(t_cylinder *)objs->content);
+		if (objlist->objtype == sp)
+			temp = intersect_sphere(ray, *(t_sphere *)objlist->object);
+		else if (objlist->objtype == pl)
+			temp = intersect_plane(ray, *(t_plane *)objlist->object);
+		else if (objlist->objtype == cy)
+			temp = intersect_cylinder(ray, *(t_cylinder *)objlist->object);
 		if (temp.distance < i.distance)
 			i = temp;
-		objs = objs->next;
+		objlist = objlist->next;
 	}
 	i.color = add_light(i.color, d->amb_light.color);
 	i.color = adjust_brightness(i.color, d->amb_light.brightness);

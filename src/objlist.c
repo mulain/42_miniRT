@@ -1,15 +1,21 @@
 
-#include "../incl/objlist.h"
+#include "../incl/minirt.h"
 
-t_objlist	*objlst_new(void *content, t_objtype objtype)
+t_objlist	*objlst_new(void *object, t_objtype objtype)
 {
 	t_objlist	*new;
 
 	new = malloc(sizeof(t_objlist));
 	if (!new)
 		return (NULL);
-	new->content = content;
+	new->object = object;
 	new->objtype = objtype;
+	if (objtype == sp)
+		new->get_intersection = intersect_sphere;
+	else if (objtype == pl)
+		new->get_intersection = intersect_plane;
+	else if (objtype == cy)
+		new->get_intersection = intersect_cylinder;
 	new->next = NULL;
 	return (new);
 }
@@ -42,7 +48,7 @@ void	objlist_free(t_objlist *lst)
 
 	while (lst)
 	{
-		free(lst->content);
+		free(lst->object);
 		temp = lst;
 		lst = lst->next;
 		free(temp);

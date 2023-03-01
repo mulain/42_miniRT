@@ -14,7 +14,6 @@ t_color	new_tcolor(int trgb)
 
 t_color	adjust_brightness(t_color color, double factor)
 {
-
 	color.r *= factor;
 	color.g *= factor;
 	color.b *= factor;
@@ -41,9 +40,9 @@ t_color	mult_colors(t_color color1, t_color color2)
 
 t_color	add_light(t_color base, t_color light)
 {
-	base.r -= 255 - light.r;
-	base.g -= 255 - light.g;
-	base.b -= 255 - light.b;
+	base.r -= (255 - light.r) * 0.5;
+	base.g -= (255 - light.g) * 0.5;
+	base.b -= (255 - light.b) * 0.5;
 	if (base.r < 0)
 		base.r = 0;
 	if (base.g < 0)
