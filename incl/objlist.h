@@ -9,7 +9,9 @@ typedef enum e_objtype
 {
 	sp = 1,
 	pl = 2,
-	cy = 3
+	cy = 3,
+	tr = 4,
+	co = 5
 }	t_objtype;
 
 // forward declaration

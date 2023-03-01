@@ -74,6 +74,7 @@ void		parse_light(t_data *d);
 void		parse_sphere(t_data *d);
 void		parse_plane(t_data *d);
 void		parse_cylinder(t_data *d);
+void		parse_triangle(t_data *d);
 
 // parsing_utils.c
 double		parse_double(t_data *d, char *input, char *msg);

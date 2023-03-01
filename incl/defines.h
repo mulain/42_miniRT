@@ -5,7 +5,7 @@
 // Settings
 # define IMG_WIDTH		1500
 # define IMG_HEIGHT		1000
-# define EPSILON		0.0
+# define EPSILON		0.00001
 # define RAYDEPTH		2
 
 // Error messages
@@ -40,6 +40,12 @@
 # define E_PLANE1		"Plane (pl): invalid first argument.\n"
 # define E_PLANE2		"Plane (pl): invalid second argument.\n"
 # define E_PLANE3		"Plane (pl): invalid third argument.\n"
+
+# define E_TRIANGLE1	"Triangle (tr): invalid first argument.\n"
+# define E_TRIANGLE2	"Triangle (tr): invalid second argument.\n"
+# define E_TRIANGLE3	"Triangle (tr): invalid third argument.\n"
+# define E_TRIANGLE4	"Triangle (tr): invalid fourth argument.\n"
+# define E_TRI_VECTOR	"Triangle (tr): Points do not define a plane.\n"
 
 # define E_CYLINDER1	"Cylinder (cy): invalid first argument.\n"
 # define E_CYLINDER2	"Cylinder (cy): invalid second argument.\n"

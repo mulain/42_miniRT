@@ -45,6 +45,8 @@ void	parse_line(t_data *d, char *line)
 		parse_plane(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "cy", 3))
 		parse_cylinder(d);
+	else if (!ft_strncmp(d->parse.elmnts[0], "tr", 3))
+		parse_triangle(d);
 	else
 		error_exit(d, E_INVALOBJID);
 	free_2d_char(d->parse.elmnts);

@@ -97,6 +97,7 @@ typedef struct s_triangle
 	t_3d		p1;
 	t_3d		p2;
 	t_3d		p3;
+	t_3d		vector;
 	t_color		color;
 }	t_triangle;
 
