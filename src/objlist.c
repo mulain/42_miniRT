@@ -16,6 +16,8 @@ t_objlist	*objlst_new(void *object, t_objtype objtype)
 		new->get_intersection = intersect_plane;
 	else if (objtype == cy)
 		new->get_intersection = intersect_cylinder;
+	else if (objtype == tr)
+		new->get_intersection = intersect_triangle;
 	new->next = NULL;
 	return (new);
 }

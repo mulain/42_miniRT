@@ -34,8 +34,9 @@ t_3d		norm(t_3d v);
 
 // draw.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
-t_3d		pixel_to_point(t_data *d, int x, int y);
-t_3d		get_3d(t_data *d, int x, int y);
+int			trace_ray(t_data *d, t_objlist *objlist, t_ray ray);
+//t_3d		pixel_to_point(t_data *d, int x, int y);
+t_3d		get_vector(t_data *d, int x, int y);
 void		render(t_data *d);
 
 // hooks.c
@@ -48,6 +49,8 @@ double		solve_quad(double a, double b, double c);
 // intersect_2d.c
 t_intrsct	intersect_plane(t_ray ray, void *obj);
 t_intrsct	intersect_disc(t_ray ray, void *obj);
+t_intrsct 	intersect_triangle(t_ray ray, void *obj);
+bool	is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval);
 
 // intersect_3d.c
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
