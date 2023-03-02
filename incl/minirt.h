@@ -17,7 +17,7 @@
 // calc_color.c
 t_color		adjust_brightness(t_color color, double factor);
 t_color		mult_colors(t_color color1, t_color color2);
-t_color		add_light(t_color base, t_color light);
+t_color		add_amblight(t_color base, t_ambientlight light);
 
 // calc_vector1.c
 t_3d		add(t_3d p1, t_3d p2);

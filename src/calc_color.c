@@ -38,11 +38,11 @@ t_color	mult_colors(t_color color1, t_color color2)
 	return (result);
 }
 
-t_color	add_light(t_color base, t_color light)
+t_color	add_amblight(t_color base, t_ambientlight light)
 {
-	base.r -= (255 - light.r) * 0.5;
-	base.g -= (255 - light.g) * 0.5;
-	base.b -= (255 - light.b) * 0.5;
+	base.r -= (255 - light.color.r) * 0.5;
+	base.g -= (255 - light.color.g) * 0.5;
+	base.b -= (255 - light.color.b) * 0.5;
 	if (base.r < 0)
 		base.r = 0;
 	if (base.g < 0)
@@ -50,5 +50,5 @@ t_color	add_light(t_color base, t_color light)
 	if (base.b < 0)
 		base.b = 0;
 	base.trgb = 0x00FFFFFF & (base.r << 16 | base.g << 8 | base.b);
-	return (base);
+	return (adjust_brightness(base, light.brightness));
 }

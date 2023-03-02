@@ -10,6 +10,7 @@ int	main(int argc, char **argv)
 	parsing(&data);
 	print_objlist(data.objectlist);
 	init_mlx(&data);
+	printf("camera vector length:%f\n", length(data.camera.vector));
 	render(&data);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);

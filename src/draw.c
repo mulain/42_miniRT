@@ -36,8 +36,8 @@ t_3d	get_vector(t_data *d, int x, int y)
 	looking.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
 	looking.z = -1;
 	looking = subtract(d->camera.point, looking);
-	x_axis = norm(cross((t_3d){0, 1, 0}, d->camera.vector));
-	y_axis = norm(cross(x_axis, d->camera.vector));
+	x_axis = /* norm */(cross((t_3d){0, 1, 0}, d->camera.vector));
+	y_axis = /* norm */(cross(x_axis, d->camera.vector));
 	transformed = add(mult(x_axis, looking.x), d->camera.vector);
 	transformed = add(mult(y_axis, looking.y), transformed);
 	return (norm(transformed));
@@ -74,14 +74,14 @@ t_color	add_shadow(t_data *d, t_objlist *objlist, t_intrsct i)
 	t_intrsct	new_i;
 	double		light_dist;
 
+	light_dist = distance(i.point, d->light.point);
+	shadow_ray.direction = norm(subtract(d->light.point, i.point));
 	shadow_ray.origin = i.point;
-	shadow_ray.direction = norm(subtract(d->light.point, shadow_ray.origin));
-	//shadow_ray.origin = add(shadow_ray.origin, mult(shadow_ray.direction, 0.03));
-	light_dist = distance(shadow_ray.origin, d->light.point);
+	//shadow_ray.origin = add(i.point, mult(shadow_ray.direction, 0.01));
 	while (objlist)
 	{
 		new_i = objlist->get_intersection(shadow_ray, objlist->object);
-		if (new_i.distance < light_dist)
+		if (new_i.distance - light_dist < EPSILON)
 		{
 			i.color = adjust_brightness(i.color, 0.1);
 			break ;
@@ -96,8 +96,7 @@ int	trace_ray(t_data *d, t_ray ray)
 	t_intrsct	i;
 
 	i = get_objintersect(d->objectlist, ray);
-	i.color = add_light(i.color, d->amb_light.color);
 	i.color = add_shadow(d, d->objectlist, i);
-	i.color = adjust_brightness(i.color, d->amb_light.brightness);
+	i.color = add_amblight(i.color, d->amb_light);
 	return (i.color.trgb);
 }
