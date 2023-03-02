@@ -34,7 +34,7 @@ t_3d		norm(t_3d v);
 
 // draw.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
-int			trace_ray(t_data *d, t_objlist *objlist, t_ray ray);
+int			trace_ray(t_data *d, t_ray ray);
 //t_3d		pixel_to_point(t_data *d, int x, int y);
 t_3d		get_vector(t_data *d, int x, int y);
 void		render(t_data *d);

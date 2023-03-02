@@ -72,7 +72,7 @@ bool	is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval)
 	v3 = subtract(p_eval, p1);
 	cross1  = cross(v1, v2);
 	cross2 = cross(v1, v3);
-	if (dot(cross1, cross2) / length(cross1) * length(cross2) < 0)
+	if (dot(cross1, cross2)/*  / length(cross1) * length(cross2) */ < 0)
 		return (false);
 	return (true);
 }

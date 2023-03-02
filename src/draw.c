@@ -15,7 +15,7 @@ void	render(t_data *d)
 		while (x < d->width)
 		{
 			ray.direction = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, d->objectlist, ray));
+			put_pixel(&d->mlx, x, y, trace_ray(d, ray));
 			x++;
 		}
 		printf("\rRendering: %.0f%%", (double)y / (d->height - 1) * 100);
@@ -51,7 +51,7 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)pxl = color;
 }
 
-int	trace_ray(t_data *d, t_objlist *objlist, t_ray ray)
+t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 {
 	t_intrsct	i;
 	t_intrsct	i_new;
@@ -65,8 +65,39 @@ int	trace_ray(t_data *d, t_objlist *objlist, t_ray ray)
 			i = i_new;
 		objlist = objlist->next;
 	}
+	return (i);
+}
+
+t_color	add_shadow(t_data *d, t_objlist *objlist, t_intrsct i)
+{
+	t_ray		shadow_ray;
+	t_intrsct	new_i;
+	double		light_dist;
+
+	shadow_ray.origin = i.point;
+	shadow_ray.direction = norm(subtract(d->light.point, shadow_ray.origin));
+	//shadow_ray.origin = add(shadow_ray.origin, mult(shadow_ray.direction, 0.03));
+	light_dist = distance(shadow_ray.origin, d->light.point);
+	while (objlist)
+	{
+		new_i = objlist->get_intersection(shadow_ray, objlist->object);
+		if (new_i.distance < light_dist)
+		{
+			i.color = adjust_brightness(i.color, 0.1);
+			break ;
+		}
+		objlist = objlist->next;
+	}
+	return (i.color);
+}
+
+int	trace_ray(t_data *d, t_ray ray)
+{
+	t_intrsct	i;
+
+	i = get_objintersect(d->objectlist, ray);
 	i.color = add_light(i.color, d->amb_light.color);
-	//i.color = add_shadow(d, objlist, i.color);
+	i.color = add_shadow(d, d->objectlist, i);
 	i.color = adjust_brightness(i.color, d->amb_light.brightness);
 	return (i.color.trgb);
 }
