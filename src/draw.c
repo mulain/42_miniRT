@@ -61,10 +61,12 @@ t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 	while (objlist)
 	{
 		i_new = objlist->get_intersection(ray, objlist->object);
+		// just calc distance in get_intersection and not point to be faster
 		if (i_new.distance < i.distance)
 			i = i_new;
 		objlist = objlist->next;
 	}
+	// calc point here only
 	return (i);
 }
 
