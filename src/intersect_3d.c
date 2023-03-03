@@ -5,6 +5,43 @@ t_intrsct	intersect_sphere(t_ray ray, void *obj)
 {
 	t_sphere	*sphere;
 	t_intrsct	i;
+
+	t_3d		l;
+	double		tca;
+	double		d2;
+	double		thc;
+	double		t1;
+	double		t2;
+
+	sphere = (t_sphere *)obj;
+	i.color = sphere->color;
+	
+	l = subtract(sphere->center, ray.origin);
+	tca = dot(l, ray.direction);
+	if (tca < EPSILON)
+		return (i.distance = INFINITY, i);
+	d2 = dot(l, l) - tca * tca;
+	if (d2 > sphere->radius * sphere->radius) //EPSILON
+		return (i.distance = INFINITY, i);
+	thc = sqrt(sphere->radius * sphere->radius - d2);
+	t1 = tca - thc;
+	t2 = tca + thc;
+	if (t1 < EPSILON)
+	{
+		if (t2 < EPSILON)
+			return (i.distance = INFINITY, i);
+		i.distance = t2;
+	}
+	else
+		i.distance = t1;
+	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	return (i);
+}
+
+t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
+{
+	t_sphere	*sphere;
+	t_intrsct	i;
 	t_helper	h;
 
 	sphere = (t_sphere *)obj;
@@ -14,6 +51,8 @@ t_intrsct	intersect_sphere(t_ray ray, void *obj)
 	h.b = 2 * dot(ray.direction, h.oc);
 	h.c = dot(h.oc, h.oc) - sphere->radius * sphere->radius;
 	i.distance = solve_quad(h.a, h.b, h.c);
+	if (i.distance == INFINITY)
+		return (i);
 	i.point = add(ray.origin, mult(ray.direction, i.distance));
 	return (i);
 }
