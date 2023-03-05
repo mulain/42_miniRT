@@ -72,7 +72,7 @@ int	trace_ray(t_data *d, t_ray ray)
 		//i.color = adjust_brightness(i.color, 0.8);
 	}
 	//i.color = add_shadow(d, d->objectlist, i);
-	i.color = add_amblight(i.color, d->amb_light);
+	//i.color = add_amblight(i.color, d->amb_light);
 	return (i.color.trgb);
 }
 
