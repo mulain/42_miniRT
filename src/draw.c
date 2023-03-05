@@ -18,7 +18,7 @@ void	render(t_data *d)
 			put_pixel(&d->mlx, x, y, trace_ray(d, ray));
 			x++;
 		}
-		printf("\rRendering: %.0f%%", (double)y / (d->height - 1) * 100);
+		printf("\rRendering: %.1f%%", (double)y / (d->height - 1) * 100);
 		y++;
 	}
 	printf("\n");
@@ -51,6 +51,45 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)pxl = color;
 }
 
+/*
+Current structure (prolly shite:
+- get objintersect gives info:
+	- base color of hit obj
+		- if none hit: black (implement bckg?)
+	- distance traveled from camera
+	- point of intersection
+	- MISSING: normal of hit object!
+*/
+int	trace_ray(t_data *d, t_ray ray)
+{
+	t_intrsct	i;
+
+	i = get_objintersect(d->objectlist, ray);
+	//i.color = add_diffuse_light(i, ray);
+	if (is_shadowed(d, d->objectlist, i.point))
+		i.color = adjust_brightness(i.color, 0.8);
+	//i.color = add_shadow(d, d->objectlist, i);
+	i.color = add_amblight(i.color, d->amb_light);
+	return (i.color.trgb);
+}
+
+
+/* i.color	add_diffuse_light(t_intrsct i, t_ray ray)
+{
+	t_3d	normal;
+
+	normal = get_normal()
+} */
+
+/* 
+float3 hitpoint = camray.origin + camray.dir * t;
+ float3 normal = normalize(hitpoint - sphere1.pos);
+ float cosine_factor = dot(normal, camray.dir) * -1.0f;
+ 
+ output[work_item_id] = sphere1.color * cosine_factor;
+
+ */
+
 t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 {
 	t_intrsct	i;
@@ -61,13 +100,32 @@ t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 	while (objlist)
 	{
 		i_new = objlist->get_intersection(ray, objlist->object);
-		// just calc distance in get_intersection and not point to be faster
+		// add pointer to the object that was hit?
 		if (i_new.distance < i.distance)
 			i = i_new;
 		objlist = objlist->next;
 	}
-	// calc point here only
 	return (i);
+}
+
+bool	is_shadowed(t_data *d, t_objlist *objlist, t_3d point)
+{
+	t_ray		shadow_ray;
+	double		light_dist;
+	double		block_dist;
+
+	light_dist = distance(point, d->light.point);
+	shadow_ray.direction = norm(subtract(d->light.point, point));
+	shadow_ray.origin = point;
+	while (objlist)
+	{
+		block_dist = objlist->get_intersection(shadow_ray, objlist->object).distance;
+		if (block_dist - light_dist < EPSILON)
+			return (true);
+		objlist = objlist->next;
+	}
+	return (false);
+
 }
 
 t_color	add_shadow(t_data *d, t_objlist *objlist, t_intrsct i)
@@ -79,7 +137,6 @@ t_color	add_shadow(t_data *d, t_objlist *objlist, t_intrsct i)
 	light_dist = distance(i.point, d->light.point);
 	shadow_ray.direction = norm(subtract(d->light.point, i.point));
 	shadow_ray.origin = i.point;
-	//shadow_ray.origin = add(i.point, mult(shadow_ray.direction, 0.01));
 	while (objlist)
 	{
 		new_i = objlist->get_intersection(shadow_ray, objlist->object);
@@ -91,14 +148,4 @@ t_color	add_shadow(t_data *d, t_objlist *objlist, t_intrsct i)
 		objlist = objlist->next;
 	}
 	return (i.color);
-}
-
-int	trace_ray(t_data *d, t_ray ray)
-{
-	t_intrsct	i;
-
-	i = get_objintersect(d->objectlist, ray);
-	i.color = add_shadow(d, d->objectlist, i);
-	i.color = add_amblight(i.color, d->amb_light);
-	return (i.color.trgb);
 }

@@ -38,10 +38,12 @@ typedef struct s_color
 	int			g;
 	int			b;
 	int			trgb;
+	double		brightness;
 }	t_color;
 
 typedef struct s_intersection
 {
+	//t_objlist	*objnode;
 	double		distance;
 	t_3d		point;
 	t_color		color;

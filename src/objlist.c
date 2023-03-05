@@ -1,13 +1,13 @@
 
 #include "../incl/minirt.h"
 
-t_objlist	*objlst_new(void *object, t_objtype objtype)
+t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype)
 {
 	t_objlist	*new;
 
 	new = malloc(sizeof(t_objlist));
 	if (!new)
-		return (NULL);
+		error_exit(d, E_MALLOC);
 	new->object = object;
 	new->objtype = objtype;
 	if (objtype == sp)

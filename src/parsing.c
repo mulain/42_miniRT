@@ -16,6 +16,8 @@ void	parsing(t_data *d)
 	}
 	if (!d->amb_light.declared || !d->camera.declared)
 		error_exit(d, E_MANDATORY);
+	close(d->parse.fd);
+	d->parse.fd = -1;
 }
 
 char	*gnl_trimmed(int fd)

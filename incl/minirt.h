@@ -37,6 +37,9 @@ void		put_pixel(t_mlx *mlx, int x, int y, int color);
 int			trace_ray(t_data *d, t_ray ray);
 //t_3d		pixel_to_point(t_data *d, int x, int y);
 t_3d		get_vector(t_data *d, int x, int y);
+t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray);
+t_color		add_shadow(t_data *d, t_objlist *objlist, t_intrsct i);
+bool		is_shadowed(t_data *d, t_objlist *objlist, t_3d point);
 void		render(t_data *d);
 
 // hooks.c
