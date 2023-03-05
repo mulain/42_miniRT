@@ -19,7 +19,7 @@ t_3d	get_normal_cylinder(t_3d point, void *obj)
 	cylinder = (t_cylinder *)obj;
 	base_to_point = subtract(point, cylinder->base);
 	projection = dot(base_to_point, cylinder->axis);
-	local_center = mult(cylinder->axis, projection);
+	local_center = add(cylinder->base, mult(cylinder->axis, projection));
 	return(norm(subtract(point, local_center)));
 }
 
