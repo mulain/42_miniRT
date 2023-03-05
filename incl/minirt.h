@@ -97,4 +97,7 @@ void	set_plane_color(t_data *d, t_plane *plane, char **elements);
 // void	ite_ray(t_data *data);
 
 
+
+
+
 #endif

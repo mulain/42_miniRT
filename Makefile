@@ -47,7 +47,10 @@ SRCFILE	= 	errors.c\
 			shutdown.c\
 			k_ite_ray.c\
 			k_vectormath.c\
-			k_render.c
+			k_render.c\
+			calc_vector1.c\
+			calc_vector2.c
+
 
 # KRIS	=	ite_ray.c\
 # 			vectormath.c

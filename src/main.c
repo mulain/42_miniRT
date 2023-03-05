@@ -5,6 +5,7 @@ int	main(int argc, char **argv)
 	t_data		data;
 
 	init_structs(&data);
+
 	parsing(&data, argc, argv);
 	init_mlx(&data);
 	ite_ray(&data);

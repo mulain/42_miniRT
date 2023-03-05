@@ -9,6 +9,8 @@ pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
 0.0,0.0,1.0 (-> elements[2])
 ∗ R,G,B colors in range [0-255]: 0, 0, 255 (-> elements[3])
 */
+
+
 void	parse_plane(t_data *d, char **elements)
 {
 	t_plane		*plane;
@@ -19,7 +21,7 @@ void	parse_plane(t_data *d, char **elements)
 	set_plane_anchor(d, plane, elements);
 	set_plane_vector(d, plane, elements);
 	set_plane_color(d, plane, elements);
-	objlst_add_back(&d->objectlist, objlst_new(plane, pl));
+	objlst_add_back(&d->objectlist, objlst_new(plane, pl, &calc_plane));
 	free_2d_char(elements);
 }
 

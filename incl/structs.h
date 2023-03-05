@@ -18,26 +18,6 @@ typedef struct s_mlx
 	int		img_height;
 }	t_mlx;
 
-// General attribute structs for use across different objects
-// typedef struct s_point
-// {
-// 	double		x;
-// 	double		y;
-// 	double		z;
-// }	t_vector;
-
-/*
-is the same datastructure as a point, but has less range
-and is something factually different, so chose to give it 
-its own name.
-*/
-// typedef struct s_normvector
-// {
-// 	double		x;
-// 	double		y;
-// 	double		z;
-// }	t_vector;
-
 typedef struct s_vector
 {
 	double		x;
@@ -129,6 +109,7 @@ typedef struct s_data
 	t_camera		camera;
 	t_light			light;
 	t_objlist		*objectlist;
+	t_color			tmp_color;			
 }	t_data;
 
 #endif

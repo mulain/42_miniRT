@@ -1,6 +1,6 @@
 # include "../incl/objlist.h"
 
-t_objlist	*objlst_new(void *content, t_objtype objtype)
+t_objlist	*objlst_new(void *content, t_objtype objtype, t_ft ft)
 {
 	t_objlist	*new;
 
@@ -10,6 +10,7 @@ t_objlist	*objlst_new(void *content, t_objtype objtype)
 	new->content = content;
 	new->objtype = objtype;
 	new->next = NULL;
+	new->formula = ft; 
 	return (new);
 }
 
