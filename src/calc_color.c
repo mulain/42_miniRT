@@ -38,6 +38,18 @@ t_color	mult_colors(t_color color1, t_color color2)
 	return (result);
 }
 
+t_color	add_color(t_color color1, t_color color2)
+{
+	t_color		result;
+
+	result.r = (color1.r * color1.brightness + color2.r * color2.brightness) * 0.5;
+	result.g = (color1.g * color1.brightness + color2.g * color2.brightness) * 0.5;
+	result.b = (color1.b * color1.brightness + color2.b * color2.brightness) * 0.5;
+	result.brightness = (color1.brightness + color2.brightness) * 0.5;
+	result.trgb = 0x00FFFFFF & (result.r << 16 | result.g << 8 | result.b);
+	return (result);
+}
+
 t_color	add_amblight(t_color base, t_ambientlight light)
 {
 	base.r -= (255 - light.color.r) * 0.5;

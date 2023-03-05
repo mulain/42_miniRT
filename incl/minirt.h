@@ -18,6 +18,7 @@
 t_color		adjust_brightness(t_color color, double factor);
 t_color		mult_colors(t_color color1, t_color color2);
 t_color		add_amblight(t_color base, t_ambientlight light);
+t_color		add_color(t_color color1, t_color color2);
 
 // calc_vector1.c
 t_3d		add(t_3d p1, t_3d p2);
@@ -42,6 +43,8 @@ t_color		add_shadow(t_data *d, t_objlist *objlist, t_intrsct i);
 bool		is_shadowed(t_data *d, t_objlist *objlist, t_3d point);
 void		apply_light(t_data *d, t_intrsct *i, t_ray ray);
 void		render(t_data *d);
+void		apply_ambientlight(t_data *d, t_intrsct *i);
+
 
 // get_normal.c
 t_3d	get_normal_plane(t_3d point, void *obj);

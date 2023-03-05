@@ -9,6 +9,11 @@ t_3d	get_normal_sphere(t_3d point, void *obj)
 	return (norm(subtract(point, sphere->center)));
 }
 
+/*
+cylinder caps will be wrong.
+maybe even split cylinder during parsing into
+tube and 2 discs.
+*/
 t_3d	get_normal_cylinder(t_3d point, void *obj)
 {
 	t_cylinder	*cylinder;
