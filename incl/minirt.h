@@ -40,7 +40,15 @@ t_3d		get_vector(t_data *d, int x, int y);
 t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray);
 t_color		add_shadow(t_data *d, t_objlist *objlist, t_intrsct i);
 bool		is_shadowed(t_data *d, t_objlist *objlist, t_3d point);
+void		apply_light(t_data *d, t_intrsct *i, t_ray ray);
 void		render(t_data *d);
+
+// get_normal.c
+t_3d	get_normal_plane(t_3d point, void *obj);
+t_3d	get_normal_disc(t_3d point, void *obj);
+t_3d	get_normal_triangle(t_3d point, void *obj);
+t_3d	get_normal_sphere(t_3d point, void *obj);
+t_3d	get_normal_cylinder(t_3d point, void *obj);
 
 // hooks.c
 int			key_release(int key, t_data *d);

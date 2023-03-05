@@ -66,20 +66,30 @@ int	trace_ray(t_data *d, t_ray ray)
 
 	i = get_objintersect(d->objectlist, ray);
 	//i.color = add_diffuse_light(i, ray);
-	if (is_shadowed(d, d->objectlist, i.point))
-		i.color = adjust_brightness(i.color, 0.8);
+	if (!is_shadowed(d, d->objectlist, i.point))
+	{
+		apply_light(d, &i, ray);
+		//i.color = adjust_brightness(i.color, 0.8);
+	}
 	//i.color = add_shadow(d, d->objectlist, i);
 	i.color = add_amblight(i.color, d->amb_light);
 	return (i.color.trgb);
 }
 
-
-/* i.color	add_diffuse_light(t_intrsct i, t_ray ray)
+void	apply_light(t_data *d, t_intrsct *i, t_ray ray)
 {
 	t_3d	normal;
-
-	normal = get_normal()
-} */
+	t_3d	light_normal;
+	double	cos_factor;
+	//check for surface type if applicable, doing diffuse now
+	(void)ray;
+	if (!i->objnode)
+		return ;
+	normal = i->objnode->get_normal(i->point, i->objnode->object);
+	light_normal = norm(subtract(i->point, d->light.point));
+	cos_factor = dot(normal, light_normal) * -1;
+	i->color = adjust_brightness(i->color, cos_factor);
+}
 
 /* 
 float3 hitpoint = camray.origin + camray.dir * t;
@@ -97,12 +107,16 @@ t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 
 	i.color.trgb = 0xFF000000;
 	i.distance = INFINITY;
+	i.objnode = NULL;
 	while (objlist)
 	{
 		i_new = objlist->get_intersection(ray, objlist->object);
 		// add pointer to the object that was hit?
 		if (i_new.distance < i.distance)
+		{
 			i = i_new;
+			i.objnode = objlist;	
+		}
 		objlist = objlist->next;
 	}
 	return (i);

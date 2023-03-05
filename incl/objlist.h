@@ -22,7 +22,7 @@ typedef struct s_objlist
 	void		*object;
 	t_objtype	objtype;
 	t_intrsct	(*get_intersection)();
-	t_3d		(*get_normal)(); //unused so far! asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdsdfgsdfgsdfgsdfgsdfg
+	t_3d		(*get_normal)();
 	t_objlist	*next;
 
 }	t_objlist;

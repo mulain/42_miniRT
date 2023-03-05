@@ -11,13 +11,26 @@ t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype)
 	new->object = object;
 	new->objtype = objtype;
 	if (objtype == sp)
+	{
 		new->get_intersection = intersect_sphere;
+		new->get_normal = get_normal_sphere;
+		print_3d(new->get_normal((t_3d){0,0,0}, new->object), "knang" );
+	}
 	else if (objtype == pl)
+	{
 		new->get_intersection = intersect_plane;
+		new->get_normal = get_normal_plane;
+	}
 	else if (objtype == cy)
+	{
 		new->get_intersection = intersect_cylinder;
+		new->get_normal = get_normal_cylinder;
+	}
 	else if (objtype == tr)
+	{
 		new->get_intersection = intersect_triangle;
+		new->get_normal = get_normal_triangle;
+	}
 	new->next = NULL;
 	return (new);
 }

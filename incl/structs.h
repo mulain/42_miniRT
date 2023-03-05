@@ -41,9 +41,12 @@ typedef struct s_color
 	double		brightness;
 }	t_color;
 
+// forward declaration
+typedef struct s_objlist	t_objlist;
+
 typedef struct s_intersection
 {
-	//t_objlist	*objnode;
+	t_objlist	*objnode;
 	double		distance;
 	t_3d		point;
 	t_color		color;
