@@ -44,6 +44,12 @@ bool		is_shadowed(t_data *d, t_objlist *objlist, t_3d point);
 void		apply_light(t_data *d, t_intrsct *i, t_ray ray);
 void		render(t_data *d);
 void		apply_ambientlight(t_data *d, t_intrsct *i);
+double		cosfactor(t_3d light_origin, t_intrsct i);
+t_rgb		add_lightcoeff(t_rgb main_rgb, t_color color, double brightness);
+int			apply_coeff(t_color color, t_rgb rgb_coeff);
+
+
+
 
 
 // get_normal.c

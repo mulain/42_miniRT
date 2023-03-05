@@ -63,23 +63,80 @@ Current structure (prolly shite:
 int	trace_ray(t_data *d, t_ray ray)
 {
 	t_intrsct	i;
+	t_rgb		rgb_coeff;
 
 	i = get_objintersect(d->objectlist, ray);
-	//i.color = add_diffuse_light(i, ray);
+	if (!i.objnode) // no intersection, return bckgcolor
+		return (0x00000000);
+	rgb_coeff = add_lightcoeff((t_rgb){0, 0, 0}, d->amb_light.color, d->amb_light.brightness);
 	if (!is_shadowed(d, d->objectlist, i.point))
 	{
-		apply_light(d, &i, ray);
+		rgb_coeff = add_lightcoeff(rgb_coeff, d->light.color,
+			d->light.brightness * cosfactor(d->light.point, i));
 		//i.color = adjust_brightness(i.color, 0.8);
 	}
-	apply_ambientlight(d, &i);
-	//i.color = add_shadow(d, d->objectlist, i);
-	i.color = add_amblight(i.color, d->amb_light);
+	//apply_light(d, &i, ray);
+	i.color.trgb = apply_coeff(i.color, rgb_coeff);
 	return (i.color.trgb);
+}
+
+int	apply_coeff(t_color color, t_rgb rgb_coeff)
+{
+	color.r *= rgb_coeff.r;
+	color.g *= rgb_coeff.g;
+	color.b *= rgb_coeff.b;
+	if (color.r > 255)
+		color.r = 255;
+	if (color.g > 255)
+		color.g = 255;
+	if (color.b > 255)
+		color.b = 255;
+	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
+	return (color.trgb);
 }
 
 void	apply_ambientlight(t_data *d, t_intrsct *i)
 {
 	i->color = add_color(i->color, d->amb_light.color);
+}
+
+t_rgb	add_lightcoeff(t_rgb main_rgb, t_color color, double brightness)
+{
+	main_rgb.r += color.r / 255 * brightness;
+	main_rgb.g += color.g / 255 * brightness;
+	main_rgb.b += color.b / 255 * brightness;
+	return (main_rgb);
+}
+
+/* void	add_coefficient(t_p3 *rgb, double coef, t_p3 color)
+{
+	(*rgb).x += coef * color.x / 255;
+	(*rgb).y += coef * color.y / 255;
+	(*rgb).z += coef * color.z / 255;
+}
+
+int	rgb_to_int(t_p3 color, t_p3 rgb)
+{
+	rgb.x = rgb.x * color.x;
+	rgb.y = rgb.y * color.y;
+	rgb.z = rgb.z * color.z;
+	if (rgb.x > 255)
+		rgb.x = 255;
+	if (rgb.y > 255)
+		rgb.y = 255;
+	if (rgb.y > 255)
+		rgb.y = 255;
+	return (((int)rgb.x << 16) | ((int)rgb.y << 8) | (int)rgb.z);
+} */
+
+double	cosfactor(t_3d light_origin, t_intrsct i)
+{
+	t_3d	obj_normal;
+	t_3d	to_light_normal;
+
+	obj_normal =i.objnode->get_normal(i.point,i.objnode->object);
+	to_light_normal = norm(subtract(i.point, light_origin));
+	return (dot(obj_normal, to_light_normal) * -1);
 }
 
 void	apply_light(t_data *d, t_intrsct *i, t_ray ray)
@@ -89,8 +146,6 @@ void	apply_light(t_data *d, t_intrsct *i, t_ray ray)
 	double	cos_factor;
 	//check for surface type if applicable, doing diffuse now
 	(void)ray;
-	if (!i->objnode)
-		return ;
 	normal = i->objnode->get_normal(i->point, i->objnode->object);
 	light_normal = norm(subtract(i->point, d->light.point));
 	cos_factor = dot(normal, light_normal) * -1;

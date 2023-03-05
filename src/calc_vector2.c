@@ -33,7 +33,8 @@ t_3d	cross(t_3d v1, t_3d v2)
 /*
 A normalized vector is of length 1. So divide by its current length
 to have a new length of 1.
-Multiply to be faster (divison more costly than multiplication)
+Multiply to be faster (divison costlier than multiplication), prolly
+compiler would handle it anyway, but still...)
 Care: doesn't guard vs dividing by 0.
 */
 t_3d	norm(t_3d v)

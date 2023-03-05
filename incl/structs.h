@@ -32,6 +32,13 @@ typedef struct s_helper
 	t_3d		oc;
 }	t_helper;
 
+typedef struct	s_rgb_intensity
+{
+	double		r;
+	double		g;
+	double		b;
+}	t_rgb;
+
 typedef struct s_color
 {
 	int			r;
