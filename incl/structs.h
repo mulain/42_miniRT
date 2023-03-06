@@ -45,7 +45,6 @@ typedef struct s_color
 	int			g;
 	int			b;
 	int			trgb;
-	double		brightness;
 }	t_color;
 
 // forward declaration
@@ -129,16 +128,6 @@ typedef struct s_tube
 	double		height;
 	t_color		color;
 }	t_tube;
-
-typedef struct s_cylinder
-{
-	t_3d		base;
-	t_3d		top;
-	t_3d		axis;
-	double		radius;
-	double		height;
-	t_color		color;
-}	t_cylinder;
 
 typedef struct s_cone
 {

@@ -14,7 +14,7 @@
 # include "objlist.h"
 # include "defines.h"
 
-// calc_color.c
+// trash.c
 t_color		adjust_brightness(t_color color, double factor);
 t_color		mult_colors(t_color color1, t_color color2);
 t_color		add_amblight(t_color base, t_ambientlight light);
