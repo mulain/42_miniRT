@@ -35,6 +35,7 @@ t_3d		get_normal_triangle(t_3d point, void *obj);
 // get_normal_3d.c
 t_3d		get_normal_sphere(t_3d point, void *obj);
 t_3d		get_normal_tube(t_3d point, void *obj);
+t_3d		get_normal_cone(t_3d point, void *obj);
 
 // hooks.c
 int			key_release(int key, t_data *d);
@@ -51,8 +52,8 @@ bool		is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval);
 
 // intersect_3d.c
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
-t_intrsct	intersect_cylinder(t_ray ray, void *obj);
 t_intrsct	intersect_tube(t_ray ray, void *obj);
+t_intrsct	intersect_cone(t_ray ray, void *obj);
 
 // main.c
 int			main(int argc, char **argv);

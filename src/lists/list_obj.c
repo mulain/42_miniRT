@@ -42,6 +42,11 @@ void	select_functions(t_objlst *new)
 		new->get_intersection = intersect_tube;
 		new->get_normal = get_normal_tube;
 	}
+	else if (new->objtype == co)
+	{
+		new->get_intersection = intersect_cone;
+		new->get_normal = get_normal_cone;
+	}
 }
 
 void	objlst_add_back(t_objlst **lst, t_objlst *new)

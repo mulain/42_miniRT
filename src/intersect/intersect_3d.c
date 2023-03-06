@@ -84,29 +84,35 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 	return (i);
 }
 
-/* t_intrsct	intersect_cone(t_ray ray, void *obj)
+/*
+atan gives the angle between the base and the hypotenuse.
+in our cone: it is the "left" and "right" angle at the base 
+of the cone.
+*/
+t_intrsct	intersect_cone(t_ray ray, void *obj)
 {
 	t_cone		*cone;
+	t_tube		tube;
 	t_intrsct	i;
-	t_helper	h;
-	t_3d		oc;
+	t_3d		base_to_p;
+	double		projection;
+	t_3d		a;
+	double		dist_a_to_top;
+	double		g;
+	double		dist_p_to_a;
 
 	cone = (t_cone *)obj;
-	i.color = sphere.color.trgb;
-	oc = subtract(ray.origin, cone->base);
-	h.a = dot(ray.direction, ray.direction);
-	h.b = 2 * dot(ray.direction, oc);
-	h.c = dot(oc, oc) - sphere.radius * sphere.radius;
-	h.discriminant = h.b * h.b - 4 * h.a * h.c;
-	if (h.discriminant < EPSILON)
+	tube = (t_tube){cone->base, cone->top, cone->axis, cone->radius, cone->height, cone->color};
+	i = intersect_tube(ray, &tube);
+	if (i.distance == INFINITY)
+		return (i);
+	base_to_p = subtract(i.point, cone->base);
+	projection = dot(base_to_p, cone->axis);
+	a = add(cone->base, mult(cone->axis, projection));
+	dist_a_to_top = distance(a, cone->top);
+	g = dist_a_to_top / cone->height * cone->radius;
+	dist_p_to_a = distance(a, i.point);
+	if (dist_p_to_a - g > EPSILON)
 		i.distance = INFINITY;
-	else
-		i.distance = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
 	return (i);
-} */
-
-void cylinder_to_cone(cylinder *c, cone *cn) {
-    cn->axis = vector_normalize(c->axis);
-    cn->apex = vector_add(c->center, vector_scale(cn->axis, c->radius / tan(cn->angle / 2)));
-    double d = vector_distance(c->center, cn->apex);
-    cn->angle = atan(c->radius / d);
+}

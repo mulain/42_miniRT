@@ -22,3 +22,12 @@ t_3d	get_normal_tube(t_3d point, void *obj)
 	local_center = add(tube->base, mult(tube->axis, projection));
 	return (norm(subtract(point, local_center)));
 }
+
+t_3d	get_normal_cone(t_3d point, void *obj)
+{
+	t_cone		*cone;
+
+	cone = (t_cone *)obj;
+	(void)point;
+	return (cone->axis);
+}
