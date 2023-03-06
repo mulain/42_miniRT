@@ -21,28 +21,29 @@ else
 endif
 
 SRCFILE	= 	\
+			intersect/intersect_util.c\
+			intersect/intersect_2d.c\
+			intersect/intersect_3d.c\
+			lists/list_obj.c\
+			lists/list_light.c\
 			parsing/parsing_lightsandcam.c\
 			parsing/parsing_2d.c\
 			parsing/parsing_3d.c\
 			parsing/parsing_utils.c\
 			parsing/parsing.c\
+			utils/shutdown.c\
+			utils/utils_print1.c\
+			utils/utils_print2.c\
+			utils/hooks.c\
 			calc_vector1.c\
 			calc_vector2.c\
 			get_normal_2d.c\
 			get_normal_3d.c\
-			hooks.c\
-			intersect_util.c\
-			intersect_2d.c\
-			intersect_3d.c\
-			list_obj.c\
-			list_light.c\
 			main.c\
 			render.c\
 			render_utils1.c\
-			render_utils2.c\
-			shutdown.c\
-			utils_print1.c\
-			utils_print2.c
+			render_utils2.c
+			
 SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 
@@ -63,7 +64,10 @@ $(MLX):
 	@echo "$(BLUE)MLX compiled for $(OS).$(RESET)"
 
 obj/%.o: src/%.c
+	@mkdir -p obj/intersect
+	@mkdir -p obj/lists
 	@mkdir -p obj/parsing
+	@mkdir -p obj/utils
 	$(CC) $(CFLAGS) $(EFLAGS) $(DEFINEFLAGS) -c $< -o $@
 
 clean:

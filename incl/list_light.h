@@ -7,7 +7,7 @@
 # include "structs.h"
 
 // forward declaration
-typedef struct s_lightlst t_lightlst;
+typedef struct s_lightlst	t_lightlst;
 
 typedef struct s_lightlst
 {

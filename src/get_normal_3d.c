@@ -20,5 +20,5 @@ t_3d	get_normal_tube(t_3d point, void *obj)
 	base_to_point = subtract(point, tube->base);
 	projection = dot(base_to_point, tube->axis);
 	local_center = add(tube->base, mult(tube->axis, projection));
-	return(norm(subtract(point, local_center)));
+	return (norm(subtract(point, local_center)));
 }

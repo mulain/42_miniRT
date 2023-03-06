@@ -37,7 +37,7 @@ t_intrsct	intersect_disc(t_ray ray, void *obj)
 	return (i);
 }
 
-t_intrsct intersect_triangle(t_ray ray, void *obj)
+t_intrsct	intersect_triangle(t_ray ray, void *obj)
 {
 	t_triangle	*triangle;
 	t_intrsct	i;
@@ -70,9 +70,9 @@ bool	is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval)
 	v1 = subtract(p2, p1);
 	v2 = subtract(p3, p1);
 	v3 = subtract(p_eval, p1);
-	cross1  = cross(v1, v2);
+	cross1 = cross(v1, v2);
 	cross2 = cross(v1, v3);
-	if (dot(cross1, cross2)/*  / length(cross1) * length(cross2) */ < 0)
+	if (dot(cross1, cross2) < 0)
 		return (false);
 	return (true);
 }

@@ -15,13 +15,12 @@ t_intrsct	intersect_sphere(t_ray ray, void *obj)
 
 	sphere = (t_sphere *)obj;
 	i.color = sphere->color;
-	
 	l = subtract(sphere->center, ray.origin);
 	tca = dot(l, ray.direction);
 	if (tca < EPSILON)
 		return (i.distance = INFINITY, i);
 	d2 = dot(l, l) - tca * tca;
-	if (d2 > sphere->radius * sphere->radius) //EPSILON
+	if (d2 - sphere->radius * sphere->radius > EPSILON)
 		return (i.distance = INFINITY, i);
 	thc = sqrt(sphere->radius * sphere->radius - d2);
 	t1 = tca - thc;
