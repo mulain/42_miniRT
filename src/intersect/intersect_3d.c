@@ -106,12 +106,15 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	i = intersect_tube(ray, &tube);
 	if (i.distance == INFINITY)
 		return (i);
+	//print_3d(i.point, "intersectionpoint tube in cone");
 	base_to_p = subtract(i.point, cone->base);
 	projection = dot(base_to_p, cone->axis);
 	a = add(cone->base, mult(cone->axis, projection));
 	dist_a_to_top = distance(a, cone->top);
-	g = dist_a_to_top / cone->height * cone->radius;
+	g = dist_a_to_top * cone->radius / cone->height;
 	dist_p_to_a = distance(a, i.point);
+	printf("g:%f\n", g);
+	printf("dist p to a:%f\n", dist_p_to_a);
 	if (dist_p_to_a - g > EPSILON)
 		i.distance = INFINITY;
 	return (i);
