@@ -32,7 +32,7 @@ typedef struct s_helper
 	t_3d		oc;
 }	t_helper;
 
-typedef struct	s_rgb_intensity
+typedef struct s_rgb_intensity
 {
 	double		r;
 	double		g;
@@ -48,11 +48,11 @@ typedef struct s_color
 }	t_color;
 
 // forward declaration
-typedef struct s_objlist	t_objlist;
+typedef struct s_objlst	t_objlst;
 
 typedef struct s_intersection
 {
-	t_objlist	*objnode;
+	t_objlst	*objnode;
 	double		distance;
 	t_3d		point;
 	t_color		color;
@@ -60,7 +60,7 @@ typedef struct s_intersection
 
 typedef struct s_light
 {
-	t_3d		point;
+	t_3d		origin;
 	double		brightness;
 	t_color		color;
 	bool		declared;
@@ -150,7 +150,8 @@ typedef struct s_parsing
 }	t_parsing;
 
 // Forward declaration
-typedef struct s_objlist	t_objlist;
+typedef struct s_objlst	t_objlst;
+typedef struct s_lightlst	t_lightlst;
 
 // The main struct
 typedef struct s_data
@@ -158,8 +159,8 @@ typedef struct s_data
 	t_mlx			mlx;
 	t_ambientlight	amb_light;
 	t_camera		camera;
-	t_light			light;
-	t_objlist		*objectlist;
+	t_lightlst		*lightlst;
+	t_objlst		*objectlist;
 	t_parsing		parse;
 	int				width;
 	int				height;

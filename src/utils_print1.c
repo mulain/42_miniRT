@@ -1,9 +1,9 @@
 
 #include "minirt.h"
 
-void	print_objlist(t_objlist *lst)
+void	print_objlst(t_objlst *lst)
 {
-	t_objlist	*temp;
+	t_objlst	*temp;
 
 	temp = lst;
 	while (temp)
@@ -44,7 +44,7 @@ void	print_camera(t_data *d)
 	printf("  %i degrees\n", d->camera.fieldofview);
 }
 
-void	print_light(t_data *d)
+/* void	print_light(t_data *d)
 {
 	if (!d->light.declared)
 	{
@@ -63,3 +63,4 @@ void	print_light(t_data *d)
 	printf("  g: %i\n", d->light.color.g);
 	printf("  b: %i\n", d->light.color.b);
 }
+ */

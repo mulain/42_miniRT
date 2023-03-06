@@ -1,5 +1,6 @@
-#ifndef OBJLIST_H
-# define OBJLIST_H
+
+#ifndef LIST_OBJ_H
+# define LIST_OBJ_H
 
 # include <stdlib.h>
 
@@ -16,22 +17,23 @@ typedef enum e_objtype
 }	t_objtype;
 
 // forward declaration
-typedef struct s_objlist t_objlist;
+typedef struct s_objlst	t_objlst;
 
-typedef struct s_objlist
+typedef struct s_objlst
 {
 	void		*object;
 	t_objtype	objtype;
 	t_intrsct	(*get_intersection)();
 	t_3d		(*get_normal)();
-	t_objlist	*next;
+	t_objlst	*next;
 
-}	t_objlist;
+}	t_objlst;
 
 // list_obj.c
-t_lightlist	*objlst_new(t_data *d, void *object, t_objtype objtype);
-void		objlst_add_back(t_objlist **lst, t_objlist *new);
-t_lightlist	*objlst_last(t_objlist *lst);
-void		objlist_free(t_objlist *lst);
+t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype);
+void		select_functions(t_objlst *new);
+void		objlst_add_back(t_objlst **lst, t_objlst *new);
+t_objlst	*objlst_last(t_objlst *lst);
+void		objlst_free(t_objlst *lst);
 
 #endif

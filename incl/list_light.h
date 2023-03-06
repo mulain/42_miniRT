@@ -1,25 +1,25 @@
-#ifndef LIGHTLIST_H
-# define LIGHTLIST_H
+
+#ifndef LIST_LIGHT_H
+# define LIST_LIGHT_H
 
 # include <stdlib.h>
 
 # include "structs.h"
 
 // forward declaration
-typedef struct s_lightlist t_lightlist;
+typedef struct s_lightlst t_lightlst;
 
-typedef struct s_lightlist
+typedef struct s_lightlst
 {
 	t_light		*light;
-	t_objlist	*next;
+	t_lightlst	*next;
 
-}	t_lightlist;
+}	t_lightlst;
 
 // list_light.c
-t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype);
-void		select_functions(t_objlist *new);
-void		objlst_add_back(t_objlist **lst, t_objlist *new);
-t_objlist	*objlst_last(t_objlist *lst);
-void		objlist_free(t_objlist *lst);
+t_lightlst		*lightlst_new(t_data *d, t_light *light);
+void			lightlst_add_back(t_lightlst **lst, t_lightlst *new);
+t_lightlst		*lightlst_last(t_lightlst *lst);
+void			lightlst_free(t_lightlst *lst);
 
 #endif

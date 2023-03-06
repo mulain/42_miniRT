@@ -66,3 +66,20 @@ t_color	add_amblight(t_color base, t_ambientlight light)
 	base.trgb = 0x00FFFFFF & (base.r << 16 | base.g << 8 | base.b);
 	return (adjust_brightness(base, light.brightness));
 }
+
+int	trace_ray_old(t_data *d, t_ray ray)
+{
+	t_intrsct	i;
+	t_rgb		rgb_coeff;
+
+	i = get_objintersect(d->objectlist, ray);
+	if (!i.objnode) // no intersection, return bckgcolor
+		return (0x00000000);
+	rgb_coeff = add_lighttocoeff((t_rgb){0, 0, 0},
+			d->amb_light.color, d->amb_light.brightness);
+	if (!is_shadowed(d->light, d->objectlist, i.point))
+		rgb_coeff = add_lighttocoeff(rgb_coeff, d->light.color,
+				d->light.brightness * cosfactor(d->light.origin, i));
+	i.color.trgb = apply_coeff(i.color, rgb_coeff);
+	return (i.color.trgb);
+}

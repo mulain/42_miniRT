@@ -21,7 +21,6 @@ void	parse_disc(t_data *d)
 	disc = malloc(sizeof(t_disc));
 	if (!disc)
 		error_exit(d, E_MALLOC);
-	objlst_add_back(&d->objectlist, objlst_new(d, disc, di));
 	disc->center = parse_point(d, d->parse.elmnts[1], E_DISC1);
 	disc->vector = parse_vector(d, d->parse.elmnts[2], E_DISC2);
 	d->parse.min = 0;

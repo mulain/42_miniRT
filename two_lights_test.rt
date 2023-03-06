@@ -6,6 +6,7 @@ A								0.2				255,255,255
 
 # LIGHTS		Position		Brightness		Color
 L				-4,10,-2		1.0				255,255,255
+L				4,10,-2			1.0				255,255,255
 
 # SPHERES		Position		Diameter		Color
 sp				0,10,-5			6				255,255,0 yellow

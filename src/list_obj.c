@@ -1,11 +1,11 @@
 
 #include "../incl/minirt.h"
 
-t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype)
+t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype)
 {
-	t_objlist	*new;
+	t_objlst	*new;
 
-	new = malloc(sizeof(t_objlist));
+	new = malloc(sizeof(t_objlst));
 	if (!new)
 		error_exit(d, E_MALLOC);
 	new->object = object;
@@ -15,7 +15,7 @@ t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype)
 	return (new);
 }
 
-void	select_functions(t_objlist *new)
+void	select_functions(t_objlst *new)
 {
 	if (new->objtype == pl)
 	{
@@ -44,7 +44,7 @@ void	select_functions(t_objlist *new)
 	}
 }
 
-void	objlst_add_back(t_objlist **lst, t_objlist *new)
+void	objlst_add_back(t_objlst **lst, t_objlst *new)
 {
 	if (!new || !lst)
 		return ;
@@ -54,7 +54,7 @@ void	objlst_add_back(t_objlist **lst, t_objlist *new)
 		(objlst_last(*lst))->next = new;
 }
 
-t_objlist	*objlst_last(t_objlist *lst)
+t_objlst	*objlst_last(t_objlst *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -63,9 +63,9 @@ t_objlist	*objlst_last(t_objlist *lst)
 	return (lst);
 }
 
-void	objlist_free(t_objlist *lst)
+void	objlst_free(t_objlst *lst)
 {
-	t_objlist	*temp;
+	t_objlst	*temp;
 
 	while (lst)
 	{

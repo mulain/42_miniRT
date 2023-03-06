@@ -1,12 +1,11 @@
 
 #include "../incl/minirt.h"
 
-t_rgb	add_lighttocoeff(t_rgb coeff, t_color color, double brightness)
+void	add_lighttocoeff(t_rgb *coeff, t_color color, double brightness)
 {
-	coeff.r += color.r / 255 * brightness;
-	coeff.g += color.g / 255 * brightness;
-	coeff.b += color.b / 255 * brightness;
-	return (coeff);
+	coeff->r += color.r / 255 * brightness;
+	coeff->g += color.g / 255 * brightness;
+	coeff->b += color.b / 255 * brightness;
 }
 
 int	apply_coeff(t_color color, t_rgb rgb_coeff)

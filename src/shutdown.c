@@ -20,7 +20,9 @@ void	free_all(t_data *d)
 	if (d->parse.subelmnts)
 		free_2d_char(d->parse.subelmnts);
 	if (d->objectlist)
-		objlist_free(d->objectlist);
+		objlst_free(d->objectlist);
+	if (d->lightlst)
+		lightlst_free(d->lightlst);
 	if (d->mlx.initialized)
 		mlx_destroy_image(d->mlx.mlx, d->mlx.img);
 }

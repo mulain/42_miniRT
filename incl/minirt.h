@@ -28,13 +28,13 @@ t_3d		cross(t_3d v1, t_3d v2);
 t_3d		norm(t_3d v);
 
 // get_normal_2d.c
-t_3d	get_normal_plane(t_3d point, void *obj);
-t_3d	get_normal_disc(t_3d point, void *obj);
-t_3d	get_normal_triangle(t_3d point, void *obj);
+t_3d		get_normal_plane(t_3d point, void *obj);
+t_3d		get_normal_disc(t_3d point, void *obj);
+t_3d		get_normal_triangle(t_3d point, void *obj);
 
 // get_normal_3d.c
-t_3d	get_normal_sphere(t_3d point, void *obj);
-t_3d	get_normal_tube(t_3d point, void *obj);
+t_3d		get_normal_sphere(t_3d point, void *obj);
+t_3d		get_normal_tube(t_3d point, void *obj);
 
 // hooks.c
 int			key_release(int key, t_data *d);
@@ -90,21 +90,21 @@ int			parse_int(t_data *d, char *input, char *msg);
 // render.c
 void		render(t_data *d);
 t_3d		get_vector(t_data *d, int x, int y);
-int			trace_ray(t_data *d, t_ray ray);
-t_intrsct	get_objintersect(t_objlist *objnode, t_ray ray);
-bool		is_shadowed(t_light light, t_objlist *objnode, t_3d point);
+int			trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray);
+t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
+bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
 
 // render_utils1.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
 double		cosfactor(t_3d light_origin, t_intrsct i);
 
 // render_utils2.c
-t_rgb		add_lighttocoeff(t_rgb coeff, t_color color, double brightness);
+void		add_lighttocoeff(t_rgb *coeff, t_color color, double brightness);
 int			apply_coeff(t_color color, t_rgb rgb_coeff);
 t_color		apply_brightness(t_color color, double factor);
 
 // utils_print1.c
-void		print_objlist(t_objlist *lst);
+void		print_objlst(t_objlst *lst);
 void		print_ambientlight(t_data *d);
 void		print_camera(t_data *d);
 void		print_light(t_data *d);

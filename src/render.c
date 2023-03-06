@@ -15,7 +15,7 @@ void	render(t_data *d)
 		while (x < d->width)
 		{
 			ray.direction = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, ray));
+			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
 			x++;
 		}
 		printf("\rRendering: %.1f%%", (double)y / (d->height - 1) * 100);
@@ -43,24 +43,28 @@ t_3d	get_vector(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-int	trace_ray(t_data *d, t_ray ray)
+int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 {
 	t_intrsct	i;
-	t_rgb		rgb_coeff;
+	t_rgb		coeff;
 
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode) // no intersection, return bckgcolor
 		return (0x00000000);
-	rgb_coeff = add_lighttocoeff((t_rgb){0, 0, 0},
-			d->amb_light.color, d->amb_light.brightness);
-	if (!is_shadowed(d->light, d->objectlist, i.point))
-		rgb_coeff = add_lighttocoeff(rgb_coeff, d->light.color,
-				d->light.brightness * cosfactor(d->light.point, i));
-	i.color.trgb = apply_coeff(i.color, rgb_coeff);
+	coeff = (t_rgb){0, 0, 0};
+	add_lighttocoeff(&coeff, d->amb_light.color, d->amb_light.brightness);
+	while (lightnode)
+	{
+		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
+			add_lighttocoeff(&coeff, lightnode->light->color,
+				lightnode->light->brightness * cosfactor(lightnode->light->origin, i));
+		lightnode = lightnode->next;
+	}
+	i.color.trgb = apply_coeff(i.color, coeff);
 	return (i.color.trgb);
 }
 
-t_intrsct	get_objintersect(t_objlist *objnode, t_ray ray)
+t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray)
 {
 	t_intrsct	i;
 	t_intrsct	i_new;
@@ -81,14 +85,14 @@ t_intrsct	get_objintersect(t_objlist *objnode, t_ray ray)
 	return (i);
 }
 
-bool	is_shadowed(t_light light, t_objlist *objnode, t_3d point)
+bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
 {
 	t_ray		shadow_ray;
 	double		light_dist;
 	double		block;
 
-	light_dist = distance(point, light.point);
-	shadow_ray.direction = norm(subtract(light.point, point));
+	light_dist = distance(point, light->origin);
+	shadow_ray.direction = norm(subtract(light->origin, point));
 	shadow_ray.origin = point;
 	while (objnode)
 	{
