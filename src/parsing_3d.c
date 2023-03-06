@@ -41,3 +41,25 @@ void	parse_cylinder(t_data *d)
 	*disc_top = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
 	*disc_base = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
 }
+
+void	parse_cone(t_data *d)
+{
+	t_cone	*cone;
+	t_disc	*disc_base;
+
+	cone = malloc(sizeof(t_cone));
+	disc_base = malloc(sizeof(t_disc));
+	if (!cone || !disc_base)
+		error_exit(d, E_MALLOC);
+	objlst_add_back(&d->objectlist, objlst_new(d, cone, co));
+	objlst_add_back(&d->objectlist, objlst_new(d, disc_base, di));
+	cone->base = parse_point(d, d->parse.elmnts[1], E_CONE1);
+	cone->axis = parse_vector(d, d->parse.elmnts[2], E_CONE2);
+	d->parse.min = 0.0;
+	d->parse.max = 0.0;
+	cone->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CONE3);
+	cone->height = parse_double(d, d->parse.elmnts[4], E_CONE4);
+	cone->top = add(cone->base, mult(cone->axis, cone->height));
+	cone->color = parse_color(d, d->parse.elmnts[5], E_CONE5);
+	*disc_base = (t_disc){cone->base, cone->axis, cone->radius, cone->color};
+}

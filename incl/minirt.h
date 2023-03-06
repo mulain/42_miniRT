@@ -101,6 +101,7 @@ void		parse_triangle(t_data *d);
 // parsing_3d.c
 void		parse_sphere(t_data *d);
 void		parse_cylinder(t_data *d);
+void		parse_cone(t_data *d);
 
 // parsing_utils.c
 double		parse_double(t_data *d, char *input, char *msg);

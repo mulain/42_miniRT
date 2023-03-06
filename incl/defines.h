@@ -33,10 +33,6 @@
 # define E_LIGHT2		"Light (L): invalid second argument.\n"
 # define E_LIGHT3		"Light (L): invalid third argument.\n"
 
-# define E_SPHERE1		"Sphere (sp): invalid first argument.\n"
-# define E_SPHERE2		"Sphere (sp): invalid second argument.\n"
-# define E_SPHERE3		"Sphere (sp): invalid third argument.\n"
-
 # define E_PLANE1		"Plane (pl): invalid first argument.\n"
 # define E_PLANE2		"Plane (pl): invalid second argument.\n"
 # define E_PLANE3		"Plane (pl): invalid third argument.\n"
@@ -52,10 +48,20 @@
 # define E_TRIANGLE4	"Triangle (tr): invalid fourth argument.\n"
 # define E_TRI_VECTOR	"Triangle (tr): Points do not define a plane.\n"
 
+# define E_SPHERE1		"Sphere (sp): invalid first argument.\n"
+# define E_SPHERE2		"Sphere (sp): invalid second argument.\n"
+# define E_SPHERE3		"Sphere (sp): invalid third argument.\n"
+
 # define E_CYLINDER1	"Cylinder (cy): invalid first argument.\n"
 # define E_CYLINDER2	"Cylinder (cy): invalid second argument.\n"
 # define E_CYLINDER3	"Cylinder (cy): invalid third argument.\n"
 # define E_CYLINDER4	"Cylinder (cy): invalid fourth argument.\n"
 # define E_CYLINDER5	"Cylinder (cy): invalid fifth argument.\n"
+
+# define E_CONE1		"Cone (co): invalid first argument.\n"
+# define E_CONE2		"Cone (co): invalid second argument.\n"
+# define E_CONE3		"Cone (co): invalid third argument.\n"
+# define E_CONE4		"Cone (co): invalid fourth argument.\n"
+# define E_CONE5		"Cone (co): invalid fifth argument.\n"
 
 #endif
