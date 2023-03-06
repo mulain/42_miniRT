@@ -57,54 +57,30 @@ t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
 	return (i);
 }
 
-t_intrsct	intersect_cylinder(t_ray ray, void *obj)
-{
-	t_cylinder	*cylinder;
-	t_intrsct	i_tube;
-	t_intrsct	i_top;
-	t_intrsct	i_base;
-	t_disc		disc;
-
-	cylinder = (t_cylinder *)obj;
-	i_tube = intersect_tube(ray, cylinder);
-	disc.center = cylinder->top;
-	disc.vector = cylinder->axis;
-	disc.radius = cylinder->radius;
-	disc.color = cylinder->color;
-	i_top = intersect_disc(ray, &disc);
-	disc.center = cylinder->base;
-	i_base = intersect_disc(ray, &disc);
-	if (i_tube.distance < i_top.distance && i_tube.distance < i_base.distance)
-		return (i_tube);
-	if (i_top.distance < i_base.distance)
-		return (i_top);
-	return (i_base);
-}
-
 t_intrsct	intersect_tube(t_ray ray, void *obj)
 {
-	t_cylinder	*cylinder;
+	t_tube		*tube;
 	t_intrsct	i;
 	t_helper	h;
 	t_3d		translate[2];
 	double		length;
 
-	cylinder = (t_cylinder *)obj;
-	i.color = cylinder->color;
-	translate[0] = mult(cylinder->axis, dot(ray.direction, cylinder->axis));
+	tube = (t_tube *)obj;
+	i.color = tube->color;
+	translate[0] = mult(tube->axis, dot(ray.direction, tube->axis));
 	translate[0] = subtract(ray.direction, translate[0]);
-	h.oc = subtract(ray.origin, cylinder->base);
-	translate[1] = mult(cylinder->axis, dot(h.oc, cylinder->axis));
+	h.oc = subtract(ray.origin, tube->base);
+	translate[1] = mult(tube->axis, dot(h.oc, tube->axis));
 	translate[1] = subtract(h.oc, translate[1]);
 	h.a = dot(translate[0], translate[0]);
 	h.b = 2 * dot(translate[0], translate[1]);
-	h.c = dot(translate[1], translate[1]) - cylinder->radius * cylinder->radius;
+	h.c = dot(translate[1], translate[1]) - tube->radius * tube->radius;
 	i.distance = solve_quad(h.a, h.b, h.c);
 	if (i.distance == INFINITY)
 		return (i);
 	i.point = add(ray.origin, mult(ray.direction, i.distance));
-	length = dot(subtract(i.point, cylinder->base), cylinder->axis);
-	if (length < EPSILON || length - cylinder->height > EPSILON)
+	length = dot(subtract(i.point, tube->base), tube->axis);
+	if (length < EPSILON || length - tube->height > EPSILON)
 		i.distance = INFINITY;
 	return (i);
 }

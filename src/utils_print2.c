@@ -37,26 +37,26 @@ void	print_plane(t_plane *plane)
 
 }
 
-void	print_cylinder(t_cylinder *cylinder)
+void	print_tube(t_tube *tube)
 {
-	printf("----- Cylinder -----\n");
+	printf("----- tube -----\n");
 	printf("Base:\n");
-	printf("  x: %f\n", cylinder->base.x);
-	printf("  y: %f\n", cylinder->base.y);
-	printf("  z: %f\n", cylinder->base.z);
+	printf("  x: %f\n", tube->base.x);
+	printf("  y: %f\n", tube->base.y);
+	printf("  z: %f\n", tube->base.z);
 	printf("Axis:\n");
-	printf("  x: %f\n", cylinder->axis.x);
-	printf("  y: %f\n", cylinder->axis.y);
-	printf("  z: %f\n", cylinder->axis.z);
+	printf("  x: %f\n", tube->axis.x);
+	printf("  y: %f\n", tube->axis.y);
+	printf("  z: %f\n", tube->axis.z);
 	printf("Radius:\n");
-	printf("  %f\n", cylinder->radius);
+	printf("  %f\n", tube->radius);
 	printf("Height:\n");
-	printf("  %f\n", cylinder->height);
+	printf("  %f\n", tube->height);
 	printf("Color:\n");
-	printf("  r: %i\n", cylinder->color.r);
-	printf("  g: %i\n", cylinder->color.g);
-	printf("  b: %i\n", cylinder->color.b);
-	printf("  brightness: %f\n", cylinder->color.brightness);
+	printf("  r: %i\n", tube->color.r);
+	printf("  g: %i\n", tube->color.g);
+	printf("  b: %i\n", tube->color.b);
+	printf("  brightness: %f\n", tube->color.brightness);
 }
 
 void	print_3d(t_3d v, char *name)

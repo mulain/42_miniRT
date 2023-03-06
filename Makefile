@@ -1,7 +1,7 @@
 NAME	=	miniRT
 CC		=	gcc
 RM		=	rm -rf
-CFLAGS	=	-g -O3 -Iincl -fsanitize=address
+CFLAGS	=	-g -O3 -Iincl #-fsanitize=address
 EFLAGS	=	-Wall -Wextra -Werror
 LFLAGS	=	-lm $(LIBFT) $(MLXFLAGS)
 LIBFT	= 	libft/libft.a
@@ -24,7 +24,8 @@ SRCFILE	= 	calc_color.c\
 			calc_vector1.c\
 			calc_vector2.c\
 			draw.c\
-			get_normal.c\
+			get_normal_2d.c\
+			get_normal_3d.c\
 			hooks.c\
 			intersect_util.c\
 			intersect_2d.c\

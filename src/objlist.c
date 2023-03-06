@@ -10,26 +10,30 @@ t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype)
 		error_exit(d, E_MALLOC);
 	new->object = object;
 	new->objtype = objtype;
-	if (objtype == sp)
-	{
-		new->get_intersection = intersect_sphere;
-		new->get_normal = get_normal_sphere;
-		print_3d(new->get_normal((t_3d){0,0,0}, new->object), "knang" );
-	}
-	else if (objtype == pl)
+	if (objtype == pl)
 	{
 		new->get_intersection = intersect_plane;
 		new->get_normal = get_normal_plane;
 	}
-	else if (objtype == cy)
+	else if (objtype == di)
 	{
-		new->get_intersection = intersect_cylinder;
-		new->get_normal = get_normal_cylinder;
+		new->get_intersection = intersect_disc;
+		new->get_normal = get_normal_disc;
 	}
 	else if (objtype == tr)
 	{
 		new->get_intersection = intersect_triangle;
 		new->get_normal = get_normal_triangle;
+	}
+	else if (objtype == sp)
+	{
+		new->get_intersection = intersect_sphere;
+		new->get_normal = get_normal_sphere;
+	}
+	else if (objtype == tu)
+	{
+		new->get_intersection = intersect_tube;
+		new->get_normal = get_normal_tube;
 	}
 	new->next = NULL;
 	return (new);
@@ -47,14 +51,11 @@ void	objlst_add_back(t_objlist **lst, t_objlist *new)
 
 t_objlist	*objlst_last(t_objlist *lst)
 {
-	t_objlist	*temp;
-
 	if (!lst)
 		return (NULL);
-	temp = lst;
-	while (temp->next)
-		temp = temp->next;
-	return (temp);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
 void	objlist_free(t_objlist *lst)

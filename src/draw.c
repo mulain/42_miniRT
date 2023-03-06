@@ -51,15 +51,6 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)pxl = color;
 }
 
-/*
-Current structure (prolly shite:
-- get objintersect gives info:
-	- base color of hit obj
-		- if none hit: black (implement bckg?)
-	- distance traveled from camera
-	- point of intersection
-	- MISSING: normal of hit object!
-*/
 int	trace_ray(t_data *d, t_ray ray)
 {
 	t_intrsct	i;
@@ -95,11 +86,6 @@ int	apply_coeff(t_color color, t_rgb rgb_coeff)
 	return (color.trgb);
 }
 
-void	apply_ambientlight(t_data *d, t_intrsct *i)
-{
-	i->color = add_color(i->color, d->amb_light.color);
-}
-
 t_rgb	add_lightcoeff(t_rgb main_rgb, t_color color, double brightness)
 {
 	main_rgb.r += color.r / 255 * brightness;
@@ -107,27 +93,6 @@ t_rgb	add_lightcoeff(t_rgb main_rgb, t_color color, double brightness)
 	main_rgb.b += color.b / 255 * brightness;
 	return (main_rgb);
 }
-
-/* void	add_coefficient(t_p3 *rgb, double coef, t_p3 color)
-{
-	(*rgb).x += coef * color.x / 255;
-	(*rgb).y += coef * color.y / 255;
-	(*rgb).z += coef * color.z / 255;
-}
-
-int	rgb_to_int(t_p3 color, t_p3 rgb)
-{
-	rgb.x = rgb.x * color.x;
-	rgb.y = rgb.y * color.y;
-	rgb.z = rgb.z * color.z;
-	if (rgb.x > 255)
-		rgb.x = 255;
-	if (rgb.y > 255)
-		rgb.y = 255;
-	if (rgb.y > 255)
-		rgb.y = 255;
-	return (((int)rgb.x << 16) | ((int)rgb.y << 8) | (int)rgb.z);
-} */
 
 double	cosfactor(t_3d light_origin, t_intrsct i)
 {
@@ -151,15 +116,6 @@ void	apply_light(t_data *d, t_intrsct *i, t_ray ray)
 	cos_factor = dot(normal, light_normal) * -1;
 	i->color = adjust_brightness(i->color, cos_factor);
 }
-
-/* 
-float3 hitpoint = camray.origin + camray.dir * t;
- float3 normal = normalize(hitpoint - sphere1.pos);
- float cosine_factor = dot(normal, camray.dir) * -1.0f;
- 
- output[work_item_id] = sphere1.color * cosine_factor;
-
- */
 
 t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 {

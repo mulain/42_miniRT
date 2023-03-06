@@ -25,7 +25,6 @@ t_3d		add(t_3d p1, t_3d p2);
 t_3d		subtract(t_3d p1, t_3d p2);
 double		distance(t_3d p1, t_3d p2);
 t_3d		mult(t_3d v, double mult);
-t_3d		divide(t_3d v, double div);
 
 // calc_vector2.c
 double		length(t_3d v);
@@ -36,7 +35,6 @@ t_3d		norm(t_3d v);
 // draw.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
 int			trace_ray(t_data *d, t_ray ray);
-//t_3d		pixel_to_point(t_data *d, int x, int y);
 t_3d		get_vector(t_data *d, int x, int y);
 t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray);
 t_color		add_shadow(t_data *d, t_objlist *objlist, t_intrsct i);
@@ -52,12 +50,14 @@ int			apply_coeff(t_color color, t_rgb rgb_coeff);
 
 
 
-// get_normal.c
+// get_normal_2d.c
 t_3d	get_normal_plane(t_3d point, void *obj);
 t_3d	get_normal_disc(t_3d point, void *obj);
 t_3d	get_normal_triangle(t_3d point, void *obj);
+
+// get_normal_3d.c
 t_3d	get_normal_sphere(t_3d point, void *obj);
-t_3d	get_normal_cylinder(t_3d point, void *obj);
+t_3d	get_normal_tube(t_3d point, void *obj);
 
 // hooks.c
 int			key_release(int key, t_data *d);
@@ -70,7 +70,7 @@ double		solve_quad(double a, double b, double c);
 t_intrsct	intersect_plane(t_ray ray, void *obj);
 t_intrsct	intersect_disc(t_ray ray, void *obj);
 t_intrsct 	intersect_triangle(t_ray ray, void *obj);
-bool	is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval);
+bool		is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval);
 
 // intersect_3d.c
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
@@ -115,7 +115,7 @@ void		print_light(t_data *d);
 // utils_print2.c
 void		print_sphere(t_sphere *sp);
 void		print_plane(t_plane *pl);
-void		print_cylinder(t_cylinder *cy);
+void		print_tube(t_tube *tu);
 void		print_3d(t_3d p, char *name);
 void		print_3d(t_3d v, char *name);
 

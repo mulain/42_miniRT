@@ -12,8 +12,8 @@ void	print_objlist(t_objlist *lst)
 			print_sphere(temp->object);
 		else if (temp->objtype == pl)
 			print_plane(temp->object);
-		else if (temp->objtype == cy)
-			print_cylinder(temp->object);
+		else if (temp->objtype == tu)
+			print_tube(temp->object);
 		temp = temp->next;
 	}
 }

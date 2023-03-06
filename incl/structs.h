@@ -120,6 +120,16 @@ typedef struct s_sphere
 	double		radius;
 }	t_sphere;
 
+typedef struct s_tube
+{
+	t_3d		base;
+	t_3d		top;
+	t_3d		axis;
+	double		radius;
+	double		height;
+	t_color		color;
+}	t_tube;
+
 typedef struct s_cylinder
 {
 	t_3d		base;
