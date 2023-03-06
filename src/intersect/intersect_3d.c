@@ -104,3 +104,9 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 		i.distance = (-h.b - sqrt(h.discriminant)) / (2 * h.a);
 	return (i);
 } */
+
+void cylinder_to_cone(cylinder *c, cone *cn) {
+    cn->axis = vector_normalize(c->axis);
+    cn->apex = vector_add(c->center, vector_scale(cn->axis, c->radius / tan(cn->angle / 2)));
+    double d = vector_distance(c->center, cn->apex);
+    cn->angle = atan(c->radius / d);
