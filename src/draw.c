@@ -43,13 +43,6 @@ t_3d	get_vector(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-void	put_pixel(t_mlx *mlx, int x, int y, int color)
-{
-	char	*pxl;
-
-	pxl = mlx->img_addr + (y * mlx->img_line_length + x * mlx->img_bytespp);
-	*(unsigned int *)pxl = color;
-}
 
 int	trace_ray(t_data *d, t_ray ray)
 {
@@ -86,35 +79,19 @@ int	apply_coeff(t_color color, t_rgb rgb_coeff)
 	return (color.trgb);
 }
 
-t_rgb	add_lightcoeff(t_rgb main_rgb, t_color color, double brightness)
+t_color	adjust_brightness(t_color color, double factor)
 {
-	main_rgb.r += color.r / 255 * brightness;
-	main_rgb.g += color.g / 255 * brightness;
-	main_rgb.b += color.b / 255 * brightness;
-	return (main_rgb);
-}
-
-double	cosfactor(t_3d light_origin, t_intrsct i)
-{
-	t_3d	obj_normal;
-	t_3d	to_light_normal;
-
-	obj_normal =i.objnode->get_normal(i.point,i.objnode->object);
-	to_light_normal = norm(subtract(i.point, light_origin));
-	return (dot(obj_normal, to_light_normal) * -1);
-}
-
-void	apply_light(t_data *d, t_intrsct *i, t_ray ray)
-{
-	t_3d	normal;
-	t_3d	light_normal;
-	double	cos_factor;
-	//check for surface type if applicable, doing diffuse now
-	(void)ray;
-	normal = i->objnode->get_normal(i->point, i->objnode->object);
-	light_normal = norm(subtract(i->point, d->light.point));
-	cos_factor = dot(normal, light_normal) * -1;
-	i->color = adjust_brightness(i->color, cos_factor);
+	color.r *= factor;
+	color.g *= factor;
+	color.b *= factor;
+	if (color.r > 255)
+		color.r = 255;
+	if (color.g > 255)
+		color.g = 255;
+	if (color.b > 255)
+		color.b = 255;
+	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
+	return (color);
 }
 
 t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
@@ -128,11 +105,10 @@ t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 	while (objlist)
 	{
 		i_new = objlist->get_intersection(ray, objlist->object);
-		// add pointer to the object that was hit?
 		if (i_new.distance < i.distance)
 		{
 			i = i_new;
-			i.objnode = objlist;	
+			i.objnode = objlist;
 		}
 		objlist = objlist->next;
 	}
