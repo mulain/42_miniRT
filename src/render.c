@@ -43,7 +43,6 @@ t_3d	get_vector(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-
 int	trace_ray(t_data *d, t_ray ray)
 {
 	t_intrsct	i;
@@ -52,49 +51,16 @@ int	trace_ray(t_data *d, t_ray ray)
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode) // no intersection, return bckgcolor
 		return (0x00000000);
-	rgb_coeff = add_lightcoeff((t_rgb){0, 0, 0}, d->amb_light.color, d->amb_light.brightness);
-	if (!is_shadowed(d, d->objectlist, i.point))
-	{
-		rgb_coeff = add_lightcoeff(rgb_coeff, d->light.color,
-			d->light.brightness * cosfactor(d->light.point, i));
-		//i.color = adjust_brightness(i.color, 0.8);
-	}
-	//apply_light(d, &i, ray);
+	rgb_coeff = add_lighttocoeff((t_rgb){0, 0, 0},
+			d->amb_light.color, d->amb_light.brightness);
+	if (!is_shadowed(d->light, d->objectlist, i.point))
+		rgb_coeff = add_lighttocoeff(rgb_coeff, d->light.color,
+				d->light.brightness * cosfactor(d->light.point, i));
 	i.color.trgb = apply_coeff(i.color, rgb_coeff);
 	return (i.color.trgb);
 }
 
-int	apply_coeff(t_color color, t_rgb rgb_coeff)
-{
-	color.r *= rgb_coeff.r;
-	color.g *= rgb_coeff.g;
-	color.b *= rgb_coeff.b;
-	if (color.r > 255)
-		color.r = 255;
-	if (color.g > 255)
-		color.g = 255;
-	if (color.b > 255)
-		color.b = 255;
-	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
-	return (color.trgb);
-}
-
-t_color	adjust_brightness(t_color color, double factor)
-{
-	color.r *= factor;
-	color.g *= factor;
-	color.b *= factor;
-	if (color.r > 255)
-		color.r = 255;
-	if (color.g > 255)
-		color.g = 255;
-	if (color.b > 255)
-		color.b = 255;
-	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
-	return (color);
-}
-
-t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
+t_intrsct	get_objintersect(t_objlist *objnode, t_ray ray)
 {
 	t_intrsct	i;
 	t_intrsct	i_new;
@@ -102,35 +68,34 @@ t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray)
 	i.color.trgb = 0xFF000000;
 	i.distance = INFINITY;
 	i.objnode = NULL;
-	while (objlist)
+	while (objnode)
 	{
-		i_new = objlist->get_intersection(ray, objlist->object);
+		i_new = objnode->get_intersection(ray, objnode->object);
 		if (i_new.distance < i.distance)
 		{
 			i = i_new;
-			i.objnode = objlist;
+			i.objnode = objnode;
 		}
-		objlist = objlist->next;
+		objnode = objnode->next;
 	}
 	return (i);
 }
 
-bool	is_shadowed(t_data *d, t_objlist *objlist, t_3d point)
+bool	is_shadowed(t_light light, t_objlist *objnode, t_3d point)
 {
 	t_ray		shadow_ray;
 	double		light_dist;
-	double		block_dist;
+	double		block;
 
-	light_dist = distance(point, d->light.point);
-	shadow_ray.direction = norm(subtract(d->light.point, point));
+	light_dist = distance(point, light.point);
+	shadow_ray.direction = norm(subtract(light.point, point));
 	shadow_ray.origin = point;
-	while (objlist)
+	while (objnode)
 	{
-		block_dist = objlist->get_intersection(shadow_ray, objlist->object).distance;
-		if (block_dist - light_dist < EPSILON)
+		block = objnode->get_intersection(shadow_ray, objnode->object).distance;
+		if (block - light_dist < EPSILON)
 			return (true);
-		objlist = objlist->next;
+		objnode = objnode->next;
 	}
 	return (false);
-
 }

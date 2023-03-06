@@ -1,15 +1,17 @@
 
 #include "../incl/minirt.h"
 
-t_color	new_tcolor(int trgb)
+void	apply_light(t_data *d, t_intrsct *i, t_ray ray)
 {
-	t_color		color;
-
-	color.trgb = trgb;
-	color.r = (0x00FF0000 & trgb) >> 16;
-	color.g = (0x0000FF00 & trgb) >> 8;
-	color.b = (0x000000FF & trgb);
-	return (color);
+	t_3d	normal;
+	t_3d	light_normal;
+	double	cos_factor;
+	//check for surface type if applicable, doing diffuse now
+	(void)ray;
+	normal = i->objnode->get_normal(i->point, i->objnode->object);
+	light_normal = norm(subtract(i->point, d->light.point));
+	cos_factor = dot(normal, light_normal) * -1;
+	i->color = apply_brightness(i->color, cos_factor);
 }
 
 t_color	adjust_brightness(t_color color, double factor)

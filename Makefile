@@ -20,9 +20,14 @@ else
 	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
-SRCFILE	= 	calc_vector1.c\
+SRCFILE	= 	\
+			parsing/parsing_lightsandcam.c\
+			parsing/parsing_2d.c\
+			parsing/parsing_3d.c\
+			parsing/parsing_utils.c\
+			parsing/parsing.c\
+			calc_vector1.c\
 			calc_vector2.c\
-			draw.c\
 			get_normal_2d.c\
 			get_normal_3d.c\
 			hooks.c\
@@ -31,11 +36,9 @@ SRCFILE	= 	calc_vector1.c\
 			intersect_3d.c\
 			main.c\
 			objlist.c\
-			parsing_lightsandcam.c\
-			parsing_2d.c\
-			parsing_3d.c\
-			parsing_utils.c\
-			parsing.c\
+			render.c\
+			render_utils1.c\
+			render_utils2.c\
 			shutdown.c\
 			utils_print1.c\
 			utils_print2.c
@@ -59,7 +62,7 @@ $(MLX):
 	@echo "$(BLUE)MLX compiled for $(OS).$(RESET)"
 
 obj/%.o: src/%.c
-	@mkdir -p obj
+	@mkdir -p obj/parsing
 	$(CC) $(CFLAGS) $(EFLAGS) $(DEFINEFLAGS) -c $< -o $@
 
 clean:

@@ -14,12 +14,6 @@
 # include "objlist.h"
 # include "defines.h"
 
-// trash.c
-t_color		adjust_brightness(t_color color, double factor);
-t_color		mult_colors(t_color color1, t_color color2);
-t_color		add_amblight(t_color base, t_ambientlight light);
-t_color		add_color(t_color color1, t_color color2);
-
 // calc_vector1.c
 t_3d		add(t_3d p1, t_3d p2);
 t_3d		subtract(t_3d p1, t_3d p2);
@@ -31,24 +25,6 @@ double		length(t_3d v);
 double		dot(t_3d v1, t_3d v2);
 t_3d		cross(t_3d v1, t_3d v2);
 t_3d		norm(t_3d v);
-
-// draw.c
-void		put_pixel(t_mlx *mlx, int x, int y, int color);
-int			trace_ray(t_data *d, t_ray ray);
-t_3d		get_vector(t_data *d, int x, int y);
-t_intrsct	get_objintersect(t_objlist *objlist, t_ray ray);
-t_color		add_shadow(t_data *d, t_objlist *objlist, t_intrsct i);
-bool		is_shadowed(t_data *d, t_objlist *objlist, t_3d point);
-void		apply_light(t_data *d, t_intrsct *i, t_ray ray);
-void		render(t_data *d);
-void		apply_ambientlight(t_data *d, t_intrsct *i);
-double		cosfactor(t_3d light_origin, t_intrsct i);
-t_rgb		add_lightcoeff(t_rgb main_rgb, t_color color, double brightness);
-int			apply_coeff(t_color color, t_rgb rgb_coeff);
-
-
-
-
 
 // get_normal_2d.c
 t_3d	get_normal_plane(t_3d point, void *obj);
@@ -109,6 +85,22 @@ t_color		parse_color(t_data *d, char *input, char *msg);
 t_3d		parse_point(t_data *d, char *input, char *msg);
 t_3d		parse_vector(t_data *d, char *input, char *msg);
 int			parse_int(t_data *d, char *input, char *msg);
+
+// render.c
+void		render(t_data *d);
+t_3d		get_vector(t_data *d, int x, int y);
+int			trace_ray(t_data *d, t_ray ray);
+t_intrsct	get_objintersect(t_objlist *objnode, t_ray ray);
+bool		is_shadowed(t_light light, t_objlist *objnode, t_3d point);
+
+// render_utils1.c
+void		put_pixel(t_mlx *mlx, int x, int y, int color);
+double		cosfactor(t_3d light_origin, t_intrsct i);
+
+// render_utils2.c
+t_rgb		add_lighttocoeff(t_rgb coeff, t_color color, double brightness);
+int			apply_coeff(t_color color, t_rgb rgb_coeff);
+t_color		apply_brightness(t_color color, double factor);
 
 // utils_print1.c
 void		print_objlist(t_objlist *lst);
