@@ -41,6 +41,11 @@
 # define E_PLANE2		"Plane (pl): invalid second argument.\n"
 # define E_PLANE3		"Plane (pl): invalid third argument.\n"
 
+# define E_DISC1		"Disc (di): invalid first argument.\n"
+# define E_DISC2		"Disc (di): invalid second argument.\n"
+# define E_DISC3		"Disc (di): invalid third argument.\n"
+# define E_DISC4		"Disc (di): invalid fourth argument.\n"
+
 # define E_TRIANGLE1	"Triangle (tr): invalid first argument.\n"
 # define E_TRIANGLE2	"Triangle (tr): invalid second argument.\n"
 # define E_TRIANGLE3	"Triangle (tr): invalid third argument.\n"

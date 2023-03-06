@@ -93,11 +93,14 @@ void		parse_ambientlight(t_data *d);
 void		parse_camera(t_data *d);
 void		parse_light(t_data *d);
 
-// parsing_objects.c
-void		parse_sphere(t_data *d);
+// parsing_2d.c
 void		parse_plane(t_data *d);
-void		parse_cylinder(t_data *d);
+void		parse_disc(t_data *d);
 void		parse_triangle(t_data *d);
+
+// parsing_3d.c
+void		parse_sphere(t_data *d);
+void		parse_cylinder(t_data *d);
 
 // parsing_utils.c
 double		parse_double(t_data *d, char *input, char *msg);

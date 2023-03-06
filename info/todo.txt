@@ -1,11 +1,13 @@
-restructure intersection files?
 
 
 - triangle: better solution should be possible
 - cone
 
-- how to combine lights
-	- add ambient light
+- camera 
+- shadow ok?
+- multiple lights
+- phong
+- bump map
 
 cylinder manipulation shmisms
 - ws			move pos.y

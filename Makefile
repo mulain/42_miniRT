@@ -33,7 +33,8 @@ SRCFILE	= 	calc_color.c\
 			main.c\
 			objlist.c\
 			parsing_lightsandcam.c\
-			parsing_objects.c\
+			parsing_2d.c\
+			parsing_3d.c\
 			parsing_utils.c\
 			parsing.c\
 			shutdown.c\

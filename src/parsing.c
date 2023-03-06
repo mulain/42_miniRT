@@ -41,14 +41,16 @@ void	parse_line(t_data *d, char *line)
 		parse_camera(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "L", 2))
 		parse_light(d);
-	else if (!ft_strncmp(d->parse.elmnts[0], "sp", 3))
-		parse_sphere(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "pl", 3))
 		parse_plane(d);
-	else if (!ft_strncmp(d->parse.elmnts[0], "cy", 3))
-		parse_cylinder(d);
+	else if (!ft_strncmp(d->parse.elmnts[0], "di", 3))
+		parse_disc(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "tr", 3))
 		parse_triangle(d);
+	else if (!ft_strncmp(d->parse.elmnts[0], "sp", 3))
+		parse_sphere(d);
+	else if (!ft_strncmp(d->parse.elmnts[0], "cy", 3))
+		parse_cylinder(d);
 	else
 		error_exit(d, E_INVALOBJID);
 	free_2d_char(d->parse.elmnts);
