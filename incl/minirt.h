@@ -11,7 +11,8 @@
 # include "mlx.h"
 # include "../libft/include/libft.h"
 # include "structs.h"
-# include "objlist.h"
+# include "list_obj.h"
+# include "list_light.h"
 # include "defines.h"
 
 // calc_vector1.c

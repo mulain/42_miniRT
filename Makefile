@@ -34,8 +34,9 @@ SRCFILE	= 	\
 			intersect_util.c\
 			intersect_2d.c\
 			intersect_3d.c\
+			list_obj.c\
+			list_light.c\
 			main.c\
-			objlist.c\
 			render.c\
 			render_utils1.c\
 			render_utils2.c\

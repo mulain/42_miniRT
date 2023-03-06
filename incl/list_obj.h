@@ -28,11 +28,10 @@ typedef struct s_objlist
 
 }	t_objlist;
 
-// objlist.c
-t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype);
-void		select_functions(t_objlist *new);
+// list_obj.c
+t_lightlist	*objlst_new(t_data *d, void *object, t_objtype objtype);
 void		objlst_add_back(t_objlist **lst, t_objlist *new);
-t_objlist	*objlst_last(t_objlist *lst);
+t_lightlist	*objlst_last(t_objlist *lst);
 void		objlist_free(t_objlist *lst);
 
 #endif
