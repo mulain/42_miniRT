@@ -10,33 +10,38 @@ t_objlist	*objlst_new(t_data *d, void *object, t_objtype objtype)
 		error_exit(d, E_MALLOC);
 	new->object = object;
 	new->objtype = objtype;
-	if (objtype == pl)
+	new->next = NULL;
+	select_functions(new);
+	return (new);
+}
+
+void	select_functions(t_objlist *new)
+{
+	if (new->objtype == pl)
 	{
 		new->get_intersection = intersect_plane;
 		new->get_normal = get_normal_plane;
 	}
-	else if (objtype == di)
+	else if (new->objtype == di)
 	{
 		new->get_intersection = intersect_disc;
 		new->get_normal = get_normal_disc;
 	}
-	else if (objtype == tr)
+	else if (new->objtype == tr)
 	{
 		new->get_intersection = intersect_triangle;
 		new->get_normal = get_normal_triangle;
 	}
-	else if (objtype == sp)
+	else if (new->objtype == sp)
 	{
 		new->get_intersection = intersect_sphere;
 		new->get_normal = get_normal_sphere;
 	}
-	else if (objtype == tu)
+	else if (new->objtype == tu)
 	{
 		new->get_intersection = intersect_tube;
 		new->get_normal = get_normal_tube;
 	}
-	new->next = NULL;
-	return (new);
 }
 
 void	objlst_add_back(t_objlist **lst, t_objlist *new)
