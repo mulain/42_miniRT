@@ -158,25 +158,3 @@ bool	is_shadowed(t_data *d, t_objlist *objlist, t_3d point)
 	return (false);
 
 }
-
-t_color	add_shadow(t_data *d, t_objlist *objlist, t_intrsct i)
-{
-	t_ray		shadow_ray;
-	t_intrsct	new_i;
-	double		light_dist;
-
-	light_dist = distance(i.point, d->light.point);
-	shadow_ray.direction = norm(subtract(d->light.point, i.point));
-	shadow_ray.origin = i.point;
-	while (objlist)
-	{
-		new_i = objlist->get_intersection(shadow_ray, objlist->object);
-		if (new_i.distance - light_dist < EPSILON)
-		{
-			i.color = adjust_brightness(i.color, 0.1);
-			break ;
-		}
-		objlist = objlist->next;
-	}
-	return (i.color);
-}

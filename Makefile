@@ -20,8 +20,7 @@ else
 	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
-SRCFILE	= 	\
-			calc_vector1.c\
+SRCFILE	= 	calc_vector1.c\
 			calc_vector2.c\
 			draw.c\
 			get_normal_2d.c\

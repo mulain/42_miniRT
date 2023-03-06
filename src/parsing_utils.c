@@ -44,7 +44,6 @@ t_color	parse_color(t_data *d, char *input, char *msg)
 	color.g = ft_atoi(split[1]);
 	color.b = ft_atoi(split[2]);
 	color.trgb = 0x00000000;
-	color.brightness = 0;
 	free_2d_char(split);
 	d->parse.subelmnts = NULL;
 	return (color);

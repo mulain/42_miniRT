@@ -14,8 +14,6 @@ void	print_sphere(t_sphere *sphere)
 	printf("  r: %i\n", sphere->color.r);
 	printf("  g: %i\n", sphere->color.g);
 	printf("  b: %i\n", sphere->color.b);
-	printf("  brightness: %f\n", sphere->color.brightness);
-
 }
 
 void	print_plane(t_plane *plane)
@@ -33,8 +31,6 @@ void	print_plane(t_plane *plane)
 	printf("  r: %i\n", plane->color.r);
 	printf("  g: %i\n", plane->color.g);
 	printf("  b: %i\n", plane->color.b);
-	printf("  brightness: %f\n", plane->color.brightness);
-
 }
 
 void	print_tube(t_tube *tube)
@@ -56,7 +52,6 @@ void	print_tube(t_tube *tube)
 	printf("  r: %i\n", tube->color.r);
 	printf("  g: %i\n", tube->color.g);
 	printf("  b: %i\n", tube->color.b);
-	printf("  brightness: %f\n", tube->color.brightness);
 }
 
 void	print_3d(t_3d v, char *name)
