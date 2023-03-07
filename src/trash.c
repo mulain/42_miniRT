@@ -83,3 +83,35 @@ int	trace_ray_old(t_data *d, t_ray ray)
 	i.color.trgb = apply_coeff(i.color, rgb_coeff);
 	return (i.color.trgb);
 }
+
+/*
+This function assumes (correctly, for now) that cone and tube
+structs are interchangeable.
+*/
+t_intrsct	intersect_cone(t_ray ray, void *obj)
+{
+	t_cone		*cone;
+	t_intrsct	i;
+	t_3d		base_to_p;
+	t_3d		axis_point;
+ 	double		local_r;
+	double		local_h;
+	double		point_r;
+
+	cone = (t_cone *)obj;
+	i = intersect_tube(ray, cone);
+	if (i.distance == INFINITY)
+		return (i);
+
+	base_to_p = subtract(i.point, cone->base);
+	local_h = dot(base_to_p, cone->axis);
+	local_r = 1 - local_h / cone->height;
+	
+	
+	axis_point = add(cone->base, mult(cone->axis, local_h));
+	point_r = distance(axis_point, i.point);
+	
+	if (point_r - local_r > EPSILON)
+		i.distance = INFINITY;
+	return (i);
+}
