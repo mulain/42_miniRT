@@ -43,6 +43,7 @@ int			event_windowdestroy(t_data *d);
 
 // intersect_util.c
 double		solve_quad(double a, double b, double c);
+t_3d		translate(t_3d obj_axis, t_3d ray_dir);
 
 // intersect_2d.c
 t_intrsct	intersect_plane(t_ray ray, void *obj);

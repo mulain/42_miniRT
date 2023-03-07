@@ -20,3 +20,11 @@ double	solve_quad(double a, double b, double c)
 	}
 	return (t1);
 }
+
+t_3d	translate(t_3d obj_axis, t_3d ray_dir)
+{
+	t_3d	projection;
+
+	projection = mult(obj_axis, dot(obj_axis, ray_dir));
+	return (subtract(ray_dir, projection));
+}
