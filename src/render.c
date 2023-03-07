@@ -47,6 +47,7 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 {
 	t_intrsct	i;
 	t_rgb		coeff;
+	int			color;
 
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode) // no intersection, return bckgcolor
@@ -55,9 +56,9 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 	add_lighttocoeff(&coeff, d->amb_light.color, d->amb_light.brightness);
 	while (lightnode)
 	{
-		//if (!is_shadowed(lightnode->light, d->objectlist, i.point))
+		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
 			add_lighttocoeff(&coeff, lightnode->light->color,
-				lightnode->light->brightness * cosfactor(lightnode->light->origin, i));
+				lightnode->light->brightness /* * cosfactor(lightnode->light->origin, i) */);
 		lightnode = lightnode->next;
 	}
 	i.color.trgb = apply_coeff(i.color, coeff);
