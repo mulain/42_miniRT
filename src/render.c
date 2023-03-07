@@ -55,7 +55,7 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 	add_lighttocoeff(&coeff, d->amb_light.color, d->amb_light.brightness);
 	while (lightnode)
 	{
-		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
+		//if (!is_shadowed(lightnode->light, d->objectlist, i.point))
 			add_lighttocoeff(&coeff, lightnode->light->color,
 				lightnode->light->brightness * cosfactor(lightnode->light->origin, i));
 		lightnode = lightnode->next;
@@ -89,15 +89,15 @@ bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
 {
 	t_ray		shadow_ray;
 	double		light_dist;
-	double		block;
+	double		block_dist;
 
 	light_dist = distance(point, light->origin);
 	shadow_ray.direction = norm(subtract(light->origin, point));
 	shadow_ray.origin = point;
 	while (objnode)
 	{
-		block = objnode->get_intersection(shadow_ray, objnode->object).distance;
-		if (block - light_dist < EPSILON)
+		block_dist = objnode->get_intersection(shadow_ray, objnode->object).distance;
+		if (block_dist - light_dist < EPSILON)
 			return (true);
 		objnode = objnode->next;
 	}
