@@ -15,4 +15,4 @@ pl				0,0,-50			0,0,1			200,200,255 background
 # CYLINDERS		Position		Vector			Diameter		Height			Color
 
 # CONES			Position		Vector			Diameter		Height			Color
-co				0,5,-5			1,1,0			10				5				255,255,255
+co				0,5,-5			1,1,0			12				6				255,255,255

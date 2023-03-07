@@ -21,6 +21,7 @@ void	parse_disc(t_data *d)
 	disc = malloc(sizeof(t_disc));
 	if (!disc)
 		error_exit(d, E_MALLOC);
+	objlst_add_back(&d->objectlist, objlst_new(d, disc, di));
 	disc->center = parse_point(d, d->parse.elmnts[1], E_DISC1);
 	disc->vector = parse_vector(d, d->parse.elmnts[2], E_DISC2);
 	d->parse.min = 0;
@@ -40,8 +41,8 @@ void	parse_triangle(t_data *d)
 	triangle->p1 = parse_point(d, d->parse.elmnts[1], E_TRIANGLE1);
 	triangle->p2 = parse_point(d, d->parse.elmnts[2], E_TRIANGLE2);
 	triangle->p3 = parse_point(d, d->parse.elmnts[3], E_TRIANGLE3);
-	triangle->vector = 
-		cross(subtract(triangle->p1, triangle->p2), subtract(triangle->p1, triangle->p3));
+	triangle->vector = cross(subtract(triangle->p1, triangle->p2),
+			subtract(triangle->p1, triangle->p3));
 	if (length(triangle->vector) < EPSILON)
 		error_exit(d, E_TRI_VECTOR);
 	triangle->color = parse_color(d, d->parse.elmnts[4], E_TRIANGLE4);

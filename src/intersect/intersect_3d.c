@@ -85,29 +85,35 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 }
 
 /*
-atan gives the angle between the base and the hypotenuse.
-in our cone: it is the "left" and "right" angle at the base 
-of the cone.
+This function assumes (correctly, for now) that cone and tube
+structs are interchangeable.
 */
 t_intrsct	intersect_cone(t_ray ray, void *obj)
 {
 	t_cone		*cone;
-	t_tube		tube;
 	t_intrsct	i;
 	t_3d		base_to_p;
-	double		dist_from_axis;
+	t_3d		axis_point;
+ 	double		local_r;
+	double		local_h;
+	double		point_r;
 
 	cone = (t_cone *)obj;
-	tube = (t_tube){cone->base, cone->top, cone->axis, cone->radius, cone->height, cone->color};
-	i = intersect_tube(ray, &tube);
+	i = intersect_tube(ray, cone);
 	if (i.distance == INFINITY)
 		return (i);
 
 	base_to_p = subtract(i.point, cone->base);
-	dist_from_axis = dot(base_to_p, cone->axis);
-	double radius_at_height = dist_from_axis / cone->height * cone->radius;
+	local_h = dot(base_to_p, cone->axis);
+	local_r = 1 - local_h / cone->height;
+	printf("local r:%f\n", local_r);
 	
-	if (dist_from_axis - radius_at_height > EPSILON)
+	axis_point = add(cone->base, mult(cone->axis, local_h));
+	point_r = distance(axis_point, i.point);
+	//always equlas radisus. why?
+	printf("point r:%f\n", point_r);
+
+	if (point_r  > local_r) //EPSILON
 		i.distance = INFINITY;
 	return (i);
 }
