@@ -24,7 +24,8 @@ SRCFILE	= 	\
 			intersect/intersect_util.c\
 			intersect/intersect_2d.c\
 			intersect/intersect_3d.c\
-			lists/list_obj.c\
+			lists/list_obj1.c\
+			lists/list_obj2.c\
 			lists/list_light.c\
 			parsing/parsing_lightsandcam.c\
 			parsing/parsing_2d.c\
