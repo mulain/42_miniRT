@@ -109,6 +109,38 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	return (i);
 }
 
+/ Compute the intersection point of a ray and a cone
+double intersect_cone(Ray ray, Cone cone) {
+    Vector3 axis = normalize(cone.axis);
+    Vector3 ba = {cone.base.x - ray.origin.x, cone.base.y - ray.origin.y, cone.base.z - ray.origin.z};
+    Vector3 ca = {cone.top.x - ray.origin.x, cone.top.y - ray.origin.y, cone.top.z - ray.origin.z};
+    double cos2 = cos(cone.angle) * cos(cone.angle);
+    double a = dot(ray.direction, ray.direction) - cos2 * dot(ray.direction, axis) * dot(ray.direction, axis);
+    double b = 2 * (dot(ray.direction, ba) - cos2 * dot(ray.direction, axis) * dot(ba, axis));
+    double c = dot(ba, ba) - cos2 * dot(ba, axis) * dot(ba, axis);
+    double d = b * b - 4 * a * c;
+    if (d < 0) {
+        return -1;
+    }
+    double t1 = (-b + sqrt(d)) / (2 * a);
+    double t2 = (-b - sqrt(d)) / (2 * a);
+    Vector3 p1 = {ray.origin.x + t1 * ray.direction.x, ray.origin.y + t1
+	ray.direction.y, ray.origin.z + t1 * ray.direction.z};
+Vector3 p2 = {ray.origin.x + t2 * ray.direction.x, ray.origin.y + t2 * ray.direction.y, ray.origin.z + t2 * ray.direction.z};
+double height = dot(normalize(ca), p1);
+if (height > cone.height || height < 0) {
+return -1;
+}
+if (t1 > 0 && (t2 < 0 || t1 < t2)) {
+return t1;
+} else if (t2 > 0) {
+return t2;
+} else {
+return -1;
+}
+}
+
+
 /* t_intrsct	intersect_cone_fail(t_ray ray, void *obj)
 {
 	t_cone		*cone;
