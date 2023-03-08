@@ -1,11 +1,7 @@
-
-
 - triangle: better solution should be possible
 - cone
 
-- camera 
-- shadow ok?
-- multiple lights
+- camera
 - phong
 - bump map
 

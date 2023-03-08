@@ -56,6 +56,11 @@ t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
 	return (i);
 }
 
+/*
+ray_tr is used as an array of 2 doubles.
+The direction is actually translated, but ray.origin is not really
+a translation of the origin.
+*/
 t_intrsct	intersect_tube(t_ray ray, void *obj)
 {
 	t_tube		*tube;
@@ -91,11 +96,8 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
-	tr[0] = mult(cone->axis, dot(ray.direction, cone->axis));
-	tr[0] = subtract(ray.direction, tr[0]);
-	h.oc = subtract(ray.origin, cone->base);
-	tr[1] = mult(cone->axis, dot(h.oc, cone->axis));
-	tr[1] = subtract(h.oc, tr[1]);
+	tr[0] = translate(cone->axis, ray.direction);
+	tr[1] = translate(cone->axis, subtract(ray.origin, cone->base));
 	k = (cone->radius / cone->height) * (cone->radius / cone->height);
 	h.a = tr[0].x * tr[0].x + tr[0].y * tr[0].y - k * tr[0].z * tr[0].z;
 	h.b = 2 * (tr[0].x * tr[1].x + tr[0].y * tr[1].y - k * tr[0].z * tr[1].z);
