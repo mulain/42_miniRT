@@ -116,19 +116,35 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	t_helper	h;
 	//t_3d		tr[2];
 	double		m;
-	double		w;
-	double		dot_a:
+	t_3d		w;
+	double		dot_vh;
+	double		dot_vw;
+	//double		dist;
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
 	m = (cone->radius * cone->radius) / (cone->height * cone->height);
 	w = subtract(ray.origin, cone->top);
-	dot_a = dot(ray.direction, cone->axis);
-	h.a = dot(ray.direction, ray.direction) - m * dot_a * dot_a - dot_a * dot_a;
-	h.b = 2 * (dot(ray.direction, w) - m * dot_a * dot(w, cone->axis) - dot_a * dot(w, cone->axis)  )
+	dot_vh = dot(ray.direction, cone->axis);
+	dot_vw = dot(ray.direction, w);
+	h.a = dot(ray.direction, ray.direction) - m * dot_vh * dot_vh - dot_vh * dot_vh;
+	h.b = 2 * (dot_vw - m * dot_vh * dot(w, cone->axis) - dot_vh * dot(w, cone->axis));
+	h.c = dot(w, w) - m * dot(w, cone->axis) * dot(w, cone->axis) - dot(w, cone->axis) * dot(w, cone->axis);
+	i.distance = solve_quad(h.a, h.b, h.c);
+	if (i.distance == INFINITY)
+		return (i);
+	double projection = dot(subtract(i.point, cone->base), cone->axis);
+	if (projection > cone->height)
+		i.distance = INFINITY;
+	
+	
+	/* double height = dot(norm(ca), i.point);
+	if (height > cone->height || height < 0)
+		i.distance = INFINITY; */
+	return (i);
 }
 
-t_intrsct	intersect_cone(t_ray ray, void *obj)
+t_intrsct	intersect_conesdfs(t_ray ray, void *obj)
 {
 	t_cone		*cone;
 	t_intrsct	i;
