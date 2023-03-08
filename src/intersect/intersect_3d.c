@@ -134,7 +134,7 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	if (i.distance == INFINITY)
 		return (i);
 	double projection = dot(subtract(i.point, cone->base), cone->axis);
-	if (projection > cone->height)
+	if (projection > cone->height || projection < EPSILON)
 		i.distance = INFINITY;
 	
 	
