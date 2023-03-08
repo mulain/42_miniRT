@@ -99,6 +99,7 @@ bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
 // render_utils1.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
 double		cosfactor(t_3d light_origin, t_intrsct i);
+double		bright_diffuse(t_light light, t_intrsct i);
 
 // render_utils2.c
 void		add_lighttocoeff(t_rgb *coeff, t_color color, double brightness);

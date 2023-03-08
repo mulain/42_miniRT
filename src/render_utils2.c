@@ -8,12 +8,12 @@ void	add_lighttocoeff(t_rgb *coeff, t_color color, double brightness)
 	coeff->b += color.b / 255 * brightness;
 }
 
-void	add_light(t_color *color, t_light light, double cosfactor)
+/* void	add_light(t_color *color, t_light light, double cosfactor)
 {
 	*color.r += light.color.r * light.brightness * cosfactor;
 	*color.g += light.color.g * light.brightness * cosfactor;
 	*color.b += light.color.b* light.brightness * cosfactor;
-}
+} */
 
 /*
 light 1: 255, 255, 255
