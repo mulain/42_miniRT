@@ -74,28 +74,13 @@ t_3d	parse_point(t_data *d, char *input, char *msg)
 
 t_3d	parse_vector(t_data *d, char *input, char *msg)
 {
-	int			i;
-	char		**split;
 	t_3d	vector;
 
-	if (!input)
-		error_exit(d, msg);
-	d->parse.subelmnts = ft_split(input, ',');
-	split = d->parse.subelmnts;
-	if (count_subelements(split) != 3)
-		error_exit(d, msg);
-	i = -1;
-	while (++i < 3)
-		if (!is_decimalformat(split[i]))
-			error_exit(d, msg);
-	vector = (t_3d){conv_strtod(split[0]), conv_strtod(split[1]),
-		conv_strtod(split[2])};
-	free_2d_char(split);
-	d->parse.subelmnts = NULL;
-	if (vector.x < -1.0 || vector.x > 1.0 || vector.y < -1.0 || vector.y > 1.0
-		|| vector.z < -1.0 || vector.z > 1.0)
-		error_exit(d, msg);
-	if (vector.x == 0 && vector.y == 0 && vector.z == 0)
+	vector = parse_point(d, input, msg);
+	if (vector.x < -1.0 || vector.x > 1.0
+		|| vector.y < -1.0 || vector.y > 1.0
+		|| vector.z < -1.0 || vector.z > 1.0
+		|| (vector.x == 0 && vector.y == 0 && vector.z == 0))
 		error_exit(d, msg);
 	return (norm(vector));
 }

@@ -20,12 +20,12 @@ else
 	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
-SRCFILE	= 	$(addprefix intersect/,			intersect_util.c intersect_2d.c intersect_3d.c)\
-			$(addprefix lists/, 			list_obj1.c list_obj2.c list_light.c)\
-			$(addprefix parsing/, 			parsing_lightsandcam.c parsing_2d.c parsing_3d.c parsing_utils.c parsing.c)\
-			$(addprefix render/, 			render.c render_utils1.c render_utils2.c)\
-			$(addprefix surface_normal/,	get_normal_2d.c get_normal_3d.c)\
-			$(addprefix utils/, 			calculate1.c calculate2.c hooks.c print1.c print2.c shutdown.c)\
+SRCFILE	= 	$(addprefix intersect/, intersect_util.c intersect_2d.c intersect_3d.c)\
+			$(addprefix lists/, list_obj1.c list_obj2.c list_light.c)\
+			$(addprefix parsing/, parsing_lightsandcam.c parsing_2d.c parsing_3d.c parsing_utils.c parsing.c)\
+			$(addprefix render/, render.c render_utils1.c render_utils2.c)\
+			$(addprefix surface_normal/, get_normal_2d.c get_normal_3d.c)\
+			$(addprefix utils/, calculate1.c calculate2.c hooks.c print1.c print2.c shutdown.c)\
 			main.c
 			
 SRC		=	$(addprefix src/, $(SRCFILE))
