@@ -31,6 +31,6 @@ t_3d	get_normal_cone(t_3d point, void *obj)
 
 	cone = (t_cone *)obj;
 	len_hypo = cos(cone->theta_rad) / distance(point, cone->apex);
-	a = add(cone->apex, scale(cone->axis, len_hypo));
+	a = add(cone->apex, scale(cone->axis, -len_hypo));
 	return (norm(subtract(point, a)));
 }

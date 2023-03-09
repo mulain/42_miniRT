@@ -54,7 +54,7 @@ Theta is half of the angle at the cone's apex, defining a 90° triangle
 with the side of the cone as hypotenuse, the radius as the counter-cathete and
 the height as co-cathete.
 */
-void	parse_cone_real(t_data *d)
+void	parse_cone(t_data *d)
 {
 	t_cone	*cone;
 	t_disc	*disc_base;
@@ -66,35 +66,14 @@ void	parse_cone_real(t_data *d)
 	objlst_add_back(&d->objectlist, objlst_new(d, cone, co));
 	objlst_add_back(&d->objectlist, objlst_new(d, disc_base, di));
 	cone->base = parse_point(d, d->parse.elmnts[1], E_CONE1);
-	cone->axis = reverse(parse_vector(d, d->parse.elmnts[2], E_CONE2));
+	cone->axis = (parse_vector(d, d->parse.elmnts[2], E_CONE2));
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
 	cone->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CONE3);
 	cone->height = parse_double(d, d->parse.elmnts[4], E_CONE4);
-	cone->apex = add(cone->base, scale(cone->axis, cone->height));
+	cone->apex = add(cone->base, scale((cone->axis), cone->height));
 	cone->theta_rad = atan(cone->radius / cone->height);
 	cone->theta_deg = to_deg(cone->theta_rad);
 	cone->color = parse_color(d, d->parse.elmnts[5], E_CONE5);
-	*disc_base = (t_disc){cone->base, cone->axis, cone->radius, cone->color};
-}
-
-//nodisc for testing
-void	parse_cone(t_data *d)
-{
-	t_cone	*cone;
-
-	cone = malloc(sizeof(t_cone));
-	if (!cone)
-		error_exit(d, E_MALLOC);
-	objlst_add_back(&d->objectlist, objlst_new(d, cone, co));
-	cone->base = parse_point(d, d->parse.elmnts[1], E_CONE1);
-	cone->axis = parse_vector(d, d->parse.elmnts[2], E_CONE2);
-	d->parse.min = 0.0;
-	d->parse.max = 0.0;
-	cone->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CONE3);
-	cone->height = parse_double(d, d->parse.elmnts[4], E_CONE4);
-	cone->apex = add(cone->base, scale(cone->axis, cone->height));
-	cone->theta_rad = atan(cone->radius / cone->height);
-	cone->theta_deg = to_deg(cone->theta_rad);
-	cone->color = parse_color(d, d->parse.elmnts[5], E_CONE5);
+	*disc_base = (t_disc){cone->base, (cone->axis), cone->radius, cone->color};
 }

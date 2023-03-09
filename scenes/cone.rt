@@ -8,7 +8,7 @@ A								0.15			255,255,255
 L				100,40,-5		1.0				255,255,255
 
 # SPHERES		Position		Diameter		Color
-#sp				0,5,-15			12				255,255,255
+sp				0,5,-15			12				255,255,255
 
 # PLANES		Position		Vector			Color
 pl				0,0,-50			0,0,1			200,200,255 background

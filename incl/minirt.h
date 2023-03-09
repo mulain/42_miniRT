@@ -45,6 +45,7 @@ int			event_windowdestroy(t_data *d);
 // intersect_util.c
 double		solve_quad(double a, double b, double c);
 t_3d		translate(t_3d obj_axis, t_3d ray_dir);
+bool		is_withinbounds(t_3d point, t_3d ref, t_3d axis, double height);
 double		to_deg(double radians);
 double		to_rad(double degrees);
 

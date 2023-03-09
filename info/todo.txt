@@ -1,5 +1,8 @@
 - triangle: better solution should be possible
 - cone
+- 2d surfaces reflect wrong normal?
+- streamline light application
+- material type to member function
 
 - camera
 - phong

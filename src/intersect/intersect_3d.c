@@ -67,7 +67,6 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 	t_intrsct	i;
 	t_helper	h;
 	t_ray		ray_tr;
-	double		length;
 
 	tube = (t_tube *)obj;
 	i.color = tube->color;
@@ -80,13 +79,12 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 	if (i.distance == INFINITY)
 		return (i);
 	i.point = add(ray.origin, scale(ray.direction, i.distance));
-	length = dot(subtract(i.point, tube->base), tube->axis);
-	if (length < EPSILON || length - tube->height > EPSILON)
+	if (!is_withinbounds(i.point, tube->base, tube->axis, tube->height))
 		i.distance = INFINITY;
 	return (i);
 }
 
-t_intrsct	intersect_cone_leessold(t_ray ray, void *obj)
+t_intrsct	intersect_cone_xstyle(t_ray ray, void *obj)
 {
 	t_cone		*cone;
 	t_intrsct	i;
@@ -102,53 +100,36 @@ t_intrsct	intersect_cone_leessold(t_ray ray, void *obj)
 	h.a = tr[0].x * tr[0].x + tr[0].y * tr[0].y - k * tr[0].z * tr[0].z;
 	h.b = 2 * (tr[0].x * tr[1].x + tr[0].y * tr[1].y - k * tr[0].z * tr[1].z);
 	h.c = tr[1].x * tr[1].x + tr[1].y * tr[1].y - k * tr[1].z * tr[1].z;
-	i.distance = solve_quad(h.a, h.b, h.c);
-	if (i.distance == INFINITY)
-		return (i);
-	i.point = add(ray.origin, scale(ray.direction, i.distance));
-	return (i);
+	double	discriminant;
+	double	t1;
+	double	t2;
+
+	discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (discriminant < EPSILON)
+		return (i.distance = INFINITY, i);
+	t1 = (-h.b - sqrt(discriminant)) / (2 * h.a);
+	t2 = (-h.b + sqrt(discriminant)) / (2 * h.a);
+	if (t1 < EPSILON && t2 < EPSILON)
+		return (i.distance = INFINITY, i);
+	i.point = add(ray.origin, scale(ray.direction, t1));
+	if (!(t1 < EPSILON) &&
+		is_withinbounds(i.point, cone->apex, cone->axis, cone->height))
+		return (i.distance = t1, i);
+	i.point = add(ray.origin, scale(ray.direction, t2));
+	if (is_withinbounds(i.point, cone->apex, cone->axis, cone->height))
+		return (i.distance = t2, i);
+	return (i.distance = INFINITY, i);
 }
 
-
-/* a = k * d dot d - (d dot n)²
-b = 2 * (k * (d dot e) - (d dot n) * (e dot n - c dot n))
-c = k * (e dot e - 2 * (e dot c) + c dot c) - (e dot n - c dot n)² */
 t_intrsct	intersect_cone(t_ray ray, void *obj)
 {
 	t_cone		*cone;
 	t_intrsct	i;
 	t_helper	h;
-	//double		projection;
-	t_3d		co;
-
-	cone = (t_cone *)obj;
-	i.color = cone->color;
-	co = subtract(ray.origin, cone->apex);
-	h.a = dot(ray.direction, cone->axis) * dot(ray.direction, cone->axis) - cos(cone->theta_rad) * cos(cone->theta_rad);
-	h.b = 2 * (dot(ray.direction, cone->axis) * dot(co, cone->axis) - dot(ray.direction, co) * cone->theta_deg * cone->theta_deg);
-	h.c = dot(co, cone->axis) * dot(co, cone->axis) - dot(co, co) * cone->theta_deg * cone->theta_deg;
-	i.distance = solve_quad(h.a, h.b, h.c);
-   if (i.distance == INFINITY)
-		return (i);
-	/* projection = dot(subtract(i.point, cone->apex), cone->axis);
-	if (projection > cone->height || projection < EPSILON)
-		i.distance = INFINITY;
-	else */
-		i.point = add(ray.origin, scale(ray.direction, i.distance));
-	return (i);
-}
-
-t_intrsct	intersect_cone__(t_ray ray, void *obj)
-{
-	t_cone		*cone;
-	t_intrsct	i;
-	t_helper	h;
-	//t_3d		tr[2];
 	double		m;
 	t_3d		w;
 	double		dot_vh;
 	double		dot_vw;
-	//double		dist;
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
@@ -159,15 +140,25 @@ t_intrsct	intersect_cone__(t_ray ray, void *obj)
 	h.a = dot(ray.direction, ray.direction) - m * dot_vh * dot_vh - dot_vh * dot_vh;
 	h.b = 2 * (dot_vw - m * dot_vh * dot(w, cone->axis) - dot_vh * dot(w, cone->axis));
 	h.c = dot(w, w) - m * dot(w, cone->axis) * dot(w, cone->axis) - dot(w, cone->axis) * dot(w, cone->axis);
-	i.distance = solve_quad(h.a, h.b, h.c);
-	if (i.distance == INFINITY)
-		return (i);
-	double projection = dot(subtract(i.point, cone->base), cone->axis);
-	if (projection > cone->height || projection < EPSILON)
-		i.distance = INFINITY;
-	else
-		i.point = add(ray.origin, scale(ray.direction, i.distance));
-	return (i);
+	double	discriminant;
+	double	t1;
+	double	t2;
+
+	discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (discriminant < EPSILON)
+		return (i.distance = INFINITY, i);
+	t1 = (-h.b - sqrt(discriminant)) / (2 * h.a);
+	t2 = (-h.b + sqrt(discriminant)) / (2 * h.a);
+	if (t1 < EPSILON && t2 < EPSILON)
+		return (i.distance = INFINITY, i);
+	i.point = add(ray.origin, scale(ray.direction, t1));
+	if (!(t1 < EPSILON) &&
+		is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+		return (i.distance = t1, i);
+	i.point = add(ray.origin, scale(ray.direction, t2));
+	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+		return (i.distance = t2, i);
+	return (i.distance = INFINITY, i);
 }
 
 t_intrsct	intersect_cone_chatgpt(t_ray ray, void *obj)

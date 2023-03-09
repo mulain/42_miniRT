@@ -96,8 +96,9 @@ bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
 	shadow_ray.origin = point;
 	while (objnode)
 	{
-		block_dist = objnode->get_intersection(shadow_ray, objnode->object).distance;
-		if (block_dist - light_dist < EPSILON)
+		block_dist = objnode->get_intersection(shadow_ray,
+				objnode->object).distance;
+		if (block_dist < light_dist)
 			return (true);
 		objnode = objnode->next;
 	}
