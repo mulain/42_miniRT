@@ -33,7 +33,7 @@ t_intrsct	intersect_sphere(t_ray ray, void *obj)
 	}
 	else
 		i.distance = t1;
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 
@@ -52,7 +52,7 @@ t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
 	i.distance = solve_quad(h.a, h.b, h.c);
 	if (i.distance == INFINITY)
 		return (i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 
@@ -79,7 +79,7 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 	i.distance = solve_quad(h.a, h.b, h.c);
 	if (i.distance == INFINITY)
 		return (i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	length = dot(subtract(i.point, tube->base), tube->axis);
 	if (length < EPSILON || length - tube->height > EPSILON)
 		i.distance = INFINITY;
@@ -105,11 +105,43 @@ t_intrsct	intersect_cone_leessold(t_ray ray, void *obj)
 	i.distance = solve_quad(h.a, h.b, h.c);
 	if (i.distance == INFINITY)
 		return (i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 
+
+/* a = k * d dot d - (d dot n)²
+b = 2 * (k * (d dot e) - (d dot n) * (e dot n - c dot n))
+c = k * (e dot e - 2 * (e dot c) + c dot c) - (e dot n - c dot n)² */
 t_intrsct	intersect_cone(t_ray ray, void *obj)
+{
+	t_cone		*cone;
+	t_intrsct	i;
+	t_helper	h;
+	//double		projection;
+	t_3d		co;
+
+	cone = (t_cone *)obj;
+	i.color = cone->color;
+	cone->axis.x = -cone->axis.x;
+	cone->axis.y = -cone->axis.y;
+	cone->axis.z = -cone->axis.z;
+	co = subtract(ray.origin, cone->apex);
+	h.a = dot(ray.direction, cone->axis) * dot(ray.direction, cone->axis) - cos(cone->theta_rad) * cos(cone->theta_rad);
+	h.b = 2 * (dot(ray.direction, cone->axis) * dot(co, cone->axis) - dot(ray.direction, co) * cone->theta_deg * cone->theta_deg);
+	h.c = dot(co, cone->axis) * dot(co, cone->axis) - dot(co, co) * cone->theta_deg * cone->theta_deg;
+	i.distance = solve_quad(h.a, h.b, h.c);
+   if (i.distance == INFINITY)
+		return (i);
+	/* projection = dot(subtract(i.point, cone->apex), cone->axis);
+	if (projection > cone->height || projection < EPSILON)
+		i.distance = INFINITY;
+	else */
+		i.point = add(ray.origin, scale(ray.direction, i.distance));
+	return (i);
+}
+
+t_intrsct	intersect_cone__(t_ray ray, void *obj)
 {
 	t_cone		*cone;
 	t_intrsct	i;
@@ -124,7 +156,7 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	cone = (t_cone *)obj;
 	i.color = cone->color;
 	m = (cone->radius * cone->radius) / (cone->height * cone->height);
-	w = subtract(ray.origin, cone->top);
+	w = subtract(ray.origin, cone->apex);
 	dot_vh = dot(ray.direction, cone->axis);
 	dot_vw = dot(ray.direction, w);
 	h.a = dot(ray.direction, ray.direction) - m * dot_vh * dot_vh - dot_vh * dot_vh;
@@ -136,61 +168,34 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	double projection = dot(subtract(i.point, cone->base), cone->axis);
 	if (projection > cone->height || projection < EPSILON)
 		i.distance = INFINITY;
-	
-	
-	/* double height = dot(norm(ca), i.point);
-	if (height > cone->height || height < 0)
-		i.distance = INFINITY; */
+	else
+		i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 
-t_intrsct	intersect_conesdfs(t_ray ray, void *obj)
+t_intrsct	intersect_cone_chatgpt(t_ray ray, void *obj)
 {
+    
 	t_cone		*cone;
 	t_intrsct	i;
-	//t_helper	h;
-	//t_3d		tr[2];
-	//double		k;
-
 	cone = (t_cone *)obj;
 	i.color = cone->color;
-	t_3d ba = subtract(cone->base, ray.origin);
-	t_3d ca = subtract(cone->top, ray.origin);
-	double cone_angle = atan(cone->radius / cone->height);
-    double cos2 = cos(cone_angle) * cos(cone_angle);
-    double a = dot(ray.direction, ray.direction) - cos2 * dot(ray.direction, cone->axis) * dot(ray.direction, cone->axis);
-    double b = 2 * (dot(ray.direction, ba) - cos2 * dot(ray.direction, cone->axis) * dot(ba, cone->axis));
-    double c = dot(ba, ba) - cos2 * dot(ba, cone->axis) * dot(ba, cone->axis);
+
+// Translate ray origin and cone base to cone local coordinates
+	 t_3d l_origin = subtract(ray.origin, cone->base);
+    t_3d l_axis = norm(cone->axis);
+    t_3d l_direction = norm(ray.direction);
+    // Compute coefficients of quadratic equation
+    double a = dot(l_direction, l_direction) - (1 + cone->radius * cone->radius / (cone->height * cone->height)) * dot(l_direction, l_axis) * dot(l_direction, l_axis);
+    double b = 2 * (dot(l_direction, l_origin) - (1 + cone->radius * cone->radius / (cone->height * cone->height)) * dot(l_direction, l_axis) * dot(l_origin, l_axis));
+    double c = dot(l_origin, l_origin) - (1 + cone->radius * cone->radius / (cone->height * cone->height)) * dot(l_origin, l_axis) * dot(l_origin, l_axis);
     i.distance = solve_quad(a, b, c);
-	if (i.distance == INFINITY)
+   if (i.distance == INFINITY)
 		return (i);
-	double height = dot(norm(ca), i.point);
-	if (height > cone->height || height < 0)
+	double projection = dot(subtract(i.point, cone->base), cone->axis);
+	if (projection > cone->height || projection < EPSILON)
 		i.distance = INFINITY;
+	else
+		i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
-
-
-/* t_intrsct	intersect_cone_fail(t_ray ray, void *obj)
-{
-	t_cone		*cone;
-	t_intrsct	i;
-	t_helper	h;
-	double		k;
-
-	cone = (t_cone *)obj;
-	i.color = cone->color;
-	k = (cone->radius / cone->height) * (cone->radius / cone->height);
-	h.a = cone->axis.x * cone->axis.x + cone->axis.y * cone->axis.y - k * cone->axis.z * cone->axis.z;
-	h.b = 2 * ((ray.origin.x - cone->top.x) * ray.direction.x
-			+ (ray.origin.y - cone->top.y) * ray.direction.y
-			- k * ((ray.origin.z - cone->top.z) * ray.direction.z));
-	h.c = (ray.origin.x - cone->top.x) * (ray.origin.x - cone->top.x)
-		+ (ray.origin.y - cone->top.y) * (ray.origin.y - cone->top.y)
-		- k * (ray.origin.z - cone->top.z) * (ray.origin.z - cone->top.z);
-	i.distance = solve_quad(h.a, h.b, h.c);
-	if (i.distance == INFINITY)
-		return (i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
-	return (i);
-} */

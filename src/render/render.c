@@ -38,8 +38,8 @@ t_3d	get_vector(t_data *d, int x, int y)
 	looking = subtract(d->camera.point, looking);
 	x_axis = /* norm */(cross((t_3d){0, 1, 0}, d->camera.vector));
 	y_axis = /* norm */(cross(x_axis, d->camera.vector));
-	transformed = add(mult(x_axis, looking.x), d->camera.vector);
-	transformed = add(mult(y_axis, looking.y), transformed);
+	transformed = add(scale(x_axis, looking.x), d->camera.vector);
+	transformed = add(scale(y_axis, looking.y), transformed);
 	return (norm(transformed));
 }
 

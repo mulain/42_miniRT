@@ -132,10 +132,12 @@ typedef struct s_tube
 typedef struct s_cone
 {
 	t_3d		base;
-	t_3d		top;
+	t_3d		apex;
 	t_3d		axis;
 	double		radius;
 	double		height;
+	double		theta_rad;
+	double		theta_deg;
 	t_color		color;
 }	t_cone;
 

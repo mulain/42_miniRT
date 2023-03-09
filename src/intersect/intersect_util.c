@@ -25,6 +25,16 @@ t_3d	translate(t_3d obj_axis, t_3d ray_dir)
 {
 	t_3d	projection;
 
-	projection = mult(obj_axis, dot(obj_axis, ray_dir));
+	projection = scale(obj_axis, dot(obj_axis, ray_dir));
 	return (subtract(ray_dir, projection));
+}
+
+double	to_deg(double radians)
+{
+	return (radians * 180 / M_PI);
+}
+
+double	to_rad(double degrees)
+{
+	return (degrees * M_PI / 180);
 }

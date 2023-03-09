@@ -18,14 +18,15 @@
 // calc_vector1.c
 t_3d		add(t_3d p1, t_3d p2);
 t_3d		subtract(t_3d p1, t_3d p2);
-double		distance(t_3d p1, t_3d p2);
-t_3d		mult(t_3d v, double mult);
+t_3d		scale(t_3d v, double mult);
+t_3d		reverse(t_3d v);
 
 // calc_vector2.c
-double		length(t_3d v);
 double		dot(t_3d v1, t_3d v2);
 t_3d		cross(t_3d v1, t_3d v2);
 t_3d		norm(t_3d v);
+double		length(t_3d v);
+double		distance(t_3d p1, t_3d p2);
 
 // get_normal_2d.c
 t_3d		get_normal_plane(t_3d point, void *obj);
@@ -44,6 +45,8 @@ int			event_windowdestroy(t_data *d);
 // intersect_util.c
 double		solve_quad(double a, double b, double c);
 t_3d		translate(t_3d obj_axis, t_3d ray_dir);
+double		to_deg(double radians);
+double		to_rad(double degrees);
 
 // intersect_2d.c
 t_intrsct	intersect_plane(t_ray ray, void *obj);

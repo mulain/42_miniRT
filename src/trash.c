@@ -108,7 +108,7 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	local_r = 1 - local_h / cone->height;
 	
 	
-	axis_point = add(cone->base, mult(cone->axis, local_h));
+	axis_point = add(cone->base, scale(cone->axis, local_h));
 	point_r = distance(axis_point, i.point);
 	
 	if (point_r - local_r > EPSILON)
