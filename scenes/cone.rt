@@ -8,7 +8,7 @@ A								0.15			255,255,255
 L				100,40,-5		1.0				255,255,255
 
 # SPHERES		Position		Diameter		Color
-sp				0,5,-15			12				255,255,255
+#sp				0,5,-15			12				255,255,255
 
 # PLANES		Position		Vector			Color
 pl				0,0,-50			0,0,1			200,200,255 background
@@ -16,4 +16,4 @@ pl				0,0,-50			0,0,1			200,200,255 background
 # CYLINDERS		Position		Vector			Diameter		Height			Color
 
 # CONES			Position		Vector			Diameter		Height			Color
-co				0,5,-5			1,1,0			12				6				255,255,255
+co				0,5,-5			.2,1,0			12				6				255,255,255
