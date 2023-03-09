@@ -123,9 +123,6 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
-	cone->axis.x = -cone->axis.x;
-	cone->axis.y = -cone->axis.y;
-	cone->axis.z = -cone->axis.z;
 	co = subtract(ray.origin, cone->apex);
 	h.a = dot(ray.direction, cone->axis) * dot(ray.direction, cone->axis) - cos(cone->theta_rad) * cos(cone->theta_rad);
 	h.b = 2 * (dot(ray.direction, cone->axis) * dot(co, cone->axis) - dot(ray.direction, co) * cone->theta_deg * cone->theta_deg);
