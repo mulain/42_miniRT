@@ -41,7 +41,6 @@ t_3d	get_vector(t_data *d, int x, int y)
 	looking.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio * d->fov_ratio;
 	looking.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
 	looking.z = -1;
-	// looking = subtract(d->camera.point, looking);
 	transformed = add(scale(d->camera.x_axis, looking.x), d->camera.vector);
 	transformed = add(scale(d->camera.y_axis, looking.y), transformed);
 	return (norm(transformed));
