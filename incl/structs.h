@@ -72,11 +72,11 @@ typedef struct s_camera
 {
 	t_3d		point;
 	t_3d		vector;
+	t_3d		x_axis;
+	t_3d		y_axis;
 	int			fieldofview;
 	double		fov_factor;
 	bool		declared;
-	t_3d		x_axis;
-	t_3d		y_axis;
 }	t_camera;
 
 typedef struct s_ambientlight
