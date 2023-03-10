@@ -1,10 +1,8 @@
 - triangle: better solution should be possible
 - cone
-- 2d surfaces reflect wrong normal?
 - streamline light application
 - material type to member function
 
-- camera
 - phong
 - bump map
 
@@ -15,5 +13,3 @@ cylinder manipulation shmisms
 - up down		height
 - left right	radius
 - 				vector: xyz and ctrl+xyz?
-
-Threads
