@@ -41,4 +41,6 @@ void	parse_camera(t_data *d)
 	d->parse.max = (double)180;
 	d->camera.fieldofview = parse_int(d, d->parse.elmnts[3], E_CAMERA3);
 	d->fov_ratio = tan((d->camera.fieldofview / 2) * M_PI / 180);
+	d->camera.x_axis = cross((t_3d){0, 1, 0}, mult(d->camera.vector, -1));
+	d->camera.y_axis = cross(d->camera.x_axis, d->camera.vector);
 }

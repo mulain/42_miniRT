@@ -28,18 +28,14 @@ void	render(t_data *d)
 t_3d	get_vector(t_data *d, int x, int y)
 {
 	t_3d	looking;
-	t_3d	x_axis;
-	t_3d	y_axis;
 	t_3d	transformed;
 
 	looking.x = (2 * (x + 0.5) / d->width - 1) * d->aspect_ratio * d->fov_ratio;
 	looking.y = (1 - 2 * (y + 0.5) / d->height) * d->fov_ratio;
 	looking.z = -1;
-	looking = subtract(d->camera.point, looking);
-	x_axis = /* norm */(cross((t_3d){0, 1, 0}, d->camera.vector));
-	y_axis = /* norm */(cross(x_axis, d->camera.vector));
-	transformed = add(mult(x_axis, looking.x), d->camera.vector);
-	transformed = add(mult(y_axis, looking.y), transformed);
+	// looking = subtract(d->camera.point, looking);
+	transformed = add(mult(d->camera.x_axis, looking.x), d->camera.vector);
+	transformed = add(mult(d->camera.y_axis, looking.y), transformed);
 	return (norm(transformed));
 }
 
