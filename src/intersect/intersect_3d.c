@@ -84,62 +84,24 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 	return (i);
 }
 
-t_intrsct	intersect_cone_xstyle(t_ray ray, void *obj)
-{
-	t_cone		*cone;
-	t_intrsct	i;
-	t_helper	h;
-	t_3d		tr[2];
-	double		k;
-
-	cone = (t_cone *)obj;
-	i.color = cone->color;
-	tr[0] = translate(cone->axis, ray.direction);
-	tr[1] = translate(cone->axis, subtract(ray.origin, cone->base));
-	k = (cone->radius / cone->height) * (cone->radius / cone->height);
-	h.a = tr[0].x * tr[0].x + tr[0].y * tr[0].y - k * tr[0].z * tr[0].z;
-	h.b = 2 * (tr[0].x * tr[1].x + tr[0].y * tr[1].y - k * tr[0].z * tr[1].z);
-	h.c = tr[1].x * tr[1].x + tr[1].y * tr[1].y - k * tr[1].z * tr[1].z;
-	double	discriminant;
-	double	t1;
-	double	t2;
-
-	discriminant = h.b * h.b - 4 * h.a * h.c;
-	if (discriminant < EPSILON)
-		return (i.distance = INFINITY, i);
-	t1 = (-h.b - sqrt(discriminant)) / (2 * h.a);
-	t2 = (-h.b + sqrt(discriminant)) / (2 * h.a);
-	if (t1 < EPSILON && t2 < EPSILON)
-		return (i.distance = INFINITY, i);
-	i.point = add(ray.origin, scale(ray.direction, t1));
-	if (!(t1 < EPSILON) &&
-		is_withinbounds(i.point, cone->apex, cone->axis, cone->height))
-		return (i.distance = t1, i);
-	i.point = add(ray.origin, scale(ray.direction, t2));
-	if (is_withinbounds(i.point, cone->apex, cone->axis, cone->height))
-		return (i.distance = t2, i);
-	return (i.distance = INFINITY, i);
-}
-
 t_intrsct	intersect_cone(t_ray ray, void *obj)
 {
 	t_cone		*cone;
 	t_intrsct	i;
 	t_helper	h;
 	double		m;
-	t_3d		w;
-	double		dot_vh;
-	double		dot_vw;
+	double		dot1;
+	double		dot2;
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
 	m = (cone->radius * cone->radius) / (cone->height * cone->height);
-	w = subtract(ray.origin, cone->apex);
-	dot_vh = dot(ray.direction, cone->axis);
-	dot_vw = dot(ray.direction, w);
-	h.a = dot(ray.direction, ray.direction) - m * dot_vh * dot_vh - dot_vh * dot_vh;
-	h.b = 2 * (dot_vw - m * dot_vh * dot(w, cone->axis) - dot_vh * dot(w, cone->axis));
-	h.c = dot(w, w) - m * dot(w, cone->axis) * dot(w, cone->axis) - dot(w, cone->axis) * dot(w, cone->axis);
+	h.oc = subtract(ray.origin, cone->apex);
+	dot1 = dot(ray.direction, cone->axis);
+	dot2 = dot(ray.direction, h.oc);
+	h.a = dot(ray.direction, ray.direction) - m * dot1 * dot1 - dot1 * dot1;
+	h.b = 2 * (dot2 - m * dot1 * dot(h.oc, cone->axis) - dot1 * dot(h.oc, cone->axis));
+	h.c = dot(h.oc, h.oc) - m * dot(h.oc, cone->axis) * dot(h.oc, cone->axis) - dot(h.oc, cone->axis) * dot(h.oc, cone->axis);
 	double	discriminant;
 	double	t1;
 	double	t2;
@@ -152,38 +114,11 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	if (t1 < EPSILON && t2 < EPSILON)
 		return (i.distance = INFINITY, i);
 	i.point = add(ray.origin, scale(ray.direction, t1));
-	if (!(t1 < EPSILON) &&
-		is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+	if (!(t1 < EPSILON)
+		&& is_withinbounds(i.point, cone->base, cone->axis, cone->height))
 		return (i.distance = t1, i);
 	i.point = add(ray.origin, scale(ray.direction, t2));
 	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
 		return (i.distance = t2, i);
 	return (i.distance = INFINITY, i);
-}
-
-t_intrsct	intersect_cone_chatgpt(t_ray ray, void *obj)
-{
-    
-	t_cone		*cone;
-	t_intrsct	i;
-	cone = (t_cone *)obj;
-	i.color = cone->color;
-
-// Translate ray origin and cone base to cone local coordinates
-	 t_3d l_origin = subtract(ray.origin, cone->base);
-    t_3d l_axis = norm(cone->axis);
-    t_3d l_direction = norm(ray.direction);
-    // Compute coefficients of quadratic equation
-    double a = dot(l_direction, l_direction) - (1 + cone->radius * cone->radius / (cone->height * cone->height)) * dot(l_direction, l_axis) * dot(l_direction, l_axis);
-    double b = 2 * (dot(l_direction, l_origin) - (1 + cone->radius * cone->radius / (cone->height * cone->height)) * dot(l_direction, l_axis) * dot(l_origin, l_axis));
-    double c = dot(l_origin, l_origin) - (1 + cone->radius * cone->radius / (cone->height * cone->height)) * dot(l_origin, l_axis) * dot(l_origin, l_axis);
-    i.distance = solve_quad(a, b, c);
-   if (i.distance == INFINITY)
-		return (i);
-	double projection = dot(subtract(i.point, cone->base), cone->axis);
-	if (projection > cone->height || projection < EPSILON)
-		i.distance = INFINITY;
-	else
-		i.point = add(ray.origin, scale(ray.direction, i.distance));
-	return (i);
 }
