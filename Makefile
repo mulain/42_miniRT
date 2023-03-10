@@ -20,29 +20,13 @@ else
 	DEFINEFLAGS	=	-DKEY_ESC=53
 endif
 
-SRCFILE	= 	\
-			intersect/intersect_util.c\
-			intersect/intersect_2d.c\
-			intersect/intersect_3d.c\
-			lists/list_obj.c\
-			lists/list_light.c\
-			parsing/parsing_lightsandcam.c\
-			parsing/parsing_2d.c\
-			parsing/parsing_3d.c\
-			parsing/parsing_utils.c\
-			parsing/parsing.c\
-			utils/shutdown.c\
-			utils/utils_print1.c\
-			utils/utils_print2.c\
-			utils/hooks.c\
-			calc_vector1.c\
-			calc_vector2.c\
-			get_normal_2d.c\
-			get_normal_3d.c\
-			main.c\
-			render.c\
-			render_utils1.c\
-			render_utils2.c
+SRCFILE	= 	main.c\
+			$(addprefix intersect/, intersect_util.c intersect_2d.c intersect_3d.c)\
+			$(addprefix lists/, list_obj1.c list_obj2.c list_light.c)\
+			$(addprefix parsing/, parsing_lightsandcam.c parsing_2d.c parsing_3d.c parsing_utils.c parsing.c)\
+			$(addprefix render/, manage_threads.c render.c render_utils1.c render_utils2.c)\
+			$(addprefix surface_normal/, get_normal_2d.c get_normal_3d.c)\
+			$(addprefix utils/, calculate1.c calculate2.c hooks.c print1.c print2.c shutdown.c)
 			
 SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
@@ -67,6 +51,8 @@ obj/%.o: src/%.c
 	@mkdir -p obj/intersect
 	@mkdir -p obj/lists
 	@mkdir -p obj/parsing
+	@mkdir -p obj/render
+	@mkdir -p obj/surface_normal
 	@mkdir -p obj/utils
 	$(CC) $(CFLAGS) $(EFLAGS) $(DEFINEFLAGS) -c $< -o $@
 

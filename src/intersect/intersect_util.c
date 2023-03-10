@@ -20,3 +20,31 @@ double	solve_quad(double a, double b, double c)
 	}
 	return (t1);
 }
+
+t_3d	translate(t_3d obj_axis, t_3d ray_dir)
+{
+	t_3d	projection;
+
+	projection = scale(obj_axis, dot(obj_axis, ray_dir));
+	return (subtract(ray_dir, projection));
+}
+
+bool	is_withinbounds(t_3d point, t_3d axis_point, t_3d axis, double height)
+{
+	double		projection;
+
+	projection = dot(subtract(point, axis_point), axis);
+	if (projection > height || projection < EPSILON)
+		return (false);
+	return (true);
+}
+
+double	to_deg(double radians)
+{
+	return (radians * 180 / M_PI);
+}
+
+double	to_rad(double degrees)
+{
+	return (degrees * M_PI / 180);
+}

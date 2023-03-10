@@ -3,9 +3,10 @@
 # define DEFINES_H
 
 // Settings
-# define IMG_WIDTH		1500
-# define IMG_HEIGHT		1000
-# define EPSILON		0.00001
+# define IMG_WIDTH		1920
+# define IMG_HEIGHT		1080
+# define EPSILON		0.000001
+# define THREADCOUNT	12
 # define RAYDEPTH		2
 
 // Error messages
@@ -13,6 +14,8 @@
 # define E_FILETYPE		"Invalid input file type. Please supply a .rt file.\n"
 # define E_FILENAME		"Invalid input file name.\n"
 # define E_OPENFILE		"Could not open input file.\n"
+# define E_THREADCREATE	"Could not create thread.\n"
+# define E_THREADJOIN	"Could not join thread.\n"
 
 # define E_MALLOC		"Malloc error.\n"
 
@@ -46,7 +49,7 @@
 # define E_TRIANGLE2	"Triangle (tr): invalid second argument.\n"
 # define E_TRIANGLE3	"Triangle (tr): invalid third argument.\n"
 # define E_TRIANGLE4	"Triangle (tr): invalid fourth argument.\n"
-# define E_TRI_VECTOR	"Triangle (tr): Points do not define a plane.\n"
+# define E_TRI_VECTOR	"Triangle (tr): Given points do not define a plane.\n"
 
 # define E_SPHERE1		"Sphere (sp): invalid first argument.\n"
 # define E_SPHERE2		"Sphere (sp): invalid second argument.\n"

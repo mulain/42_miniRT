@@ -29,11 +29,15 @@ typedef struct s_objlst
 
 }	t_objlst;
 
-// list_obj.c
+// list_obj1.c
 t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype);
-void		select_functions(t_objlst *new);
 void		objlst_add_back(t_objlst **lst, t_objlst *new);
 t_objlst	*objlst_last(t_objlst *lst);
 void		objlst_free(t_objlst *lst);
+
+// list_obj2.c
+void		select_functions(t_objlst *new);
+void		select_intersect(t_objlst *new);
+void	select_get_normal(t_objlst *new);
 
 #endif

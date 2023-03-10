@@ -36,12 +36,24 @@ void	parse_cylinder(t_data *d)
 	d->parse.max = 0.0;
 	tube->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CYLINDER3);
 	tube->height = parse_double(d, d->parse.elmnts[4], E_CYLINDER4);
-	tube->top = add(tube->base, mult(tube->axis, tube->height));
+	tube->top = add(tube->base, scale(tube->axis, tube->height));
 	tube->color = parse_color(d, d->parse.elmnts[5], E_CYLINDER5);
 	*disc_top = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
 	*disc_base = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
 }
 
+/*
+The cone is structured differently than it is input.
+Input:
+Cone vector defines the orientation of the base disc and points towards
+the apex.
+Actual handling:
+The apex is the anchor of the cone and the vector points from apex to base.
+Therefore the input vector is reversed.
+Theta is half of the angle at the cone's apex, defining a 90° triangle
+with the side of the cone as hypotenuse, the radius as the counter-cathete and
+the height as co-cathete.
+*/
 void	parse_cone(t_data *d)
 {
 	t_cone	*cone;
@@ -54,12 +66,14 @@ void	parse_cone(t_data *d)
 	objlst_add_back(&d->objectlist, objlst_new(d, cone, co));
 	objlst_add_back(&d->objectlist, objlst_new(d, disc_base, di));
 	cone->base = parse_point(d, d->parse.elmnts[1], E_CONE1);
-	cone->axis = parse_vector(d, d->parse.elmnts[2], E_CONE2);
+	cone->axis = (parse_vector(d, d->parse.elmnts[2], E_CONE2));
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
 	cone->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CONE3);
 	cone->height = parse_double(d, d->parse.elmnts[4], E_CONE4);
-	cone->top = add(cone->base, mult(cone->axis, cone->height));
+	cone->apex = add(cone->base, scale((cone->axis), cone->height));
+	cone->theta_rad = atan(cone->radius / cone->height);
+	cone->theta_deg = to_deg(cone->theta_rad);
 	cone->color = parse_color(d, d->parse.elmnts[5], E_CONE5);
-	*disc_base = (t_disc){cone->base, cone->axis, cone->radius, cone->color};
+	*disc_base = (t_disc){cone->base, (cone->axis), cone->radius, cone->color};
 }

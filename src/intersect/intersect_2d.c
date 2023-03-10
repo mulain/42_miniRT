@@ -15,7 +15,7 @@ t_intrsct	intersect_plane(t_ray ray, void *obj)
 	i.distance = dot(subtract(plane->point, ray.origin), plane->vector) / div;
 	if (i.distance < EPSILON)
 		return (i.distance = INFINITY, i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 

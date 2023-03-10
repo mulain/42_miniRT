@@ -131,12 +131,12 @@ double	cylinder_tube(t_ray ray, t_cylinder cylinder)
 	t_3d		oc;
 	
 	// Compute the direction vector of the ray projected onto the cylinder's axis
-	v = mult(cylinder.axis, dot(ray.direction, cylinder.axis));
+	v = scale(cylinder.axis, dot(ray.direction, cylinder.axis));
 	// Compute the direction vector of the ray perpendicular to the cylinder's axis
 	v = subtract(ray.direction, v);
 	// Compute the origin vector of the ray projected onto the cylinder's axis
 	oc = subtract(ray.origin, cylinder.base);
-	u = mult(cylinder.axis, dot(oc, cylinder.axis));
+	u = scale(cylinder.axis, dot(oc, cylinder.axis));
 	// Compute the origin vector of the ray perpendicular to the cylinder's axis
 	u = subtract(oc, u);
 	// Compute coefficients of quadratic equation
@@ -152,7 +152,7 @@ double	cylinder_tube(t_ray ray, t_cylinder cylinder)
 		return (INFINITY);
 	//Intersection of ray with cylinder is origin of ray + 
 	//distance t1 traveled along direction of ray
-	h.intrsct = add(ray.origin, mult(ray.direction, h.t1));
+	h.intrsct = add(ray.origin, scale(ray.direction, h.t1));
 	h.intrsct = subtract(h.intrsct, cylinder.base);
 	h.dot_prod = dot(h.intrsct, cylinder.axis);
 

@@ -1,15 +1,6 @@
 
 #include "minirt.h"
 
-/*
-The length (or magnitude) of a vector is the square root of the dot product
-of the vector with itself.
-*/
-double	length(t_3d v)
-{
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
-}
-
 double	dot(t_3d v1, t_3d v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
@@ -48,4 +39,25 @@ t_3d	norm(t_3d v)
 	v.y *= inv_len;
 	v.z *= inv_len;
 	return (v);
+}
+
+/*
+The length (or magnitude) of a vector is the square root of the dot product
+of the vector with itself.
+*/
+double	length(t_3d v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+double	distance(t_3d p1, t_3d p2)
+{
+	double	delta_x;
+	double	delta_y;
+	double	delta_z;
+
+	delta_x = p2.x - p1.x;
+	delta_y = p2.y - p1.y;
+	delta_z = p2.z - p1.z;
+	return (sqrt(delta_x * delta_x + delta_y * delta_y + delta_z * delta_z));
 }

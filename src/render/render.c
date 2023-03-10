@@ -1,15 +1,21 @@
 
 #include "../incl/minirt.h"
 
-void	render(t_data *d)
+void	*render(void *ptr)
 {
-	int		x;
-	int		y;
-	t_ray	ray;
+	t_data		*d;
+	int			id;
+	int			x;
+	int			y;
+	int			job;
+	t_ray		ray;
 
+	d = ((t_threadinfo *)ptr)->data;
+	id = ((t_threadinfo *)ptr)->id;
 	ray.origin = d->camera.point;
-	y = 0;
-	while (y < d->height)
+	job = d->height / THREADCOUNT;
+	y = id * job;
+	while (y < job * (id + 1))
 	{
 		x = 0;
 		while (x < d->width)
@@ -18,11 +24,13 @@ void	render(t_data *d)
 			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
 			x++;
 		}
-		printf("\rRendering: %.1f%%", (double)y / (d->height - 1) * 100);
+		if (id == THREADCOUNT - 1)
+			printf("\rRendering: %.1f", (float)100 * (y / THREADCOUNT) / job);
 		y++;
 	}
-	printf("\n");
-	mlx_put_image_to_window(d->mlx.mlx, d->mlx.win, d->mlx.img, 0, 0);
+	if (id == THREADCOUNT - 1)
+		printf("\rRendering: 100.0%%\n");
+	return (NULL);
 }
 
 t_3d	get_vector(t_data *d, int x, int y)
@@ -43,6 +51,7 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 {
 	t_intrsct	i;
 	t_rgb		coeff;
+	//int		color;
 
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode) // no intersection, return bckgcolor
@@ -52,8 +61,7 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 	while (lightnode)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
-			add_lighttocoeff(&coeff, lightnode->light->color,
-				lightnode->light->brightness * cosfactor(lightnode->light->origin, i));
+			add_lighttocoeff(&coeff, lightnode->light->color, bright_diffuse(*lightnode->light, i));
 		lightnode = lightnode->next;
 	}
 	i.color.trgb = apply_coeff(i.color, coeff);
@@ -85,15 +93,16 @@ bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
 {
 	t_ray		shadow_ray;
 	double		light_dist;
-	double		block;
+	double		block_dist;
 
 	light_dist = distance(point, light->origin);
 	shadow_ray.direction = norm(subtract(light->origin, point));
 	shadow_ray.origin = point;
 	while (objnode)
 	{
-		block = objnode->get_intersection(shadow_ray, objnode->object).distance;
-		if (block - light_dist < EPSILON)
+		block_dist = objnode->get_intersection(shadow_ray,
+				objnode->object).distance;
+		if (block_dist < light_dist)
 			return (true);
 		objnode = objnode->next;
 	}

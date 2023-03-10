@@ -33,7 +33,7 @@ t_intrsct	intersect_sphere(t_ray ray, void *obj)
 	}
 	else
 		i.distance = t1;
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 
@@ -52,62 +52,73 @@ t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
 	i.distance = solve_quad(h.a, h.b, h.c);
 	if (i.distance == INFINITY)
 		return (i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
 
+/*
+ray_tr is used as an array of 2 doubles.
+The direction is actually translated, but ray.origin is not really
+a translation of the origin.
+*/
 t_intrsct	intersect_tube(t_ray ray, void *obj)
 {
 	t_tube		*tube;
 	t_intrsct	i;
 	t_helper	h;
-	t_3d		translate[2];
-	double		length;
+	t_ray		ray_tr;
 
 	tube = (t_tube *)obj;
 	i.color = tube->color;
-	translate[0] = mult(tube->axis, dot(ray.direction, tube->axis));
-	translate[0] = subtract(ray.direction, translate[0]);
-	h.oc = subtract(ray.origin, tube->base);
-	translate[1] = mult(tube->axis, dot(h.oc, tube->axis));
-	translate[1] = subtract(h.oc, translate[1]);
-	h.a = dot(translate[0], translate[0]);
-	h.b = 2 * dot(translate[0], translate[1]);
-	h.c = dot(translate[1], translate[1]) - tube->radius * tube->radius;
+	ray_tr.direction = translate(tube->axis, ray.direction);
+	ray_tr.origin = translate(tube->axis, subtract(ray.origin, tube->base));
+	h.a = dot(ray_tr.direction, ray_tr.direction);
+	h.b = 2 * dot(ray_tr.direction, ray_tr.origin);
+	h.c = dot(ray_tr.origin, ray_tr.origin) - tube->radius * tube->radius;
 	i.distance = solve_quad(h.a, h.b, h.c);
 	if (i.distance == INFINITY)
 		return (i);
-	i.point = add(ray.origin, mult(ray.direction, i.distance));
-	length = dot(subtract(i.point, tube->base), tube->axis);
-	if (length < EPSILON || length - tube->height > EPSILON)
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
+	if (!is_withinbounds(i.point, tube->base, tube->axis, tube->height))
 		i.distance = INFINITY;
 	return (i);
 }
 
-/*
-atan gives the angle between the base and the hypotenuse.
-in our cone: it is the "left" and "right" angle at the base 
-of the cone.
-*/
 t_intrsct	intersect_cone(t_ray ray, void *obj)
 {
 	t_cone		*cone;
-	t_tube		tube;
 	t_intrsct	i;
-	t_3d		base_to_p;
-	double		dist_from_axis;
+	t_helper	h;
+	double		m;
+	double		dot1;
+	double		dot2;
 
 	cone = (t_cone *)obj;
-	tube = (t_tube){cone->base, cone->top, cone->axis, cone->radius, cone->height, cone->color};
-	i = intersect_tube(ray, &tube);
-	if (i.distance == INFINITY)
-		return (i);
+	i.color = cone->color;
+	m = (cone->radius * cone->radius) / (cone->height * cone->height);
+	h.oc = subtract(ray.origin, cone->apex);
+	dot1 = dot(ray.direction, cone->axis);
+	dot2 = dot(ray.direction, h.oc);
+	h.a = dot(ray.direction, ray.direction) - m * dot1 * dot1 - dot1 * dot1;
+	h.b = 2 * (dot2 - m * dot1 * dot(h.oc, cone->axis) - dot1 * dot(h.oc, cone->axis));
+	h.c = dot(h.oc, h.oc) - m * dot(h.oc, cone->axis) * dot(h.oc, cone->axis) - dot(h.oc, cone->axis) * dot(h.oc, cone->axis);
+	double	discriminant;
+	double	t1;
+	double	t2;
 
-	base_to_p = subtract(i.point, cone->base);
-	dist_from_axis = dot(base_to_p, cone->axis);
-	double radius_at_height = dist_from_axis / cone->height * cone->radius;
-	
-	if (dist_from_axis - radius_at_height > EPSILON)
-		i.distance = INFINITY;
-	return (i);
+	discriminant = h.b * h.b - 4 * h.a * h.c;
+	if (discriminant < EPSILON)
+		return (i.distance = INFINITY, i);
+	t1 = (-h.b - sqrt(discriminant)) / (2 * h.a);
+	t2 = (-h.b + sqrt(discriminant)) / (2 * h.a);
+	if (t1 < EPSILON && t2 < EPSILON)
+		return (i.distance = INFINITY, i);
+	i.point = add(ray.origin, scale(ray.direction, t1));
+	if (!(t1 < EPSILON)
+		&& is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+		return (i.distance = t1, i);
+	i.point = add(ray.origin, scale(ray.direction, t2));
+	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+		return (i.distance = t2, i);
+	return (i.distance = INFINITY, i);
 }
