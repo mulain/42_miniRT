@@ -2,6 +2,8 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+#include "defines.h"
+ 
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -152,7 +154,7 @@ typedef struct s_parsing
 }	t_parsing;
 
 // Forward declaration
-typedef struct s_objlst	t_objlst;
+typedef struct s_objlst		t_objlst;
 typedef struct s_lightlst	t_lightlst;
 
 // The main struct
@@ -169,5 +171,12 @@ typedef struct s_data
 	float			aspect_ratio;
 	float			fov_ratio;
 }	t_data;
+
+// Struct fo rthreads
+typedef struct s_threadinfo
+{
+	t_data	*data;
+	int		id;
+}	t_threadinfo;
 
 #endif

@@ -1,7 +1,39 @@
 
 #include "../incl/minirt.h"
 
-void	render(t_data *d)
+void	*render(void *ptr)
+{
+	t_data		*d;
+	int			id;
+	int			x;
+	int			y;
+	int			job;
+	t_ray		ray;
+
+	d = ((t_threadinfo *)ptr)->data;
+	id = ((t_threadinfo *)ptr)->id;
+	ray.origin = d->camera.point;
+	job = d->height / THREADCOUNT;
+	y = id * job;
+	while (y < job * (id + 1))
+	{
+		x = 0;
+		while (x < d->width)
+		{
+			ray.direction = get_vector(d, x, y);
+			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
+			x++;
+		}
+		if (id == THREADCOUNT - 1)
+			printf("\rRendering: %.1f", (float)100 * (y / THREADCOUNT) / job);
+		y++;
+	}
+	if (id == THREADCOUNT - 1)
+		printf("\rRendering: 100.0%%\n");
+	return (NULL);
+}
+
+void	render_nothread(t_data *d)
 {
 	int		x;
 	int		y;

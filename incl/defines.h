@@ -6,6 +6,7 @@
 # define IMG_WIDTH		1920
 # define IMG_HEIGHT		1080
 # define EPSILON		0.000001
+# define THREADCOUNT	12
 # define RAYDEPTH		2
 
 // Error messages
@@ -13,6 +14,8 @@
 # define E_FILETYPE		"Invalid input file type. Please supply a .rt file.\n"
 # define E_FILENAME		"Invalid input file name.\n"
 # define E_OPENFILE		"Could not open input file.\n"
+# define E_THREADCREATE	"Could not create thread.\n"
+# define E_THREADJOIN	"Could not join thread.\n"
 
 # define E_MALLOC		"Malloc error.\n"
 

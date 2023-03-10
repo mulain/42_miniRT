@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdbool.h>
+# include <pthread.h>
 
 # include "mlx.h"
 # include "../libft/include/libft.h"
@@ -78,6 +79,9 @@ void		parse_line(t_data *d, char *line);
 
 // RENDER
 
+// manage_threads.c
+void		manage_threads(t_data *d);
+
 // render_utils1.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
 double		cosfactor(t_3d light_origin, t_intrsct i);
@@ -89,7 +93,7 @@ int			apply_coeff(t_color color, t_rgb rgb_coeff);
 t_color		apply_brightness(t_color color, double factor);
 
 // render.c
-void		render(t_data *d);
+void		*render(void *ptr);
 t_3d		get_vector(t_data *d, int x, int y);
 int			trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray);
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
