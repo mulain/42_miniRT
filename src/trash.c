@@ -84,34 +84,26 @@ int	trace_ray_old(t_data *d, t_ray ray)
 	return (i.color.trgb);
 }
 
-/*
-This function assumes (correctly, for now) that cone and tube
-structs are interchangeable.
-*/
-t_intrsct	intersect_cone(t_ray ray, void *obj)
+void	render_nothread(t_data *d)
 {
-	t_cone		*cone;
-	t_intrsct	i;
-	t_3d		base_to_p;
-	t_3d		axis_point;
- 	double		local_r;
-	double		local_h;
-	double		point_r;
+	int		x;
+	int		y;
+	t_ray	ray;
 
-	cone = (t_cone *)obj;
-	i = intersect_tube(ray, cone);
-	if (i.distance == INFINITY)
-		return (i);
-
-	base_to_p = subtract(i.point, cone->base);
-	local_h = dot(base_to_p, cone->axis);
-	local_r = 1 - local_h / cone->height;
-	
-	
-	axis_point = add(cone->base, scale(cone->axis, local_h));
-	point_r = distance(axis_point, i.point);
-	
-	if (point_r - local_r > EPSILON)
-		i.distance = INFINITY;
-	return (i);
+	ray.origin = d->camera.point;
+	y = 0;
+	while (y < d->height)
+	{
+		x = 0;
+		while (x < d->width)
+		{
+			ray.direction = get_vector(d, x, y);
+			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
+			x++;
+		}
+		printf("\rRendering: %.1f%%", (double)y / (d->height - 1) * 100);
+		y++;
+	}
+	printf("\n");
+	mlx_put_image_to_window(d->mlx.mlx, d->mlx.win, d->mlx.img, 0, 0);
 }

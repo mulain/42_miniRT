@@ -33,30 +33,6 @@ void	*render(void *ptr)
 	return (NULL);
 }
 
-void	render_nothread(t_data *d)
-{
-	int		x;
-	int		y;
-	t_ray	ray;
-
-	ray.origin = d->camera.point;
-	y = 0;
-	while (y < d->height)
-	{
-		x = 0;
-		while (x < d->width)
-		{
-			ray.direction = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
-			x++;
-		}
-		printf("\rRendering: %.1f%%", (double)y / (d->height - 1) * 100);
-		y++;
-	}
-	printf("\n");
-	mlx_put_image_to_window(d->mlx.mlx, d->mlx.win, d->mlx.img, 0, 0);
-}
-
 t_3d	get_vector(t_data *d, int x, int y)
 {
 	t_3d	looking;
