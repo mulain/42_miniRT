@@ -1,7 +1,7 @@
 
 #include "../incl/minirt.h"
 
-double	solve_quad(double a, double b, double c)
+double	solve_quad(double a, double b, double c, double *t)
 {
 	double	discriminant;
 	double	t1;
@@ -12,6 +12,11 @@ double	solve_quad(double a, double b, double c)
 		return (INFINITY);
 	t1 = (-b - sqrt(discriminant)) / (2 * a);
 	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	if (t)
+	{
+		t[0] = t1;
+		t[1] = t2;
+	}
 	if (t1 < EPSILON)
 	{
 		if (t2 < EPSILON)
