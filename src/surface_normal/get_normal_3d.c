@@ -55,8 +55,8 @@ t_3d	get_normal_cone(t_3d point, t_3d light, void *obj)
 
 	(void)light;
 	cone = (t_cone *)obj;
-	len_hypo = to_deg(cos(cone->theta_rad)) / distance(point, cone->apex);
-	a = add(cone->apex, scale(cone->axis, -len_hypo));
+	len_hypo = distance(point, cone->apex) / to_deg(cos(cone->theta_rad));
+	a = add(cone->apex, scale(cone->axis, len_hypo));
 	return (norm(subtract(point, a)));
 }
 
