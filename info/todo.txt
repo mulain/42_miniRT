@@ -1,5 +1,4 @@
 - triangle: better solution should be possible
-- cone
 - streamline light application
 - material type to member function
 
