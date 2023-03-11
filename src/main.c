@@ -10,13 +10,10 @@ int	main(int argc, char **argv)
 	parsing(&data);
 	init_mlx(&data);
 	manage_threads(&data);
-	//render(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
 	mlx_loop(data.mlx.mlx);
-	free_all(&data);
-	return (0);
 }
 
 void	get_infile(t_data *d, int argc, char **argv)
@@ -41,13 +38,16 @@ void	init_structs(t_data *d)
 	d->height = IMG_HEIGHT;
 	d->aspect_ratio = (double)d->width / (double)d->height;
 	d->mlx.initialized = false;
-	d->amb_light.declared = false;
 	d->amb_light.brightness = 0.0;
 	d->amb_light.color = (t_color){0, 0, 0, 0};
-	d->camera.declared = false;
-	d->camera.fieldofview = 0;
-	d->camera.vector = (t_3d){0, 0, 0};
+	d->amb_light.declared = false;
 	d->camera.point = (t_3d){0, 0, 0};
+	d->camera.vector = (t_3d){0, 0, 0};
+	d->camera.x_axis = (t_3d){0, 0, 0};
+	d->camera.y_axis = (t_3d){0, 0, 0};
+	d->camera.fieldofview = 0;
+	d->camera.fov_factor = 0.0;
+	d->camera.declared = false;
 	d->objectlist = NULL;
 	d->lightlst = NULL;
 	d->parse.fd = -1;
