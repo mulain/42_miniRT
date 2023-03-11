@@ -31,6 +31,10 @@ typedef struct s_helper
 	double		a;
 	double		b;
 	double		c;
+	double		d1;
+	double		d2;
+	double		d3;
+	double		m;
 	t_3d		oc;
 }	t_helper;
 

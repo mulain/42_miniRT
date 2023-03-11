@@ -89,49 +89,32 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	t_cone		*cone;
 	t_intrsct	i;
 	t_helper	h;
-	double		m;
-	double		dot1;
-	double		dot2;
 	double		t[2];
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
-	m = (cone->radius * cone->radius) / (cone->height * cone->height);
+	h.m = (cone->radius * cone->radius) / (cone->height * cone->height);
 	h.oc = subtract(ray.origin, cone->apex);
-	dot1 = dot(ray.direction, cone->axis);
-	dot2 = dot(ray.direction, h.oc);
-	h.a = dot(ray.direction, ray.direction) - m * dot1 * dot1 - dot1 * dot1;
-	h.b = 2 * (dot2 - m * dot1 * dot(h.oc, cone->axis) - dot1 * dot(h.oc, cone->axis));
-	h.c = dot(h.oc, h.oc) - m * dot(h.oc, cone->axis) * dot(h.oc, cone->axis) - dot(h.oc, cone->axis) * dot(h.oc, cone->axis);
+	h.d1 = dot(ray.direction, cone->axis);
+	h.d2 = dot(ray.direction, h.oc);
+	h.d3 = dot(h.oc, cone->axis);
+	h.a = dot(ray.direction, ray.direction) - h.m * h.d1 * h.d1 - h.d1 * h.d1;
+	h.b = 2 * (h.d2 - h.m * h.d1 * h.d3 - h.d1 * h.d3);
+	h.c = dot(h.oc, h.oc) - h.m * h.d3 * h.d3 - h.d3 * h.d3;
 	i.distance = solve_quad(h.a, h.b, h.c, t);
 	if (i.distance == INFINITY)
-		return(i);
+		return (i);
+	if (t[0] < EPSILON)
+	{
+		/* if (t[1] < EPSILON)
+			return (i.distance = INFINITY, i); */
+		i.point = add(ray.origin, scale(ray.direction, t[1]));
+		if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+			return (i.distance = t[1], i);
+		return (i.distance = INFINITY, i);
+	}
 	i.point = add(ray.origin, scale(ray.direction, t[0]));
-	if (!(t[0] < EPSILON)
-		&& is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
 		return (i.distance = t[0], i);
-	i.point = add(ray.origin, scale(ray.direction, t[1]));
-	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
-		return (i.distance = t[1], i);
 	return (i.distance = INFINITY, i);
-
-	/* double	discriminant;
-	double	t1;
-	double	t2;
-
-	discriminant = h.b * h.b - 4 * h.a * h.c;
-	if (discriminant < EPSILON)
-		return (i.distance = INFINITY, i);
-	t1 = (-h.b - sqrt(discriminant)) / (2 * h.a);
-	t2 = (-h.b + sqrt(discriminant)) / (2 * h.a);
-	if (t1 < EPSILON && t2 < EPSILON)
-		return (i.distance = INFINITY, i);
-	i.point = add(ray.origin, scale(ray.direction, t1));
-	if (!(t1 < EPSILON)
-		&& is_withinbounds(i.point, cone->base, cone->axis, cone->height))
-		return (i.distance = t1, i);
-	i.point = add(ray.origin, scale(ray.direction, t2));
-	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
-		return (i.distance = t2, i);
-	return (i.distance = INFINITY, i); */
 }
