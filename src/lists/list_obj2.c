@@ -28,7 +28,7 @@ void	select_get_normal(t_objlst *new)
 	if (new->objtype == pl)
 		new->get_normal = get_normal_plane;
 	else if (new->objtype == di)
-		new->get_normal = get_normal_disc;
+		new->get_normal = get_normal_plane;
 	else if (new->objtype == tr)
 		new->get_normal = get_normal_triangle;
 	else if (new->objtype == sp)

@@ -104,17 +104,17 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	i.distance = solve_quad(h.a, h.b, h.c, t);
 	if (i.distance == INFINITY)
 		return (i);
-	if (t[0] < EPSILON)
+	if (t[0] > EPSILON)
 	{
-		/* if (t[1] < EPSILON)
-			return (i.distance = INFINITY, i); */
+		i.point = add(ray.origin, scale(ray.direction, t[0]));
+		if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+			return (i.distance = t[0], i);
+	}
+	if (t[1] > EPSILON)
+	{
 		i.point = add(ray.origin, scale(ray.direction, t[1]));
 		if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
 			return (i.distance = t[1], i);
-		return (i.distance = INFINITY, i);
-	}
-	i.point = add(ray.origin, scale(ray.direction, t[0]));
-	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
-		return (i.distance = t[0], i);
+	}	
 	return (i.distance = INFINITY, i);
 }
