@@ -37,7 +37,7 @@ t_intrsct	intersect_tube(t_ray ray, void *obj);
 t_intrsct	intersect_cone(t_ray ray, void *obj);
 
 // intersect_util.c
-double		solve_quad(double a, double b, double c);
+double		solve_quad(double a, double b, double c, double *t);
 t_3d		translate(t_3d obj_axis, t_3d ray_dir);
 bool		is_withinbounds(t_3d point, t_3d ref, t_3d axis, double height);
 double		to_deg(double radians);

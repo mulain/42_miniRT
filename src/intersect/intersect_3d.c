@@ -49,7 +49,7 @@ t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
 	h.a = dot(ray.direction, ray.direction);
 	h.b = 2 * dot(ray.direction, h.oc);
 	h.c = dot(h.oc, h.oc) - sphere->radius * sphere->radius;
-	i.distance = solve_quad(h.a, h.b, h.c);
+	i.distance = solve_quad(h.a, h.b, h.c, NULL);
 	if (i.distance == INFINITY)
 		return (i);
 	i.point = add(ray.origin, scale(ray.direction, i.distance));
@@ -75,7 +75,7 @@ t_intrsct	intersect_tube(t_ray ray, void *obj)
 	h.a = dot(ray_tr.direction, ray_tr.direction);
 	h.b = 2 * dot(ray_tr.direction, ray_tr.origin);
 	h.c = dot(ray_tr.origin, ray_tr.origin) - tube->radius * tube->radius;
-	i.distance = solve_quad(h.a, h.b, h.c);
+	i.distance = solve_quad(h.a, h.b, h.c, NULL);
 	if (i.distance == INFINITY)
 		return (i);
 	i.point = add(ray.origin, scale(ray.direction, i.distance));
@@ -92,6 +92,7 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	double		m;
 	double		dot1;
 	double		dot2;
+	double		t[2];
 
 	cone = (t_cone *)obj;
 	i.color = cone->color;
@@ -102,7 +103,19 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	h.a = dot(ray.direction, ray.direction) - m * dot1 * dot1 - dot1 * dot1;
 	h.b = 2 * (dot2 - m * dot1 * dot(h.oc, cone->axis) - dot1 * dot(h.oc, cone->axis));
 	h.c = dot(h.oc, h.oc) - m * dot(h.oc, cone->axis) * dot(h.oc, cone->axis) - dot(h.oc, cone->axis) * dot(h.oc, cone->axis);
-	double	discriminant;
+	i.distance = solve_quad(h.a, h.b, h.c, t);
+	if (i.distance == INFINITY)
+		return(i);
+	i.point = add(ray.origin, scale(ray.direction, t[0]));
+	if (!(t[0] < EPSILON)
+		&& is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+		return (i.distance = t[0], i);
+	i.point = add(ray.origin, scale(ray.direction, t[1]));
+	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
+		return (i.distance = t[1], i);
+	return (i.distance = INFINITY, i);
+
+	/* double	discriminant;
 	double	t1;
 	double	t2;
 
@@ -120,5 +133,5 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	i.point = add(ray.origin, scale(ray.direction, t2));
 	if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
 		return (i.distance = t2, i);
-	return (i.distance = INFINITY, i);
+	return (i.distance = INFINITY, i); */
 }
