@@ -5,7 +5,7 @@
 // Settings
 # define IMG_WIDTH		1920
 # define IMG_HEIGHT		1080
-# define EPSILON		0.0000001
+# define EPSILON		0.000001
 # define THREADCOUNT	12
 # define RAYDEPTH		2
 

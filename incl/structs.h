@@ -54,7 +54,7 @@ typedef struct s_color
 }	t_color;
 
 // forward declaration
-typedef struct s_objlst	t_objlst;
+typedef struct s_objlst		t_objlst;
 
 typedef struct s_intersection
 {
@@ -159,11 +159,10 @@ typedef struct s_parsing
 	double		max;
 }	t_parsing;
 
-// Forward declaration
+// forward declaration
 typedef struct s_objlst		t_objlst;
 typedef struct s_lightlst	t_lightlst;
 
-// The main struct
 typedef struct s_data
 {
 	t_mlx			mlx;
@@ -178,7 +177,7 @@ typedef struct s_data
 	float			fov_ratio;
 }	t_data;
 
-// Struct fo rthreads
+// struct for threads
 typedef struct s_threadinfo
 {
 	t_data	*data;
