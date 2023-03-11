@@ -3,7 +3,7 @@
 # define STRUCTS_H
 
 #include "defines.h"
- 
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -25,7 +25,7 @@ typedef struct s_3d
 	double		z;
 }	t_3d;
 
-// Helper for parsing objects that need more variables than norm allows
+// Helper for functions that need more variables than 42 norm allows
 typedef struct s_helper
 {
 	double		a;

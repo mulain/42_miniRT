@@ -20,7 +20,7 @@ t_3d	get_normal_disc(t_3d point, t_3d light, void *obj)
 
 	disc = (t_disc *)obj;
 	to_light = subtract(light, point);
-	if (dot(to_light, disc->vector) < 0)
+	if (dot(to_light, disc->vector) < EPSILON)
 		return (reverse(disc->vector));
 	return (disc->vector);
 }
