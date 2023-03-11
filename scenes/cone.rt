@@ -14,15 +14,17 @@ sp				0,-10,-15			12				255,255,255
 
 # PLANES		Position		Vector			Color
 pl				0,0,-50			0,0,1			200,200,255 background
+#pl				50,3,-5			-1,-.5,1		255,5,255 right
+pl				50,3,-5			1,.5,-1			255,5,255 right
 
 # DISCS			Position		Vector			Diameter		Color
-di				-30,3,-5		-1,-.5,1			30				255,5,255			
+di				-30,3,-5		-1,-.5,1		30				255,5,255
 
 # CYLINDERS		Position		Vector			Diameter		Height			Color
 
 # CONES			Position		Vector			Diameter		Height			Color
 co				0,5,-5			0,1,0			12				12			255,255,255
 co				-30,5,-5		-1,1,0			12				12			255,255,255
-co				-20,0,-5		0,-1,0			12				12			255,0,255
+co				-20,0,-5		-.2,-1,-.2		12				12			255,0,255
 co				20,5,-5			0,0,1			12				12			255,255,0
 co				20,10,-5		0,1,1			12				12			0,255,0
