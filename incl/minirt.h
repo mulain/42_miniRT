@@ -84,6 +84,7 @@ void		manage_threads(t_data *d);
 
 // render_utils1.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
+bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
 double		cosfactor(t_3d light_origin, t_intrsct i);
 double		bright_diffuse(t_light light, t_intrsct i);
 
@@ -97,7 +98,6 @@ void		*render(void *ptr);
 t_3d		get_vector(t_data *d, int x, int y);
 int			trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray);
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
-bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
 
 
 // SURFACE_NORMAL

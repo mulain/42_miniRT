@@ -87,23 +87,3 @@ t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray)
 	}
 	return (i);
 }
-
-bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
-{
-	t_ray		shadow_ray;
-	double		light_dist;
-	double		block_dist;
-
-	light_dist = distance(point, light->origin);
-	shadow_ray.direction = norm(subtract(light->origin, point));
-	shadow_ray.origin = point;
-	while (objnode)
-	{
-		block_dist = objnode->get_intersection(shadow_ray,
-				objnode->object).distance;
-		if (block_dist < light_dist)
-			return (true);
-		objnode = objnode->next;
-	}
-	return (false);
-}
