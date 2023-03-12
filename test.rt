@@ -1,5 +1,5 @@
 # CAMERA		Position		Vector			Field of View
-C				0,0,0			0,.5,-1			90
+C				0,0,0			1,0,0			90
 #C				0,10,3			0,-0.5,-0.5		90
 
 

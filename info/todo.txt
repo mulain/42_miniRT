@@ -7,6 +7,8 @@
 - checkerboard
 - 3d inside normals
 
+camera edge case: 0,1,0 (and prolly also 1,)
+
 cylinder manipulation shmisms
 - ws			move pos.y
 - ad			move pos.x
