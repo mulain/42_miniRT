@@ -4,6 +4,8 @@
 
 - phong
 - bump map
+- checkerboard
+- 3d inside normals
 
 cylinder manipulation shmisms
 - ws			move pos.y

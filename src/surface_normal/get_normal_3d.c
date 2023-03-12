@@ -4,10 +4,15 @@
 t_3d	get_normal_sphere(t_3d point, t_3d light, void *obj)
 {
 	t_sphere	*sphere;
+	t_3d		p_to_light;
+	t_3d		center_to_p;
 
-	(void)light;
 	sphere = (t_sphere *)obj;
-	return (norm(subtract(point, sphere->center)));
+	p_to_light = subtract(light, point);
+	center_to_p = subtract(point, sphere->center);
+	if (dot(p_to_light, center_to_p) > EPSILON)
+		return (norm(center_to_p));
+	return (norm(reverse(center_to_p)));
 }
 
 t_3d	get_normal_tube(t_3d point, t_3d light, void *obj)

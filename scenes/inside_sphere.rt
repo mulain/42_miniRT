@@ -1,0 +1,25 @@
+# CAMERA		Position		Vector			Field of View
+C				0,0,0			0,0,-1			90
+
+# AMBIENT LIGHT					Brightness		Color
+A								0.3				255,255,255
+
+# LIGHTS		Position		Brightness		Color
+L				0,0,-30			1.0				255,255,255
+
+# PLANES		Position		Vector			Color
+pl				0,-10,0			0,1,0			100,100,200
+
+# DISCS			Position		Vector			Diameter		Color
+
+# TRIANGLES		Point 1			Point 2			Point 3			Color
+
+# SPHERES		Position		Diameter		Color
+sp				0,0,0			100				255,100,50 skydome
+sp				-5,-9,-30		5				255,255,255 left
+sp				5,-7,-30		5				255,255,255 right
+sp				5,10,-40		5				255,255,255 background
+
+# CYLINDERS		Position		Vector			Diameter		Height			Color
+
+# CONES			Position		Vector			Diameter		Height			Color

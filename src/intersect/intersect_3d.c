@@ -1,7 +1,7 @@
 
 #include "../incl/minirt.h"
 
-t_intrsct	intersect_sphere(t_ray ray, void *obj)
+t_intrsct	intersect_sphere__(t_ray ray, void *obj)
 {
 	t_sphere	*sphere;
 	t_intrsct	i;
@@ -37,7 +37,7 @@ t_intrsct	intersect_sphere(t_ray ray, void *obj)
 	return (i);
 }
 
-t_intrsct	intersect_sphere_old(t_ray ray, void *obj)
+t_intrsct	intersect_sphere(t_ray ray, void *obj)
 {
 	t_sphere	*sphere;
 	t_intrsct	i;
