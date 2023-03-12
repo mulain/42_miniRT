@@ -38,11 +38,11 @@ void	parse_triangle(t_data *d)
 	if (!triangle)
 		error_exit(d, E_MALLOC);
 	objlst_add_back(&d->objectlist, objlst_new(d, triangle, tr));
-	triangle->p1 = parse_point(d, d->parse.elmnts[1], E_TRIANGLE1);
-	triangle->p2 = parse_point(d, d->parse.elmnts[2], E_TRIANGLE2);
-	triangle->p3 = parse_point(d, d->parse.elmnts[3], E_TRIANGLE3);
-	triangle->vector = cross(subtract(triangle->p1, triangle->p2),
-			subtract(triangle->p1, triangle->p3));
+	triangle->v1 = parse_point(d, d->parse.elmnts[1], E_TRIANGLE1);
+	triangle->v2 = parse_point(d, d->parse.elmnts[2], E_TRIANGLE2);
+	triangle->v3 = parse_point(d, d->parse.elmnts[3], E_TRIANGLE3);
+	triangle->vector = cross(subtract(triangle->v1, triangle->v2),
+			subtract(triangle->v1, triangle->v3));
 	if (length(triangle->vector) < EPSILON)
 		error_exit(d, E_TRI_VECTOR);
 	triangle->color = parse_color(d, d->parse.elmnts[4], E_TRIANGLE4);

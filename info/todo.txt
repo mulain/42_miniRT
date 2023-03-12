@@ -5,9 +5,8 @@
 - phong
 - bump map
 - checkerboard
-- 3d inside normals
 
-camera edge case: 0,1,0 (and prolly also 1,)
+camera vector edge cases: 0,1,0 and 1,0,0 (cross prod will be 0, have to manually config)
 
 cylinder manipulation shmisms
 - ws			move pos.y

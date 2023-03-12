@@ -143,3 +143,43 @@ t_intrsct	intersect_sphere__(t_ray ray, void *obj)
 	i.point = add(ray.origin, scale(ray.direction, i.distance));
 	return (i);
 }
+
+bool	is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval)
+{
+	t_3d	v1;
+	t_3d	v2;
+	t_3d	v3;
+	t_3d	cross1;
+	t_3d	cross2;
+
+	v1 = subtract(p2, p1);
+	v2 = subtract(p3, p1);
+	v3 = subtract(p_eval, p1);
+	cross1 = cross(v1, v2);
+	cross2 = cross(v1, v3);
+	if (dot(cross1, cross2) < 0)
+		return (false);
+	return (true);
+}
+
+t_intrsct	intersect_triangle__(t_ray ray, void *obj)
+{
+	t_triangle	*triangle;
+	t_intrsct	i;
+	t_plane		tri_plane;
+
+	triangle = (t_triangle *)obj;
+	tri_plane.color = triangle->color;
+	tri_plane.point = triangle->v1;
+	tri_plane.vector = triangle->vector;
+	i = intersect_plane(ray, &tri_plane);
+	if (i.distance == INFINITY)
+		return (i);
+	if (!is_inside(triangle->v1, triangle->v2, triangle->v3, i.point))
+		return (i.distance = INFINITY, i);
+	if (!is_inside(triangle->v3, triangle->v1, triangle->v2, i.point))
+		return (i.distance = INFINITY, i);
+	if (!is_inside(triangle->v2, triangle->v3, triangle->v1, i.point))
+		return (i.distance = INFINITY, i);
+	return (i);
+}

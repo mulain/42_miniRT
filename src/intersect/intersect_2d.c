@@ -44,35 +44,25 @@ t_intrsct	intersect_triangle(t_ray ray, void *obj)
 	t_plane		tri_plane;
 
 	triangle = (t_triangle *)obj;
-	tri_plane.color = triangle->color;
-	tri_plane.point = triangle->p1;
-	tri_plane.vector = triangle->vector;
+	tri_plane = (t_plane){triangle->v1, triangle->vector, triangle->color};
 	i = intersect_plane(ray, &tri_plane);
 	if (i.distance == INFINITY)
 		return (i);
-	if (!is_inside(triangle->p1, triangle->p2, triangle->p3, i.point))
-		return (i.distance = INFINITY, i);
-	if (!is_inside(triangle->p3, triangle->p1, triangle->p2, i.point))
-		return (i.distance = INFINITY, i);
-	if (!is_inside(triangle->p2, triangle->p3, triangle->p1, i.point))
+	if (!is_left(i.point, triangle->vector, triangle->v1, triangle->v2)
+		|| !is_left(i.point, triangle->vector, triangle->v2, triangle->v3)
+		|| !is_left(i.point, triangle->vector, triangle->v3, triangle->v1))
 		return (i.distance = INFINITY, i);
 	return (i);
 }
 
-bool	is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval)
+bool	is_left(t_3d point, t_3d normal, t_3d vertex1, t_3d vertex2)
 {
-	t_3d	v1;
-	t_3d	v2;
-	t_3d	v3;
-	t_3d	cross1;
-	t_3d	cross2;
+	t_3d	side;
+	t_3d	to_point;
 
-	v1 = subtract(p2, p1);
-	v2 = subtract(p3, p1);
-	v3 = subtract(p_eval, p1);
-	cross1 = cross(v1, v2);
-	cross2 = cross(v1, v3);
-	if (dot(cross1, cross2) < 0)
+	side = subtract(vertex2, vertex1);
+	to_point = subtract(point, vertex1);
+	if (dot(normal, cross(side, to_point)) < EPSILON)
 		return (false);
 	return (true);
 }

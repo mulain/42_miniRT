@@ -11,7 +11,7 @@ L				0,10,-10		1.0				255,255,255
 
 # DISCS			Position		Vector			Diameter		Color
 
-# TRIANGLES		Point 1			Point 2			Point 3			Color
+# TRIANGLES		Vertex 1		Vertex 2		Vertex 3		Color
 
 # SPHERES		Position		Diameter		Color
 

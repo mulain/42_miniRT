@@ -29,7 +29,7 @@ void		init_mlx(t_data *d);
 t_intrsct	intersect_plane(t_ray ray, void *obj);
 t_intrsct	intersect_disc(t_ray ray, void *obj);
 t_intrsct 	intersect_triangle(t_ray ray, void *obj);
-bool		is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval);
+bool		is_left(t_3d point, t_3d normal, t_3d vertex1, t_3d vertex2);
 
 // intersect_3d.c
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
