@@ -38,6 +38,14 @@ typedef struct s_helper
 	t_3d		oc;
 }	t_helper;
 
+typedef struct s_inthelper
+{
+	int			id;
+	int			x;
+	int			y;
+	int			job;
+}	t_inthelp;
+
 typedef struct s_rgb_intensity
 {
 	double		r;

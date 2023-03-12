@@ -107,3 +107,39 @@ void	render_nothread(t_data *d)
 	printf("\n");
 	mlx_put_image_to_window(d->mlx.mlx, d->mlx.win, d->mlx.img, 0, 0);
 }
+
+t_intrsct	intersect_sphere__(t_ray ray, void *obj)
+{
+	t_sphere	*sphere;
+	t_intrsct	i;
+
+	t_3d		l;
+	double		tca;
+	double		d2;
+	double		thc;
+	double		t1;
+	double		t2;
+
+	sphere = (t_sphere *)obj;
+	i.color = sphere->color;
+	l = subtract(sphere->center, ray.origin);
+	tca = dot(l, ray.direction);
+	if (tca < EPSILON)
+		return (i.distance = INFINITY, i);
+	d2 = dot(l, l) - tca * tca;
+	if (d2 - sphere->radius * sphere->radius > EPSILON)
+		return (i.distance = INFINITY, i);
+	thc = sqrt(sphere->radius * sphere->radius - d2);
+	t1 = tca - thc;
+	t2 = tca + thc;
+	if (t1 < EPSILON)
+	{
+		if (t2 < EPSILON)
+			return (i.distance = INFINITY, i);
+		i.distance = t2;
+	}
+	else
+		i.distance = t1;
+	i.point = add(ray.origin, scale(ray.direction, i.distance));
+	return (i);
+}

@@ -9,6 +9,10 @@
 # define THREADCOUNT	12
 # define RAYDEPTH		2
 
+// Status during rendering
+# define STATUSMSG		"\rRendering: %.1f"
+# define STATUSDONE		"\rRendering complete.\n"
+
 // Error messages
 # define E_ARGCOUNT		"Wrong number of arguments. Please supply scene file.\n"
 # define E_FILETYPE		"Invalid input file type. Please supply a .rt file.\n"
@@ -31,7 +35,6 @@
 # define E_CAMERA2		"Camera (C): invalid second argument.\n"
 # define E_CAMERA3		"Camera (C): invalid third argument.\n"
 
-# define E_LIGHTDEF		"Light (L): may only be defined once.\n"
 # define E_LIGHT1		"Light (L): invalid first argument.\n"
 # define E_LIGHT2		"Light (L): invalid second argument.\n"
 # define E_LIGHT3		"Light (L): invalid third argument.\n"

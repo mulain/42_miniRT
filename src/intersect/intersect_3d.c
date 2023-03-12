@@ -1,42 +1,6 @@
 
 #include "../incl/minirt.h"
 
-t_intrsct	intersect_sphere__(t_ray ray, void *obj)
-{
-	t_sphere	*sphere;
-	t_intrsct	i;
-
-	t_3d		l;
-	double		tca;
-	double		d2;
-	double		thc;
-	double		t1;
-	double		t2;
-
-	sphere = (t_sphere *)obj;
-	i.color = sphere->color;
-	l = subtract(sphere->center, ray.origin);
-	tca = dot(l, ray.direction);
-	if (tca < EPSILON)
-		return (i.distance = INFINITY, i);
-	d2 = dot(l, l) - tca * tca;
-	if (d2 - sphere->radius * sphere->radius > EPSILON)
-		return (i.distance = INFINITY, i);
-	thc = sqrt(sphere->radius * sphere->radius - d2);
-	t1 = tca - thc;
-	t2 = tca + thc;
-	if (t1 < EPSILON)
-	{
-		if (t2 < EPSILON)
-			return (i.distance = INFINITY, i);
-		i.distance = t2;
-	}
-	else
-		i.distance = t1;
-	i.point = add(ray.origin, scale(ray.direction, i.distance));
-	return (i);
-}
-
 t_intrsct	intersect_sphere(t_ray ray, void *obj)
 {
 	t_sphere	*sphere;
@@ -104,6 +68,11 @@ t_intrsct	intersect_cone(t_ray ray, void *obj)
 	i.distance = solve_quad(h.a, h.b, h.c, t);
 	if (i.distance == INFINITY)
 		return (i);
+	return (intersect_cone2(i, ray, cone, t));
+}
+
+t_intrsct	intersect_cone2(t_intrsct i, t_ray ray, t_cone *cone, double *t)
+{
 	if (t[0] > EPSILON)
 	{
 		i.point = add(ray.origin, scale(ray.direction, t[0]));

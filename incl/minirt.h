@@ -35,6 +35,7 @@ bool		is_inside(t_3d p1, t_3d p2, t_3d p3, t_3d p_eval);
 t_intrsct	intersect_sphere(t_ray ray, void *obj);
 t_intrsct	intersect_tube(t_ray ray, void *obj);
 t_intrsct	intersect_cone(t_ray ray, void *obj);
+t_intrsct	intersect_cone2(t_intrsct i, t_ray ray, t_cone *cone, double *t);
 
 // intersect_util.c
 double		solve_quad(double a, double b, double c, double *t);

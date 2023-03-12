@@ -4,32 +4,29 @@
 void	*render(void *ptr)
 {
 	t_data		*d;
-	int			id;
-	int			x;
-	int			y;
-	int			job;
+	t_inthelp	h;
 	t_ray		ray;
 
 	d = ((t_threadinfo *)ptr)->data;
-	id = ((t_threadinfo *)ptr)->id;
+	h.id = ((t_threadinfo *)ptr)->id;
 	ray.origin = d->camera.point;
-	job = d->height / THREADCOUNT;
-	y = id * job;
-	while (y < job * (id + 1))
+	h.job = d->height / THREADCOUNT;
+	h.y = h.id * h.job;
+	while (h.y < h.job * (h.id + 1))
 	{
-		x = 0;
-		while (x < d->width)
+		h.x = 0;
+		while (h.x < d->width)
 		{
-			ray.direction = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
-			x++;
+			ray.direction = get_vector(d, h.x, h.y);
+			put_pixel(&d->mlx, h.x, h.y, trace_ray(d, d->lightlst, ray));
+			h.x++;
 		}
-		if (id == THREADCOUNT - 1)
-			printf("\rRendering: %.1f", (float)100 * (y / THREADCOUNT) / job);
-		y++;
+		if (h.id == THREADCOUNT - 1)
+			printf(STATUSMSG, (float)100 * (h.y / THREADCOUNT) / h.job);
+		h.y++;
 	}
-	if (id == THREADCOUNT - 1)
-		printf("\rRendering: 100.0%%\n");
+	if (h.id == THREADCOUNT - 1)
+		printf(STATUSDONE);
 	return (NULL);
 }
 
