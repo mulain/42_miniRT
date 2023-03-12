@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 
 	init_structs(&data);
 	get_infile(&data, argc, argv);
-	parsing(&data);
+	parse(&data);
 	init_mlx(&data);
 	manage_threads(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);

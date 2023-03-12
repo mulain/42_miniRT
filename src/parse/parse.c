@@ -1,7 +1,7 @@
 
 #include "minirt.h"
 
-void	parsing(t_data *d)
+void	parse(t_data *d)
 {
 	char	*line;
 

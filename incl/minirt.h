@@ -48,32 +48,32 @@ double		to_rad(double degrees);
 // LISTS -> have seperate headers
 
 
-// PARSING
+// parse
 
-// parsing_2d.c
+// parse_2d.c
 void		parse_plane(t_data *d);
 void		parse_disc(t_data *d);
 void		parse_triangle(t_data *d);
 
-// parsing_3d.c
+// parse_3d.c
 void		parse_sphere(t_data *d);
 void		parse_cylinder(t_data *d);
 void		parse_cone(t_data *d);
 
-// parsing_lightsandcam.c
+// parse_lightsandcam.c
 void		parse_ambientlight(t_data *d);
 void		parse_camera(t_data *d);
 void		parse_light(t_data *d);
 
-// parsing_utils.c
+// parse_utils.c
 double		parse_double(t_data *d, char *input, char *msg);
 t_color		parse_color(t_data *d, char *input, char *msg);
 t_3d		parse_point(t_data *d, char *input, char *msg);
 t_3d		parse_vector(t_data *d, char *input, char *msg);
 int			parse_int(t_data *d, char *input, char *msg);
 
-// parsing.c
-void		parsing(t_data *d);
+// parse.c
+void		parse(t_data *d);
 char		*gnl_trimmed(int fd);
 void		parse_line(t_data *d, char *line);
 

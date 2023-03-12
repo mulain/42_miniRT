@@ -1,4 +1,3 @@
-- triangle: better solution should be possible
 - streamline light application
 - material type to member function
 
@@ -8,6 +7,7 @@
 
 camera vector edge cases: 0,1,0 and 1,0,0 (cross prod will be 0, have to manually config)
 
+nah:
 cylinder manipulation shmisms
 - ws			move pos.y
 - ad			move pos.x

@@ -167,15 +167,15 @@ typedef struct s_cone
 	t_color		color;
 }	t_cone;
 
-// Struct for parsing
-typedef struct s_parsing
+// Struct for parse
+typedef struct s_parse
 {
 	int			fd;
 	char		**elmnts;
 	char		**subelmnts;
 	double		min;
 	double		max;
-}	t_parsing;
+}	t_parse;
 
 // forward declaration
 typedef struct s_objlst		t_objlst;
@@ -188,7 +188,7 @@ typedef struct s_data
 	t_camera		camera;
 	t_lightlst		*lightlst;
 	t_objlst		*objectlist;
-	t_parsing		parse;
+	t_parse		parse;
 	int				width;
 	int				height;
 	float			aspect_ratio;
