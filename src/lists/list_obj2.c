@@ -5,6 +5,7 @@ void	select_functions(t_objlst *new)
 {
 	select_intersect(new);
 	select_get_normal(new);
+	select_colorize(new);
 }
 
 void	select_intersect(t_objlst *new)
@@ -37,4 +38,12 @@ void	select_get_normal(t_objlst *new)
 		new->get_normal = get_normal_tube;
 	else if (new->objtype == co)
 		new->get_normal = get_normal_cone;
+}
+
+void	select_colorize(t_objlst *new)
+{
+	if (new->surface == diff)
+		new->colorize = diffuse;
+	/* else if (new->surface == spec)
+		new->colorize = specular; */
 }

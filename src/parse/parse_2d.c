@@ -4,11 +4,15 @@
 void	parse_plane(t_data *d)
 {
 	t_plane		*plane;
+	t_surface	surface;
 
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
 		error_exit(d, E_MALLOC);
-	objlst_add_back(&d->objectlist, objlst_new(d, plane, pl));
+	d->parse.min = 0;
+	d->parse.max = 5;
+	surface = parse_int(d, d->parse.elmnts[4], E_PLANEMAT);
+	objlst_add_back(&d->objectlist, objlst_new(d, plane, pl, surface));
 	plane->point = parse_point(d, d->parse.elmnts[1], E_PLANE1);
 	plane->vector = parse_vector(d, d->parse.elmnts[2], E_PLANE2);
 	plane->color = parse_color(d, d->parse.elmnts[3], E_PLANE3);
@@ -17,11 +21,15 @@ void	parse_plane(t_data *d)
 void	parse_disc(t_data *d)
 {
 	t_disc		*disc;
+	t_surface	surface;
 
 	disc = malloc(sizeof(t_disc));
 	if (!disc)
 		error_exit(d, E_MALLOC);
-	objlst_add_back(&d->objectlist, objlst_new(d, disc, di));
+	d->parse.min = 0;
+	d->parse.max = 5;
+	surface = parse_int(d, d->parse.elmnts[5], E_DISCMAT);
+	objlst_add_back(&d->objectlist, objlst_new(d, disc, di, surface));
 	disc->center = parse_point(d, d->parse.elmnts[1], E_DISC1);
 	disc->vector = parse_vector(d, d->parse.elmnts[2], E_DISC2);
 	d->parse.min = 0;
@@ -33,11 +41,15 @@ void	parse_disc(t_data *d)
 void	parse_triangle(t_data *d)
 {
 	t_triangle	*triangle;
+	t_surface	surface;
 
 	triangle = malloc(sizeof(t_triangle));
 	if (!triangle)
 		error_exit(d, E_MALLOC);
-	objlst_add_back(&d->objectlist, objlst_new(d, triangle, tr));
+	d->parse.min = 0;
+	d->parse.max = 5;
+	surface = parse_int(d, d->parse.elmnts[5], E_TRIANGLEMAT);
+	objlst_add_back(&d->objectlist, objlst_new(d, triangle, tr, surface));
 	triangle->v1 = parse_point(d, d->parse.elmnts[1], E_TRIANGLE1);
 	triangle->v2 = parse_point(d, d->parse.elmnts[2], E_TRIANGLE2);
 	triangle->v3 = parse_point(d, d->parse.elmnts[3], E_TRIANGLE3);

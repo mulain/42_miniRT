@@ -26,6 +26,10 @@
 # define E_INVALOBJID	"Invalid object identifier.\n"
 # define E_MANDATORY	"Camera (C) and Light (L) must both be defined.\n"
 
+# define E_PLANEMAT		"Invalid material selection in plane object.\n"
+# define E_DISCMAT		"Invalid material selection in disc object.\n"
+# define E_TRIANGLEMAT	"Invalid material selection in triangle object.\n"
+
 # define E_AMBLIGHTDEF	"Ambient light (A): may only be defined once.\n"
 # define E_AMBLIGHT1	"Ambient light (A): invalid first argument.\n"
 # define E_AMBLIGHT2	"Ambient light (A): invalid second argument.\n"

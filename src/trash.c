@@ -75,10 +75,10 @@ int	trace_ray_old(t_data *d, t_ray ray)
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode) // no intersection, return bckgcolor
 		return (0x00000000);
-	rgb_coeff = add_lighttocoeff((t_rgb){0, 0, 0},
+	rgb_coeff = add_light((t_rgb){0, 0, 0},
 			d->amb_light.color, d->amb_light.brightness);
 	if (!is_shadowed(d->light, d->objectlist, i.point))
-		rgb_coeff = add_lighttocoeff(rgb_coeff, d->light.color,
+		rgb_coeff = add_light(rgb_coeff, d->light.color,
 				d->light.brightness * cosfactor(d->light.origin, i));
 	i.color.trgb = apply_coeff(i.color, rgb_coeff);
 	return (i.color.trgb);
@@ -182,4 +182,18 @@ t_intrsct	intersect_triangle__(t_ray ray, void *obj)
 	if (!is_inside(triangle->v2, triangle->v3, triangle->v1, i.point))
 		return (i.distance = INFINITY, i);
 	return (i);
+}
+
+void	add_light_drct(t_color *final, t_color base, t_color add, double brghtn)
+{
+	final->r += base.r * add.r / 255 * brghtn;
+	final->g += base.g * add.g / 255 * brghtn;
+	final->b += base.b * add.b / 255 * brghtn;
+	if (final->r > 255)
+		final->r = 255;
+	if (final->g > 255)
+		final->g = 255;
+	if (final->b > 255)
+		final->b = 255;
+	final->trgb = 0x00FFFFFF & (final->r << 16 | final->g << 8 | final->b);
 }
