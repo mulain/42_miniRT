@@ -36,15 +36,18 @@ t_3d	get_normal_tube(t_3d point, t_3d light, void *obj)
 t_3d	get_normal_cone(t_3d point, t_3d light, void *obj)
 {
 	t_cone		*cone;
+	t_3d		p_to_light;
 	t_3d		bp;
 	t_3d		ap;
 	t_3d		vector;
 
-	(void)light;
 	cone = (t_cone *)obj;
+	p_to_light = subtract(light, point);
 	bp = subtract(point, cone->base);
 	ap = subtract(point, cone->apex);
 	vector = scale(ap, dot(bp, ap) / dot(ap, ap));
 	vector = subtract(bp, vector);
+	if (dot(p_to_light, vector) < EPSILON)
+		return (norm(reverse(vector)));
 	return (norm(vector));
 }
