@@ -79,8 +79,8 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
 		{
-			diffuse(&coeff, *lightnode->light, &i, ray);
-			//i.objnode->colorize(&coeff, lightnode->light, &i, ray);
+			//diffuse(&coeff, *lightnode->light, &i, ray);
+			i.objnode->colorize(&coeff, *lightnode->light, &i, ray);
 		}
 		lightnode = lightnode->next;
 	}
