@@ -11,8 +11,7 @@ t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype,
 		error_exit(d, E_MALLOC);
 	new->object = object;
 	new->objtype = objtype;
-	(void)surface;
-	new->surface = diff; //Expand
+	new->surface = surface;
 	new->next = NULL;
 	select_functions(new);
 	return (new);

@@ -46,16 +46,6 @@ typedef struct s_inthelper
 	int			job;
 }	t_inthelp;
 
-typedef struct s_trihelper
-{
-	t_3d		side_a;
-	t_3d		side_b;
-	t_3d		side_c;
-	t_3d		p1_to_p;
-	t_3d		p2_to_p;
-	t_3d		p3_to_p;
-}	t_trihelp;
-
 typedef struct s_rgb_intensity
 {
 	double		r;

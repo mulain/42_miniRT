@@ -44,6 +44,8 @@ void	select_colorize(t_objlst *new)
 {
 	if (new->surface == diff)
 		new->colorize = diffuse;
+	else
+		printf("kutkutk\n");
 	/* else if (new->surface == spec)
 		new->colorize = specular; */
 }

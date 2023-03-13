@@ -29,6 +29,9 @@
 # define E_PLANEMAT		"Invalid material selection in plane object.\n"
 # define E_DISCMAT		"Invalid material selection in disc object.\n"
 # define E_TRIANGLEMAT	"Invalid material selection in triangle object.\n"
+# define E_SPHEREMAT	"Invalid material selection in sphere object.\n"
+# define E_CYLINDERMAT	"Invalid material selection in cylinder object.\n"
+# define E_CONEMAT		"Invalid material selection in cone object.\n"
 
 # define E_AMBLIGHTDEF	"Ambient light (A): may only be defined once.\n"
 # define E_AMBLIGHT1	"Ambient light (A): invalid first argument.\n"
