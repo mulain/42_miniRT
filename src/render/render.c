@@ -1,7 +1,7 @@
 
 #include "../incl/minirt.h"
 
-void	*render(void *ptr)
+void	*render_threads(void *ptr)
 {
 	t_data		*d;
 	t_inthelp	h;
@@ -22,12 +22,35 @@ void	*render(void *ptr)
 			h.x++;
 		}
 		if (h.id == THREADCOUNT - 1)
-			printf(STATUSMSG, (float)100 * (h.y / THREADCOUNT) / h.job);
+			printf(STATUSMSG, 100 * ((float)h.y / THREADCOUNT) / h.job);
 		h.y++;
 	}
 	if (h.id == THREADCOUNT - 1)
 		printf(STATUSDONE);
 	return (NULL);
+}
+
+void	render(t_data *d)
+{
+	int			x;
+	int			y;
+	t_ray		ray;
+
+	ray.origin = d->camera.point;
+	y = 0;
+	while (y < d->height)
+	{
+		x = 0;
+		while (x < d->width)
+		{
+			ray.direction = get_vector(d, x, y);
+			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
+			x++;
+		}
+		printf(STATUSMSG, 100 * ((float)y / d->height));
+		y++;
+	}
+	printf(STATUSDONE);
 }
 
 t_3d	get_vector(t_data *d, int x, int y)
@@ -55,7 +78,10 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 	while (lightnode)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
-			i.objnode->colorize(&coeff, lightnode->light, i, ray);
+		{
+			diffuse(&coeff, *lightnode->light, &i, ray);
+			//i.objnode->colorize(&coeff, lightnode->light, &i, ray);
+		}
 		lightnode = lightnode->next;
 	}
 	add_light(&coeff, d->amb_light.color, d->amb_light.brightness);

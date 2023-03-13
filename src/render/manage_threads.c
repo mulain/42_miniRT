@@ -12,7 +12,7 @@ void	manage_threads(t_data *d)
 	{
 		thr_info[i].data = d;
 		thr_info[i].id = i;
-		if (pthread_create(&threads[i], NULL, render, &thr_info[i]))
+		if (pthread_create(&threads[i], NULL, render_threads, &thr_info[i]))
 			error_exit(d, E_THREADCREATE);
 		i++;
 	}

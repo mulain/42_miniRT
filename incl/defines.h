@@ -6,11 +6,12 @@
 # define IMG_WIDTH		1920
 # define IMG_HEIGHT		1080
 # define EPSILON		0.000001
+# define USETHREADS		1
 # define THREADCOUNT	12
 # define RAYDEPTH		2
 
 // Status during rendering
-# define STATUSMSG		"\rRendering: %.1f"
+# define STATUSMSG		"\rRendering: %.1f%%"
 # define STATUSDONE		"\rRendering complete.\n"
 
 // Error messages

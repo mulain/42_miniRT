@@ -81,7 +81,7 @@ void		parse_line(t_data *d, char *line);
 // RENDER
 
 // colorize.c
-void		diffuse(t_rgb *coeff, t_light light, t_intrsct i, t_ray ray);
+void		diffuse(t_rgb *coeff, t_light light, t_intrsct *i, t_ray ray);
 
 // manage_threads.c
 void		manage_threads(t_data *d);
@@ -96,7 +96,8 @@ void		add_light(t_rgb *coeff, t_color color, double brightness);
 int			apply_coeff(t_color color, t_rgb rgb_coeff);
 
 // render.c
-void		*render(void *ptr);
+void		*render_threads(void *ptr);
+void		render(t_data *d);
 t_3d		get_vector(t_data *d, int x, int y);
 int			trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray);
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);

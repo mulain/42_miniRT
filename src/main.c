@@ -9,7 +9,10 @@ int	main(int argc, char **argv)
 	get_infile(&data, argc, argv);
 	parse(&data);
 	init_mlx(&data);
-	manage_threads(&data);
+	if (USETHREADS)
+		manage_threads(&data);
+	else
+		render(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 	mlx_key_hook(data.mlx.win, key_release, &data);
 	mlx_hook(data.mlx.win, 17, 0L << 0, event_windowdestroy, &data);
