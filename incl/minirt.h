@@ -90,12 +90,10 @@ void		manage_threads(t_data *d);
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
 bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
 double		cosfactor(t_3d light_origin, t_intrsct i);
-double		bright_diffuse(t_light light, t_intrsct i);
 
 // render_utils2.c
 void		add_light(t_rgb *coeff, t_color color, double brightness);
 int			apply_coeff(t_color color, t_rgb rgb_coeff);
-t_color		apply_brightness(t_color color, double factor);
 
 // render.c
 void		*render(void *ptr);

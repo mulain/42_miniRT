@@ -52,13 +52,13 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
 	if (!i.objnode)
 		return (0x00000000);
 	coeff = (t_rgb){0, 0, 0};
-	add_light(&coeff, d->amb_light.color, d->amb_light.brightness);
 	while (lightnode)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
 			i.objnode->colorize(&coeff, lightnode->light, i, ray);
 		lightnode = lightnode->next;
 	}
+	add_light(&coeff, d->amb_light.color, d->amb_light.brightness);
 	i.color.trgb = apply_coeff(i.color, coeff);
 	return (i.color.trgb);
 }
