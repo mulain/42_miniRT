@@ -33,7 +33,6 @@ typedef struct s_objlst
 	t_phong		phong;
 	t_intrsct	(*get_intersection)();
 	t_3d		(*get_normal)();
-	void		(*colorize)();
 	t_objlst	*next;
 
 }	t_objlst;

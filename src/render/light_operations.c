@@ -7,14 +7,14 @@ for each color update.
 By only modifying the coefficient, this approach only has to run it once 
 when the coefficient is applied and the final result is calculated.
 */
-void	add_light(t_rgb *coeff, t_color lightcolor, double brightness)
+void	add_light_to_coeff(t_rgb *coeff, t_color lightcolor, double brightness)
 {
 	coeff->r += lightcolor.r / 255 * brightness;
 	coeff->g += lightcolor.g / 255 * brightness;
 	coeff->b += lightcolor.b / 255 * brightness;
 }
 
-int	apply_coeff(t_color color, t_rgb rgb_coeff)
+t_color	apply_coeff(t_color color, t_rgb rgb_coeff)
 {
 	color.r *= rgb_coeff.r;
 	color.g *= rgb_coeff.g;
@@ -26,7 +26,7 @@ int	apply_coeff(t_color color, t_rgb rgb_coeff)
 	if (color.b > 255)
 		color.b = 255;
 	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
-	return (color.trgb);
+	return (color);
 }
 
 int	add_colors(int color1, int color2, int color3)
@@ -67,4 +67,19 @@ int	direct_light(t_color objcolor, t_color lightcolor, double brightness)
 	objcolor.trgb
 		= 0x00FFFFFF & (objcolor.r << 16 | objcolor.g << 8 | objcolor.b);
 	return (objcolor.trgb);
+}
+
+t_color	adjust_brightness(t_color color, double brightness)
+{
+	color.r *= brightness;
+	color.g *= brightness;
+	color.b *= brightness;
+	if (color.r > 255)
+		color.r = 255;
+	if (color.g > 255)
+		color.g = 255;
+	if (color.b > 255)
+		color.b = 255;
+	color.trgb = 0x00FFFFFF & (color.r << 16 | color.g << 8 | color.b);
+	return (color);
 }

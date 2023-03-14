@@ -5,7 +5,6 @@ void	parse_plane(t_data *d)
 {
 	t_plane		*plane;
 	t_objlst	*new;
-	t_3d		temp;
 
 	plane = malloc(sizeof(t_plane));
 	if (!plane)
@@ -16,15 +15,13 @@ void	parse_plane(t_data *d)
 	plane->point = parse_point(d, d->parse.elmnts[1], E_PLANE1);
 	plane->vector = parse_vector(d, d->parse.elmnts[2], E_PLANE2);
 	plane->color = parse_color(d, d->parse.elmnts[3], E_PLANE3);
-	temp = parse_vector(d, d->parse.elmnts[4], E_PLANEMAT);
-	new->phong = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = parse_phong(d, d->parse.elmnts[4], E_PLANEMAT);
 }
 
 void	parse_disc(t_data *d)
 {
 	t_disc		*disc;
 	t_objlst	*new;
-	t_3d		temp;
 
 	disc = malloc(sizeof(t_disc));
 	if (!disc)
@@ -36,15 +33,13 @@ void	parse_disc(t_data *d)
 	disc->vector = parse_vector(d, d->parse.elmnts[2], E_DISC2);
 	disc->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_DISC3);
 	disc->color = parse_color(d, d->parse.elmnts[4], E_DISC4);
-	temp = parse_vector(d, d->parse.elmnts[5], E_DISCMAT);
-	new->phong = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = parse_phong(d, d->parse.elmnts[5], E_DISCMAT);
 }
 
 void	parse_triangle(t_data *d)
 {
 	t_triangle	*triangle;
 	t_objlst	*new;
-	t_3d		temp;
 
 	triangle = malloc(sizeof(t_triangle));
 	if (!triangle)
@@ -60,6 +55,5 @@ void	parse_triangle(t_data *d)
 	if (length(triangle->vector) < EPSILON)
 		error_exit(d, E_TRI_VECTOR);
 	triangle->color = parse_color(d, d->parse.elmnts[4], E_TRIANGLE4);
-	temp = parse_vector(d, d->parse.elmnts[5], E_TRIANGLEMAT);
-	new->phong = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = parse_phong(d, d->parse.elmnts[5], E_TRIANGLEMAT);
 }

@@ -1,9 +1,6 @@
 
 #include "../incl/minirt.h"
 
-/*
-Will not test range if min == max.
-*/
 double	parse_double(t_data *d, char *input, char *msg)
 {
 	double		value;

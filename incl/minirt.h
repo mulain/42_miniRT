@@ -58,17 +58,20 @@ void		parse_sphere(t_data *d);
 void		parse_cylinder(t_data *d);
 void		parse_cone(t_data *d);
 
-// parse_lightsandcam.c
+// parse_lights_cam.c
 void		parse_ambientlight(t_data *d);
 void		parse_camera(t_data *d);
 void		parse_light(t_data *d);
 
-// parse_utils.c
+// parse_utils1.c
 double		parse_double(t_data *d, char *input, char *msg);
 t_color		parse_color(t_data *d, char *input, char *msg);
 t_3d		parse_point(t_data *d, char *input, char *msg);
 t_3d		parse_vector(t_data *d, char *input, char *msg);
 int			parse_int(t_data *d, char *input, char *msg);
+
+// parse_utils2.c
+t_phong		parse_phong(t_data *d, char *input, char *msg);
 
 // parse.c
 void		parse(t_data *d);
@@ -78,21 +81,24 @@ void		parse_line(t_data *d, char *line);
 // RENDER
 
 // light_operations.c
-void		add_light(t_rgb *coeff, t_color lightcolor, double brightness);
-int			apply_coeff(t_color color, t_rgb rgb_coeff);
+void		add_light_to_coeff(t_rgb *coeff, t_color lightcolor,
+				double brightness);
+t_color		apply_coeff(t_color color, t_rgb rgb_coeff);
 int			add_colors(int color1, int color2, int color3);
-int			direct_light(t_color objcolor, t_color lightcolor, double brightness);
+int			direct_light(t_color objcolor, t_color lightcolor,
+				double brightness);
+t_color		adjust_brightness(t_color color, double brightness);
 
 // phong.c
 int			diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode);
 int			ambient_component(t_data *d, t_intrsct i);
-void		diffuse(t_data *d, t_intrsct *i, t_light light);
+int			specular_component(t_data *d, t_intrsct i);
 
 // render.c
 void		*render_threads(void *ptr);
 void		render(t_data *d);
 t_3d		get_vector(t_data *d, int x, int y);
-int			trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth);
+int			trace_ray(t_data *d, t_ray ray, int depth);
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
 
 // utils.c

@@ -18,7 +18,7 @@ void	*render_threads(void *ptr)
 		while (h.x < d->width)
 		{
 			ray.direction = get_vector(d, h.x, h.y);
-			put_pixel(&d->mlx, h.x, h.y, trace_ray(d, d->lightlst, ray, 0));
+			put_pixel(&d->mlx, h.x, h.y, trace_ray(d, ray, 0));
 			h.x++;
 		}
 		if (h.id == THREADCOUNT - 1)
@@ -44,7 +44,7 @@ void	render(t_data *d)
 		while (x < d->width)
 		{
 			ray.direction = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray, 0));
+			put_pixel(&d->mlx, x, y, trace_ray(d, ray, 0));
 			x++;
 		}
 		printf(STATUSMSG, 100 * ((float)y / d->height));
@@ -66,11 +66,10 @@ t_3d	get_vector(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth)
+int	trace_ray(t_data *d, t_ray ray, int depth)
 {
 	t_intrsct	i;
 
-	(void)lightnode;
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode)
 		return (0x00000000);
@@ -79,6 +78,7 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth)
 	i.coeff = (t_rgb){0, 0, 0};
 	i.amb = ambient_component(d, i);
 	i.diff = diffuse_component(d, i, d->lightlst);
+	i.spec = specular_component(d, i);
 	// calc specular
 	// need rules, becuase if all have high vals, will oversaturate
 	//old colorize
