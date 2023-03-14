@@ -24,7 +24,7 @@ SRCFILE	= 	main.c\
 			$(addprefix intersect/, intersect_util.c intersect_2d.c intersect_3d.c)\
 			$(addprefix lists/, list_obj1.c list_obj2.c list_light.c)\
 			$(addprefix parse/, parse_lights_cam.c parse_2d.c parse_3d.c parse_utils.c parse.c)\
-			$(addprefix render/, colorize.c manage_threads.c render.c render_utils1.c render_utils2.c)\
+			$(addprefix render/, phong.c render.c render_utils1.c render_utils2.c)\
 			$(addprefix surface_normal/, get_normal_2d.c get_normal_3d.c)\
 			$(addprefix utils/, calculate1.c calculate2.c hooks.c print1.c print2.c shutdown.c)
 			

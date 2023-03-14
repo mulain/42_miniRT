@@ -21,7 +21,7 @@ int			main(int argc, char **argv);
 void		get_infile(t_data *d, int argc, char **argv);
 void		init_structs(t_data *d);
 void		init_mlx(t_data *d);
-
+void		manage_threads(t_data *d);
 
 // INTERSECT
 
@@ -44,11 +44,9 @@ bool		is_withinbounds(t_3d point, t_3d ref, t_3d axis, double height);
 double		to_deg(double radians);
 double		to_rad(double degrees);
 
-
 // LISTS -> have seperate headers
 
-
-// parse
+// PARSE
 
 // parse_2d.c
 void		parse_plane(t_data *d);
@@ -77,15 +75,12 @@ void		parse(t_data *d);
 char		*gnl_trimmed(int fd);
 void		parse_line(t_data *d, char *line);
 
-
 // RENDER
 
-// colorize.c
-void		diffuse(t_data *d, t_intrsct *i, t_light light);
-void		specular(t_rgb *coeff, t_light light, t_intrsct i, t_ray ray);
+// phong.c
+int			diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode);
 
-// manage_threads.c
-void		manage_threads(t_data *d);
+void	diffuse(t_data *d, t_intrsct *i, t_light light);
 
 // render_utils1.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);

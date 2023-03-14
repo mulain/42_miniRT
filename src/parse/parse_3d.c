@@ -23,22 +23,21 @@ void	parse_sphere(t_data *d)
 void	parse_cylinder(t_data *d)
 {
 	t_tube		*tube;
-	t_disc		*disc_top;
-	t_disc		*disc_base;
+	t_disc		*disc[2];
 	t_objlst	*new[3];
 	t_3d		temp;
 
 	tube = malloc(sizeof(t_tube));
-	disc_top = malloc(sizeof(t_disc));
-	disc_base = malloc(sizeof(t_disc));
-	if (!tube || !disc_top || !disc_base)
+	disc[0] = malloc(sizeof(t_disc));
+	disc[1] = malloc(sizeof(t_disc));
+	if (!tube || !disc[0] || !disc[1])
 		error_exit(d, E_MALLOC);
 	d->parse.check_range = false;
 	new[0] = objlst_new(d, tube, tu);
 	objlst_add_back(&d->objectlist, new[0]);
-	new[1] = objlst_new(d, disc_top, di);
+	new[1] = objlst_new(d, disc[0], di);
 	objlst_add_back(&d->objectlist, new[1]);
-	new[2] = objlst_new(d, disc_base, di);
+	new[2] = objlst_new(d, disc[1], di);
 	objlst_add_back(&d->objectlist, new[2]);
 	tube->base = parse_point(d, d->parse.elmnts[1], E_CYLINDER1);
 	tube->axis = parse_vector(d, d->parse.elmnts[2], E_CYLINDER2);
@@ -50,8 +49,8 @@ void	parse_cylinder(t_data *d)
 	new[0]->ph = (t_phong){temp.x, temp.y, temp.z};
 	new[1]->ph = new[0]->ph;
 	new[2]->ph= new[0]->ph;
-	*disc_top = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
-	*disc_base = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
+	*disc[0] = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
+	*disc[1] = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
 }
 
 /*
@@ -80,8 +79,6 @@ void	parse_cone(t_data *d)
 	cone->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CONE3);
 	cone->height = parse_double(d, d->parse.elmnts[4], E_CONE4);
 	cone->apex = add(cone->base, scale(cone->axis, cone->height));
-	cone->theta_rad = atan(cone->radius / cone->height);
-	cone->theta_deg = to_deg(cone->theta_rad);
 	cone->color = parse_color(d, d->parse.elmnts[5], E_CONE5);
 	temp = parse_vector(d, d->parse.elmnts[6], E_CONEMAT);
 	new[0]->ph = (t_phong){temp.x, temp.y, temp.z};
