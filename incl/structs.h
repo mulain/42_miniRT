@@ -61,17 +61,6 @@ typedef struct s_color
 	int			trgb;
 }	t_color;
 
-// forward declaration
-typedef struct s_objlst		t_objlst;
-
-typedef struct s_intersection
-{
-	t_objlst	*objnode;
-	double		distance;
-	t_3d		point;
-	t_color		color;
-}	t_intrsct;
-
 typedef struct s_light
 {
 	t_3d		origin;
@@ -156,6 +145,20 @@ typedef struct s_cone
 	double		theta_deg;
 	t_color		color;
 }	t_cone;
+
+// forward declaration
+typedef struct s_objlst		t_objlst;
+
+typedef struct s_intersection
+{
+	int			depth;
+	t_objlst	*objnode;
+	t_ray		ray;
+	double		distance;
+	t_3d		point;
+	t_color		color;
+	t_rgb		coeff;
+}	t_intrsct;
 
 // Struct for parse
 typedef struct s_parse

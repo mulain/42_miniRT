@@ -18,7 +18,7 @@ void	*render_threads(void *ptr)
 		while (h.x < d->width)
 		{
 			ray.direction = get_vector(d, h.x, h.y);
-			put_pixel(&d->mlx, h.x, h.y, trace_ray(d, d->lightlst, ray));
+			put_pixel(&d->mlx, h.x, h.y, trace_ray(d, d->lightlst, ray, 0));
 			h.x++;
 		}
 		if (h.id == THREADCOUNT - 1)
@@ -44,7 +44,7 @@ void	render(t_data *d)
 		while (x < d->width)
 		{
 			ray.direction = get_vector(d, x, y);
-			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray));
+			put_pixel(&d->mlx, x, y, trace_ray(d, d->lightlst, ray, 0));
 			x++;
 		}
 		printf(STATUSMSG, 100 * ((float)y / d->height));
@@ -66,25 +66,26 @@ t_3d	get_vector(t_data *d, int x, int y)
 	return (norm(transformed));
 }
 
-int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray)
+int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth)
 {
 	t_intrsct	i;
-	t_rgb		coeff;
 
 	i = get_objintersect(d->objectlist, ray);
 	if (!i.objnode)
 		return (0x00000000);
-	coeff = (t_rgb){0, 0, 0};
+	i.depth = depth;
+	i.ray = ray;
+	i.coeff = (t_rgb){0, 0, 0};
 	while (lightnode)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
 		{
-			i.objnode->colorize(&coeff, *lightnode->light, i, ray);
+			i.objnode->colorize(d, &i, *lightnode->light);
 		}
 		lightnode = lightnode->next;
 	}
-	add_light(&coeff, d->amb_light.color, d->amb_light.brightness);
-	i.color.trgb = apply_coeff(i.color, coeff);
+	add_light(&i.coeff, d->amb_light.color, d->amb_light.brightness);
+	i.color.trgb = apply_coeff(i.color, i.coeff);
 	return (i.color.trgb);
 }
 
