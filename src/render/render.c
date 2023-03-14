@@ -76,6 +76,10 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth)
 	i.depth = depth;
 	i.ray = ray;
 	i.coeff = (t_rgb){0, 0, 0};
+	//calc ambient
+	// calc diffuse
+	// calc specular
+	// need rules, becuase if all have high vals, will oversaturate
 	while (lightnode)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))

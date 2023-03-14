@@ -11,7 +11,7 @@ double	parse_double(t_data *d, char *input, char *msg)
 	if (!input || !is_decimalformat(input))
 		error_exit(d, msg);
 	value = conv_strtod(input);
-	if (d->parse.min == d->parse.max)
+	if (!d->parse.check_range)
 		return (value);
 	if (value < d->parse.min || value > d->parse.max)
 		error_exit(d, msg);

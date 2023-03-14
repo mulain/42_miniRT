@@ -56,6 +56,7 @@ void	init_structs(t_data *d)
 	d->parse.fd = -1;
 	d->parse.elmnts = NULL;
 	d->parse.subelmnts = NULL;
+	d->parse.check_range = false;
 	d->parse.min = 0.0;
 	d->parse.max = 0.0;
 }

@@ -42,10 +42,5 @@ void	select_get_normal(t_objlst *new)
 
 void	select_colorize(t_objlst *new)
 {
-	if (new->surface == diff)
-		new->colorize = diffuse;
-	else
-		printf("kutkutk\n");
-	/* else if (new->surface == spec)
-		new->colorize = specular; */
+	new->colorize = diffuse;
 }

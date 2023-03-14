@@ -1,0 +1,53 @@
+The Phong model for shading is based on three components:
+ambient, diffuse, and specular.
+
+The total color of a point on a surface is computed as the sum of these three components.
+The general formula for the Phong model is:
+
+I = Ia + Id + Is
+
+where I is the total color of the surface at a point,
+Ia is the ambient component,
+Id is the diffuse component, and
+Is is the specular component.
+
+The ambient component represents the overall light in the environment and
+is typically a constant color value. It is computed as:
+
+Ia = ka * La
+
+where ka is the ambient reflection coefficient, and La is the ambient light color.
+
+DIFFUSE
+The diffuse component represents the color of the surface due to light that is scattered
+in all directions. It is computed using the Lambertian cosine law as:
+
+Id = kd * Ld * max(0, N · L)
+
+where kd is the diffuse reflection coefficient,
+Ld is the diffuse light color,
+N is the surface normal, and
+L is the light direction. We use the shadow ray as "Light Direction" and therefore have to 
+multiply by -1 at the end.
+
+The specular component represents the highlight on the surface due to light that is reflected
+in a specific direction.
+It is computed using the Phong specular reflection model as:
+
+Is = ks * Ls * max(0, R · V)^s
+
+where ks is the specular reflection coefficient,
+Ls is the specular light color,
+R is the reflected light direction,
+V is the view direction,
+and s is the shininess coefficient.
+
+The reflected light direction R is computed as:
+
+R = 2 * (N · L) * N - L
+
+where N is the surface normal and L is the light direction.
+
+The view direction V is the direction from the surface point towards the camera or viewer.
+
+Overall, the Phong model provides a simple yet effective way to compute the shading of a surface in a ray tracing or rendering algorithm.

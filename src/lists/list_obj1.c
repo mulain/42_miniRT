@@ -1,8 +1,7 @@
 
 #include "../incl/minirt.h"
 
-t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype,
-			t_surface surface)
+t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype)
 {
 	t_objlst	*new;
 
@@ -11,7 +10,6 @@ t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype,
 		error_exit(d, E_MALLOC);
 	new->object = object;
 	new->objtype = objtype;
-	new->surface = surface;
 	new->next = NULL;
 	select_functions(new);
 	return (new);

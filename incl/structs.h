@@ -166,6 +166,7 @@ typedef struct s_parse
 	int			fd;
 	char		**elmnts;
 	char		**subelmnts;
+	bool		check_range;
 	double		min;
 	double		max;
 }	t_parse;
@@ -181,7 +182,7 @@ typedef struct s_data
 	t_camera		camera;
 	t_lightlst		*lightlst;
 	t_objlst		*objectlist;
-	t_parse		parse;
+	t_parse			parse;
 	int				width;
 	int				height;
 	float			aspect_ratio;

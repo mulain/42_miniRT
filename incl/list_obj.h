@@ -16,11 +16,12 @@ typedef enum e_objtype
 	co = 6
 }	t_objtype;
 
-typedef enum e_surface
+typedef struct s_phong
 {
-	diff = 1,
-	spec = 2
-}	t_surface;
+	double		amb;
+	double		diff;
+	double		spec;
+}	t_phong;
 
 // forward declaration
 typedef struct s_objlst	t_objlst;
@@ -29,7 +30,7 @@ typedef struct s_objlst
 {
 	void		*object;
 	t_objtype	objtype;
-	t_surface	surface;
+	t_phong		ph;
 	t_intrsct	(*get_intersection)();
 	t_3d		(*get_normal)();
 	void		(*colorize)();
@@ -38,8 +39,7 @@ typedef struct s_objlst
 }	t_objlst;
 
 // list_obj1.c
-t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype,
-				t_surface surface);
+t_objlst	*objlst_new(t_data *d, void *object, t_objtype objtype);
 void		objlst_add_back(t_objlst **lst, t_objlst *new);
 t_objlst	*objlst_last(t_objlst *lst);
 void		objlst_free(t_objlst *lst);
