@@ -17,7 +17,7 @@ void	parse_sphere(t_data *d)
 	sphere->radius = 0.5 * parse_double(d, d->parse.elmnts[2], E_SPHERE2);
 	sphere->color = parse_color(d, d->parse.elmnts[3], E_SPHERE3);
 	temp = parse_vector(d, d->parse.elmnts[4], E_SPHEREMAT);
-	new->ph = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = (t_phong){temp.x, temp.y, temp.z};
 }
 
 void	parse_cylinder(t_data *d)
@@ -46,9 +46,9 @@ void	parse_cylinder(t_data *d)
 	tube->top = add(tube->base, scale(tube->axis, tube->height));
 	tube->color = parse_color(d, d->parse.elmnts[5], E_CYLINDER5);
 	temp = parse_vector(d, d->parse.elmnts[6], E_CYLINDERMAT);
-	new[0]->ph = (t_phong){temp.x, temp.y, temp.z};
-	new[1]->ph = new[0]->ph;
-	new[2]->ph= new[0]->ph;
+	new[0]->phong = (t_phong){temp.x, temp.y, temp.z};
+	new[1]->phong = new[0]->phong;
+	new[2]->phong = new[0]->phong;
 	*disc[0] = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
 	*disc[1] = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
 }
@@ -81,7 +81,7 @@ void	parse_cone(t_data *d)
 	cone->apex = add(cone->base, scale(cone->axis, cone->height));
 	cone->color = parse_color(d, d->parse.elmnts[5], E_CONE5);
 	temp = parse_vector(d, d->parse.elmnts[6], E_CONEMAT);
-	new[0]->ph = (t_phong){temp.x, temp.y, temp.z};
-	new[1]->ph = new[0]->ph;
+	new[0]->phong = (t_phong){temp.x, temp.y, temp.z};
+	new[1]->phong = new[0]->phong;
 	*disc_base = (t_disc){cone->base, cone->axis, cone->radius, cone->color};
 }

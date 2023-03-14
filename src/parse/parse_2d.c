@@ -17,7 +17,7 @@ void	parse_plane(t_data *d)
 	plane->vector = parse_vector(d, d->parse.elmnts[2], E_PLANE2);
 	plane->color = parse_color(d, d->parse.elmnts[3], E_PLANE3);
 	temp = parse_vector(d, d->parse.elmnts[4], E_PLANEMAT);
-	new->ph = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = (t_phong){temp.x, temp.y, temp.z};
 }
 
 void	parse_disc(t_data *d)
@@ -37,7 +37,7 @@ void	parse_disc(t_data *d)
 	disc->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_DISC3);
 	disc->color = parse_color(d, d->parse.elmnts[4], E_DISC4);
 	temp = parse_vector(d, d->parse.elmnts[5], E_DISCMAT);
-	new->ph = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = (t_phong){temp.x, temp.y, temp.z};
 }
 
 void	parse_triangle(t_data *d)
@@ -61,5 +61,5 @@ void	parse_triangle(t_data *d)
 		error_exit(d, E_TRI_VECTOR);
 	triangle->color = parse_color(d, d->parse.elmnts[4], E_TRIANGLE4);
 	temp = parse_vector(d, d->parse.elmnts[5], E_TRIANGLEMAT);
-	new->ph = (t_phong){temp.x, temp.y, temp.z};
+	new->phong = (t_phong){temp.x, temp.y, temp.z};
 }

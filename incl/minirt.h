@@ -77,20 +77,16 @@ void		parse_line(t_data *d, char *line);
 
 // RENDER
 
+// light_operations.c
+void		add_light(t_rgb *coeff, t_color lightcolor, double brightness);
+int			apply_coeff(t_color color, t_rgb rgb_coeff);
+int			add_colors(int color1, int color2, int color3);
+int			direct_light(t_color objcolor, t_color lightcolor, double brightness);
+
 // phong.c
 int			diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode);
-
-void	diffuse(t_data *d, t_intrsct *i, t_light light);
-
-// render_utils1.c
-void		put_pixel(t_mlx *mlx, int x, int y, int color);
-bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
-double		cosfactor(t_3d light_origin, t_intrsct i);
-t_3d		reflect(t_3d incoming, t_3d normal);
-
-// render_utils2.c
-void		add_light(t_rgb *coeff, t_color color, double brightness);
-int			apply_coeff(t_color color, t_rgb rgb_coeff);
+int			ambient_component(t_data *d, t_intrsct i);
+void		diffuse(t_data *d, t_intrsct *i, t_light light);
 
 // render.c
 void		*render_threads(void *ptr);
@@ -99,6 +95,11 @@ t_3d		get_vector(t_data *d, int x, int y);
 int			trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth);
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
 
+// utils.c
+void		put_pixel(t_mlx *mlx, int x, int y, int color);
+bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
+double		cosfactor(t_3d light_origin, t_intrsct i);
+t_3d		reflect(t_3d incoming, t_3d normal);
 
 // SURFACE_NORMAL
 

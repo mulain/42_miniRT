@@ -1,11 +1,29 @@
 
 #include "../incl/minirt.h"
 
+int	ambient_component__(t_data *d, t_intrsct i)
+{
+	t_rgb	amb;
+
+	amb = (t_rgb){0, 0, 0};
+	add_light(&amb, d->amb_light.color,
+		d->amb_light.brightness * i.objnode->phong.amb);
+	return (apply_coeff(i.color, amb));
+}
+
+int	ambient_component(t_data *d, t_intrsct i)
+{
+	double	brightness;
+
+	brightness = d->amb_light.brightness * i.objnode->phong.amb;
+	return (direct_light(i.color, d->amb_light.color, brightness));
+}
+
 int	diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 {
 	double	cos_fac;
 
-	if (!i.objnode->ph.diff)
+	if (!i.objnode->phong.diff)
 		return (-1);
 	while (lightnode)
 	{
@@ -13,7 +31,6 @@ int	diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 		{
 			cos_fac = cosfactor(lightnode->light->origin, i);
 			add_light(&i.coeff, lightnode->light->color, cos_fac);
-			//i.objnode->colorize(d, &i, *lightnode->light);
 		}
 		lightnode = lightnode->next;
 	}

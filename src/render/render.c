@@ -77,29 +77,13 @@ int	trace_ray(t_data *d, t_lightlst *lightnode, t_ray ray, int depth)
 	i.depth = depth;
 	i.ray = ray;
 	i.coeff = (t_rgb){0, 0, 0};
-	//calc ambient
-	//add_light(&i.coeff, d->amb_light.color, d->amb_light.brightness);
-	// calc diffuse
-		i.diff = diffuse_component(d, i, d->lightlst);
+	i.amb = ambient_component(d, i);
+	i.diff = diffuse_component(d, i, d->lightlst);
 	// calc specular
 	// need rules, becuase if all have high vals, will oversaturate
-	
-	
 	//old colorize
-	/* while (lightnode)
-	{
-		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
-		{
-			//i.objnode->colorize(d, &i, *lightnode->light);
-			diffuse(d, &i, *lightnode->light);
-		}
-		lightnode = lightnode->next;
-	} */
-
-	return (i.diff);
-
-	/* i.color.trgb = apply_coeff(i.color, i.coeff);
-	return (i.color.trgb); */
+	
+	return (add_colors(i.amb, i.diff, 0));
 }
 
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray)

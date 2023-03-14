@@ -30,7 +30,7 @@ typedef struct s_objlst
 {
 	void		*object;
 	t_objtype	objtype;
-	t_phong		ph;
+	t_phong		phong;
 	t_intrsct	(*get_intersection)();
 	t_3d		(*get_normal)();
 	void		(*colorize)();
