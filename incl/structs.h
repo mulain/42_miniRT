@@ -66,7 +66,6 @@ typedef struct s_light
 	t_3d		origin;
 	double		brightness;
 	t_color		color;
-	bool		declared;
 }	t_light;
 
 typedef struct s_camera

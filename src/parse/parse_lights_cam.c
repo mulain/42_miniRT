@@ -15,23 +15,17 @@ void	parse_ambientlight(t_data *d)
 
 void	parse_light(t_data *d)
 {
-	t_light		*light;
+	t_light		light;
 
-	light = malloc(sizeof(t_light));
-	if (!light)
-		error_exit(d, E_MALLOC);
-	lightlst_add_back(&d->lightlst, lightlst_new(d, light));
-	light->origin = parse_point(d, d->parse.elmnts[1], E_LIGHT1);
+	light.origin = parse_point(d, d->parse.elmnts[1], E_LIGHT1);
 	d->parse.check_range = true;
 	d->parse.min = 0.0;
 	d->parse.max = 1.0;
-	light->brightness = parse_double(d, d->parse.elmnts[2], E_LIGHT2);
-	light->color = parse_color(d, d->parse.elmnts[3], E_LIGHT3);
+	light.brightness = parse_double(d, d->parse.elmnts[2], E_LIGHT2);
+	light.color = parse_color(d, d->parse.elmnts[3], E_LIGHT3);
+	lightlst_add_back(&d->lightlst, lightlst_new(d, light));
 }
 
-/*
-angle in radians = (angle in degrees) x (π/180)
-*/
 void	parse_camera(t_data *d)
 {
 	if (d->camera.declared)

@@ -1,14 +1,16 @@
 
 #include "../incl/minirt.h"
 
-t_lightlst	*lightlst_new(t_data *d, t_light *light)
+t_lightlst	*lightlst_new(t_data *d, t_light light)
 {
 	t_lightlst		*new;
 
 	new = malloc(sizeof(t_lightlst));
 	if (!new)
 		error_exit(d, E_MALLOC);
-	new->light = light;
+	new->origin = light.origin;
+	new->brightness = light.brightness;
+	new->color = light.color;
 	new->next = NULL;
 	return (new);
 }
@@ -38,7 +40,6 @@ void	lightlst_free(t_lightlst *lst)
 
 	while (lst)
 	{
-		free(lst->light);
 		temp = lst;
 		lst = lst->next;
 		free(temp);

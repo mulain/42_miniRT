@@ -103,7 +103,7 @@ t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
 
 // utils.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
-bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
+bool		is_shadowed(t_3d light_origin, t_objlst *objnode, t_3d point);
 double		cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal);
 t_3d		reflect(t_3d incoming, t_3d normal);
 

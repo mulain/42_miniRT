@@ -9,14 +9,14 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)pxl = color;
 }
 
-bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
+bool	is_shadowed(t_3d light_origin, t_objlst *objnode, t_3d point)
 {
 	t_ray		shadow_ray;
 	double		light_dist;
 	double		block_dist;
 
-	light_dist = distance(point, light->origin);
-	shadow_ray.direction = norm(subtract(light->origin, point));
+	light_dist = distance(point, light_origin);
+	shadow_ray.direction = norm(subtract(light_origin, point));
 	shadow_ray.origin = point;
 	while (objnode)
 	{
