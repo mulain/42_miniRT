@@ -47,13 +47,15 @@ void	parse_triangle(t_data *d)
 	new = objlst_new(d, triangle, tr);
 	objlst_add_back(&d->objectlist, new);
 	d->parse.check_range = false;
-	triangle->v1 = parse_point(d, d->parse.elmnts[1], E_TRIANGLE1);
-	triangle->v2 = parse_point(d, d->parse.elmnts[2], E_TRIANGLE2);
-	triangle->v3 = parse_point(d, d->parse.elmnts[3], E_TRIANGLE3);
+	triangle->v1 = parse_point(d, d->parse.elmnts[1], E_TR_1);
+	triangle->v2 = parse_point(d, d->parse.elmnts[2], E_TR_2);
+	triangle->v3 = parse_point(d, d->parse.elmnts[3], E_TR_3);
 	triangle->vector = cross(subtract(triangle->v1, triangle->v2),
 			subtract(triangle->v1, triangle->v3));
 	if (length(triangle->vector) < EPSILON)
-		error_exit(d, E_TRI_VECTOR);
-	triangle->color = parse_color(d, d->parse.elmnts[4], E_TRIANGLE4);
-	new->phong = parse_phong(d, d->parse.elmnts[5], E_TRIANGLEMAT);
+		error_exit(d, E_TR_VECTOR);
+	triangle->color = parse_color(d, d->parse.elmnts[4], E_TR_4);
+	new->phong = parse_phong(d, d->parse.elmnts[5], E_TR_MAT);
+	set_range(d, 2.0, 1200);
+	new->spec_exp = parse_int(d, d->parse.elmnts[6], E_TR_EXP);
 }

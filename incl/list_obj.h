@@ -31,6 +31,7 @@ typedef struct s_objlst
 	void		*object;
 	t_objtype	objtype;
 	t_phong		phong;
+	int			spec_exp;
 	t_intrsct	(*get_intersection)();
 	t_3d		(*get_normal)();
 	t_objlst	*next;

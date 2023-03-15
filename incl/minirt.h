@@ -54,8 +54,8 @@ void		parse_disc(t_data *d);
 void		parse_triangle(t_data *d);
 
 // parse_3d.c
-void		parse_sphere(t_data *d);
-void		parse_cylinder(t_data *d);
+void		parsE_SP_(t_data *d);
+void		parsE_CY_(t_data *d);
 void		parse_cone(t_data *d);
 
 // parse_lights_cam.c
@@ -72,6 +72,7 @@ int			parse_int(t_data *d, char *input, char *msg);
 
 // parse_utils2.c
 t_phong		parse_phong(t_data *d, char *input, char *msg);
+void		set_range(t_data *d, double min, double max);
 
 // parse.c
 void		parse(t_data *d);

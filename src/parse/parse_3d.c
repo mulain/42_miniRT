@@ -1,7 +1,7 @@
 
 #include "../incl/minirt.h"
 
-void	parse_sphere(t_data *d)
+void	parsE_SP_(t_data *d)
 {
 	t_sphere	*sphere;
 	t_objlst	*new;
@@ -12,13 +12,13 @@ void	parse_sphere(t_data *d)
 	new = objlst_new(d, sphere, sp);
 	objlst_add_back(&d->objectlist, new);
 	d->parse.check_range = false;
-	sphere->center = parse_point(d, d->parse.elmnts[1], E_SPHERE1);
-	sphere->radius = 0.5 * parse_double(d, d->parse.elmnts[2], E_SPHERE2);
-	sphere->color = parse_color(d, d->parse.elmnts[3], E_SPHERE3);
-	new->phong = parse_phong(d, d->parse.elmnts[4], E_SPHEREMAT);
+	sphere->center = parse_point(d, d->parse.elmnts[1], E_SP_1);
+	sphere->radius = 0.5 * parse_double(d, d->parse.elmnts[2], E_SP_2);
+	sphere->color = parse_color(d, d->parse.elmnts[3], E_SP_3);
+	new->phong = parse_phong(d, d->parse.elmnts[4], E_SP_MAT);
 }
 
-void	parse_cylinder(t_data *d)
+void	parsE_CY_(t_data *d)
 {
 	t_tube		*tube;
 	t_disc		*disc[2];
@@ -36,13 +36,13 @@ void	parse_cylinder(t_data *d)
 	objlst_add_back(&d->objectlist, new[1]);
 	new[2] = objlst_new(d, disc[1], di);
 	objlst_add_back(&d->objectlist, new[2]);
-	tube->base = parse_point(d, d->parse.elmnts[1], E_CYLINDER1);
-	tube->axis = parse_vector(d, d->parse.elmnts[2], E_CYLINDER2);
-	tube->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CYLINDER3);
-	tube->height = parse_double(d, d->parse.elmnts[4], E_CYLINDER4);
+	tube->base = parse_point(d, d->parse.elmnts[1], E_CY_1);
+	tube->axis = parse_vector(d, d->parse.elmnts[2], E_CY_2);
+	tube->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_CY_3);
+	tube->height = parse_double(d, d->parse.elmnts[4], E_CY_4);
 	tube->top = add(tube->base, scale(tube->axis, tube->height));
-	tube->color = parse_color(d, d->parse.elmnts[5], E_CYLINDER5);
-	new[0]->phong = parse_phong(d, d->parse.elmnts[6], E_CYLINDERMAT);
+	tube->color = parse_color(d, d->parse.elmnts[5], E_CY_5);
+	new[0]->phong = parse_phong(d, d->parse.elmnts[6], E_CY_MAT);
 	new[1]->phong = new[0]->phong;
 	new[2]->phong = new[0]->phong;
 	*disc[0] = (t_disc){tube->top, tube->axis, tube->radius, tube->color};

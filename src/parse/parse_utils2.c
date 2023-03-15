@@ -17,3 +17,10 @@ t_phong	parse_phong(t_data *d, char *input, char *msg)
 	temp.z *= temp.z / sum; */
 	return ((t_phong){temp.x, temp.y, temp.z});
 }
+
+void	set_range(t_data *d, double min, double max)
+{
+	d->parse.check_range = true;
+	d->parse.min = min;
+	d->parse.max = max;
+}

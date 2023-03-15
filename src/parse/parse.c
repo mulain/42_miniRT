@@ -48,9 +48,9 @@ void	parse_line(t_data *d, char *line)
 	else if (!ft_strncmp(d->parse.elmnts[0], "tr", 3))
 		parse_triangle(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "sp", 3))
-		parse_sphere(d);
+		parsE_SP_(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "cy", 3))
-		parse_cylinder(d);
+		parsE_CY_(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "co", 3))
 		parse_cone(d);	
 	else
