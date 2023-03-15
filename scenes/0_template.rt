@@ -7,14 +7,14 @@ A								0.3				255,255,255
 # LIGHTS		Position		Brightness		Color
 L				0,10,-10		1.0				255,255,255
 
-# PLANES		Position		Vector			Color
+# PLANES		Position		Vector			Color			amb, diff, spec		spec exp
 
-# DISCS			Position		Vector			Diameter		Color
+# DISCS			Position		Vector			Diameter		Color			amb, diff, spec		spec exp
 
-# TRIANGLES		Vertex 1		Vertex 2		Vertex 3		Color
+# TRIANGLES		Vertex 1		Vertex 2		Vertex 3		Color			amb, diff, spec		spec exp
 
-# SPHERES		Position		Diameter		Color
+# SPHERES		Position		Diameter		Color			amb, diff, spec		spec exp
 
-# CYLINDERS		Position		Vector			Diameter		Height			Color
+# CYLINDERS		Position		Vector			Diameter		Height			Color		amb, diff, spec		spec exp
 
-# CONES			Position		Vector			Diameter		Height			Color
+# CONES			Position		Vector			Diameter		Height			Color		amb, diff, spec		spec exp
