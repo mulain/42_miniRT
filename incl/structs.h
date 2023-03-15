@@ -156,13 +156,12 @@ typedef struct s_intersection
 	t_ray		ray;
 	double		distance;
 	t_3d		point;
-	t_phong		phong;
 	int			amb;			
 	int			diff;
 	int			spec;
 	
 	
-	t_color		color;
+	t_color		color; // get rid of dese?
 	t_rgb		coeff;
 }	t_intrsct;
 

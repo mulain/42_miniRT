@@ -36,12 +36,15 @@ int	diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 int	specular_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 {
 	float		cos_factor;
+	float		specular;
 	t_3d		light_to_point;
 	t_3d		light_refl_dir;
 	t_3d		view_dir;
 	t_3d		local_normal;
 	t_3d		light_origin;
+	int			specular_exponent;
 
+	specular_exponent = 1200; //2 to 1250
 	if (!i.objnode->phong.spec)
 		return (0);
 	while (lightnode)
@@ -55,16 +58,19 @@ int	specular_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 			view_dir = norm(subtract(i.point, i.ray.origin));
 			cos_factor = dot(light_refl_dir, view_dir);
 			if (cos_factor < EPSILON)
-				cos_factor = 0;
+				specular = 0;
+			else
+				specular = pow(cos_factor, specular_exponent);
+			add_light_to_coeff(&i.coeff, lightnode->light->color, specular);
 		}
 		lightnode = lightnode->next;
 	}
 	i.color = apply_coeff(i.color, i.coeff);
-	return (adjust_brightness(i.color, i.objnode->phong.diff).trgb);
+	return (adjust_brightness(i.color, i.objnode->phong.spec).trgb);
 }
 
 
-vec3 specular(vec3 ks, vec3 Ls, vec3 R, vec3 V, float s) {
+/* vec3 specular(vec3 ks, vec3 Ls, vec3 R, vec3 V, float s) {
     float cos_theta = max(dot(R, V), 0.0);
     float specular_intensity = pow(cos_theta, s);
     return ks * Ls * specular_intensity;
@@ -80,4 +86,4 @@ int	specular_component__(t_data *d, t_intrsct i, t_lightlst *lightnode)
 			i.objnode->get_normal(i.point, i.ray.origin, i.objnode->object));
 	i.color.trgb = trace_ray(d, i.ray, i.depth + 1);
 	return (adjust_brightness(i.color, i.objnode->phong.spec).trgb);
-}
+} */

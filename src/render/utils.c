@@ -43,11 +43,13 @@ double	cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal)
 
 /*
 R = I - 2(I · N)N
+R = 2(N · L)N - L
 */
 t_3d	reflect(t_3d incoming, t_3d normal)
 {
 	double		dotprod;
 
 	dotprod = dot(incoming, normal);
-	return (subtract(incoming, scale(normal, 2 * dotprod)));
+	return (subtract(scale(normal, 2 * dotprod), incoming));
+	//return (subtract(incoming, scale(normal, 2 * dotprod)));
 }
