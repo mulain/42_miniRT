@@ -4,7 +4,7 @@
 void	select_functions(t_objlst *new)
 {
 	select_intersect(new);
-	select_get_normal(new);
+	select_normal(new);
 }
 
 void	select_intersect(t_objlst *new)
@@ -23,18 +23,18 @@ void	select_intersect(t_objlst *new)
 		new->get_intersection = intersect_cone;
 }
 
-void	select_get_normal(t_objlst *new)
+void	select_normal(t_objlst *new)
 {
 	if (new->objtype == pl)
-		new->get_normal = get_normal_plane;
+		new->get_normal = normal_plane;
 	else if (new->objtype == di)
-		new->get_normal = get_normal_disc;
+		new->get_normal = normal_disc;
 	else if (new->objtype == tr)
-		new->get_normal = get_normal_triangle;
+		new->get_normal = normal_triangle;
 	else if (new->objtype == sp)
-		new->get_normal = get_normal_sphere;
+		new->get_normal = normal_sphere;
 	else if (new->objtype == tu)
-		new->get_normal = get_normal_tube;
+		new->get_normal = normal_tube;
 	else if (new->objtype == co)
-		new->get_normal = get_normal_cone;
+		new->get_normal = normal_cone;
 }

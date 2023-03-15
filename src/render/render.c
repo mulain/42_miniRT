@@ -78,12 +78,8 @@ int	trace_ray(t_data *d, t_ray ray, int depth)
 	i.coeff = (t_rgb){0, 0, 0};
 	i.amb = ambient_component(d, i);
 	i.diff = diffuse_component(d, i, d->lightlst);
-	i.spec = specular_component(d, i);
-	// calc specular
-	// need rules, becuase if all have high vals, will oversaturate
-	//old colorize
-	
-	return (add_colors(i.amb, i.diff, 0));
+	i.spec = specular_component(d, i, d->lightlst);
+	return (add_colors(i.amb, i.diff, i.spec));
 }
 
 t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray)

@@ -4,7 +4,7 @@ C				0,0,0			0,.5,-1			90
 
 
 # AMBIENT LIGHT					Brightness		Color
-A								.4				255,255,255
+A								.7				255,255,255
 
 # LIGHTS		Position		Brightness		Color
 L				-4,10,-2		1.0				255,255,255

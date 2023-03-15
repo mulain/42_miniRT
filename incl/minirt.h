@@ -90,9 +90,9 @@ int			direct_light(t_color objcolor, t_color lightcolor,
 t_color		adjust_brightness(t_color color, double brightness);
 
 // phong.c
-int			diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode);
 int			ambient_component(t_data *d, t_intrsct i);
-int			specular_component(t_data *d, t_intrsct i);
+int			diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode);
+int			specular_component(t_data *d, t_intrsct i, t_lightlst *lightnode);
 
 // render.c
 void		*render_threads(void *ptr);
@@ -104,21 +104,20 @@ t_intrsct	get_objintersect(t_objlst *objnode, t_ray ray);
 // utils.c
 void		put_pixel(t_mlx *mlx, int x, int y, int color);
 bool		is_shadowed(t_light *light, t_objlst *objnode, t_3d point);
-double		cosfactor(t_3d light_origin, t_intrsct i);
+double		cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal);
 t_3d		reflect(t_3d incoming, t_3d normal);
 
 // SURFACE_NORMAL
 
 // get_normal_2d.c
-t_3d		get_normal_plane(t_3d point, t_3d light, void *obj);
-t_3d		get_normal_disc(t_3d point, t_3d light, void *obj);
-t_3d		get_normal_triangle(t_3d point, t_3d light, void *obj);
+t_3d		normal_plane(t_3d point, t_3d ray_origin, void *obj);
+t_3d		normal_disc(t_3d point, t_3d ray_origin, void *obj);
+t_3d		normal_triangle(t_3d point, t_3d ray_origin, void *obj);
 
 // get_normal_3d.c
-t_3d		get_normal_sphere(t_3d point, t_3d light, void *obj);
-t_3d		get_normal_tube(t_3d point, t_3d light, void *obj);
-t_3d		get_normal_cone(t_3d point, t_3d light, void *obj);
-
+t_3d		normal_sphere(t_3d point, t_3d ray_origin, void *obj);
+t_3d		normal_tube(t_3d point, t_3d ray_origin, void *obj);
+t_3d		normal_cone(t_3d point, t_3d ray_origin, void *obj);
 
 // UTILS
 

@@ -29,16 +29,13 @@ bool	is_shadowed(t_light *light, t_objlst *objnode, t_3d point)
 	return (false);
 }
 
-double	cosfactor(t_3d light_origin, t_intrsct i)
+double	cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal)
 {
-	t_3d	obj_normal;
-	t_3d	to_light_normal;
+	t_3d	to_light;
 	double	cosine_factor;
 
-	obj_normal = i.objnode->get_normal(i.point,
-			light_origin, i.objnode->object);
-	to_light_normal = norm(subtract(i.point, light_origin));
-	cosine_factor = dot(obj_normal, to_light_normal) * -1;
+	to_light = norm(subtract(hitpoint, ray_origin));
+	cosine_factor = dot(surface_normal, to_light) * -1;
 	if (cosine_factor < EPSILON)
 		return (0);
 	return (cosine_factor);

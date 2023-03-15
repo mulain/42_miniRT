@@ -46,7 +46,6 @@ void		objlst_free(t_objlst *lst);
 // list_obj2.c
 void		select_functions(t_objlst *new);
 void		select_intersect(t_objlst *new);
-void		select_get_normal(t_objlst *new);
-void		select_colorize(t_objlst *new);
+void		select_normal(t_objlst *new);
 
 #endif

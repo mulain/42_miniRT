@@ -2,7 +2,7 @@
 #include "../incl/minirt.h"
 
 /*
-If t1 / t2 are of interest to the calling function, pass address to
+If t1 / t2 are of interest to the calling function, pass address of a
 double[2] array in t. If not, pass NULL.
 */
 double	solve_quad(double a, double b, double c, double *t)
