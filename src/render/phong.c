@@ -35,32 +35,25 @@ int	diffuse_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 
 int	specular_component(t_data *d, t_intrsct i, t_lightlst *lightnode)
 {
-	float		cos_factor;
+	float		cos_fac;
 	float		specular;
-	t_3d		light_to_point;
-	t_3d		light_refl_dir;
-	t_3d		view_dir;
-	t_3d		local_normal;
-	t_3d		light_origin;
+	t_3d		l_to_p;
+	t_3d		normal;
+	t_3d		l_orig;
 	int			specular_exponent;
 
-	specular_exponent = 1200; //2 to 1250
+	specular_exponent = 20; //2 to 1250 highlight size
 	if (!i.objnode->phong.spec)
 		return (0);
 	while (lightnode)
 	{
 		if (!is_shadowed(lightnode->light, d->objectlist, i.point))
 		{
-			light_origin = lightnode->light->origin;
-			local_normal = i.objnode->get_normal(i.point, light_origin, i.objnode->object);
-			light_to_point = norm(subtract(i.point, light_origin));
-			light_refl_dir = reflect(light_to_point, local_normal);
-			view_dir = norm(subtract(i.point, i.ray.origin));
-			cos_factor = dot(light_refl_dir, view_dir);
-			if (cos_factor < EPSILON)
-				specular = 0;
-			else
-				specular = pow(cos_factor, specular_exponent);
+			l_orig = lightnode->light->origin;
+			normal = i.objnode->get_normal(i.point, l_orig, i.objnode->object);
+			l_to_p = norm(subtract(i.point, l_orig));
+			cos_fac = cosfactor(i.ray.origin, i.point, reflect(l_to_p, normal));
+			specular = pow(cos_fac, specular_exponent);
 			add_light_to_coeff(&i.coeff, lightnode->light->color, specular);
 		}
 		lightnode = lightnode->next;

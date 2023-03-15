@@ -34,7 +34,7 @@ double	cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal)
 	t_3d	to_light;
 	double	cosine_factor;
 
-	to_light = norm(subtract(hitpoint, ray_origin));
+	to_light = norm(subtract(hitpoint, ray_origin)); //view_dir
 	cosine_factor = dot(surface_normal, to_light) * -1;
 	if (cosine_factor < EPSILON)
 		return (0);
@@ -50,6 +50,6 @@ t_3d	reflect(t_3d incoming, t_3d normal)
 	double		dotprod;
 
 	dotprod = dot(incoming, normal);
-	return (subtract(scale(normal, 2 * dotprod), incoming));
-	//return (subtract(incoming, scale(normal, 2 * dotprod)));
+	//return (subtract(scale(normal, 2 * dotprod), incoming));
+	return (subtract(incoming, scale(normal, 2 * dotprod)));
 }
