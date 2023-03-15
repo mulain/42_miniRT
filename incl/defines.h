@@ -27,6 +27,7 @@
 # define E_INVALOBJID	"Invalid object identifier.\n"
 # define E_MANDATORY	"Camera (C) and Light (L) must both be defined.\n"
 
+// Error msg: material coefficients
 # define E_PLANEMAT		"Invalid material selection in plane object.\n"
 # define E_DISCMAT		"Invalid material selection in disc object.\n"
 # define E_TR_MAT		"Invalid material selection in triangle object.\n"
@@ -34,7 +35,13 @@
 # define E_CY_MAT		"Invalid material selection in cylinder object.\n"
 # define E_CONEMAT		"Invalid material selection in cone object.\n"
 
-# define E_TR_EXP		"Invalid specular exponent selection in triangle object.\n"
+// Error msg: specular exponent
+# define E_PLANEEXP		"Invalid specular exponent in plane object.\n"
+# define E_DISCEXP		"Invalid specular exponent in disc object.\n"
+# define E_TR_EXP		"Invalid specular exponent in triangle object.\n"
+# define E_SP_EXP		"Invalid specular exponent in sphere object.\n"
+# define E_CY_EXP		"Invalid specular exponent in cylinder object.\n"
+# define E_CONEEXP		"Invalid specular exponent in cone object.\n"
 
 # define E_AMBLIGHTDEF	"Ambient light (A): may only be defined once.\n"
 # define E_AMBLIGHT1	"Ambient light (A): invalid first argument.\n"

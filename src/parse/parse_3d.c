@@ -1,7 +1,7 @@
 
 #include "../incl/minirt.h"
 
-void	parsE_SP_(t_data *d)
+void	parse_sphere(t_data *d)
 {
 	t_sphere	*sphere;
 	t_objlst	*new;
@@ -16,9 +16,11 @@ void	parsE_SP_(t_data *d)
 	sphere->radius = 0.5 * parse_double(d, d->parse.elmnts[2], E_SP_2);
 	sphere->color = parse_color(d, d->parse.elmnts[3], E_SP_3);
 	new->phong = parse_phong(d, d->parse.elmnts[4], E_SP_MAT);
+	set_range(d, 2.0, 1200);
+	new->spec_exp = parse_int(d, d->parse.elmnts[5], E_SP_EXP);
 }
 
-void	parsE_CY_(t_data *d)
+void	parse_cylinder(t_data *d)
 {
 	t_tube		*tube;
 	t_disc		*disc[2];
@@ -45,6 +47,10 @@ void	parsE_CY_(t_data *d)
 	new[0]->phong = parse_phong(d, d->parse.elmnts[6], E_CY_MAT);
 	new[1]->phong = new[0]->phong;
 	new[2]->phong = new[0]->phong;
+	set_range(d, 2.0, 1200);
+	new[0]->spec_exp = parse_int(d, d->parse.elmnts[7], E_CY_EXP);
+	new[1]->spec_exp = new[0]->spec_exp;
+	new[2]->spec_exp= new[0]->spec_exp;
 	*disc[0] = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
 	*disc[1] = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
 }
@@ -73,4 +79,7 @@ void	parse_cone(t_data *d)
 	new[0]->phong = parse_phong(d, d->parse.elmnts[6], E_CONEMAT);
 	new[1]->phong = new[0]->phong;
 	*disc_base = (t_disc){cone->base, cone->axis, cone->radius, cone->color};
+	set_range(d, 2.0, 1200);
+	new[0]->spec_exp = parse_int(d, d->parse.elmnts[7], E_CONEEXP);
+	new[1]->spec_exp = new[0]->spec_exp;
 }

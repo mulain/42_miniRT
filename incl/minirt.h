@@ -54,8 +54,8 @@ void		parse_disc(t_data *d);
 void		parse_triangle(t_data *d);
 
 // parse_3d.c
-void		parsE_SP_(t_data *d);
-void		parsE_CY_(t_data *d);
+void		parse_sphere(t_data *d);
+void		parse_cylinder(t_data *d);
 void		parse_cone(t_data *d);
 
 // parse_lights_cam.c

@@ -39,19 +39,18 @@ int	specular_component(t_data *d, t_intrsct i, t_lightlst *light)
 	float		specular;
 	t_3d		l_to_p;
 	t_3d		normal;
-	int			specular_exponent;
 
-	specular_exponent = 20; //2 to 1250 highlight size
 	if (!i.objnode->phong.spec)
 		return (0);
 	while (light)
 	{
 		if (!is_shadowed(light->origin, d->objectlist, i.point))
 		{
-			normal = i.objnode->get_normal(i.point, light->origin, i.objnode->object);
+			normal = i.objnode->get_normal(i.point,
+					light->origin, i.objnode->object);
 			l_to_p = norm(subtract(i.point, light->origin));
 			cos_fac = cosfactor(i.ray.origin, i.point, reflect(l_to_p, normal));
-			specular = pow(cos_fac, specular_exponent);
+			specular = pow(cos_fac, i.objnode->spec_exp);
 			add_light_to_coeff(&i.coeff, light->color, specular);
 		}
 		light = light->next;
@@ -60,11 +59,7 @@ int	specular_component(t_data *d, t_intrsct i, t_lightlst *light)
 	return (adjust_brightness(i.color, i.objnode->phong.spec).trgb);
 }
 
-
-/* vec3 specular(vec3 ks, vec3 Ls, vec3 R, vec3 V, float s) {
-    float cos_theta = max(dot(R, V), 0.0);
-    float specular_intensity = pow(cos_theta, s);
-    return ks * Ls * specular_intensity;
+/* 
 
 int	specular_component__(t_data *d, t_intrsct i, t_lightlst *light)
 {

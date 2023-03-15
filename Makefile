@@ -1,7 +1,7 @@
 NAME	=	miniRT
 CC		=	gcc
 RM		=	rm -rf
-CFLAGS	=	-g -O3 -Iincl -pthread -fsanitize=address
+CFLAGS	=	-g -O3 -Iincl -pthread #-fsanitize=address
 EFLAGS	=	-Wall -Wextra -Werror
 LFLAGS	=	-lm $(LIBFT) $(MLXFLAGS)
 LIBFT	= 	libft/libft.a

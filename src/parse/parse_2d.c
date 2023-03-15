@@ -16,6 +16,8 @@ void	parse_plane(t_data *d)
 	plane->vector = parse_vector(d, d->parse.elmnts[2], E_PLANE2);
 	plane->color = parse_color(d, d->parse.elmnts[3], E_PLANE3);
 	new->phong = parse_phong(d, d->parse.elmnts[4], E_PLANEMAT);
+	set_range(d, 2.0, 1200);
+	new->spec_exp = parse_int(d, d->parse.elmnts[5], E_PLANEEXP);
 }
 
 void	parse_disc(t_data *d)
@@ -34,6 +36,8 @@ void	parse_disc(t_data *d)
 	disc->radius = 0.5 * parse_double(d, d->parse.elmnts[3], E_DISC3);
 	disc->color = parse_color(d, d->parse.elmnts[4], E_DISC4);
 	new->phong = parse_phong(d, d->parse.elmnts[5], E_DISCMAT);
+	set_range(d, 2.0, 1200);
+	new->spec_exp = parse_int(d, d->parse.elmnts[6], E_DISCEXP);
 }
 
 void	parse_triangle(t_data *d)
