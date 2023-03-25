@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/25 18:02:05 by wmardin           #+#    #+#             */
+/*   Updated: 2023/03/25 18:03:57 by wmardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include "defines.h"
+# include "defines.h"
 
 typedef struct s_mlx
 {
@@ -158,9 +169,7 @@ typedef struct s_intersection
 	int			amb;			
 	int			diff;
 	int			spec;
-	
-	
-	t_color		color; // get rid of dese?
+	t_color		color;
 	t_rgb		coeff;
 }	t_intrsct;
 

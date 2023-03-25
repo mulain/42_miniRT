@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/25 17:47:28 by wmardin           #+#    #+#             */
+/*   Updated: 2023/03/25 17:47:58 by wmardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -52,7 +63,7 @@ void	parse_line(t_data *d, char *line)
 	else if (!ft_strncmp(d->parse.elmnts[0], "cy", 3))
 		parse_cylinder(d);
 	else if (!ft_strncmp(d->parse.elmnts[0], "co", 3))
-		parse_cone(d);	
+		parse_cone(d);
 	else
 		error_exit(d, E_INVALOBJID);
 	free_2d_char(d->parse.elmnts);

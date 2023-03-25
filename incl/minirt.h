@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/25 18:01:59 by wmardin           #+#    #+#             */
+/*   Updated: 2023/03/25 18:02:01 by wmardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -28,7 +39,7 @@ void		manage_threads(t_data *d);
 // intersect_2d.c
 t_intrsct	intersect_plane(t_ray ray, void *obj);
 t_intrsct	intersect_disc(t_ray ray, void *obj);
-t_intrsct 	intersect_triangle(t_ray ray, void *obj);
+t_intrsct	intersect_triangle(t_ray ray, void *obj);
 bool		is_left(t_3d point, t_3d normal, t_3d vertex1, t_3d vertex2);
 
 // intersect_3d.c
@@ -56,6 +67,7 @@ void		parse_triangle(t_data *d);
 // parse_3d.c
 void		parse_sphere(t_data *d);
 void		parse_cylinder(t_data *d);
+void		parse_cylinder2(t_data *d, t_objlst	*new[3]);
 void		parse_cone(t_data *d);
 
 // parse_lights_cam.c

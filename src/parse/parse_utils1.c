@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/25 17:46:27 by wmardin           #+#    #+#             */
+/*   Updated: 2023/03/25 17:48:28 by wmardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../incl/minirt.h"
 
@@ -44,7 +55,7 @@ t_3d	parse_point(t_data *d, char *input, char *msg)
 {
 	int			i;
 	char		**split;
-	t_3d	point;
+	t_3d		point;
 
 	if (!input)
 		error_exit(d, msg);

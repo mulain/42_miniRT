@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/25 17:46:12 by wmardin           #+#    #+#             */
+/*   Updated: 2023/03/25 17:49:21 by wmardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../incl/minirt.h"
 
@@ -34,7 +45,7 @@ double	cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal)
 	t_3d	to_light;
 	double	cosine_factor;
 
-	to_light = norm(subtract(hitpoint, ray_origin)); //view_dir
+	to_light = norm(subtract(hitpoint, ray_origin));
 	cosine_factor = dot(surface_normal, to_light) * -1;
 	if (cosine_factor < EPSILON)
 		return (0);
@@ -44,12 +55,12 @@ double	cosfactor(t_3d ray_origin, t_3d hitpoint, t_3d surface_normal)
 /*
 R = I - 2(I · N)N
 R = 2(N · L)N - L
+return (subtract(scale(normal, 2 * dotprod), incoming));
 */
 t_3d	reflect(t_3d incoming, t_3d normal)
 {
 	double		dotprod;
 
 	dotprod = dot(incoming, normal);
-	//return (subtract(scale(normal, 2 * dotprod), incoming));
 	return (subtract(incoming, scale(normal, 2 * dotprod)));
 }

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_3d.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/25 17:46:21 by wmardin           #+#    #+#             */
+/*   Updated: 2023/03/25 17:56:43 by wmardin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../incl/minirt.h"
 
@@ -44,15 +55,20 @@ void	parse_cylinder(t_data *d)
 	tube->height = parse_double(d, d->parse.elmnts[4], E_CY_4);
 	tube->top = add(tube->base, scale(tube->axis, tube->height));
 	tube->color = parse_color(d, d->parse.elmnts[5], E_CY_5);
+	*disc[0] = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
+	*disc[1] = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
+	parse_cylinder2(d, new);
+}
+
+void	parse_cylinder2(t_data *d, t_objlst	*new[3])
+{
 	new[0]->phong = parse_phong(d, d->parse.elmnts[6], E_CY_MAT);
 	new[1]->phong = new[0]->phong;
 	new[2]->phong = new[0]->phong;
 	set_range(d, 2.0, 1200);
 	new[0]->spec_exp = parse_int(d, d->parse.elmnts[7], E_CY_EXP);
 	new[1]->spec_exp = new[0]->spec_exp;
-	new[2]->spec_exp= new[0]->spec_exp;
-	*disc[0] = (t_disc){tube->top, tube->axis, tube->radius, tube->color};
-	*disc[1] = (t_disc){tube->base, tube->axis, tube->radius, tube->color};
+	new[2]->spec_exp = new[0]->spec_exp;
 }
 
 void	parse_cone(t_data *d)
