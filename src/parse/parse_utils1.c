@@ -15,12 +15,6 @@ double	parse_double(t_data *d, char *input, char *msg)
 	return (value);
 }
 
-/*
-color.trgb and brightness start at values for total darkness. If the object
-never gets hit by any light, this is what will get displayed.
-The hidden color is stored in the separate r g b vars so calculations can
-still take place.
-*/
 t_color	parse_color(t_data *d, char *input, char *msg)
 {
 	int			i;
