@@ -1,5 +1,5 @@
 # CAMERA		Position		Vector			Field of View
-C				0,50,100			0,0,-1			90					
+C				0,50,100		0,0,-1			90					
 
 # AMBIENT LIGHT					Brightness		Color
 A								0.2 			255,255,255

@@ -1,0 +1,38 @@
+# CAMERA		Position		Vector			Field of View
+C				0,10,0			0,0,-1			90
+
+# AMBIENT LIGHT					Brightness		Color
+A								0.3				255,255,255
+
+# LIGHTS		Position		Brightness		Color
+#L				0,10,-20		1.0				255,255,255
+L				0,0,-80			1.0				255,255,255
+
+# PLANES		Position		Vector			Color
+
+# DISCS			Position		Vector			Diameter		Color
+
+# TRIANGLES		Point 1			Point 2			Point 3			Color
+
+# SPHERES		Position		Diameter		Color
+sp				-2,15,-65		25				255,200,100		0.9,1,0		2
+sp				15,0,-40		10				0,200,100		0.9,1,0		2
+
+# CYLINDERS		Position		Vector			Diameter		Height			Color
+cy				0,0,10			0,0,-1			30				100				200,100,100		0.9,1,0		2
+
+# CONES			Position		Vector			Diameter		Height			Color
+co				12,-10,-60		-.5,1,-.1		10				10				255,255,255		0.9,1,0		2
+co				-12,-10,-60		.5,1,.1			10				10				255,255,255		0.9,1,0		2
+
+co				10,-17,-60		-.5,1,-.1		10				10				255,255,255		0.9,1,0		2
+co				-10,-17,-60		.5,1,.1			10				10				255,255,255		0.9,1,0		2
+
+co				8,-17,-60		-.5,1,-.1		10				10				255,255,255		0.9,1,0		2
+co				-8,-17,-60		.5,1,.1			10				10				0255,255,255	0.9,1,0		2
+
+co				6,-19,-60		-.3,1,-.1		10				10				0255,255,255	0.9,1,0		2
+co				-6,-19,-60		.3,1,.1			10				10				0255,255,255	0.9,1,0		2
+
+co				2,-20,-60		-.1,1,-.1		10				10				0255,255,255	0.9,1,0		2
+co				-2,-20,-60		.1,1,.1			10				10				0255,255,255	0.9,1,0		2
