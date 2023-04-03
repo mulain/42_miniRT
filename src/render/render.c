@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:08 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:46:10 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/04/02 23:40:55 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	*render_threads(void *ptr)
 			h.x++;
 		}
 		if (h.id == THREADCOUNT - 1)
-			printf(STATUSMSG, 100 * ((float)h.y / THREADCOUNT) / h.job);
+			printf(STATUSMSG, 100 * (float)(h.y % h.job) / (float)h.job);
+		fflush(stdout);
 		h.y++;
 	}
 	if (h.id == THREADCOUNT - 1)
