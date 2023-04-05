@@ -26,8 +26,7 @@ SRCFILE	= 	main.c\
 			$(addprefix parse/, parse_lights_cam.c parse_2d.c parse_3d.c parse_utils1.c parse_utils2.c parse.c)\
 			$(addprefix render/, light_operations.c phong.c render.c utils.c)\
 			$(addprefix surface_normal/, get_normal_2d.c get_normal_3d.c)\
-			$(addprefix utils/, calculate1.c calculate2.c hooks.c print1.c print2.c shutdown.c)
-			
+			$(addprefix utils/, calculate1.c calculate2.c hooks.c print1.c print2.c shutdown.c)			
 SRC		=	$(addprefix src/, $(SRCFILE))
 OBJ		= 	$(addprefix obj/, $(SRCFILE:%.c=%.o))
 
