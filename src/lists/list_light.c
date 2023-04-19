@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:36 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:46:37 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/04/19 07:42:26 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	lightlst_add_back(t_lightlst **lst, t_lightlst *new)
 	if (!*lst)
 		*lst = new;
 	else
-		(lightlst_last(*lst))->next = new;
+		lightlst_last(*lst)->next = new;
 }
 
 t_lightlst	*lightlst_last(t_lightlst *lst)
