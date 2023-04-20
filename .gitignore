@@ -1,11 +1,6 @@
-#ackchual files
 *.o
 *.a
 /obj
 minirt
-
-#retardation files
-#shmest.c
-#shmest2.c
 a.out
 .DS_Store
