@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 18:01:48 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 18:01:49 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/04/28 14:44:10 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_objlst
 	t_objtype	objtype;
 	t_phong		phong;
 	int			spec_exp;
-	t_intrsct	(*get_intersection)();
-	t_3d		(*get_normal)();
+	t_intrsct	(*get_intersection)(t_ray ray, void *obj);
+	t_3d		(*get_normal)(t_3d point, t_3d ray_origin, void *obj);
 	t_objlst	*next;
 
 }	t_objlst;
