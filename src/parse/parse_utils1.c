@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:27 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:48:28 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:50:04 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	parse_int(t_data *d, char *input, char *msg)
 	if (!input || !is_onlydigits(input))
 		error_exit(d, msg);
 	value = ft_atoi(input);
-	if (d->parse.min == d->parse.max)
+	if (!d->parse.check_range)
 		return (value);
 	if (value < (int)d->parse.min || value > (int)d->parse.max)
 		error_exit(d, msg);

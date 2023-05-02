@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:05 by wmardin           #+#    #+#             */
-/*   Updated: 2023/04/28 14:44:25 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/05/02 11:55:56 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ambient_component(t_data *d, t_intrsct i)
 int	diffuse_component(t_data *d, t_intrsct i, t_lightlst *light)
 {
 	double	cos_fac;
-	t_3d	light_origin;
 
 	if (!i.objnode->phong.diff)
 		return (0);
@@ -33,9 +32,8 @@ int	diffuse_component(t_data *d, t_intrsct i, t_lightlst *light)
 	{
 		if (!is_shadowed(light->origin, d->objectlist, i.point))
 		{
-			light_origin = light->origin;
-			cos_fac = cosfactor(light_origin, i.point, i.objnode->\
-				get_normal(i.point, light_origin, i.objnode->object));
+			cos_fac = cosfactor(light->origin, i.point, i.objnode->\
+				get_normal(i.point, light->origin, i.objnode->object));
 			add_light_to_coeff(&i.coeff, light->color, cos_fac);
 		}
 		light = light->next;
