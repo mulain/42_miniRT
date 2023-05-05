@@ -10,27 +10,27 @@ L				0,10,0			1.0				255,255,255
 # PLANES		Position		Vector			Color
 # ground and ceiling have the same vector, but are on opposite sides of the light
 # this shows the correct handling of 2d surface normals.
-pl				0,0,0			0,1,0			0,255,0 ground
-pl				0,20,0			0,1,0			0,255,0 ceiling
+pl				0,0,0			0,1,0			0,255,0 .1,1,0	2 ground
+pl				0,20,0			0,1,0			0,255,0 .1,1,0	2 ceiling
 # walls to test the same issue for the other vectors
-pl				20,0,0			1,0,0			255,0,0 right wall
-pl				-20,0,0			1,0,0			255,0,0 left wall
-pl				0,0,-20			0,0,1			255,255,255 background
+pl				20,0,0			1,0,0			255,0,0 .1,1,0	2 right wall
+pl				-20,0,0			1,0,0			255,0,0 .1,1,0	2 left wall
+pl				0,0,-20			0,0,1			255,255,255 .1,1,0	2 background
 
 # DISCS			Position		Vector			Diameter		Color
-di				0,1,-10			0,1,0			5				0,0,255 ground
-di				0,19,-10		0,1,0			5				0,0,255 ceiling
-di				-19,10,-10		1,0,0			5				0,0,255 left
-di				19,10,-10		1,0,0			5				0,0,255 right
+di				0,1,-10			0,1,0			5				0,0,255 .1,1,0	2 ground
+di				0,19,-10		0,1,0			5				0,0,255 .1,1,0	2 ceiling
+di				-19,10,-10		1,0,0			5				0,0,255 .1,1,0	2 left
+di				19,10,-10		1,0,0			5				0,0,255 .1,1,0	2 right
 
 # TRIANGLES		Vertex 1		Vertex 2		Vertex 3		Color
-tr				2,2,-2			1,3,-3			0,2,-1			200,200,200
+tr				2,2,-2			1,3,-3			0,2,-1			200,200,200 .1,1,0	2 
 
 # SPHERES		Position		Diameter		Color
-sp				5,10,-10		5				255,255,255
+sp				5,10,-10		5				255,255,255 .1,1,0	2 
 
 # CYLINDERS		Position		Vector			Diameter		Height			Color
-cy				-5,0,-5			0,1,0			2				4				0,255,255
+cy				-5,0,-5			0,1,0			2				4				0,255,255 .1,1,0	2 
 
 # CONES			Position		Vector			Diameter		Height			Color
-co				5,0,-5			0,1,0			2				4				0,255,255
+co				5,0,-5			0,1,0			2				4				0,255,255 .1,1,0	2 
