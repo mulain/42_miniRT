@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:16 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:46:18 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/05/05 16:54:14 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parse_plane(t_data *d)
 	plane->color = parse_color(d, d->parse.elmnts[3], E_PLANE3);
 	new->phong = parse_phong(d, d->parse.elmnts[4], E_PLANEMAT);
 	set_range(d, 2.0, 1200);
-	new->spec_exp = parse_int(d, d->parse.elmnts[5], E_PLANEEXP);
+	new->spec_exp = parse_int(d, d->parse.elmnts[5], E_PL_EXP);
 }
 
 void	parse_disc(t_data *d)
@@ -48,7 +48,7 @@ void	parse_disc(t_data *d)
 	disc->color = parse_color(d, d->parse.elmnts[4], E_DISC4);
 	new->phong = parse_phong(d, d->parse.elmnts[5], E_DISCMAT);
 	set_range(d, 2.0, 1200);
-	new->spec_exp = parse_int(d, d->parse.elmnts[6], E_DISCEXP);
+	new->spec_exp = parse_int(d, d->parse.elmnts[6], E_DI_EXP);
 }
 
 void	parse_triangle(t_data *d)

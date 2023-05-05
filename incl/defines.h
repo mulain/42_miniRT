@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 18:01:35 by wmardin           #+#    #+#             */
-/*   Updated: 2023/04/02 23:40:44 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/05/05 16:54:00 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@
 # define E_CONEMAT		"Invalid material selection in cone object.\n"
 
 // Error msg: specular exponent
-# define E_PLANEEXP		"Invalid specular exponent in plane object.\n"
-# define E_DISCEXP		"Invalid specular exponent in disc object.\n"
+# define E_PL_EXP		"Invalid specular exponent in plane object.\n"
+# define E_DI_EXP		"Invalid specular exponent in disc object.\n"
 # define E_TR_EXP		"Invalid specular exponent in triangle object.\n"
 # define E_SP_EXP		"Invalid specular exponent in sphere object.\n"
 # define E_CY_EXP		"Invalid specular exponent in cylinder object.\n"
