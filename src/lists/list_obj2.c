@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:42 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:46:44 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/07/30 21:10:18 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	select_functions(t_objlst *new)
 	select_normal(new);
 }
 
-void	select_intersect(t_objlst *new)
+/* 
+Should use case instead of if here, but norm.
+*/
+void	select_intersect_safe(t_objlst *new)
 {
 	if (new->objtype == pl)
 		new->get_intersection = intersect_plane;
