@@ -6,12 +6,19 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:08 by wmardin           #+#    #+#             */
-/*   Updated: 2023/05/02 08:24:00 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:20:01 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minirt.h"
 
+/*
+if (h.id == THREADCOUNT - 1)
+	{
+		printf(STATUSMSG, 100 * (float)(h.y % h.job) / (float)h.job);
+		fflush(stdout);
+	}
+*/
 void	*render_threads(void *ptr)
 {
 	t_data		*d;
@@ -33,10 +40,7 @@ void	*render_threads(void *ptr)
 			h.x++;
 		}
 		if (h.id == THREADCOUNT - 1)
-		{
 			printf(STATUSMSG, 100 * (float)(h.y % h.job) / (float)h.job);
-			fflush(stdout);
-		}
 		h.y++;
 	}
 	if (h.id == THREADCOUNT - 1)
