@@ -39,6 +39,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 			p[n - 1] = q[n - 1];
 			n--;
 		}
-	}	
+	}
 	return (dest);
 }

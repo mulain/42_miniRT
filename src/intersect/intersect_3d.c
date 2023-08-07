@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:46:49 by wmardin           #+#    #+#             */
-/*   Updated: 2023/03/25 17:46:50 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:17:58 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ t_intrsct	intersect_cone2(t_intrsct i, t_ray ray, t_cone *cone, double *t)
 		i.point = add(ray.origin, scale(ray.direction, t[1]));
 		if (is_withinbounds(i.point, cone->base, cone->axis, cone->height))
 			return (i.distance = t[1], i);
-	}	
+	}
 	return (i.distance = INFINITY, i);
 }

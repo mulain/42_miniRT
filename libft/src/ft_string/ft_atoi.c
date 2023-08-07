@@ -30,7 +30,7 @@ int	ft_atoi(const char *nptr)
 	while (nptr[i] == 32 || (nptr[i] > 8 && nptr[i] < 14))
 		++i;
 	if (nptr[i] == 45 || nptr[i] == 43)
-	{	
+	{
 		if (nptr[i] == 45)
 			sign = -1;
 		++i;

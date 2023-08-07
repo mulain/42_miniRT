@@ -6,7 +6,7 @@
 /*   By: wmardin <wmardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 10:25:14 by wmardin           #+#    #+#             */
-/*   Updated: 2023/02/20 13:46:05 by wmardin          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:17:09 by wmardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**split_multichar(char const *string, char *splitters)
 		while (s[i] && !ft_strchr(splitters, (int)s[i]))
 			i++;
 		out = append_string(out, ft_substr(s, 0, i));
-	s += i;
+		s += i;
 	}
 	free(s_save);
 	return (out);
